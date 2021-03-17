@@ -6,7 +6,7 @@
 - Do not forget to use your own annotation Dao.
 - Return [Optional](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html) when you can return null in DAO.
   For example: ```public Optional<Manufacturer> get(Long id);```
-- Add new [injector](../content/new-injector.md) to your project.
+- Add new [injector](https://mate-academy.github.io/jv-program-fulltime/02_jdbc/content/new-injector.html) to your project.
 - Add class Application with main method where you are invoking all your methods from service
 - In the `main` method create instance of manufacturer service and call CRUD methods. It may look like:
 ```java
@@ -76,6 +76,6 @@ public class Car {
 
 ### UML diagram
 
-![img](../content/taxi_models_diagram.jpg)
+![img](https://mate-academy.github.io/jv-program-fulltime/02_jdbc/content/taxi_models_diagram.jpg)
 
 __You can check yourself using this__ [checklist](../checklist/03_dao_service_checklist.md)
