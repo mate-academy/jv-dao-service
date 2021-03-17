@@ -1,6 +1,5 @@
 # HW 02
 
-- Create your own repository - [video](https://youtu.be/0hN-VJ9RNHQ). Make sure you are creating a new branch before start working.
 - Create models: `Car`, `Driver` and `Manufacturer`. Use UML diagram (models) for this, see below.
 - Create DAO and service layer for `Manufacturer` model. Below you can see the list of required methods.
 - Add CRUD operations into `ManufacturerDao`.
@@ -78,8 +77,5 @@ public class Car {
 ### UML diagram
 
 ![img](../content/taxi_models_diagram.jpg)
-
-### ADVANCED
-- Configure [Travis CI](https://www.youtube.com/watch?v=BHSsWTbuow4)
 
 __You can check yourself using this__ [checklist](../checklist/03_dao_service_checklist.md)
