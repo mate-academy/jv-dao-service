@@ -1,4 +1,4 @@
-# HW 02
+# HW 03
 
 - Create models: `Car`, `Driver` and `Manufacturer`. Use UML diagram (models) for this, see below.
 - Create DAO and service layer for `Manufacturer` model. Below you can see the list of required methods.
@@ -77,4 +77,4 @@ public class Car {
 
 ![img](https://mate-academy.github.io/jv-program-fulltime/02_jdbc/content/taxi_models_diagram.jpg)
 
-__You can check yourself using this__ [checklist](../checklist/03_dao_service_checklist.md)
+__You can check yourself using this__ [checklist](https://mate-academy.github.io/jv-program-common-mistakes/java-JDBC/dao-vs-service/dao-vs-service_checklist.html)
