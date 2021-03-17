@@ -3,11 +3,10 @@
 - Create models: `Car`, `Driver` and `Manufacturer`. Use UML diagram (models) for this, see below.
 - Create DAO and service layer for `Manufacturer` model. Below you can see the list of required methods.
 - Add CRUD operations into `ManufacturerDao`.
-- Do not forget to use your own annotation Dao.
+- Add new [injector](https://mate-academy.github.io/jv-program-fulltime/02_jdbc/content/new-injector.html) to your project.
+- Do not forget to use `@Dao` annotation from injector for classes that implement Dao interface. Same for `@Service`.
 - Return [Optional](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html) when you can return null in DAO.
   For example: ```public Optional<Manufacturer> get(Long id);```
-- Add new [injector](https://mate-academy.github.io/jv-program-fulltime/02_jdbc/content/new-injector.html) to your project.
-- Add class Application with main method where you are invoking all your methods from service
 - In the `main` method create instance of manufacturer service and call CRUD methods. It may look like:
 ```java
 public class Main {
