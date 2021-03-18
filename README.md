@@ -14,10 +14,10 @@ public class Client {
 
 DAO methods
 ```java
-- Optional<Client> register(Client client);
+- Client register(Client client);
 - Optional<Client> find(Long id);
 - Optional<Client> findByAccount(String accountNumbet);
-- List<Client> getAll();
+- List<Client> getAllByAmountRange(BigDecimal from, BigDecimal to);
 - boolean updateBalance(BigDecimal amount);
 - boolean transfer(BigDecimal amount, String toAccount);
 - boolean closeAccount(Client client);
@@ -27,11 +27,11 @@ Service methods
 - Client register(Client client);
 - Client find(Long id);
 - Client findByAccount(String accountNumber);
-- List<Client> getAll();
-- boolean withdrawMoney(BigDecimal ammount);
-- boolean replenishBalance(BigDecimal amount);
-- boolean transfer(BigDecimal amount, String toAccount);
-- boolean closeAccount(Client client);
+- List<Client> getAllByAmountRange(BigDecimal from, BigDecimal to);
+- boolean withdrawMoney(BigDecimal ammount); // money withdrawal from account
+- boolean replenishBalance(BigDecimal amount); // payment to bank account
+- boolean transfer(BigDecimal amount, String toAccount); // money transfer between accounts
+- boolean closeAccount(Client client); // delete client from bank database
 ```
 - When client will withdraw cash, replenish balance or transfer money to another account - there will be a fee percentage.
     - 0% - amount is less than 100
