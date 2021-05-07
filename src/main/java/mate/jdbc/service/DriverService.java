@@ -14,5 +14,5 @@ public interface DriverService {
 
     boolean delete(Long id);
 
-    public void truncate();
+    void truncate();
 }

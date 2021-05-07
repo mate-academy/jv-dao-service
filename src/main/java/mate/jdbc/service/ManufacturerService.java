@@ -14,5 +14,5 @@ public interface ManufacturerService {
 
     boolean delete(Long id);
 
-    public void truncate();
+    void truncate();
 }
