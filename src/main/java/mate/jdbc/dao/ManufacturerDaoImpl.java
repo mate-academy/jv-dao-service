@@ -43,7 +43,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
             Manufacturer manufacturer = null;
             if (resultSet.next()) {
                 manufacturer = getManufacturer(resultSet);
@@ -101,6 +101,17 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         } catch (SQLException throwable) {
             throw new DataProcessingException("Couldn't delete a manufacturer by id " + id + " ",
                     throwable);
+        }
+    }
+
+    @Override
+    public void truncate() {
+        String truncateRequest = "TRUNCATE TABLE manufacturers;";
+        try (Connection connection = ConnectionUtil.getConnection();
+             Statement truncateManufacturers = connection.createStatement()) {
+            truncateManufacturers.executeUpdate(truncateRequest);
+        } catch (SQLException throwables) {
+            throw new DataProcessingException("Can't truncate manufacturers", throwables);
         }
     }
 
