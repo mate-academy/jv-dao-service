@@ -1,10 +1,5 @@
 package mate.jdbc.dao;
 
-import mate.jdbc.lib.Dao;
-import mate.jdbc.lib.exception.DataProcessingException;
-import mate.jdbc.model.Driver;
-import mate.jdbc.model.Manufacturer;
-import mate.jdbc.util.ConnectionUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import mate.jdbc.lib.Dao;
+import mate.jdbc.lib.exception.DataProcessingException;
+import mate.jdbc.model.Driver;
+import mate.jdbc.util.ConnectionUtil;
 
 @Dao
 public class DriverDaoImpl implements DriverDao {
@@ -21,8 +20,8 @@ public class DriverDaoImpl implements DriverDao {
         String query = "INSERT INTO drivers (driver_name, driver_license_number) "
                 + "VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement preparedStatement
-                     = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement preparedStatement
+                        = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, driver.getName());
             preparedStatement.setString(2, driver.getLicenseNumber());
             preparedStatement.executeUpdate();
@@ -42,7 +41,7 @@ public class DriverDaoImpl implements DriverDao {
         String query = "SELECT * FROM drivers"
                 + " WHERE driver_id = ? AND deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             Driver driver = null;
@@ -60,7 +59,7 @@ public class DriverDaoImpl implements DriverDao {
     public List<Driver> getAll() {
         String query = "SELECT * FROM drivers WHERE deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             List<Driver> drivers = new ArrayList<>();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -79,8 +78,8 @@ public class DriverDaoImpl implements DriverDao {
         String query = "UPDATE drivers SET driver_name = ?, driver_license_number = ?"
                 + " WHERE driver_id = ? AND deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement preparedStatement
-                     = connection.prepareStatement(query)) {
+                PreparedStatement preparedStatement
+                        = connection.prepareStatement(query)) {
             preparedStatement.setString(1, driver.getName());
             preparedStatement.setString(2, driver.getLicenseNumber());
             preparedStatement.setLong(3, driver.getId());
@@ -96,7 +95,7 @@ public class DriverDaoImpl implements DriverDao {
     public boolean delete(Long id) {
         String query = "UPDATE drivers SET deleted = TRUE WHERE driver_id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException throwable) {
@@ -109,7 +108,7 @@ public class DriverDaoImpl implements DriverDao {
     public void truncate() {
         String truncateRequest = "TRUNCATE TABLE drivers;";
         try (Connection connection = ConnectionUtil.getConnection();
-             Statement truncateDrivers = connection.createStatement()) {
+                Statement truncateDrivers = connection.createStatement()) {
             truncateDrivers.executeUpdate(truncateRequest);
         } catch (SQLException throwables) {
             throw new DataProcessingException("Can't truncate drivers", throwables);

@@ -108,7 +108,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
     public void truncate() {
         String truncateRequest = "TRUNCATE TABLE manufacturers;";
         try (Connection connection = ConnectionUtil.getConnection();
-             Statement truncateManufacturers = connection.createStatement()) {
+                Statement truncateManufacturers = connection.createStatement()) {
             truncateManufacturers.executeUpdate(truncateRequest);
         } catch (SQLException throwables) {
             throw new DataProcessingException("Can't truncate manufacturers", throwables);
