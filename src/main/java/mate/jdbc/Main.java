@@ -14,29 +14,29 @@ public class Main {
             = (DriverService) injector.getInstance(DriverService.class);
 
     public static void main(String[] args) {
-        Manufacturer macBookPro = new Manufacturer();
-        macBookPro.setName("MacBook Pro 13");
-        macBookPro.setCountry("United States");
+        Manufacturer apple = new Manufacturer();
+        apple.setName("Apple");
+        apple.setCountry("United States");
 
-        Manufacturer lenovoNoteBook = new Manufacturer();
-        lenovoNoteBook.setName("Lenovo IdeaPad Gaming");
-        lenovoNoteBook.setCountry("China");
+        Manufacturer lenovo = new Manufacturer();
+        lenovo.setName("Lenovo");
+        lenovo.setCountry("China");
 
-        Manufacturer xiaomiNoteBook = new Manufacturer();
-        xiaomiNoteBook.setName("Xiaomi RedmiBook");
-        xiaomiNoteBook.setCountry("China");
+        Manufacturer xiaomi = new Manufacturer();
+        xiaomi.setName("Xiaomi");
+        xiaomi.setCountry("China");
 
         System.out.println(".....Save manufacturers to DB.....");
-        System.out.printf("MacBook Pro saved to DB %s%n",
-                manufacturerService.create(macBookPro));
-        System.out.printf("Lenovo IdeaPad Gaming saved to DB %s%n",
-                manufacturerService.create(lenovoNoteBook));
-        System.out.printf("Xiaomi RedmiBook saved to DB %s%n",
-                manufacturerService.create(xiaomiNoteBook));
+        System.out.printf("Apple manufacturer saved to DB %s%n",
+                manufacturerService.create(apple));
+        System.out.printf("Lenovo manufacturer saved to DB %s%n",
+                manufacturerService.create(lenovo));
+        System.out.printf("Xiaomi manufacturer saved to DB %s%n",
+                manufacturerService.create(xiaomi));
         System.out.println();
 
         System.out.println(".....Remove manufacturer from DB.....");
-        System.out.println(manufacturerService.delete(xiaomiNoteBook.getId()));
+        System.out.println(manufacturerService.delete(xiaomi.getId()));
         System.out.println();
 
         System.out.println(".....Show all data from DB.....");
@@ -44,12 +44,12 @@ public class Main {
         System.out.println();
 
         System.out.println(".....Update manufacturer in DB.....");
-        macBookPro.setName("MacBook Pro 16");
-        System.out.printf("New element in DB %s%n", manufacturerService.update(macBookPro));
+        apple.setName("Samsung");
+        System.out.printf("New element in DB %s%n", manufacturerService.update(apple));
         System.out.println();
 
         System.out.println("....Get manufacturer from DB.....");
-        System.out.println(manufacturerService.get(macBookPro.getId()));
+        System.out.println(manufacturerService.get(apple.getId()));
         System.out.println();
 
         Driver bob = new Driver();

@@ -40,11 +40,11 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Optional<Driver> get(Long id) {
-        String selectByIdRequest = "SELECT * FROM drivers WHERE id = ? "
+        String selectDriverRequest = "SELECT * FROM drivers WHERE id = ? "
                 + "AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement selectDriverStatement
-                        = connection.prepareStatement(selectByIdRequest)) {
+                        = connection.prepareStatement(selectDriverRequest)) {
             selectDriverStatement.setLong(1, id);
             ResultSet resultSet = selectDriverStatement.executeQuery();
             Driver driver = null;
@@ -60,11 +60,11 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public List<Driver> getAll() {
-        String getAllRequest = "SELECT * FROM drivers  WHERE is_deleted = FALSE;";
+        String selectAllDriversRequest = "SELECT * FROM drivers  WHERE is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                 Statement selectDriversStatement = connection.createStatement()) {
             List<Driver> driverList = new ArrayList<>();
-            ResultSet resultSet = selectDriversStatement.executeQuery(getAllRequest);
+            ResultSet resultSet = selectDriversStatement.executeQuery(selectAllDriversRequest);
             while (resultSet.next()) {
                 driverList.add(getDriver(resultSet));
             }
