@@ -40,8 +40,8 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Optional<Driver> get(Long id) {
-        String selectDriverRequest = "SELECT * FROM drivers WHERE id = ? "
-                + "AND is_deleted = FALSE";
+        String selectDriverRequest = "SELECT * FROM drivers WHERE id = ?"
+                + "AND is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement selectDriverStatement
                         = connection.prepareStatement(selectDriverRequest)) {
