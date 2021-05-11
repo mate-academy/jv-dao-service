@@ -8,6 +8,8 @@ import mate.jdbc.service.ManufacturerService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
+    private static final long INDEX_OK = 16L;
+    private static final long INDEX_NOT_OK = 999L;
 
     public static void main(String[] args) {
         ManufacturerService manufacturerService =
@@ -17,17 +19,17 @@ public class Main {
         Manufacturer infinityManufacturer = new Manufacturer("Infinity", "Japan");
         Manufacturer teslaManufacturer = new Manufacturer("Tesla", "Tesla");
 
-        System.out.println(manufacturerService.create(audiManufacturer) + System.lineSeparator()
-                + manufacturerService.create(infinityManufacturer) + System.lineSeparator()
-                + manufacturerService.create(teslaManufacturer) + System.lineSeparator());
+        System.out.println(manufacturerService.create(audiManufacturer));
+        System.out.println(manufacturerService.create(infinityManufacturer));
+        System.out.println(manufacturerService.create(teslaManufacturer));
 
-        System.out.println(manufacturerService.get(16L) + System.lineSeparator()
-                + manufacturerService.get(999L));
+        System.out.println(manufacturerService.get(INDEX_OK).getId());
+        //System.out.println(manufacturerService.get(INDEX_NOT_OK).getId());
 
         infinityManufacturer.setName("Nissan");
         System.out.println(manufacturerService.update(infinityManufacturer));
 
-        System.out.println(manufacturerService.delete(1L));
+        System.out.println(manufacturerService.delete(INDEX_OK));
         manufacturerService.getAll().forEach(System.out::println);
 
         DriverService driverService =
@@ -37,12 +39,11 @@ public class Main {
         Driver infinityDriver = new Driver("Ivan Sverlov", "2222222222");
         Driver teslaDriver = new Driver("Mike Trump", "33333333333");
 
-        System.out.println(driverService.create(audiDriver) + System.lineSeparator()
-                + driverService.create(infinityDriver) + System.lineSeparator()
-                + driverService.create(teslaDriver) + System.lineSeparator());
+        System.out.println(driverService.create(audiDriver));
+        System.out.println(driverService.create(infinityDriver));
+        System.out.println(driverService.create(teslaDriver));
 
-        System.out.println(driverService.get(19L) + System.lineSeparator()
-                + driverService.get(999L));
+        System.out.println(driverService.get(INDEX_OK));
 
         infinityDriver.setName("Mykola Ivannenko");
         System.out.println(driverService.update(infinityDriver));
