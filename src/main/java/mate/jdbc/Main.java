@@ -22,14 +22,14 @@ public class Main {
         System.out.println(manufacturerService.create(infinityManufacturer));
         System.out.println(manufacturerService.create(teslaManufacturer));
 
-        final long INDEX_OK = audiManufacturer.getId();
-        System.out.println(manufacturerService.get(INDEX_OK).getId());
+        final long indexOk = audiManufacturer.getId();
+        System.out.println(manufacturerService.get(indexOk).getId());
         //System.out.println(manufacturerService.get(INDEX_NOT_OK).getId());
 
         infinityManufacturer.setName("Nissan");
         System.out.println(manufacturerService.update(infinityManufacturer));
 
-        System.out.println(manufacturerService.delete(INDEX_OK));
+        System.out.println(manufacturerService.delete(indexOk));
         manufacturerService.getAll().forEach(System.out::println);
 
         DriverService driverService =
@@ -43,7 +43,7 @@ public class Main {
         System.out.println(driverService.create(infinityDriver));
         System.out.println(driverService.create(teslaDriver));
 
-        System.out.println(driverService.get(INDEX_OK));
+        System.out.println(driverService.get(indexOk));
 
         infinityDriver.setName("Mykola Ivannenko");
         System.out.println(driverService.update(infinityDriver));
