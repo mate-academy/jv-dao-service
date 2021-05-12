@@ -8,7 +8,6 @@ import mate.jdbc.service.ManufacturerService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
-    private static final long INDEX_OK = 16L;
     private static final long INDEX_NOT_OK = 999L;
 
     public static void main(String[] args) {
@@ -23,6 +22,7 @@ public class Main {
         System.out.println(manufacturerService.create(infinityManufacturer));
         System.out.println(manufacturerService.create(teslaManufacturer));
 
+        final long INDEX_OK = audiManufacturer.getId();
         System.out.println(manufacturerService.get(INDEX_OK).getId());
         //System.out.println(manufacturerService.get(INDEX_NOT_OK).getId());
 
