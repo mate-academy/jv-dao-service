@@ -12,14 +12,11 @@ public class Main {
 
     public static void main(String[] args) {
         // test your code here
-        ManufacturerService manufacturerService =
-                (ManufacturerService) injector.getInstance(ManufacturerService.class);
-
-        manufacturerService.truncate();
-
         Manufacturer bmwManufacturer = new Manufacturer("BMW", "Germany");
         Manufacturer mercedesManufacturer = new Manufacturer("Mercedes", "Germany");
         Manufacturer toyotaManufacturer = new Manufacturer("Toyota", "Japan");
+        ManufacturerService manufacturerService =
+                (ManufacturerService) injector.getInstance(ManufacturerService.class);
 
         System.out.println(manufacturerService.create(bmwManufacturer));
         System.out.println(manufacturerService.create(mercedesManufacturer));
@@ -28,7 +25,6 @@ public class Main {
         System.out.println(manufacturerService.get(1L));
         System.out.println(manufacturerService.get(2L));
         System.out.println(manufacturerService.get(3L));
-        System.out.println(manufacturerService.get(100L));
 
         mercedesManufacturer.setName("Mercedes Benz");
         System.out.println(manufacturerService.update(mercedesManufacturer));
@@ -39,7 +35,6 @@ public class Main {
         System.out.println(all);
 
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-        driverService.truncate();
 
         Driver bob = new Driver("Bob", "123456");
         Driver john = new Driver("John", "7890123");
