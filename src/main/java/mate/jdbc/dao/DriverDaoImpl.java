@@ -16,7 +16,6 @@ import mate.jdbc.util.ConnectionUtil;
 
 @Dao
 public class DriverDaoImpl implements DriverDao {
-
     @Override
     public Driver create(Driver driver) {
         String insertRequest = "INSERT INTO drivers (name, licenseNumber) values(?, ?);";
@@ -25,7 +24,7 @@ public class DriverDaoImpl implements DriverDao {
                         connection.prepareStatement(insertRequest,
                              Statement.RETURN_GENERATED_KEYS)) {
             createStatement.setString(1, driver.getName());
-            createStatement.setString(2,driver.getLicenseNumber());
+            createStatement.setString(2, driver.getLicenseNumber());
             createStatement.executeUpdate();
             ResultSet generatedKeys = createStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
@@ -45,7 +44,7 @@ public class DriverDaoImpl implements DriverDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement getStatement =
                         connection.prepareStatement(getRequest)) {
-            getStatement.setLong(1,id);
+            getStatement.setLong(1, id);
             ResultSet resultSet = getStatement.executeQuery();
             Driver driver = null;
             if (resultSet.next()) {
@@ -102,7 +101,7 @@ public class DriverDaoImpl implements DriverDao {
                 PreparedStatement createStatement =
                         connection.prepareStatement(deleteRequest)) {
             createStatement.setLong(1, id);
-            return createStatement.executeUpdate() >= 1;
+            return createStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DataProcessingException("Can`t delete driver for id: "
                     + id + " from DB", e);

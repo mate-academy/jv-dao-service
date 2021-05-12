@@ -16,7 +16,6 @@ import mate.jdbc.util.ConnectionUtil;
 
 @Dao
 public class ManufacturerDaoImpl implements ManufacturerDao {
-
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
         String insertRequest = "INSERT INTO manufacturers (name, country) values(?, ?);";
@@ -25,7 +24,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
                         connection.prepareStatement(insertRequest,
                              Statement.RETURN_GENERATED_KEYS)) {
             createStatement.setString(1, manufacturer.getName());
-            createStatement.setString(2,manufacturer.getCountry());
+            createStatement.setString(2, manufacturer.getCountry());
             createStatement.executeUpdate();
             ResultSet generatedKeys = createStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
@@ -45,7 +44,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement getStatement =
                         connection.prepareStatement(getRequest)) {
-            getStatement.setLong(1,id);
+            getStatement.setLong(1, id);
             ResultSet resultSet = getStatement.executeQuery();
             Manufacturer manufacturer = null;
             if (resultSet.next()) {
@@ -102,7 +101,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
                 PreparedStatement createStatement =
                         connection.prepareStatement(deleteRequest)) {
             createStatement.setLong(1, id);
-            return createStatement.executeUpdate() >= 1;
+            return createStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DataProcessingException("Can`t delete manufacturer for id: "
                     + id + " from DB", e);
