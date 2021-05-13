@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import mate.jdbc.lib.Dao;
 import mate.jdbc.lib.exception.DataProcessingException;
@@ -81,7 +82,7 @@ public class DriverDaoImpl implements DriverDao {
             if (preparedStatement.executeUpdate() > 0) {
                 return driver;
             }
-            throw new RuntimeException("Can't update nonexistent driver");
+            throw new NoSuchElementException("Can't update nonexistent driver");
         } catch (SQLException e) {
             throw new DataProcessingException(
                     "Can't update driver: " + driver + " by following ID: " + driver.getId(), e);

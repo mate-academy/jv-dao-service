@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import mate.jdbc.lib.Dao;
 import mate.jdbc.lib.exception.DataProcessingException;
@@ -83,7 +84,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             if (preparedStatement.executeUpdate() > 0) {
                 return manufacturer;
             }
-            throw new RuntimeException("Can't update nonexistent manufacturer");
+            throw new NoSuchElementException("Can't update nonexistent manufacturer");
         } catch (SQLException throwable) {
             throw new DataProcessingException(
                     "Couldn't update a manufacturer " + manufacturer + " with ID: " + manufacturer
