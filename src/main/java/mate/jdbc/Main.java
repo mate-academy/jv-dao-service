@@ -38,7 +38,7 @@ public class Main {
         scoda.setCountry("Japan");
         zaz.setCountry("USA");
         vasya.setName("Vasyl");
-        kingJulian.setName("KING Julian");
+        kingJulian.setName("KiNG Julian");
         manufacturerService.update(scoda);
         manufacturerService.update(zaz);
         driverService.update(vasya);
