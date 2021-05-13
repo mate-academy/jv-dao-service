@@ -7,7 +7,7 @@ public class Driver {
     private String licenseNumber;
 }
 ```
-- Create `ManufacturerService` and its implementation. Annotation `@Service` has already been given to you.
+- Create `ManufacturerService` and its implementation. Annotations `@Service` and `@Inject` have already been given to you.
 ### ManufacturerService methods:
     - Manufacturer create(Manufacturer manufacturer);
     - Manufacturer get(Long id);
@@ -23,7 +23,6 @@ public class Driver {
     - boolean delete(Long id);
 
 - Do not forget about DB naming rules mentioned in previous homework.
-- Add required dependencies in pom.xml.
 - Test your code in `main`.
 - Main should only contain invocation of `Service` methods, no Dao methods allowed in `main`.
 - Do not forget about Dependency Injection. Use your annotations.
