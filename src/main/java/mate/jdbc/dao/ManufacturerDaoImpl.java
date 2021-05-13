@@ -89,12 +89,6 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
                 return manufacturer;
             }
             throw new NoSuchElementException("Can't find manufacturer " + manufacturer + " in DB");
-                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, manufacturer.getName());
-            preparedStatement.setString(2, manufacturer.getCountry());
-            preparedStatement.setLong(3, manufacturer.getId());
-            preparedStatement.executeUpdate();
-            return manufacturer;
         } catch (SQLException throwable) {
             throw new DataProcessingException("Couldn't update a manufacturer "
                     + manufacturer + " ", throwable);
