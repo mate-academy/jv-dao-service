@@ -86,7 +86,7 @@ public class DriverDaoImpl implements DriverDao {
             if (updateStatement.executeUpdate() > 0) {
                 return driver;
             }
-            throw new RuntimeException("No such driver " + driver.getId());
+            throw new DataProcessingException("No such driver " + driver.getId());
         } catch (SQLException e) {
             throw new DataProcessingException("Can`t update driver by name: "
                     + driver.getName() + " from DB", e);

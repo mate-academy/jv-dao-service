@@ -19,9 +19,9 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
     public Manufacturer create(Manufacturer manufacturer) {
         String insertRequest = "INSERT INTO manufacturers (name, country) values(?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement createStatement =
-                        connection.prepareStatement(insertRequest,
-                             Statement.RETURN_GENERATED_KEYS)) {
+                     PreparedStatement createStatement =
+                             connection.prepareStatement(insertRequest,
+                                     Statement.RETURN_GENERATED_KEYS)) {
             createStatement.setString(1, manufacturer.getName());
             createStatement.setString(2, manufacturer.getCountry());
             createStatement.executeUpdate();
@@ -86,7 +86,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             if (updateStatement.executeUpdate() > 0) {
                 return manufacturer;
             }
-            throw new RuntimeException("No such manufacturer " + manufacturer.getId());
+            throw new DataProcessingException("No such manufacturer " + manufacturer.getId());
         } catch (SQLException e) {
             throw new DataProcessingException("Can`t update manufacturer by name: "
                     + manufacturer.getName() + " from DB", e);
