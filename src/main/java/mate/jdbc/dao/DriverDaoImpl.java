@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import mate.jdbc.lib.Dao;
 import mate.jdbc.lib.exception.DataProcessingException;
@@ -78,10 +79,12 @@ public class DriverDaoImpl implements DriverDao {
             updateStatement.setString(1, driver.getName());
             updateStatement.setString(2, driver.getLicenseNumber());
             updateStatement.setLong(3, driver.getId());
-            updateStatement.executeUpdate();
-            return driver;
+            if (updateStatement.executeUpdate() > 0) {
+                return driver;
+            }
+            throw new NoSuchElementException("Current driver not exist in DB " + driver);
         } catch (SQLException e) {
-            throw new DataProcessingException("Couldn't update a drivers "
+            throw new DataProcessingException("Couldn't update a driver "
                     + driver + " ", e);
         }
     }
