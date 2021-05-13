@@ -26,8 +26,10 @@ public class Main {
 
         Manufacturer manufacturerBmw = new Manufacturer("BMW", "Germany");
         Manufacturer manufacturerMercedes = new Manufacturer("Mercedes", "Germany");
+        Manufacturer manufacturerBugatti = new Manufacturer("Bugatti", "France;");
         System.out.println(manufacturerService.create(manufacturerBmw));
         System.out.println(manufacturerService.create(manufacturerMercedes));
+        System.out.println(manufacturerService.create(manufacturerBugatti));
         System.out.println(manufacturerService.get(manufacturerBmw.getId()));
         System.out.println(manufacturerService.delete(manufacturerMercedes.getId()));
         manufacturerBmw.setName("NewBMW");
