@@ -45,14 +45,14 @@ public class Driver {
             return true;
         }
 
-        if (obj == null || obj.getClass() != this.getClass()) {
+        if (obj == null || getClass() != this.getClass()) {
             return false;
         }
 
         Driver driver = (Driver) obj;
         return Objects.equals(id, driver.id)
-                || Objects.equals(name, driver.name)
-                || Objects.equals(licenseNumber, driver.licenseNumber);
+                && Objects.equals(name, driver.name)
+                && Objects.equals(licenseNumber, driver.licenseNumber);
     }
 
     @Override

@@ -31,7 +31,7 @@ public class DriverDaoImpl implements DriverDao {
             }
             return driver;
         } catch (SQLException throwables) {
-            throw new DataProcessingException("Can't create driver", throwables);
+            throw new DataProcessingException("Can't create driver " + driver, throwables);
         }
     }
 
@@ -49,7 +49,7 @@ public class DriverDaoImpl implements DriverDao {
             }
             return Optional.ofNullable(driver);
         } catch (SQLException throwables) {
-            throw new DataProcessingException("Can't get driver from Db",
+            throw new DataProcessingException("Can't get driver by id " + id + " from Db",
                      throwables);
         }
     }
@@ -66,7 +66,7 @@ public class DriverDaoImpl implements DriverDao {
             }
             return drivers;
         } catch (SQLException throwables) {
-            throw new DataProcessingException("Can't get all drivers from Db",
+            throw new DataProcessingException("Can't get list of all drivers from Db",
                     throwables);
         }
     }
@@ -83,7 +83,7 @@ public class DriverDaoImpl implements DriverDao {
             preparedStatement.executeUpdate();
             return driver;
         } catch (SQLException throwables) {
-            throw new DataProcessingException("Can't update driver from Db",
+            throw new DataProcessingException("Can't update driver " + driver + " to Db",
                     throwables);
         }
     }
@@ -95,9 +95,9 @@ public class DriverDaoImpl implements DriverDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(deleteRequest)) {
             preparedStatement.setObject(1, id);
-            return preparedStatement.executeUpdate() >= 1;
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException throwables) {
-            throw new DataProcessingException("Can't delete driver from Db",
+            throw new DataProcessingException("Can't delete driver by id " + id + " from Db",
                     throwables);
         }
     }
