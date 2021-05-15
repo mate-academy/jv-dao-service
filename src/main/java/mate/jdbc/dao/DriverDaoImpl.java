@@ -88,7 +88,6 @@ public class DriverDaoImpl implements DriverDao {
         } catch (SQLException e) {
             throw new DataProcessingException("Can't update current driver: " + driver, e);
         }
-
     }
 
     @Override
@@ -114,8 +113,7 @@ public class DriverDaoImpl implements DriverDao {
             currentDriver.setId(dataFromDB.getObject("id", Long.class));
             return currentDriver;
         } catch (SQLException e) {
-            throw new DataProcessingException("", e);
+            throw new DataProcessingException("Can't create driver from input data", e);
         }
-
     }
 }
