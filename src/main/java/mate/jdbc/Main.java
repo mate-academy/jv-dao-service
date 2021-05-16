@@ -2,6 +2,7 @@ package mate.jdbc;
 
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
+import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.DriverService;
 import mate.jdbc.service.ManufacturerService;
 
@@ -23,5 +24,12 @@ public class Main {
         bob.setLicenseNumber("N765576P");
         System.out.println(driverService.update(bob));
         System.out.println(driverService.getAll());
+
+        Manufacturer tesla = new Manufacturer("Tesla", "United States");
+        System.out.println(manufacturerService.create(tesla));
+        System.out.println(manufacturerService.get(tesla.getId()));
+        System.out.println(manufacturerService.update(tesla));
+        System.out.println(manufacturerService.getAll());
+        System.out.println(manufacturerService.delete(tesla.getId()));
     }
 }
