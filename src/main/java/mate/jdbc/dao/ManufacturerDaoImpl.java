@@ -104,11 +104,9 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
     }
 
     private Manufacturer getManufacturer(ResultSet resultSet) throws SQLException {
-        Long newId = resultSet.getObject("id", Long.class);
-        String name = resultSet.getString("name");
-        String country = resultSet.getString("country");
-        Manufacturer manufacturer = new Manufacturer(name, country);
-        manufacturer.setId(newId);
+        Manufacturer manufacturer = new Manufacturer(resultSet.getString("name"),
+                resultSet.getString("country"));
+        manufacturer.setId(resultSet.getObject("id", Long.class));
         return manufacturer;
     }
 }
