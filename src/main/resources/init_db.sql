@@ -6,7 +6,7 @@ CREATE TABLE `drivers` (
     `name` varchar(255) DEFAULT NULL,
     `license_number` varchar(255) DEFAULT NULL,
     PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `manufacturers` (
     `id` bigint NOT NULL AUTO_INCREMENT,
@@ -14,4 +14,4 @@ CREATE TABLE `manufacturers` (
     `name` varchar(255) DEFAULT NULL,
     `country` varchar(255) DEFAULT NULL,
     PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
