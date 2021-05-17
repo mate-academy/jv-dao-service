@@ -13,6 +13,4 @@ public interface FlightService {
     Flight update(Flight flight);
 
     boolean delete(Long id);
-
-    boolean truncateTable();
 }

@@ -21,8 +21,7 @@ public class FlightDaoImpl implements FlightDao {
         String query = "INSERT INTO flights(number, carrier, manufacturer_id) VALUES (?, ?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement = connection
-                         .prepareStatement(query, Statement.RETURN_GENERATED_KEYS)
-        ) {
+                         .prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, flight.getNumber());
             statement.setString(2, flight.getCarrier());
             statement.setLong(3, flight.getManufacturer());
@@ -43,8 +42,7 @@ public class FlightDaoImpl implements FlightDao {
     public Optional<Flight> get(Long id) {
         String query = "SELECT * FROM flights WHERE id = ? AND is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
-                 PreparedStatement statement = connection.prepareStatement(query)
-        ) {
+                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -61,8 +59,7 @@ public class FlightDaoImpl implements FlightDao {
         List<Flight> flights = new ArrayList<>();
         String query = "SELECT * FROM flights WHERE is_deleted = false;";
         try (Connection connection = ConnectionUtil.getConnection();
-                 Statement statement = connection.createStatement()
-        ) {
+                 Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 flights.add(getFlight(resultSet));
@@ -78,8 +75,7 @@ public class FlightDaoImpl implements FlightDao {
         String query = "UPDATE flights SET  number = ?, carrier = ?, manufacturer_id = ?"
                 + " WHERE id = ? AND is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
-                 PreparedStatement statement = connection.prepareStatement(query)
-        ) {
+                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, flight.getNumber());
             statement.setString(2, flight.getCarrier());
             statement.setLong(3, flight.getManufacturer());
@@ -87,7 +83,8 @@ public class FlightDaoImpl implements FlightDao {
             if (statement.executeUpdate() > 0) {
                 return flight;
             } else {
-                throw new mate.jdbc.exception.DataProcessingException("Bad flight: " + flight);
+                throw new DataProcessingException("The flight have illegal id or was deleted: "
+                        + flight);
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Can't update flight in DB by id = "
@@ -104,18 +101,6 @@ public class FlightDaoImpl implements FlightDao {
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DataProcessingException("Can't delete flight from DB by id = " + id, e);
-        }
-    }
-
-    @Override
-    public boolean truncateTable() {
-        String query = "TRUNCATE TABLE flights";
-        try (Connection connection = ConnectionUtil.getConnection();
-                 Statement statement = connection.createStatement()
-        ) {
-            return statement.executeUpdate(query) > 0;
-        } catch (SQLException e) {
-            throw new DataProcessingException("Can't delete all manufactures from DB", e);
         }
     }
 

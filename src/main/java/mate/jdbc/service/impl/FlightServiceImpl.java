@@ -38,10 +38,4 @@ public class FlightServiceImpl implements FlightService {
     public boolean delete(Long id) {
         return flightDao.delete(id);
     }
-
-    @Override
-    public boolean truncateTable() {
-        return flightDao.truncateTable();
-    }
-
 }

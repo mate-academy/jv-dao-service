@@ -14,6 +14,4 @@ public interface FlightDao {
     Flight update(Flight flight);
 
     boolean delete(Long id);
-
-    boolean truncateTable();
 }

@@ -69,9 +69,5 @@ public class Main {
         flightService.update(kieToMsk);
         flightService.delete(kieToMsk.getId());
         flightService.getAll().forEach(System.out::println);
-
-        manufacturerService.truncateTable();
-        flightService.truncateTable();
-
     }
 }
