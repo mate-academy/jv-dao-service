@@ -8,39 +8,41 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import mate.jdbc.dao.FlightDao;
+import mate.jdbc.dao.PilotDao;
 import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Dao;
-import mate.jdbc.model.Flight;
+import mate.jdbc.model.Pilot;
 import mate.jdbc.util.ConnectionUtil;
 
 @Dao
-public class FlightDaoImpl implements FlightDao {
+public class PilotDaoImpl implements PilotDao {
     @Override
-    public Flight create(Flight flight) {
-        String query = "INSERT INTO flights(number, carrier, manufacturer_id) VALUES (?, ?, ?);";
+    public Pilot create(Pilot pilot) {
+        String query = "INSERT INTO pilots (name, flight_number, carrier, manufacturer_id) "
+                + "VALUES (?, ?, ?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement = connection
                          .prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, flight.getNumber());
-            statement.setString(2, flight.getCarrier());
-            statement.setLong(3, flight.getManufacturer());
+            statement.setString(1, pilot.getName());
+            statement.setString(2, pilot.getFlightNumber());
+            statement.setString(3, pilot.getCarrier());
+            statement.setLong(4, pilot.getManufacturer());
             statement.executeUpdate();
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 Long id = generatedKeys.getObject(1, Long.class);
-                flight.setId(id);
+                pilot.setId(id);
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't insert flight to DB : "
-                    + flight, e);
+            throw new DataProcessingException("Can't insert pilot to DB : "
+                    + pilot, e);
         }
-        return flight;
+        return pilot;
     }
 
     @Override
-    public Optional<Flight> get(Long id) {
-        String query = "SELECT * FROM flights WHERE id = ? AND is_deleted = FALSE;";
+    public Optional<Pilot> get(Long id) {
+        String query = "SELECT * FROM pilots WHERE id = ? AND is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
@@ -50,64 +52,67 @@ public class FlightDaoImpl implements FlightDao {
             }
             return Optional.empty();
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't get flight from DB by id = " + id, e);
+            throw new DataProcessingException("Can't get pilot from DB by id = " + id, e);
         }
     }
 
     @Override
-    public List<Flight> getAll() {
-        List<Flight> flights = new ArrayList<>();
-        String query = "SELECT * FROM flights WHERE is_deleted = false;";
+    public List<Pilot> getAll() {
+        List<Pilot> pilots = new ArrayList<>();
+        String query = "SELECT * FROM pilots WHERE is_deleted = false;";
         try (Connection connection = ConnectionUtil.getConnection();
                  Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
-                flights.add(getFlight(resultSet));
+                pilots.add(getFlight(resultSet));
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't get all flights from DB", e);
+            throw new DataProcessingException("Can't get all pilots from DB", e);
         }
-        return flights;
+        return pilots;
     }
 
     @Override
-    public Flight update(Flight flight) {
-        String query = "UPDATE flights SET  number = ?, carrier = ?, manufacturer_id = ?"
-                + " WHERE id = ? AND is_deleted = FALSE;";
+    public Pilot update(Pilot pilot) {
+        String query = "UPDATE pilots "
+                + "SET name = ?, flight_number = ?, carrier = ?, manufacturer_id = ? "
+                + "WHERE id = ? AND is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, flight.getNumber());
-            statement.setString(2, flight.getCarrier());
-            statement.setLong(3, flight.getManufacturer());
-            statement.setObject(4, flight.getId());
+            statement.setString(1, pilot.getName());
+            statement.setString(2, pilot.getFlightNumber());
+            statement.setString(3, pilot.getCarrier());
+            statement.setLong(4, pilot.getManufacturer());
+            statement.setObject(5, pilot.getId());
             if (statement.executeUpdate() > 0) {
-                return flight;
+                return pilot;
             } else {
-                throw new DataProcessingException("The flight have illegal id or was deleted: "
-                        + flight);
+                throw new DataProcessingException("The pilot have illegal id or was deleted: "
+                        + pilot);
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't update flight in DB by id = "
-                    + flight.getId(), e);
+            throw new DataProcessingException("Can't update pilot in DB by id = "
+                    + pilot.getId(), e);
         }
     }
 
     @Override
     public boolean delete(Long id) {
-        String query = "UPDATE flights SET is_deleted = TRUE where id = ?;";
+        String query = "UPDATE pilots SET is_deleted = TRUE where id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't delete flight from DB by id = " + id, e);
+            throw new DataProcessingException("Can't delete pilot from DB by id = " + id, e);
         }
     }
 
-    private Flight getFlight(ResultSet resultSet) throws SQLException {
-        Flight flight = new Flight();
+    private Pilot getFlight(ResultSet resultSet) throws SQLException {
+        Pilot flight = new Pilot();
         flight.setId(resultSet.getObject("id", Long.class));
-        flight.setNumber(resultSet.getString("number"));
+        flight.setName(resultSet.getString("name"));
+        flight.setFlightNumber(resultSet.getString("flight_number"));
         flight.setCarrier(resultSet.getString("carrier"));
         flight.setManufacturer(resultSet.getObject("manufacturer_id", Long.class));
         return flight;

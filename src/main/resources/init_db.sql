@@ -9,9 +9,10 @@ CREATE TABLE `manufacturers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-CREATE TABLE `flights` (
+CREATE TABLE `pilots` (
                            `id` int NOT NULL AUTO_INCREMENT,
-                           `number` varchar(10) DEFAULT NULL,
+                           `name` varchar(50) DEFAULT NULL,
+                           `flight_number` varchar(10) DEFAULT NULL,
                            `carrier` varchar(50) DEFAULT NULL,
                            `manufacturer_id` int,
                            `is_deleted` tinyint NOT NULL DEFAULT '0',

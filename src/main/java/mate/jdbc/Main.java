@@ -1,73 +1,76 @@
 package mate.jdbc;
 
 import mate.jdbc.lib.Injector;
-import mate.jdbc.model.Flight;
 import mate.jdbc.model.Manufacturer;
-import mate.jdbc.service.FlightService;
+import mate.jdbc.model.Pilot;
 import mate.jdbc.service.ManufacturerService;
+import mate.jdbc.service.PilotService;
 
 public class Main {
-    private static final Injector injector = Injector.getInstance("mate.jdbc");
-    private static final ManufacturerService manufacturerService
-            = (ManufacturerService) injector.getInstance(ManufacturerService.class);
-    private static final FlightService flightService =
-            (FlightService) injector.getInstance(FlightService.class);
+    private static final Injector INJECTOR = Injector.getInstance("mate.jdbc");
+    private static final ManufacturerService MANUFACTURER_SERVICE
+            = (ManufacturerService) INJECTOR.getInstance(ManufacturerService.class);
+    private static final PilotService PILOT_SERVICE
+            = (PilotService) INJECTOR.getInstance(PilotService.class);
 
     public static void main(String[] args) {
         Manufacturer airbus = new Manufacturer("Airbus","FRA");
-        manufacturerService.create(airbus);
+        MANUFACTURER_SERVICE.create(airbus);
         Manufacturer boeing = new Manufacturer("Boeing","USA");
-        manufacturerService.create(boeing);
+        MANUFACTURER_SERVICE.create(boeing);
         Manufacturer mcDonnellDouglas = new Manufacturer("McDonnell Douglas","USA");
-        manufacturerService.create(mcDonnellDouglas);
+        MANUFACTURER_SERVICE.create(mcDonnellDouglas);
         Manufacturer sukhoi = new Manufacturer("Sukhoi", "SUN");
-        manufacturerService.create(sukhoi);
+        MANUFACTURER_SERVICE.create(sukhoi);
         Manufacturer ilyushin = new Manufacturer("Ilyushin", "SUN");
-        manufacturerService.create(ilyushin);
-        Flight mskToKie = new Flight("Aeroflot - Soviet airlines", "SU 0004", ilyushin.getId());
-        flightService.create(mskToKie);
-        Flight kieToMsk = new Flight("Aeroflot - Soviet airlines", "SU 0005", ilyushin.getId());
-        flightService.create(kieToMsk);
+        MANUFACTURER_SERVICE.create(ilyushin);
+        Pilot mskToKie = new Pilot("Aleksander Pushkin",
+                "SU 0004", "Aeroflot - Soviet airlines", ilyushin.getId());
+        PILOT_SERVICE.create(mskToKie);
+        Pilot kieToMsk = new Pilot("Taras Shevchenko",
+                "SU 0005", "Aeroflot - Soviet airlines", ilyushin.getId());
+        PILOT_SERVICE.create(kieToMsk);
 
         System.out.println("\nGET");
-        System.out.println(manufacturerService.get(sukhoi.getId()));
-        System.out.println(flightService.get(mskToKie.getId()));
+        System.out.println(MANUFACTURER_SERVICE.get(sukhoi.getId()));
+        System.out.println(PILOT_SERVICE.get(mskToKie.getId()));
 
         System.out.println("\nGET ALL after CREATE");
-        manufacturerService.getAll().forEach(System.out::println);
-        flightService.getAll().forEach(System.out::println);
+        MANUFACTURER_SERVICE.getAll().forEach(System.out::println);
+        PILOT_SERVICE.getAll().forEach(System.out::println);
 
         System.out.println("\nGET ALL after UPDATE");
         mcDonnellDouglas.setName("Boeing");
         sukhoi.setCountry("RUS");
         ilyushin.setCountry("RUS");
-        manufacturerService.update(mcDonnellDouglas);
-        manufacturerService.update(sukhoi);
-        manufacturerService.update(ilyushin);
-        manufacturerService.getAll().forEach(System.out::println);
+        MANUFACTURER_SERVICE.update(mcDonnellDouglas);
+        MANUFACTURER_SERVICE.update(sukhoi);
+        MANUFACTURER_SERVICE.update(ilyushin);
+        MANUFACTURER_SERVICE.getAll().forEach(System.out::println);
         mskToKie.setCarrier("Aeroflot - Russian airlines");
         mskToKie.setManufacturer(boeing.getId());
-        kieToMsk.setNumber("VV 1001");
+        kieToMsk.setFlightNumber("VV 1001");
         kieToMsk.setCarrier("AeroSvit - Ukrainian airlines");
         kieToMsk.setManufacturer(airbus.getId());
-        flightService.update(mskToKie);
-        flightService.update(kieToMsk);
-        flightService.getAll().forEach(System.out::println);
+        PILOT_SERVICE.update(mskToKie);
+        PILOT_SERVICE.update(kieToMsk);
+        PILOT_SERVICE.getAll().forEach(System.out::println);
 
         System.out.println("\nGET ALL after DELETE");
-        manufacturerService.delete(mcDonnellDouglas.getId());
+        MANUFACTURER_SERVICE.delete(mcDonnellDouglas.getId());
         sukhoi.setName("United Aircraft Corporation");
         ilyushin.setName(sukhoi.getName());
-        manufacturerService.update(sukhoi);
-        manufacturerService.update(ilyushin);
-        manufacturerService.delete(ilyushin.getId());
-        manufacturerService.getAll().forEach(System.out::println);
+        MANUFACTURER_SERVICE.update(sukhoi);
+        MANUFACTURER_SERVICE.update(ilyushin);
+        MANUFACTURER_SERVICE.delete(ilyushin.getId());
+        MANUFACTURER_SERVICE.getAll().forEach(System.out::println);
+        mskToKie.setName("Fedor Dostoevsky");
         mskToKie.setManufacturer(sukhoi.getId());
-        kieToMsk.setNumber("PS 1001");
+        kieToMsk.setFlightNumber("PS 1001");
         kieToMsk.setCarrier("Ukraine International Airlines");
-        flightService.update(mskToKie);
-        flightService.update(kieToMsk);
-        flightService.delete(kieToMsk.getId());
-        flightService.getAll().forEach(System.out::println);
+        PILOT_SERVICE.update(mskToKie);
+        PILOT_SERVICE.update(kieToMsk);
+        PILOT_SERVICE.delete(kieToMsk.getId());
+        PILOT_SERVICE.getAll().forEach(System.out::println);
     }
 }

@@ -1,17 +1,19 @@
 package mate.jdbc.model;
 
-public class Flight {
+public class Pilot {
     private Long id;
-    private String number;
+    private String name;
+    private String flightNumber;
     private String carrier;
     private Long manufacturer;
 
-    public Flight() {
+    public Pilot() {
     }
 
-    public Flight(String carrier, String number, Long manufacturer) {
+    public Pilot(String name, String flightNumber, String carrier, Long manufacturer) {
+        this.name = name;
         this.carrier = carrier;
-        this.number = number;
+        this.flightNumber = flightNumber;
         this.manufacturer = manufacturer;
     }
 
@@ -23,12 +25,20 @@ public class Flight {
         this.id = id;
     }
 
-    public String getNumber() {
-        return number;
+    public String getName() {
+        return name;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getFlightNumber() {
+        return flightNumber;
+    }
+
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
     }
 
     public String getCarrier() {
@@ -49,12 +59,12 @@ public class Flight {
 
     @Override
     public String toString() {
-        return "Flight{"
+        return "Pilot{"
                 + "id=" + id
-                + ", number='" + number + '\''
+                + ", name='" + name + '\''
+                + ", flightNumber='" + flightNumber + '\''
                 + ", carrier='" + carrier + '\''
                 + ", manufacturer=" + manufacturer
                 + '}';
     }
-
 }
