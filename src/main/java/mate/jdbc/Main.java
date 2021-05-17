@@ -32,9 +32,9 @@ public class Main {
         driverService.update(driver);
         driverService.delete(driver.getId());
 
-        System.out.println("Manufacturers");
+        System.out.println("#Manufacturers#");
         manufacturerService.getAll().forEach(System.out::println);
-        System.out.println("Drivers");
+        System.out.println("#Drivers#");
         driverService.getAll().forEach(System.out::println);
     }
 }
