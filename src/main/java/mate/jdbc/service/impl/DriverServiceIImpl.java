@@ -24,19 +24,16 @@ public class DriverServiceIImpl implements DriverService {
 
     @Override
     public List<Driver> getAll() {
-
         return driverDao.getAll();
     }
 
     @Override
     public Driver update(Driver driver) {
-
         return driverDao.update(driver);
     }
 
     @Override
     public boolean delete(Long id) {
-
         return driverDao.delete(id);
     }
 }
