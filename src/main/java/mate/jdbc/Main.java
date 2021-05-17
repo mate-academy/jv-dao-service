@@ -14,22 +14,16 @@ public class Main {
     public static void main(String[] args) {
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
 
-        Driver driverBob = new Driver();
-        driverBob.setName("Robert Kennedy");
-        driverBob.setLicenseNumber("12345");
+        Driver driverBob = new Driver("Robert Kennedy", "12345");
         driverService.create(driverBob);
-        Driver driverAlice = new Driver();
-        driverAlice.setName("Alice Wonderland");
-        driverAlice.setLicenseNumber("67890");
+        Driver driverAlice = new Driver("Alice Wonderland", "67890");
         driverService.create(driverAlice);
         driverService.getAll().forEach(System.out::println);
 
         driverAlice.setName("Alice Kennedy");
         driverService.update(driverAlice);
 
-        Driver driverJohn = new Driver();
-        driverJohn.setName("John Kennedy");
-        driverJohn.setLicenseNumber("13579");
+        Driver driverJohn = new Driver("John Kennedy", "13579");
         driverService.create(driverJohn);
         Optional<Driver> optionalJohn = driverService.get(driverJohn.getId());
         System.out.println(Objects.equals(optionalJohn.get().getId(),
@@ -41,26 +35,19 @@ public class Main {
 
         ManufacturerService manufacturerService =
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
-        Manufacturer manufacturerMersedes = new Manufacturer();
-        manufacturerMersedes.setName("Mersedes");
-        manufacturerMersedes.setCountry("Germany");
+        Manufacturer manufacturerMersedes = new Manufacturer("Mersedes", "Germany");
         manufacturerService.create(manufacturerMersedes);
-        Manufacturer manufacturerLexus = new Manufacturer();
-        manufacturerMersedes.setName("Lexus");
-        manufacturerMersedes.setCountry("Japan");
+        Manufacturer manufacturerLexus = new Manufacturer("Lexus", "Japan");
         manufacturerService.create(manufacturerLexus);
         System.out.println(manufacturerService.delete(manufacturerMersedes.getId()));
 
-        Manufacturer manufacturerTesla = new Manufacturer();
-        manufacturerTesla.setName("Tesla");
-        manufacturerTesla.setCountry("USA");
+        Manufacturer manufacturerTesla = new Manufacturer("Tesla", "USA");
         manufacturerService.create(manufacturerTesla);
         manufacturerTesla.setCountry("USA, California");
         manufacturerService.update(manufacturerTesla);
 
-        Optional<Manufacturer> lexusOptional = manufacturerService.get(manufacturerLexus.getId());
-        System.out.println(Objects.equals(lexusOptional.get().getId(),
-                manufacturerMersedes.getId()));
+        Optional<Manufacturer> getLexus = manufacturerService.get(manufacturerLexus.getId());
+        System.out.println(getLexus);
 
         boolean teslaDeleted = manufacturerService.delete(manufacturerTesla.getId());
         System.out.println("Tesla deleted" + teslaDeleted);
