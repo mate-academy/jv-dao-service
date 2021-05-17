@@ -19,7 +19,7 @@ public class ConnectionUtil {
         }
     }
 
-    public static Connection getConnection(){
+    public static Connection getConnection() {
         Properties dbProperties = new Properties();
         dbProperties.setProperty("user", USERNAME);
         dbProperties.setProperty("password", PASSWORD);
