@@ -62,8 +62,9 @@ public class DriverDaoImpl implements DriverDao {
         List<Driver> driversList = new ArrayList<>();
         String getAllDriversQuery = "SELECT * FROM drivers WHERE deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
-                Statement getAllDriversStatement = connection.createStatement()) {
-            ResultSet dataFromDB = getAllDriversStatement.executeQuery(getAllDriversQuery);
+                PreparedStatement getAllDriversStatement = connection
+                        .prepareStatement(getAllDriversQuery)) {
+            ResultSet dataFromDB = getAllDriversStatement.executeQuery();
             while (dataFromDB.next()) {
                 driversList.add(createAndInitializeDriver(dataFromDB));
             }
@@ -99,7 +100,6 @@ public class DriverDaoImpl implements DriverDao {
             deleteDriverStatement.setLong(1, id);
             deleteDriverStatement.executeUpdate();
             return deleteDriverStatement.executeUpdate() >= 1;
-
         } catch (SQLException e) {
             throw new DataProcessingException("Can't delete driver with current ID: " + id, e);
         }
