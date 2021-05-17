@@ -3,28 +3,22 @@ package mate.jdbc;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
-import mate.jdbc.service.DriverDaoService;
-import mate.jdbc.service.ManufactureDaoService;
+import mate.jdbc.service.DriverService;
+import mate.jdbc.service.ManufactureService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
-    private static final ManufactureDaoService manufactureDaoService = (ManufactureDaoService)
-            injector.getInstance(ManufactureDaoService.class);
-    private static final DriverDaoService driverDaoService = (DriverDaoService)
-            injector.getInstance(DriverDaoService.class);
+    private static final ManufactureService manufactureDaoService = (ManufactureService)
+            injector.getInstance(ManufactureService.class);
+    private static final DriverService driverDaoService = (DriverService)
+            injector.getInstance(DriverService.class);
 
     public static void main(String[] args) {
-        Manufacturer nike = new Manufacturer();
-        nike.setName("Nike");
-        nike.setCountry("USA");
+        Manufacturer nike = new Manufacturer("Nike","USA");
 
-        Manufacturer adidas = new Manufacturer();
-        adidas.setName("Adidas");
-        adidas.setCountry("Island");
+        Manufacturer adidas = new Manufacturer("Adidas","Island");
 
-        Manufacturer puma = new Manufacturer();
-        puma.setName("Puma");
-        puma.setCountry("England");
+        Manufacturer puma = new Manufacturer("Puma", "England");
 
         manufactureDaoService.create(nike);
         manufactureDaoService.create(adidas);

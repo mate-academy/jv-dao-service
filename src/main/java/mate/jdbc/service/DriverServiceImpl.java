@@ -4,10 +4,11 @@ import java.util.List;
 import mate.jdbc.dao.DriverDao;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
+import mate.jdbc.lib.exception.DataProcessingException;
 import mate.jdbc.model.Driver;
 
 @Service
-public class DriverDaoServiceImpl implements DriverDaoService {
+public class DriverServiceImpl implements DriverService {
     @Inject
     private DriverDao driverDao;
 
@@ -18,7 +19,8 @@ public class DriverDaoServiceImpl implements DriverDaoService {
 
     @Override
     public Driver get(Long id) {
-        return driverDao.get(id);
+        return driverDao.get(id).orElseThrow(()
+                -> new DataProcessingException("Can't find driver by id:" + id));
     }
 
     @Override

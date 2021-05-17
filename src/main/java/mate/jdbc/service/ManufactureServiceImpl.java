@@ -1,14 +1,14 @@
 package mate.jdbc.service;
 
 import java.util.List;
-import java.util.Optional;
 import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
+import mate.jdbc.lib.exception.DataProcessingException;
 import mate.jdbc.model.Manufacturer;
 
 @Service
-public class ManufactureDaoServiceImpl implements ManufactureDaoService {
+public class ManufactureServiceImpl implements ManufactureService {
     @Inject
     private ManufacturerDao manufacturerDao;
 
@@ -18,8 +18,9 @@ public class ManufactureDaoServiceImpl implements ManufactureDaoService {
     }
 
     @Override
-    public Optional<Manufacturer> get(Long id) {
-        return manufacturerDao.get(id);
+    public Manufacturer get(Long id) {
+        return manufacturerDao.get(id).orElseThrow(()
+                -> new DataProcessingException("Can't find manufacturer by id" + id));
     }
 
     @Override
