@@ -20,7 +20,7 @@ public class DriverServiceImpl implements DriverService {
     public Driver get(Long id) {
         return driverDao.get(id).orElseThrow(
                 () -> new DataProcessingException(
-                        "Cannot get driver by id: " + id
+                        "Driver not found by id: " + id
                 )
         );
     }
