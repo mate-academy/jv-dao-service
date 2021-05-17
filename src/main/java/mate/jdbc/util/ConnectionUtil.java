@@ -6,8 +6,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class ConnectionUtil {
-    public static final String URL_MANUFACTURERS = "jdbc:mysql://localhost:3306/manufacturers";
-    public static final String URL_DRIVERS = "jdbc:mysql://localhost:3306/drivers";
+    public static final String URL = "jdbc:mysql://localhost:3306/manufacturers";
     public static final String USERNAME = "root";
     public static final String PASSWORD = "OkC0mputer";
     public static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -20,17 +19,10 @@ public class ConnectionUtil {
         }
     }
 
-    public static Connection getManufacturersConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException {
         Properties dbProperties = new Properties();
         dbProperties.setProperty("user", USERNAME);
         dbProperties.setProperty("password", PASSWORD);
-        return DriverManager.getConnection(URL_MANUFACTURERS, dbProperties);
-    }
-
-    public static Connection getDriversConnection() throws SQLException {
-        Properties dbProperties = new Properties();
-        dbProperties.setProperty("user", USERNAME);
-        dbProperties.setProperty("password", PASSWORD);
-        return DriverManager.getConnection(URL_DRIVERS, dbProperties);
+        return DriverManager.getConnection(URL, dbProperties);
     }
 }
