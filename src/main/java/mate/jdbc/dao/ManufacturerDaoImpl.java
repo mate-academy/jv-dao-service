@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import mate.jdbc.lib.Dao;
 import mate.jdbc.lib.exception.DataProcessingException;
@@ -17,11 +18,10 @@ import mate.jdbc.util.ConnectionUtil;
 public class ManufacturerDaoImpl implements ManufacturerDao {
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        String query = "INSERT INTO manufacturers (name, country) "
-                + "VALUES (?, ?)";
+        String query = "INSERT INTO manufacturers (name, country) " + "VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement preparedStatement
-                        = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement preparedStatement = connection
+                        .prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, manufacturer.getName());
             preparedStatement.setString(2, manufacturer.getCountry());
             preparedStatement.executeUpdate();
@@ -35,11 +35,10 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
                     throwable);
         }
     }
-
+    
     @Override
     public Optional<Manufacturer> get(Long id) {
-        String query = "SELECT * FROM manufacturers"
-                + " WHERE id = (?) AND deleted = FALSE";
+        String query = "SELECT * FROM manufacturers" + " WHERE id = (?) AND deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, id);
@@ -54,7 +53,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
                     throwable);
         }
     }
-
+    
     @Override
     public List<Manufacturer> getAll() {
         String query = "SELECT * FROM manufacturers WHERE deleted = FALSE";
@@ -67,12 +66,12 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             }
             return manufacturers;
         } catch (SQLException throwable) {
-            throw new DataProcessingException("Couldn't get a list of manufacturers "
-                    + "from manufacturers table. ",
+            throw new DataProcessingException(
+                    "Couldn't get a list of manufacturers " + "from manufacturers table. ",
                     throwable);
         }
     }
-
+    
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
         String query = "UPDATE manufacturers SET name = ?, country = ?"
@@ -82,14 +81,17 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             preparedStatement.setString(1, manufacturer.getName());
             preparedStatement.setString(2, manufacturer.getCountry());
             preparedStatement.setLong(3, manufacturer.getId());
-            preparedStatement.executeUpdate();
-            return manufacturer;
+            if (preparedStatement.executeUpdate() > 0) {
+                return manufacturer;
+            }
+            throw new NoSuchElementException("Can't update nonexistent manufacturer");
         } catch (SQLException throwable) {
-            throw new DataProcessingException("Couldn't update a manufacturer "
-                    + manufacturer + " ", throwable);
+            throw new DataProcessingException(
+                    "Couldn't update a manufacturer " + manufacturer + " with ID: " + manufacturer
+                            .getId(), throwable);
         }
     }
-
+    
     @Override
     public boolean delete(Long id) {
         String query = "UPDATE manufacturers SET deleted = TRUE WHERE id = ?";
@@ -102,7 +104,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
                     throwable);
         }
     }
-
+    
     private Manufacturer getManufacturer(ResultSet resultSet) throws SQLException {
         Long newId = resultSet.getObject("id", Long.class);
         String name = resultSet.getString("name");
