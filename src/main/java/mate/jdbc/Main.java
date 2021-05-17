@@ -17,7 +17,6 @@ public class Main {
         ManufacturerService manufacturerService = (ManufacturerService) injector
                 .getInstance(ManufacturerService.class);
         manufacturerService.create(manufacturer);
-        System.out.println(manufacturerService.get(1L));
         System.out.println(manufacturerService.get(manufacturer.getId()));
         manufacturerService.getAll().forEach(System.out::println);
 
@@ -35,7 +34,6 @@ public class Main {
         DriverService driverService = (DriverService) injector
                 .getInstance(DriverService.class);
         driverService.createDriver(driver);
-        System.out.println(driverService.getDriver(1L));
         System.out.println(driverService.getDriver(driver.getId()));
         driverService.getAllDrivers().forEach(System.out::println);
 
