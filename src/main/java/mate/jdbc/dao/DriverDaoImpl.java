@@ -40,7 +40,6 @@ public class DriverDaoImpl implements DriverDao {
                 PreparedStatement getDriverByIdStatement = connection.prepareStatement(query)) {
             getDriverByIdStatement.setLong(1, id);
             ResultSet resultSet = getDriverByIdStatement.executeQuery();
-
             if (resultSet.next()) {
                 return Optional.of(parseDriver(resultSet));
             }
