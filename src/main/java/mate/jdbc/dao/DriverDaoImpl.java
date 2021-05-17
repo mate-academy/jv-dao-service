@@ -46,7 +46,7 @@ public class DriverDaoImpl implements DriverDao {
             getDriverStatement.setLong(1, id);
             ResultSet resultSet = getDriverStatement.executeQuery();
             if (resultSet.next()) {
-                return Optional.ofNullable(createDriverObject(resultSet));
+                return Optional.of(createDriverObject(resultSet));
             }
             return Optional.empty();
         } catch (SQLException e) {
@@ -97,7 +97,7 @@ public class DriverDaoImpl implements DriverDao {
                 PreparedStatement deleteDriverStatement =
                         connection.prepareStatement(deleteDriverRequest)) {
             deleteDriverStatement.setLong(1, id);
-            return deleteDriverStatement.executeUpdate() > 1;
+            return deleteDriverStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DataProcessingException("Can't delete driver by id = " + id, e);
         }
