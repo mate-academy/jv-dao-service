@@ -39,7 +39,7 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public Optional<Driver> get(Long id) {
         String query = "SELECT * FROM drivers"
-                + " WHERE id = (?) AND deleted = FALSE";
+                + " WHERE id = ? AND deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, id);
