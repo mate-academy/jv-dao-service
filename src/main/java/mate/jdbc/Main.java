@@ -1,7 +1,5 @@
 package mate.jdbc;
 
-import java.util.Objects;
-import java.util.Optional;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
@@ -25,9 +23,8 @@ public class Main {
 
         Driver driverJohn = new Driver("John Kennedy", "13579");
         driverService.create(driverJohn);
-        Optional<Driver> optionalJohn = driverService.get(driverJohn.getId());
-        System.out.println(Objects.equals(optionalJohn.get().getId(),
-                driverJohn.getId()));
+        Driver optionalJohn = driverService.get(driverJohn.getId());
+        System.out.println(optionalJohn);
 
         boolean johnDeleted = driverService.delete(driverJohn.getId());
         System.out.println("John deleted" + johnDeleted);
@@ -46,7 +43,7 @@ public class Main {
         manufacturerTesla.setCountry("USA, California");
         manufacturerService.update(manufacturerTesla);
 
-        Optional<Manufacturer> getLexus = manufacturerService.get(manufacturerLexus.getId());
+        Manufacturer getLexus = manufacturerService.get(manufacturerLexus.getId());
         System.out.println(getLexus);
 
         boolean teslaDeleted = manufacturerService.delete(manufacturerTesla.getId());
