@@ -10,47 +10,32 @@ public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
-        Manufacturer scoda = new Manufacturer();
-        scoda.setName("Scoda");
-        scoda.setCountry("Czech Republic");
-        Manufacturer volkswagen = new Manufacturer();
-        volkswagen.setName("Volkswagen");
-        volkswagen.setCountry("Germany");
-        Manufacturer bugatti = new Manufacturer();
-        bugatti.setName("Bugatti");
-        bugatti.setCountry("France");
-        Manufacturer porsche = new Manufacturer();
-        porsche.setName("Porsche");
-        porsche.setCountry("Germany");
-        Driver tom = new Driver();
-        tom.setName("Tom");
-        tom.setLicenseNumber("ABC123");
-        Driver john = new Driver();
-        john.setName("John");
-        john.setLicenseNumber("DEFG45");
-        Driver kate = new Driver();
-        kate.setName("Kate");
-        kate.setLicenseNumber("HJK678");
-        Driver evelyne = new Driver();
-        evelyne.setName("Evelyne");
-        evelyne.setLicenseNumber("LMNO90");
-
         ManufacturerService manufacturerService = (ManufacturerService)
                 injector.getInstance(ManufacturerService.class);
         DriverService driverService = (DriverService)
                 injector.getInstance(DriverService.class);
-        System.out.println("Testing is table empty");
+        System.out.println("_______________________________"
+                + '\n' + "Testing is table empty");
         manufacturerService.getAll().forEach(System.out::println);
         driverService.getAll().forEach(System.out::println);
-        System.out.println("_______________________________");
+        System.out.println();
 
+        Manufacturer scoda = new Manufacturer("Scoda","Czech Republic");
         manufacturerService.create(scoda);
+        Manufacturer volkswagen = new Manufacturer("Volkswagen", "Germany");
         manufacturerService.create(volkswagen);
+        Manufacturer bugatti = new Manufacturer("Bugatti", "France");
         manufacturerService.create(bugatti);
+        Manufacturer porsche = new Manufacturer("Porsche", "Germany");
         manufacturerService.create(porsche);
+
+        Driver tom = new Driver("Tom", "ABC123");
         driverService.create(tom);
+        Driver john = new Driver("John", "DEFG45");
         driverService.create(john);
+        Driver kate = new Driver("Kate", "HJK678");
         driverService.create(kate);
+        Driver evelyne = new Driver("Evelyne", "LMNO90");
         driverService.create(evelyne);
 
         System.out.println("_______________________________");
