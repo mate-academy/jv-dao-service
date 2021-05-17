@@ -21,14 +21,14 @@ public class Main {
         System.out.println(manufacturerService.create(mercedesManufacturer));
         System.out.println(manufacturerService.create(toyotaManufacturer));
 
-        System.out.println(manufacturerService.get(1L));
-        System.out.println(manufacturerService.get(2L));
-        System.out.println(manufacturerService.get(3L));
+        System.out.println(manufacturerService.get(renaultManufacturer.getId()));
+        System.out.println(manufacturerService.get(toyotaManufacturer.getId()));
+        System.out.println(manufacturerService.get(mercedesManufacturer.getId()));
 
         mercedesManufacturer.setName("Mercedes Benz");
         System.out.println(manufacturerService.update(mercedesManufacturer));
 
-        System.out.println(manufacturerService.delete(3L));
+        System.out.println(manufacturerService.delete(mercedesManufacturer.getId()));
 
         List<Manufacturer> all = manufacturerService.getAll();
         System.out.println(all);
@@ -40,11 +40,11 @@ public class Main {
         System.out.println(driverService.create(bob));
         System.out.println(driverService.create(john));
 
-        System.out.println(driverService.get(1L));
+        System.out.println(driverService.get(renaultManufacturer.getId()));
 
         bob.setName("Alice");
         System.out.println(driverService.update(bob));
-        System.out.println(driverService.delete(1L));
+        System.out.println(driverService.delete(renaultManufacturer.getId()));
         System.out.println(driverService.getAll());
     }
 }
