@@ -23,7 +23,7 @@ public class Main {
         manufacturerService.get(manufacturerBershka.getId());
         manufacturerService.delete(manufacturerSkechers.getId());
 
-        manufacturerService.getAll();
+        manufacturerService.getAll().forEach(System.out::println);
 
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         Driver driverIvan = new Driver("Ivan", "1234");
@@ -38,6 +38,6 @@ public class Main {
         driverService.get(driverSasha.getId());
         driverService.delete(driverIvan.getId());
 
-        driverService.getAll();
+        driverService.getAll().forEach(System.out::println);
     }
 }
