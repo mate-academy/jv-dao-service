@@ -48,7 +48,7 @@ public class PilotDaoImpl implements PilotDao {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return Optional.of(getFlight(resultSet));
+                return Optional.of(getPilot(resultSet));
             }
             return Optional.empty();
         } catch (SQLException e) {
@@ -64,7 +64,7 @@ public class PilotDaoImpl implements PilotDao {
                  Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
-                pilots.add(getFlight(resultSet));
+                pilots.add(getPilot(resultSet));
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Can't get all pilots from DB", e);
@@ -108,13 +108,13 @@ public class PilotDaoImpl implements PilotDao {
         }
     }
 
-    private Pilot getFlight(ResultSet resultSet) throws SQLException {
-        Pilot flight = new Pilot();
-        flight.setId(resultSet.getObject("id", Long.class));
-        flight.setName(resultSet.getString("name"));
-        flight.setFlightNumber(resultSet.getString("flight_number"));
-        flight.setCarrier(resultSet.getString("carrier"));
-        flight.setManufacturer(resultSet.getObject("manufacturer_id", Long.class));
-        return flight;
+    private Pilot getPilot(ResultSet resultSet) throws SQLException {
+        Pilot pilot = new Pilot();
+        pilot.setId(resultSet.getObject("id", Long.class));
+        pilot.setName(resultSet.getString("name"));
+        pilot.setFlightNumber(resultSet.getString("flight_number"));
+        pilot.setCarrier(resultSet.getString("carrier"));
+        pilot.setManufacturer(resultSet.getObject("manufacturer_id", Long.class));
+        return pilot;
     }
 }
