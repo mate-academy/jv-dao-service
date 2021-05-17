@@ -10,8 +10,8 @@ public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
     private static final Driver DRIVER_A = new Driver("Vovan", "AE0001KM");
     private static final Driver DRIVER_B = new Driver("Salli", "AA6666AA");
-    private static final Manufacturer MANUFACTURER_A = new Manufacturer("CADILLAC", "USA");
-    private static final Manufacturer MANUFACTURER_B = new Manufacturer("LINCOLN", "USA");
+    private static final Manufacturer MANUFACTURER_A = new Manufacturer("Cadillac", "USA");
+    private static final Manufacturer MANUFACTURER_B = new Manufacturer("Lincoln", "USA");
     
     public static void main(String[] args) {
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
