@@ -24,12 +24,17 @@ public class Main {
         DriverService driverService = (DriverService) injector
                 .getInstance(DriverService.class);
 
-        Driver driver = new Driver("TEST_DRIVER_JOHN", "NA12346789");
+        Driver driver = new Driver("TEST_DRIVER_JOHN", "NA123467890");
         driverService.create(driver);
         driverService.get(driver.getId());
         driverService.getAll();
         driver.setName("test_driver");
         driverService.update(driver);
         driverService.delete(driver.getId());
+
+        System.out.println("Manufacturers");
+        manufacturerService.getAll().forEach(System.out::println);
+        System.out.println("Drivers");
+        driverService.getAll().forEach(System.out::println);
     }
 }
