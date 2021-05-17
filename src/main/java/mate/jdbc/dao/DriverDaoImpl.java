@@ -85,7 +85,7 @@ public class DriverDaoImpl implements DriverDao {
             if (updateStatement.executeUpdate() > 0) {
                 return driver;
             }
-            throw new RuntimeException("Can`t find record with id = " + driver.getId());
+            throw new DataProcessingException("Can`t find record with id = " + driver.getId());
         } catch (SQLException throwable) {
             throw new DataProcessingException("Couldn't update a driver "
                     + driver + " ", throwable);
