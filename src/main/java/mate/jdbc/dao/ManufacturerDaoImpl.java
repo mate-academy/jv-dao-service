@@ -69,8 +69,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             return manufacturers;
         } catch (SQLException throwable) {
             throw new DataProcessingException("Couldn't get a list of manufacturers "
-                    + "from manufacturers table. ",
-                    throwable);
+                    + "from manufacturers table. ", throwable);
         }
     }
 
