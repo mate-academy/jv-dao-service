@@ -1,8 +1,7 @@
 package mate.jdbc.service;
 
 import java.util.List;
-import java.util.Optional;
-import mate.jdbc.dao.ManufacturerService;
+import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
 import mate.jdbc.model.Manufacturer;
@@ -10,7 +9,7 @@ import mate.jdbc.model.Manufacturer;
 @Service
 public class ManufacturerServiceImpl implements ManufacturerService {
     @Inject
-    private ManufacturerService manufacturerDao;
+    private ManufacturerDao manufacturerDao;
 
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
@@ -18,8 +17,8 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     }
 
     @Override
-    public Optional<Manufacturer> get(Long id) {
-        return manufacturerDao.get(id);
+    public Manufacturer get(Long id) {
+        return manufacturerDao.get(id).get();
     }
 
     @Override

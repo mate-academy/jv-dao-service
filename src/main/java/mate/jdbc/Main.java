@@ -1,10 +1,10 @@
 package mate.jdbc;
 
-import mate.jdbc.dao.ManufacturerService;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.DriverService;
+import mate.jdbc.service.ManufacturerService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
@@ -13,31 +13,31 @@ public class Main {
         ManufacturerService manufacturerService = (ManufacturerService) injector
                 .getInstance(ManufacturerService.class);
         Manufacturer manufacturer = new Manufacturer();
-        manufacturer.setName("Renault");
+        manufacturer.setName("Peugeot");
         manufacturer.setCountry("France");
         manufacturerService.create(manufacturer);
         manufacturerService.getAll();
-        manufacturerService.get(2L);
+        manufacturerService.get(3L);
         Manufacturer manufacturer1 = new Manufacturer();
-        manufacturer1.setId(2L);
-        manufacturer1.setName("Mercedes");
+        manufacturer1.setId(3L);
+        manufacturer1.setName("Porsche");
         manufacturer1.setCountry("Germany");
         manufacturerService.update(manufacturer1);
-        manufacturerService.delete(2L);
+        manufacturerService.delete(3L);
 
         DriverService driverService = (DriverService) injector
                 .getInstance(DriverService.class);
         Driver driver = new Driver();
-        driver.setName("Bob");
-        driver.setLicenseNumber("083956875");
+        driver.setName("Alice");
+        driver.setLicenseNumber("083915675");
         driverService.create(driver);
         driverService.getAll();
-        driverService.get(1L);
+        driverService.get(2L);
         Driver driver1 = new Driver();
-        driver1.setId(1L);
-        driver1.setName("Yurii");
-        driver1.setLicenseNumber("CXV05905");
+        driver1.setId(2L);
+        driver1.setName("Alex");
+        driver1.setLicenseNumber("CXV02305");
         driverService.update(driver1);
-        driverService.delete(1L);
+        driverService.delete(2L);
     }
 }
