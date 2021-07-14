@@ -21,7 +21,8 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     @Override
     public Manufacturer get(Long id) {
         Optional<Manufacturer> optionalManufacturer = manufacturerDao.get(id);
-        return driverDaoDao.get(id).orElseThrow(() -> new RuntimeException("There is no driver, at id: " + id));
+        return manufacturerDao.get(id).orElseThrow(() ->
+                new RuntimeException("There is no driver, at id: " + id));
     }
 
     @Override
