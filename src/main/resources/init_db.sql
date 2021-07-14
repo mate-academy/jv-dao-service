@@ -14,7 +14,3 @@ CREATE TABLE `taxi_driver` (
                                `is_deleted` tinyint NOT NULL DEFAULT '0',
                                PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
-
-
-
