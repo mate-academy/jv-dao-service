@@ -20,12 +20,12 @@ public class DriverDaoImpl implements DriverDao {
         String query = "INSERT INTO drivers (name, license_number) "
                 + "VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement createManufacturerStatement
+                PreparedStatement createDriverStatement
                         = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);) {
-            createManufacturerStatement.setString(1, driver.getName());
-            createManufacturerStatement.setString(2, driver.getLicenseNumber());
-            createManufacturerStatement.executeUpdate();
-            ResultSet resultSet = createManufacturerStatement.getGeneratedKeys();
+            createDriverStatement.setString(1, driver.getName());
+            createDriverStatement.setString(2, driver.getLicenseNumber());
+            createDriverStatement.executeUpdate();
+            ResultSet resultSet = createDriverStatement.getGeneratedKeys();
             if (resultSet.next()) {
                 driver.setId(resultSet.getLong(1));
             }
