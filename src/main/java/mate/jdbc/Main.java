@@ -9,15 +9,15 @@ public class Main {
 
     public static void main(String[] args) {
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-        Driver billDriver = new Driver(null, "Walter", "36522114789");
+        Driver billDriver = new Driver("Bob", "114789");
         System.out.println("*********Create Driver***********");
         driverService.create(billDriver);
         driverService.getAll().forEach(System.out::println);
         System.out.println("*********Delete Driver***********");
-        driverService.delete(4L);
+        driverService.delete(13L);
         driverService.getAll().forEach(System.out::println);
-        Driver driver = driverService.get(6L);
-        driver.setName("Alice");
+        Driver driver = driverService.get(12L);
+        driver.setName("John");
         System.out.println("*********Update Driver***********");
         driverService.update(driver);
         driverService.getAll().forEach(System.out::println);
