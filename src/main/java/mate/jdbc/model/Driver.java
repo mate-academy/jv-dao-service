@@ -2,15 +2,15 @@ package mate.jdbc.model;
 
 import java.util.Objects;
 
-public class Manufacturer {
+public class Driver {
     private Long id;
     private String name;
     private String country;
 
-    public Manufacturer() {
+    public Driver() {
     }
 
-    public Manufacturer(String name, String country) {
+    public Driver(String name, String country) {
         this.name = name;
         this.country = country;
     }
@@ -47,7 +47,7 @@ public class Manufacturer {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Manufacturer that = (Manufacturer) o;
+        Driver that = (Driver) o;
         return Objects.equals(id, that.id)
                 && Objects.equals(name, that.name)
                 && Objects.equals(country, that.country);
@@ -60,7 +60,7 @@ public class Manufacturer {
 
     @Override
     public String toString() {
-        return "Manufacturer{"
+        return "Driver{"
                 + "id=" + id
                 + ", name='" + name + '\''
                 + ", country='" + country + '\''
