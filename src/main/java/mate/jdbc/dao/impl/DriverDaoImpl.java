@@ -16,7 +16,6 @@ import mate.jdbc.util.ConnectionUtil;
 
 @Dao
 public class DriverDaoImpl implements DriverDao {
-
     @Override
     public Driver create(Driver driver) {
         String selectDriverRequest =
@@ -33,7 +32,7 @@ public class DriverDaoImpl implements DriverDao {
             }
             return driver;
         } catch (SQLException e) {
-            throw new DataProcessingException("Couldn't create driver to DB " + driver, e);
+            throw new DataProcessingException("Couldn't insert driver to DB " + driver, e);
         }
     }
 
