@@ -24,7 +24,7 @@ public class DriverServiceImpl implements DriverService {
         if (optionalDriver.isEmpty()) {
             throw new RuntimeException("There is no driver, at id: " + id);
         }
-        return optionalDriver.get();
+        return driverDaoDao.get(id).orElseThrow(() -> new RuntimeException("There is no driver, at id: " + id));
     }
 
     @Override
