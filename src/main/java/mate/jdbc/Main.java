@@ -1,11 +1,9 @@
 package mate.jdbc;
 
+import java.util.Optional;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.service.DriverService;
-import mate.jdbc.service.DriverServiceImpl;
-
-import java.util.Optional;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
@@ -34,21 +32,21 @@ public class Main {
 
         System.out.println();
 
-        Driver muhamed_ii = new Driver("Muhamed II", "1010101");
-        driverService.create(muhamed_ii);
+        Driver muhamedIii = new Driver("Muhamed II", "1010101");
+        driverService.create(muhamedIii);
         System.out.println("Muhamed II before update:");
-        System.out.println(muhamed_ii.getId());
-        System.out.println(muhamed_ii.getName());
-        System.out.println(muhamed_ii.getLicenseNumber());
-        muhamed_ii = driverService.update(muhamed);
+        System.out.println(muhamedIii.getId());
+        System.out.println(muhamedIii.getName());
+        System.out.println(muhamedIii.getLicenseNumber());
+        muhamedIii = driverService.update(muhamed);
         System.out.println("Muhamed II after update:");
-        System.out.println(muhamed_ii.getId());
-        System.out.println(muhamed_ii.getName());
-        System.out.println(muhamed_ii.getLicenseNumber());
+        System.out.println(muhamedIii.getId());
+        System.out.println(muhamedIii.getName());
+        System.out.println(muhamedIii.getLicenseNumber());
 
         System.out.println();
 
-        System.out.println(driverService.delete(muhamed_ii.getId()));
+        System.out.println(driverService.delete(muhamedIii.getId()));
 
     }
 }
