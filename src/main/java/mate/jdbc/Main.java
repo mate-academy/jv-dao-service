@@ -33,8 +33,8 @@ public class Main {
         Manufacturer updateManufacturer = new Manufacturer("Nissan","Japan");
         updateManufacturer.setId(1L);
         manufacturerService.update(updateManufacturer);
-        System.out.println(manufacturerService.get(1L));
-        manufacturerService.delete(1L);
+        System.out.println(manufacturerService.get(2L));
+        manufacturerService.delete(2L);
         manufacturerService.getAll().forEach(System.out::println);
     }
 }
