@@ -66,7 +66,7 @@ public class DriverDaoImpl implements DriverDao {
                 resultList.add(getEntityFromResultSet(resultSet));
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't get all from taxi DB", e);
+            throw new DataProcessingException("Can't get all drivers from taxi DB", e);
         }
         return resultList;
     }
