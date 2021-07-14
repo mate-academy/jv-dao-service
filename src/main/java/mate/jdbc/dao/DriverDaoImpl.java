@@ -32,7 +32,7 @@ public class DriverDaoImpl implements DriverDao {
             }
             return driver;
         } catch (SQLException throwable) {
-            throw new DataProcessingException("Couldn't create driver. " + driver + " ",
+            throw new DataProcessingException("Couldn't create driver. " + driver,
                     throwable);
         }
     }
@@ -51,7 +51,7 @@ public class DriverDaoImpl implements DriverDao {
             }
             return Optional.ofNullable(driver);
         } catch (SQLException throwable) {
-            throw new DataProcessingException("Couldn't get driver by id " + id + " ",
+            throw new DataProcessingException("Couldn't get driver by id " + id,
                     throwable);
         }
     }
@@ -70,8 +70,7 @@ public class DriverDaoImpl implements DriverDao {
             return drivers;
         } catch (SQLException throwable) {
             throw new DataProcessingException("Couldn't get a list of drivers "
-                    + "from drivers table. ",
-                    throwable);
+                    + "from drivers table. ", throwable);
         }
     }
 
@@ -89,7 +88,7 @@ public class DriverDaoImpl implements DriverDao {
             return driver;
         } catch (SQLException throwable) {
             throw new DataProcessingException("Couldn't update a driver "
-                    + driver + " ", throwable);
+                    + driver, throwable);
         }
     }
 
@@ -102,7 +101,7 @@ public class DriverDaoImpl implements DriverDao {
             deleteDriverStatement.setLong(1, id);
             return deleteDriverStatement.executeUpdate() > 0;
         } catch (SQLException throwable) {
-            throw new DataProcessingException("Couldn't delete a driver by id " + id + " ",
+            throw new DataProcessingException("Couldn't delete a driver by id " + id,
                     throwable);
         }
     }
