@@ -1,7 +1,5 @@
 package mate.jdbc;
 
-import mate.jdbc.dao.DriverDao;
-import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
@@ -14,7 +12,6 @@ public class Main {
     private static ManufacturerService manufacturerService = (ManufacturerService) injector.getInstance(ManufacturerService.class);
 
     public static void main(String[] args) {
-
         Driver driver = new Driver("Statik", "gfh123");
         driverService.create(driver);
         driver.setName("Stas");
