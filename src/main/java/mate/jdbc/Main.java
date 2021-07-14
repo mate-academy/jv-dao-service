@@ -5,26 +5,27 @@ import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
+import mate.jdbc.service.DriverService;
+import mate.jdbc.service.ManufacturerService;
 
 public class Main {
-    private static Injector injector = Injector.getInstance("mate");
+    private static Injector injector = Injector.getInstance("mate.jdbc");
+    private static DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
+    private static ManufacturerService manufacturerService = (ManufacturerService) injector.getInstance(ManufacturerService.class);
 
     public static void main(String[] args) {
-        DriverDao driverDao = (DriverDao) injector.getInstance(DriverDao.class);
-        Driver driver = new Driver("Statik", "BEe");
-        driverDao.create(driver);
+
+        Driver driver = new Driver("Statik", "gfh123");
+        driverService.create(driver);
         driver.setName("Stas");
-        driverDao.update(driver);
-        driverDao.delete(1L);
-        driverDao.getAll().forEach(System.out::println);
-        ManufacturerDao manufacturerDao =
-                (ManufacturerDao) injector
-                        .getInstance(ManufacturerDao.class);
+        driverService.update(driver);
+        driverService.delete(1L);
+        driverService.getAll().forEach(System.out::println);
         Manufacturer manufacturer = new Manufacturer("Alex", "Ukraine");
-        manufacturerDao.create(manufacturer);
+        manufacturerService.create(manufacturer);
         driver.setName("Lecha");
-        manufacturerDao.update(manufacturer);
-        manufacturerDao.delete(1L);
-        manufacturerDao.getAll().forEach(System.out::println);
+        manufacturerService.update(manufacturer);
+        manufacturerService.delete(1L);
+        manufacturerService.getAll().forEach(System.out::println);
     }
 }
