@@ -21,7 +21,7 @@ public class DriverDaoImpl implements DriverDao {
                 + "VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement createDriverStatement
-                        = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);) {
+                        = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             createDriverStatement.setString(1, driver.getName());
             createDriverStatement.setString(2, driver.getLicenseNumber());
             createDriverStatement.executeUpdate();
