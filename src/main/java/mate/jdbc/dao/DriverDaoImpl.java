@@ -79,9 +79,7 @@ public class DriverDaoImpl implements DriverDao {
             statement.executeUpdate();
             return driver;
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't update data : id - " + driver.getId()
-            + " name - " + driver.getName()
-                    + " license_number - " + driver.getLicenseNumber(), e);
+            throw new DataProcessingException("Can't update data : " + driver, e);
         }
     }
 
