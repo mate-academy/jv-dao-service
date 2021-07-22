@@ -17,8 +17,9 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     }
 
     @Override
-    public Manufacturer get(Long id) {
-        return manufacturerDao.get(id).orElseGet(Manufacturer::new);
+    public Manufacturer get(Long id) throws IllegalArgumentException {
+        return manufacturerDao.get(id).orElseThrow(
+                () -> new IllegalArgumentException("Manufacturer with id " + id + " not found"));
     }
 
     @Override

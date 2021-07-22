@@ -6,7 +6,7 @@ import mate.jdbc.model.Manufacturer;
 public interface ManufacturerService {
     Manufacturer create(Manufacturer manufacturer);
 
-    Manufacturer get(Long id);
+    Manufacturer get(Long id) throws IllegalArgumentException;
 
     List<Manufacturer> getAll();
 

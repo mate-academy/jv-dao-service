@@ -27,8 +27,12 @@ public class Main {
         manufacturerList.forEach(System.out::println);
 
         System.out.println(System.lineSeparator() + "Search result of record 8");
-        manufacturer = manufacturerService.get(8L);
-        System.out.println(manufacturer);
+        try {
+            manufacturer = manufacturerService.get(8L);
+            System.out.println(manufacturer);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
 
         System.out.println(System.lineSeparator() + "After updating record 2");
         manufacturer = new Manufacturer(2L, "Bombardier", "Seychelles");
@@ -53,9 +57,13 @@ public class Main {
         driverList = driverService.getAll();
         driverList.forEach(System.out::println);
 
-        System.out.println(System.lineSeparator() + "Search result of record 8");
-        driver = driverService.get(8L);
-        System.out.println(driver);
+        System.out.println(System.lineSeparator() + "Search result of record 2");
+        try {
+            driver = driverService.get(2L);
+            System.out.println(driver);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
 
         System.out.println(System.lineSeparator() + "After updating record 2");
         driver = new Driver(2L, "John", "EE999999");

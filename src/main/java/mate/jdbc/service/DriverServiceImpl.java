@@ -17,8 +17,9 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public Driver get(Long id) {
-        return driverDao.get(id).orElseGet(Driver::new);
+    public Driver get(Long id) throws IllegalArgumentException {
+        return driverDao.get(id).orElseThrow(
+                () -> new IllegalArgumentException("Driver with id " + id + " not found"));
     }
 
     @Override
