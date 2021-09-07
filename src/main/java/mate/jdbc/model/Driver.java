@@ -14,9 +14,8 @@ public class Driver {
     }
 
     public Driver(Long id, String name, String licenseNumber) {
+        this(name, licenseNumber);
         this.id = id;
-        this.name = name;
-        this.licenseNumber = licenseNumber;
     }
 
     public Long getId() {
@@ -33,6 +32,14 @@ public class Driver {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLicenseNumber(String licenseNumber) {
+        this.licenseNumber = licenseNumber;
     }
 
     @Override
