@@ -17,7 +17,7 @@ public class Main {
 
         Driver johnLennon = new Driver("John Lennon", "S123-456-600-12");
         Driver polMccartney = new Driver("Pol Mccartney", "K200-546-176-01");
-        Driver georgeHarrison = new Driver("George Harrison", "W414-842-763-22");
+        Driver georgeHarrison = new Driver("George Harrison", "W414-842-763-2");
         Driver ringoStarr = new Driver("Ringo Starr", "A134-746-978-75");
         Driver stuartSutcliffe = new Driver(4L,"Stuart Sutcliffe", "F22-11-33-34");
         driverService.create(johnLennon);
