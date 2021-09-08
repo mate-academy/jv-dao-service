@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import mate.jdbc.lib.Dao;
 import mate.jdbc.model.Driver;
 import mate.jdbc.util.ConnectionUtil;
@@ -38,7 +37,7 @@ public class DriverDaoImpl implements DriverDao {
     }
 
     @Override
-    public Optional<Driver> get(Long id) {
+    public Driver get(Long id) {
         String getDriverRequest = "SELECT * FROM drivers WHERE is_deleted = false AND id = ?;";
         Driver driver = new Driver();
 
@@ -49,14 +48,9 @@ public class DriverDaoImpl implements DriverDao {
             getDriverStatement.executeQuery();
             ResultSet resultSet = getDriverStatement.getResultSet();
             if (resultSet.next()) {
-                String name = resultSet.getString("name");
-                String licenseNumber = resultSet.getString("licenseNumber");
-                driver.setName(name);
-                driver.setLicenseNumber(licenseNumber);
-                driver.setId(id);
-                return Optional.of(driver);
+                return getDriver(resultSet);
             }
-            return Optional.empty();
+            return null;
         } catch (SQLException e) {
             throw new RuntimeException("Can't get a driver for id #" + id + " from DB.", e);
         }
@@ -72,11 +66,7 @@ public class DriverDaoImpl implements DriverDao {
                         connection.prepareStatement(getAllDriversRequest)) {
             ResultSet resultSet = getAllDriversStatement.executeQuery(getAllDriversRequest);
             while (resultSet.next()) {
-                String name = resultSet.getString("name");
-                String licenseNumber = resultSet.getString("licenseNumber");
-                Long id = resultSet.getObject("id", Long.class);
-                Driver driver = new Driver(id, name, licenseNumber);
-                allDrivers.add(driver);
+                allDrivers.add(getDriver(resultSet));
             }
         } catch (SQLException e) {
             throw new RuntimeException("Can't get all drivers from DB.", e);
@@ -97,7 +87,7 @@ public class DriverDaoImpl implements DriverDao {
             updateDriverStatement.setLong(3, driver.getId());
             updateDriverStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Can't update driver.", e);
+            throw new RuntimeException("Can't update driver " + driver, e);
         }
         return driver;
     }
@@ -116,6 +106,13 @@ public class DriverDaoImpl implements DriverDao {
         } catch (SQLException e) {
             throw new RuntimeException("Can't delete driver id #" + id + " from DB.", e);
         }
+    }
+
+    private Driver getDriver(ResultSet resultSet) throws SQLException {
+        return new Driver(
+                resultSet.getObject("id", Long.class),
+                resultSet.getString("name"),
+                resultSet.getString("licenseNumber"));
     }
 
 }
