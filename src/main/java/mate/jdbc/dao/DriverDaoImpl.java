@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import mate.jdbc.lib.Dao;
 import mate.jdbc.model.Driver;
 import mate.jdbc.util.ConnectionUtil;
@@ -31,15 +33,14 @@ public class DriverDaoImpl implements DriverDao {
                 driver.setId(id);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Can't insert driver to DB.", e);
+            throw new RuntimeException("Can't insert driver to DB" + driver, e);
         }
         return driver;
     }
 
     @Override
-    public Driver get(Long id) {
+    public Optional<Driver> get(Long id) {
         String getDriverRequest = "SELECT * FROM drivers WHERE is_deleted = false AND id = ?;";
-        Driver driver = new Driver();
 
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement getDriverStatement =
@@ -48,9 +49,9 @@ public class DriverDaoImpl implements DriverDao {
             getDriverStatement.executeQuery();
             ResultSet resultSet = getDriverStatement.getResultSet();
             if (resultSet.next()) {
-                return getDriver(resultSet);
+                return Optional.of(getDriver(resultSet));
             }
-            return null;
+            return Optional.empty();
         } catch (SQLException e) {
             throw new RuntimeException("Can't get a driver for id #" + id + " from DB.", e);
         }
