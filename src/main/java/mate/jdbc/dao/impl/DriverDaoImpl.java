@@ -1,15 +1,17 @@
 package mate.jdbc.dao.impl;
 
-import mate.jdbc.dao.DriverDao;
-import mate.jdbc.lib.Dao;
-import mate.jdbc.lib.Inject;
-import mate.jdbc.model.Driver;
-import mate.jdbc.util.ConnectionUtil;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import mate.jdbc.dao.DriverDao;
+import mate.jdbc.lib.Dao;
+import mate.jdbc.model.Driver;
+import mate.jdbc.util.ConnectionUtil;
 
 @Dao
 public class DriverDaoImpl implements DriverDao {
@@ -36,7 +38,7 @@ public class DriverDaoImpl implements DriverDao {
     public List<Driver> getAll() {
         List<Driver> driverList = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection();
-             Statement getAllDriversStatement = connection.createStatement();) {
+                Statement getAllDriversStatement = connection.createStatement();) {
             ResultSet resultSet = getAllDriversStatement
                     .executeQuery(GET_ALL_DRIVERS_REQUEST);
             while (resultSet.next()) {
@@ -58,8 +60,8 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public Driver create(Driver driver) {
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement createDriverStatement =
-                     connection.prepareStatement(INSERT_DRIVER_REQUEST,
+                PreparedStatement createDriverStatement =
+                        connection.prepareStatement(INSERT_DRIVER_REQUEST,
                              Statement.RETURN_GENERATED_KEYS);) {
             createDriverStatement.setString(1, driver.getName());
             createDriverStatement.setString(2, driver.getLicenseNumber());
@@ -78,8 +80,8 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public Driver update(Driver driver) {
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement updateDriverStatement =
-                     connection.prepareStatement(UPDATE_DRIVER_REQUEST,
+                 PreparedStatement updateDriverStatement =
+                        connection.prepareStatement(UPDATE_DRIVER_REQUEST,
                              Statement.RETURN_GENERATED_KEYS);) {
             updateDriverStatement.setString(1, driver.getName());
             updateDriverStatement.setString(2, driver.getLicenseNumber());
@@ -94,8 +96,8 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public boolean delete(Long id) {
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement deleteDriverStatement =
-                     connection.prepareStatement(DELETE_DRIVER_REQUEST,
+                 PreparedStatement deleteDriverStatement =
+                         connection.prepareStatement(DELETE_DRIVER_REQUEST,
                              Statement.RETURN_GENERATED_KEYS);) {
             deleteDriverStatement.setLong(1, id);
             return deleteDriverStatement.executeUpdate() >= 1;
@@ -108,8 +110,8 @@ public class DriverDaoImpl implements DriverDao {
     public Optional<Driver> get(Long id) {
         Driver driver = null;
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement getDriverStatement =
-                     connection.prepareStatement(GET_DRIVER_REQUEST,
+                 PreparedStatement getDriverStatement =
+                        connection.prepareStatement(GET_DRIVER_REQUEST,
                              Statement.RETURN_GENERATED_KEYS);) {
             getDriverStatement.setLong(1, id);
             ResultSet resultSet = getDriverStatement.executeQuery();

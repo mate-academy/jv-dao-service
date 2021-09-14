@@ -5,7 +5,6 @@ import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.DriverService;
 import mate.jdbc.service.ManufacturerService;
-import mate.jdbc.service.impl.DriverServiceImpl;
 
 public class Main {
     private static final String PACKAGE_NAME = "mate.jdbc";
@@ -13,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
         driverTest();
-//        manufacturerTest();
+        manufacturerTest();
     }
 
     private static void driverTest() {
@@ -42,7 +41,8 @@ public class Main {
     }
 
     private static void manufacturerTest() {
-        ManufacturerService manufacturerService = (ManufacturerService) injector.getInstance(ManufacturerService.class);
+        ManufacturerService manufacturerService =
+                (ManufacturerService) injector.getInstance(ManufacturerService.class);
         System.out.println("\t\tTESTS FOR MANUFACTURER");
         System.out.println("Test for getAll()");
         System.out.println("DriverList: " + manufacturerService.getAll());
