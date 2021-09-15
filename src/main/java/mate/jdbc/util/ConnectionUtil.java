@@ -15,7 +15,7 @@ public class ConnectionUtil {
         try {
             Class.forName(JDBC_DRIVER);
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Can't find SQL Driver", e);
+            throw new RuntimeException("Can't load " + JDBC_DRIVER + " driver", e);
         }
     }
 
