@@ -17,8 +17,8 @@ public class Main {
                 .getInstance(DriverService.class);
         Manufacturer manufacturer = new Manufacturer("Honda", "Japan");
         Driver driver = new Driver("Bob", "12345");
-        manufacturerService.create(manufacturer);
-        driverService.create(driver);
+        manufacturer = manufacturerService.create(manufacturer);
+        driver = driverService.create(driver);
         List<Manufacturer> manufacturers = manufacturerService.getAll();
         manufacturers.forEach(System.out::println);
         List<Driver> drivers = driverService.getAll();
