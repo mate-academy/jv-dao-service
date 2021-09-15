@@ -42,14 +42,7 @@ public class DriverDaoImpl implements DriverDao {
             ResultSet resultSet = getAllDriversStatement
                     .executeQuery(GET_ALL_DRIVERS_REQUEST);
             while (resultSet.next()) {
-                String name = resultSet.getString(NAME);
-                String licenceNumber = resultSet.getString(LICENCE_NUMBER);
-                Long id = resultSet.getObject(ID, Long.class);
-                Driver driver = new Driver();
-                driver.setId(id);
-                driver.setName(name);
-                driver.setLicenseNumber(licenceNumber);
-                driverList.add(driver);
+                driverList.add(getDriver(resultSet));
             }
         } catch (SQLException e) {
             throw new RuntimeException(CANT_GET_ALL_MESSAGE, e);
@@ -115,17 +108,19 @@ public class DriverDaoImpl implements DriverDao {
                              Statement.RETURN_GENERATED_KEYS);) {
             getDriverStatement.setLong(1, id);
             ResultSet resultSet = getDriverStatement.executeQuery();
-            while (resultSet.next()) {
-                driver = new Driver();
-                String name = resultSet.getString(NAME);
-                String licenceNumber = resultSet.getString(LICENCE_NUMBER);
-                driver.setId(id);
-                driver.setName(name);
-                driver.setLicenseNumber(licenceNumber);
+            if (resultSet.next()) {
+                driver = getDriver(resultSet);
             }
             return Optional.ofNullable(driver);
         } catch (SQLException e) {
             throw new RuntimeException(CANT_GET_MESSAGE, e);
         }
+    }
+
+    private Driver getDriver(ResultSet resultSet) throws SQLException {
+        Long id = resultSet.getObject(ID, Long.class);
+        String name = resultSet.getString(NAME);
+        String licenseNumber = resultSet.getString(LICENCE_NUMBER);
+        return new Driver(id, name, licenseNumber);
     }
 }
