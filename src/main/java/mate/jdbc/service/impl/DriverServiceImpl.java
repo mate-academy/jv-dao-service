@@ -23,7 +23,7 @@ public class DriverServiceImpl implements DriverService {
         return driverDao.get(id)
                 .orElseThrow(
                         () -> new NoSuchElementException(
-                                "There isn't driver with id = " + id + " in DB.")
+                                "There is no driver with id = " + id + " in DB.")
                 );
     }
 

@@ -23,7 +23,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
         return manufacturerDao.get(id)
                 .orElseThrow(
                         () -> new NoSuchElementException(
-                                "There isn't manufacturer with id = " + id + " in DB.")
+                                "There is no manufacturer with id = " + id + " in DB.")
                 );
     }
 

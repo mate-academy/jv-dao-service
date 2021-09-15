@@ -16,10 +16,11 @@ import mate.jdbc.util.ConnectionUtil;
 @Dao
 public class ManufacturerDaoImpl implements ManufacturerDao {
     private static final String CANT_GET_ALL_MESSAGE = "Can't get all manufacturers from DB.";
-    private static final String CANT_CREATE_MESSAGE = "Can't insert manufacturer to DB.";
-    private static final String CANT_UPDATE_MESSAGE = "Can't update manufacturer in DB.";
-    private static final String CANT_DELETE_MESSAGE = "Can't delete manufacturer from DB.";
-    private static final String CANT_GET_MESSAGE = "Can't get manufacturer by id from DB.";
+    private static final String CANT_CREATE_MESSAGE = "Can't insert manufacturer %s to DB.";
+    private static final String CANT_UPDATE_MESSAGE = "Can't update manufacturer %s in DB.";
+    private static final String CANT_DELETE_MESSAGE
+            = "Can't delete manufacturer with id = %s from DB.";
+    private static final String CANT_GET_MESSAGE = "Can't get manufacturer with id = %s from DB.";
     private static final String NAME = "name";
     private static final String COUNTRY = "country";
     private static final String ID = "id";
@@ -60,7 +61,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
                 manufacturer.setId(id);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(CANT_CREATE_MESSAGE, e);
+            throw new RuntimeException(String.format(CANT_CREATE_MESSAGE, manufacturer), e);
         }
         return manufacturer;
     }
@@ -77,7 +78,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             updateManufacturerStatement.setObject(3, manufacturer.getId());
             updateManufacturerStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(CANT_UPDATE_MESSAGE, e);
+            throw new RuntimeException(String.format(CANT_UPDATE_MESSAGE, manufacturer), e);
         }
         return manufacturer;
     }
@@ -92,7 +93,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             deleteManufacturerStatement.setLong(1, id);
             return deleteManufacturerStatement.executeUpdate() >= 1;
         } catch (SQLException e) {
-            throw new RuntimeException(CANT_DELETE_MESSAGE, e);
+            throw new RuntimeException(String.format(CANT_DELETE_MESSAGE, id), e);
         }
     }
 
@@ -111,7 +112,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             }
             return Optional.ofNullable(manufacturer);
         } catch (SQLException e) {
-            throw new RuntimeException(CANT_GET_MESSAGE, e);
+            throw new RuntimeException(String.format(CANT_GET_MESSAGE, id), e);
         }
     }
 

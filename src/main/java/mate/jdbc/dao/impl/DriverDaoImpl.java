@@ -16,10 +16,10 @@ import mate.jdbc.util.ConnectionUtil;
 @Dao
 public class DriverDaoImpl implements DriverDao {
     private static final String CANT_GET_ALL_MESSAGE = "Can't get all drivers from DB.";
-    private static final String CANT_CREATE_MESSAGE = "Can't insert driver to DB.";
-    private static final String CANT_UPDATE_MESSAGE = "Can't update driver in DB.";
-    private static final String CANT_DELETE_MESSAGE = "Can't delete driver from DB.";
-    private static final String CANT_GET_MESSAGE = "Can't get driver by id from DB.";
+    private static final String CANT_CREATE_MESSAGE = "Can't insert driver %s to DB.";
+    private static final String CANT_UPDATE_MESSAGE = "Can't update driver %s in DB.";
+    private static final String CANT_DELETE_MESSAGE = "Can't delete driver with id = %s from DB.";
+    private static final String CANT_GET_MESSAGE = "Can't get driver with id = %s from DB.";
     private static final String NAME = "name";
     private static final String LICENCE_NUMBER = "licence_number";
     private static final String ID = "id";
@@ -50,7 +50,7 @@ public class DriverDaoImpl implements DriverDao {
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement createDriverStatement =
                         connection.prepareStatement(insertDriverRequest,
-                             Statement.RETURN_GENERATED_KEYS);) {
+                             Statement.RETURN_GENERATED_KEYS)) {
             createDriverStatement.setString(1, driver.getName());
             createDriverStatement.setString(2, driver.getLicenseNumber());
             createDriverStatement.executeUpdate();
@@ -60,7 +60,7 @@ public class DriverDaoImpl implements DriverDao {
                 driver.setId(id);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(CANT_CREATE_MESSAGE, e);
+            throw new RuntimeException(String.format(CANT_CREATE_MESSAGE, driver), e);
         }
         return driver;
     }
@@ -77,7 +77,7 @@ public class DriverDaoImpl implements DriverDao {
             updateDriverStatement.setObject(3, driver.getId());
             updateDriverStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(CANT_UPDATE_MESSAGE, e);
+            throw new RuntimeException(String.format(CANT_UPDATE_MESSAGE, driver), e);
         }
         return driver;
     }
@@ -92,7 +92,7 @@ public class DriverDaoImpl implements DriverDao {
             deleteDriverStatement.setLong(1, id);
             return deleteDriverStatement.executeUpdate() >= 1;
         } catch (SQLException e) {
-            throw new RuntimeException(CANT_DELETE_MESSAGE, e);
+            throw new RuntimeException(String.format(CANT_DELETE_MESSAGE, id), e);
         }
     }
 
@@ -111,7 +111,7 @@ public class DriverDaoImpl implements DriverDao {
             }
             return Optional.ofNullable(driver);
         } catch (SQLException e) {
-            throw new RuntimeException(CANT_GET_MESSAGE, e);
+            throw new RuntimeException(String.format(CANT_GET_MESSAGE, id), e);
         }
     }
 
