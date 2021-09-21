@@ -21,7 +21,8 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
                 + "VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement createManufacturerStatement
-                        = connection.prepareStatement(createManufacturerQuery, Statement.RETURN_GENERATED_KEYS)) {
+                        = connection.prepareStatement(createManufacturerQuery,
+                        Statement.RETURN_GENERATED_KEYS)) {
             createManufacturerStatement.setString(1, manufacturer.getName());
             createManufacturerStatement.setString(2, manufacturer.getCountry());
             createManufacturerStatement.executeUpdate();
@@ -41,7 +42,8 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         String getManufacturerQuery = "SELECT * FROM manufacturers"
                 + " WHERE id = (?) AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement getManufacturerStatement = connection.prepareStatement(getManufacturerQuery)) {
+                PreparedStatement getManufacturerStatement
+                        = connection.prepareStatement(getManufacturerQuery)) {
             getManufacturerStatement.setLong(1, id);
             ResultSet resultSet = getManufacturerStatement.executeQuery();
             Manufacturer manufacturer = null;

@@ -21,7 +21,8 @@ public class DriverDaoImpl implements DriverDao {
                 + "VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement createDriverStatement
-                         = connection.prepareStatement(createDriverQuery, Statement.RETURN_GENERATED_KEYS)) {
+                         = connection.prepareStatement(createDriverQuery,
+                        Statement.RETURN_GENERATED_KEYS)) {
             createDriverStatement.setString(1, driver.getName());
             createDriverStatement.setString(2, driver.getLicenseNumber());
             createDriverStatement.executeUpdate();
@@ -40,7 +41,8 @@ public class DriverDaoImpl implements DriverDao {
     public Optional<Driver> get(Long id) {
         String getDriverQuery = "SELECT * FROM drivers WHERE id = (?) AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement getDriverStatement = connection.prepareStatement(getDriverQuery)) {
+                PreparedStatement getDriverStatement
+                        = connection.prepareStatement(getDriverQuery)) {
             getDriverStatement.setLong(1, id);
             ResultSet resultSet = getDriverStatement.executeQuery();
             Driver driver = null;
