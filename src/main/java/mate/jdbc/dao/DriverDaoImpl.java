@@ -7,11 +7,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import mate.jdbc.lib.exception.DataProcessingException;
 import mate.jdbc.model.Driver;
 import mate.jdbc.util.ConnectionUtil;
 
 public class DriverDaoImpl implements DriverDao {
+    private static final String COLUMN_ID = "id";
+    private static final String COLUMN_NAME = "name";
+    private static final String COLUMN_LICENSE_NUMBER = "licenseNumber";
 
     @Override
     public Driver create(Driver driver) {
@@ -35,7 +39,7 @@ public class DriverDaoImpl implements DriverDao {
     }
 
     @Override
-    public Driver get(Long id) {
+    public Optional<Driver> get(Long id) {
         String query = "SELECT * FROM drivers_list"
                 + "WHERE id = (?) AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
@@ -46,7 +50,7 @@ public class DriverDaoImpl implements DriverDao {
             if (resultSet.next()) {
                 driver = getDriver(resultSet);
             }
-            return driver;
+            return Optional.of(driver);
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't get driver by id " + id + " ", e);
         }
@@ -102,9 +106,9 @@ public class DriverDaoImpl implements DriverDao {
     }
 
     private Driver getDriver(ResultSet resultset) throws SQLException {
-        Long newId = resultset.getObject("id", Long.class);
-        String name = resultset.getString("name");
-        String getLicenseNumber = resultset.getString("licenseNumber");
+        Long newId = resultset.getObject(COLUMN_ID, Long.class);
+        String name = resultset.getString(COLUMN_NAME);
+        String getLicenseNumber = resultset.getString(COLUMN_LICENSE_NUMBER);
         Driver driver = new Driver(name, getLicenseNumber);
         driver.setId(newId);
         return driver;
