@@ -40,14 +40,14 @@ public class Manufacturer {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object anotherManufacturer) {
+        if (this == anotherManufacturer) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (anotherManufacturer == null || getClass() != anotherManufacturer.getClass()) {
             return false;
         }
-        Manufacturer that = (Manufacturer) o;
+        Manufacturer that = (Manufacturer) anotherManufacturer;
         return Objects.equals(id, that.id)
                 && Objects.equals(name, that.name)
                 && Objects.equals(country, that.country);
