@@ -27,12 +27,11 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             createManufacturerStatement.executeUpdate();
             ResultSet resultSet = createManufacturerStatement.getGeneratedKeys();
             if (resultSet.next()) {
-                manufacturer.setId(resultSet.getObject(1, Long.class));
+                manufacturer.setId(resultSet.getObject(1,Long.class));
             }
             return manufacturer;
-        } catch (SQLException throwable) {
-            throw new DataProcessingException("Couldn't create manufacturer. " + manufacturer + " ",
-                    throwable);
+        } catch (SQLException e) {
+            throw new RuntimeException("Can't create new row to DB",e);
         }
     }
 
@@ -81,15 +80,18 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement updateManufacturerStatement
                         = connection.prepareStatement(query)) {
+
             updateManufacturerStatement.setString(1, manufacturer.getName());
             updateManufacturerStatement.setString(2, manufacturer.getCountry());
-            updateManufacturerStatement.setLong(3, manufacturer.getId());
+            updateManufacturerStatement.setObject(3,manufacturer.getId());
             updateManufacturerStatement.executeUpdate();
             return manufacturer;
+
         } catch (SQLException throwable) {
             throw new DataProcessingException("Couldn't update a manufacturer "
                     + manufacturer + " ", throwable);
         }
+
     }
 
     @Override
