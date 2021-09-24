@@ -1,7 +1,6 @@
 package mate.jdbc.service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
@@ -22,9 +21,8 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     public Manufacturer get(Long id) {
         try {
             return manufacturerDao.get(id).orElseThrow();
-        } catch (NoSuchElementException e) {
-            System.out.println("manufacturer id " + id + " was deleted early or doesn't exist");
-            return null;
+        } catch (RuntimeException e) {
+            throw new RuntimeException("driver was deleted early or does not exist",e);
         }
     }
 

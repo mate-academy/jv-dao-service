@@ -1,7 +1,6 @@
 package mate.jdbc.service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import mate.jdbc.dao.DriverDao;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
@@ -21,9 +20,8 @@ public class DriverServiceImpl implements DriverService {
     public Driver get(Long id) {
         try {
             return driverDao.get(id).orElseThrow();
-        } catch (NoSuchElementException e) {
-            System.out.println("driver with id " + id + " was deleted early or does not exist");
-            return null;
+        } catch (RuntimeException e) {
+            throw new RuntimeException("driver was deleted early or does not exist",e);
         }
     }
 
