@@ -18,11 +18,7 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver get(Long id) {
-        try {
-            return driverDao.get(id).orElseThrow();
-        } catch (RuntimeException e) {
-            throw new RuntimeException("driver was deleted early or does not exist",e);
-        }
+        return driverDao.get(id).orElseThrow();
     }
 
     @Override

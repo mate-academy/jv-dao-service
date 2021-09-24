@@ -19,11 +19,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer get(Long id) {
-        try {
-            return manufacturerDao.get(id).orElseThrow();
-        } catch (RuntimeException e) {
-            throw new RuntimeException("driver was deleted early or does not exist",e);
-        }
+        return manufacturerDao.get(id).orElseThrow();
     }
 
     @Override

@@ -19,10 +19,10 @@ public class Main {
         bob.setLicenseNumber("789000");
         System.out.println("Driver was updated to: " + driverService.update(bob) + "\n");
 
-        System.out.println("get driver " + driverService.get(199L) + "\n");
+        System.out.println("get driver " + driverService.get(184L) + "\n");
 
         driverService.getAll().forEach(System.out::println);
 
-        System.out.println("\n" + "Driver was deleted : " + driverService.delete(193L));
+        System.out.println("\n" + "Driver was deleted : " + driverService.delete(199L));
     }
 }
