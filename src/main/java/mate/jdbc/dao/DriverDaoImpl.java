@@ -26,7 +26,7 @@ public class DriverDaoImpl implements DriverDao {
             createDriverStatement.setString(2, driver.getLicenseNumber());
             createDriverStatement.executeUpdate();
             ResultSet resultSet = createDriverStatement.getGeneratedKeys();
-            if (resultSet != null && resultSet.next()) {
+            if (resultSet.next()) {
                 driver.setId(resultSet.getObject(1, Long.class));
             }
             return driver;
@@ -45,7 +45,7 @@ public class DriverDaoImpl implements DriverDao {
             getDriverStatement.setLong(1, id);
             ResultSet resultSet = getDriverStatement.executeQuery();
             Driver driver = null;
-            if (resultSet != null && resultSet.next()) {
+            if (resultSet.next()) {
                 driver = getDriver(resultSet);
             }
             return Optional.ofNullable(driver);
@@ -63,7 +63,7 @@ public class DriverDaoImpl implements DriverDao {
                         .prepareStatement(query)) {
             List<Driver> drivers = new ArrayList<>();
             ResultSet resultSet = getAllDriversStatement.executeQuery();
-            while (resultSet != null && resultSet.next()) {
+            while (resultSet.next()) {
                 drivers.add(getDriver(resultSet));
             }
             return drivers;
