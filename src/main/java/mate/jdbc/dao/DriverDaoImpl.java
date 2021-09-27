@@ -15,11 +15,11 @@ import mate.jdbc.util.ConnectionUtil;
 public class DriverDaoImpl implements DriverDao {
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_NAME = "name";
-    private static final String COLUMN_LICENSE_NUMBER = "licenseNumber";
+    private static final String COLUMN_LICENSE_NUMBER = "license_number";
 
     @Override
     public Driver create(Driver driver) {
-        String query = "INSERT INTO drivers_list (name, licenseNumber) "
+        String query = "INSERT INTO drivers_list (name, license_number) "
                 + "VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
                     PreparedStatement createDriverStatement =

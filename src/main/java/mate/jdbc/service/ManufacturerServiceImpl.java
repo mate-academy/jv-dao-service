@@ -1,6 +1,7 @@
 package mate.jdbc.service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.lib.Inject;
@@ -18,7 +19,10 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Optional<Manufacturer> get(Long id) {
-        return manufacturerDao.get(id);
+        return Optional.of(manufacturerDao.get(id)).orElseThrow(
+                () -> new NoSuchElementException(
+                        "Can't get manufacturer with id: " + Long.toString(id))
+        );
     }
 
     @Override
