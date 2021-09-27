@@ -11,24 +11,24 @@ public class Main {
 
     public static void main(String[] args) {
         Manufacturer manufacturer = new Manufacturer("Ford", "USA");
-        Manufacturer manufacturer1 = new Manufacturer("Volvo","Sweden");
+        Manufacturer manufacturerOne = new Manufacturer("Volvo","Sweden");
         ManufacturerService manufacturerService = (ManufacturerService) injector
                 .getInstance(ManufacturerService.class);
         manufacturer = manufacturerService.create(manufacturer);
-        manufacturer1 = manufacturerService.create(manufacturer1);
+        manufacturerOne = manufacturerService.create(manufacturerOne);
         System.out.println(manufacturerService.get(manufacturer.getId()));
-        manufacturer1.setName("Tesla");
-        manufacturer1.setCountry("USA");
-        manufacturerService.update(manufacturer1);
-        System.out.println(manufacturerService.get(manufacturer1.getId()));
-        manufacturerService.delete(manufacturer1.getId());
+        manufacturerOne.setName("Tesla");
+        manufacturerOne.setCountry("USA");
+        manufacturerService.update(manufacturerOne);
+        System.out.println(manufacturerService.get(manufacturerOne.getId()));
+        manufacturerService.delete(manufacturerOne.getId());
         manufacturerService.getAll().forEach(System.out::println);
 
         Driver driver = new Driver("Viktor", "01234");
-        Driver driver1 = new Driver("Kyrylo", "56789");
+        Driver driverOne = new Driver("Kyrylo", "56789");
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         driver = driverService.create(driver);
-        driver1 = driverService.create(driver1);
+        driverOne = driverService.create(driverOne);
         System.out.println(driverService.get(driver.getId()));
         driver.setLicenseNumber("43210");
         driverService.update(driver);

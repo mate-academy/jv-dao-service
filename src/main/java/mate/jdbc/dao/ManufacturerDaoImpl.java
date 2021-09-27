@@ -29,9 +29,9 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             createManufacturerStatement.setString(FIRST_INDEX, manufacturer.getName());
             createManufacturerStatement.setString(SECOND_INDEX, manufacturer.getCountry());
             createManufacturerStatement.executeUpdate();
-            ResultSet resultSet = createManufacturerStatement.getGeneratedKeys();
-            if (resultSet.next()) {
-                manufacturer.setId(resultSet.getObject(FIRST_INDEX, Long.class));
+            ResultSet generatedKeys = createManufacturerStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                manufacturer.setId(generatedKeys.getObject(FIRST_INDEX, Long.class));
             }
             return manufacturer;
         } catch (SQLException throwable) {
@@ -111,11 +111,11 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
     }
 
     private Manufacturer getManufacturer(ResultSet resultSet) throws SQLException {
-        Long newId = resultSet.getObject("id", Long.class);
+        Long id = resultSet.getObject("id", Long.class);
         String name = resultSet.getString("name");
         String country = resultSet.getString("country");
         Manufacturer manufacturer = new Manufacturer(name, country);
-        manufacturer.setId(newId);
+        manufacturer.setId(id);
         return manufacturer;
     }
 }

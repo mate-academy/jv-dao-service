@@ -29,9 +29,9 @@ public class DriverDaoImpl implements DriverDao {
             createDriverStatement.setString(FIRST_INDEX, driver.getName());
             createDriverStatement.setString(SECOND_INDEX, driver.getLicenseNumber());
             createDriverStatement.executeUpdate();
-            ResultSet resultSet = createDriverStatement.getGeneratedKeys();
-            if (resultSet.next()) {
-                driver.setId(resultSet.getObject(FIRST_INDEX, Long.class));
+            ResultSet generatedKeys = createDriverStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                driver.setId(generatedKeys.getObject(FIRST_INDEX, Long.class));
             }
             return driver;
         } catch (SQLException throwable) {
@@ -63,9 +63,9 @@ public class DriverDaoImpl implements DriverDao {
     public List<Driver> getAll() {
         String query = "SELECT * FROM drivers WHERE is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement getDriversStatement = connection.prepareStatement(query)) {
+                PreparedStatement getAllDriversStatement = connection.prepareStatement(query)) {
             List<Driver> drivers = new ArrayList<>();
-            ResultSet resultSet = getDriversStatement.executeQuery();
+            ResultSet resultSet = getAllDriversStatement.executeQuery();
             while (resultSet.next()) {
                 drivers.add(getDriver(resultSet));
             }
@@ -108,11 +108,11 @@ public class DriverDaoImpl implements DriverDao {
     }
 
     private Driver getDriver(ResultSet resultSet) throws SQLException {
-        Long newId = resultSet.getObject("id", Long.class);
+        Long id = resultSet.getObject("id", Long.class);
         String name = resultSet.getString("name");
         String licenseNumber = resultSet.getString("licenseNumber");
         Driver driver = new Driver(name,licenseNumber);
-        driver.setId(newId);
+        driver.setId(id);
         return driver;
     }
 }
