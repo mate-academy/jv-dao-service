@@ -20,7 +20,7 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public Driver get(Long id) {
         return driverDao.get(id).orElseThrow(() ->
-                new NoSuchElementException("Can't get user with id" + id));
+                new NoSuchElementException("Can't get driver with id" + id));
     }
 
     @Override
