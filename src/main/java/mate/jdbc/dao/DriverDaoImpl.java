@@ -41,12 +41,12 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Optional<Driver> get(Long id) {
-        String query = String.format("SELECT * FROM drivers "
-                + "WHERE id = %d AND is_deleted = 0", id);
+        String query = "SELECT * FROM drivers WHERE id = ? AND is_deleted = 0";
 
         try (Connection connection = ConnectionUtil.getConnection();
-                Statement getDriverStatement = connection.createStatement()) {
-            ResultSet resultSet = getDriverStatement.executeQuery(query);
+                PreparedStatement getDriverStatement = connection.prepareStatement(query)) {
+            getDriverStatement.setObject(1, id);
+            ResultSet resultSet = getDriverStatement.executeQuery();
             Driver driver = null;
             if (resultSet.next()) {
                 driver = getDriver(resultSet);
