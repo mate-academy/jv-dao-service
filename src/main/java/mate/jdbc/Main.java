@@ -16,9 +16,9 @@ public class Main {
                 + "from ManufacturerServiceImpl Class: ");
         manufacturerService.getAll().stream().forEach(System.out::println);
 
-        Manufacturer getToyota = manufacturerService.get(6L);
+        Manufacturer receivedToyota = manufacturerService.get(6L);
         System.out.println("The result of the method get() from ManufacturerServiceImpl Class: "
-                + getToyota);
+                + receivedToyota);
         Manufacturer manufacturer = new Manufacturer();
         manufacturer.setName("Toyota");
         manufacturer.setCountry("USA");
@@ -39,9 +39,9 @@ public class Main {
         System.out.println("The result of the method getAll() from DriverServiceImpl Class: ");
         driverService.getAll().stream().forEach(System.out::println);
 
-        Driver driverInfo = driverService.get(4L);
+        Driver receivedDriver = driverService.get(4L);
         System.out.println("The result of the method get() from DriverServiceImpl Class: "
-                + driverInfo);
+                + receivedDriver);
 
         Driver driver = new Driver("Bob", "23456789");
         driverService.create(driver);
