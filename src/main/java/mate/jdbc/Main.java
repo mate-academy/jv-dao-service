@@ -10,9 +10,10 @@ public class Main {
     public static final Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
-        Driver driver = new Driver("John", "12345");
+        Driver driver = new Driver("Jack", "AA12345");
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         driverService.delete(3L);
+        driverService.create(driver);
         driverService.getAll().stream()
                 .forEach(System.out::println);
         Manufacturer manufacturer = new Manufacturer("Audi", "Germany");
