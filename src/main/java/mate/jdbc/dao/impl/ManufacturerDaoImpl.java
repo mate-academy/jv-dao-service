@@ -1,4 +1,4 @@
-package mate.jdbc.dao;
+package mate.jdbc.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.lib.Dao;
 import mate.jdbc.lib.exception.DataProcessingException;
 import mate.jdbc.model.Manufacturer;
@@ -17,15 +18,15 @@ import mate.jdbc.util.ConnectionUtil;
 public class ManufacturerDaoImpl implements ManufacturerDao {
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        String insertRequest = "INSERT INTO manufacturers(name, country) VALUES(?, ?);";
+        String insertManufacturerRequest = "INSERT INTO manufacturers(name, country) VALUES(?, ?);";
         try (Connection connection = ConnectionUtil.getConnect();
-                 PreparedStatement createManufacturer =
-                         connection.prepareStatement(insertRequest,
+                 PreparedStatement insertManufacturerStatement =
+                         connection.prepareStatement(insertManufacturerRequest,
                                  Statement.RETURN_GENERATED_KEYS)) {
-            createManufacturer.setString(1, manufacturer.getName());
-            createManufacturer.setString(2, manufacturer.getCountry());
-            createManufacturer.executeUpdate();
-            ResultSet resultSet = createManufacturer.getGeneratedKeys();
+            insertManufacturerStatement.setString(1, manufacturer.getName());
+            insertManufacturerStatement.setString(2, manufacturer.getCountry());
+            insertManufacturerStatement.executeUpdate();
+            ResultSet resultSet = insertManufacturerStatement.getGeneratedKeys();
             if (resultSet.next()) {
                 manufacturer.setId(resultSet.getObject("id", Long.class));
             }
@@ -61,11 +62,10 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         String getAllManufacturersRequest = "SELECT * FROM manufacturers WHERE is_deleted = false;";
         List<Manufacturer> allManufacturers = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnect();
-                 PreparedStatement getAllManufacturers = connection
+                 PreparedStatement getAllManufacturersStatement = connection
                          .prepareStatement(getAllManufacturersRequest)) {
-            ResultSet resultSet = getAllManufacturers.executeQuery();
+            ResultSet resultSet = getAllManufacturersStatement.executeQuery();
             while (resultSet.next()) {
-                Manufacturer manufacturer = new Manufacturer();
                 allManufacturers.add(parseResultSet(resultSet));
             }
         } catch (SQLException e) {
