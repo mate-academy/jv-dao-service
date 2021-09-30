@@ -38,9 +38,7 @@ public class Main {
         System.out.println(manufacturerService.update(manufacturer));
         System.out.println(System.lineSeparator() + "All manufacturers:");
         manufacturers = manufacturerService.getAll();
-        manufacturers.stream()
-                .map(Manufacturer::toString)
-                .forEach(System.out::println);
+        manufacturers.forEach(System.out::println);
     }
 
     private static void testDrivers() {
@@ -65,8 +63,6 @@ public class Main {
         System.out.println(driverService.update(driver));
         System.out.println(System.lineSeparator() + "All drivers:");
         drivers = driverService.getAll();
-        drivers.stream()
-                .map(Driver::toString)
-                .forEach(System.out::println);
+        drivers.forEach(System.out::println);
     }
 }
