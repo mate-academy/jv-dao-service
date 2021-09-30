@@ -113,8 +113,8 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         String country = resultSet.getString("country");
         return Manufacturer.builder()
                         .name(name)
-                                .country(country)
-                                        .id(newId)
-                                                .build();
+                        .country(country)
+                        .id(newId)
+                        .build();
     }
 }

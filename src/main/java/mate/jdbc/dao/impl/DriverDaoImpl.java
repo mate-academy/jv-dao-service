@@ -40,7 +40,8 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Optional<Driver> get(Long id) {
-        String getQuery = "SELECT * FROM drivers WHERE id = ?;";
+        String getQuery = "SELECT * FROM drivers WHERE id = ? "
+                + "AND is_deleted = false;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(getQuery)) {
             statement.setObject(1, id);
@@ -57,7 +58,7 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public List<Driver> getAll() {
         List<Driver> drivers = new ArrayList<>();
-        String getAllQuery = "SELECT * FROM drivers WHERE is_fired = false;";
+        String getAllQuery = "SELECT * FROM drivers WHERE is_deleted = false;";
         try (Connection connection = ConnectionUtil.getConnection();
                    PreparedStatement statement = connection.prepareStatement(getAllQuery)) {
             ResultSet resultSet = statement.executeQuery();
@@ -88,7 +89,7 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public boolean delete(Long id) {
-        String deleteQuery = "Update drivers SET is_fired = true WHERE id = ?;";
+        String deleteQuery = "Update drivers SET is_deleted = true WHERE id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(deleteQuery)) {
             statement.setObject(1, id);
