@@ -8,7 +8,6 @@ import mate.jdbc.lib.Inject;
 import mate.jdbc.model.Driver;
 
 public class DriverServiceImpl implements DriverService {
-
     @Inject
     private DriverDao driverDao;
 
