@@ -29,7 +29,7 @@ public class DriverDaoImpl implements DriverDao {
                 driver.setId(resultSet.getObject(1, Long.class));
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't query driver in DB ", e);
+            throw new DataProcessingException("Can't create driver in DB " + driver + " ", e);
         }
         return driver;
     }
