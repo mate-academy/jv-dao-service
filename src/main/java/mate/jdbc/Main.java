@@ -16,9 +16,10 @@ public class Main {
         driverService.create(driver);
         driverService.getAll().stream()
                 .forEach(System.out::println);
-        Manufacturer manufacturer = new Manufacturer("Audi", "Germany");
+        Manufacturer manufacturer = new Manufacturer("WV", "Germany");
         ManufacturerService manufacturerService = (ManufacturerService)
                 injector.getInstance(ManufacturerService.class);
+        manufacturerService.create(manufacturer);
         manufacturerService.delete(2L);
         manufacturerService.getAll().stream()
                 .forEach(System.out::println);
