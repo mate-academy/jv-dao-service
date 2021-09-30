@@ -22,15 +22,15 @@ public class Main {
         Manufacturer manufacturer = new Manufacturer();
         manufacturer.setName("Toyota");
         manufacturer.setCountry("USA");
-        Manufacturer newToyota = manufacturerService.create(manufacturer);
+        Manufacturer toyota = manufacturerService.create(manufacturer);
         System.out.println("The result of the method create() from ManufacturerServiceImpl Class: "
-                + newToyota);
+                + toyota);
 
         manufacturer.setName("Toyota Motor Corporation");
         Manufacturer updatedToyota = manufacturerService.update(manufacturer);
         System.out.println("The result of the method update() from ManufacturerServiceImpl Class: "
                 + updatedToyota);
-        boolean deletedManufacturer = manufacturerService.delete(newToyota.getId());
+        boolean deletedManufacturer = manufacturerService.delete(toyota.getId());
         System.out.println("The result of the method delete() from ManufacturerServiceImpl Class: "
                 + deletedManufacturer);
 
@@ -40,21 +40,21 @@ public class Main {
         driverService.getAll().stream().forEach(System.out::println);
 
         Driver driverInfo = driverService.get(4L);
-        System.out.println("The result of the method getAll() from DriverServiceImpl Class: "
+        System.out.println("The result of the method get() from DriverServiceImpl Class: "
                 + driverInfo);
 
         Driver driver = new Driver("Bob", "23456789");
-        Driver newDriver = driverService.create(driver);
-        System.out.println("The result of the method getAll() "
-                + "from DriverServiceImpl Class: " + newDriver);
+        driverService.create(driver);
+        System.out.println("The result of the method create() "
+                + "from DriverServiceImpl Class: " + driver);
 
         driver.setLicenseNumber("12309812");
         Driver updatedDriverData = driverService.update(driver);
-        System.out.println("The result of the method getAll() from DriverServiceImpl Class: "
+        System.out.println("The result of the method update() from DriverServiceImpl Class: "
                 + updatedDriverData);
 
-        boolean deletedDriverData = driverService.delete(newDriver.getId());
-        System.out.println("The result of the method getAll() from DriverServiceImpl Class: "
+        boolean deletedDriverData = driverService.delete(driver.getId());
+        System.out.println("The result of the method delete() from DriverServiceImpl Class: "
                 + deletedDriverData);
     }
 }
