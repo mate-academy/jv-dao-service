@@ -25,8 +25,8 @@ public class DriverServiceImpl implements DriverService {
         if (id == null) {
             throw new RuntimeException("Can't get driver by null id");
         }
-        return driverDao.get(id).orElseThrow(()
-                -> new RuntimeException("Driver with id " + id + " does not exist"));
+        return driverDao.get(id).orElseThrow(() ->
+                new RuntimeException("Driver with id " + id + " does not exist"));
     }
 
     @Override
