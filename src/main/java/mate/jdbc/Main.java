@@ -21,9 +21,7 @@ public class Main {
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
         System.out.println("All manufacturers:");
         List<Manufacturer> manufacturers = manufacturerService.getAll();
-        manufacturers.stream()
-                .map(Manufacturer::toString)
-                .forEach(System.out::println);
+        manufacturers.forEach(System.out::println);
         System.out.println(System.lineSeparator() + "Manufacturer with id 2:");
         Manufacturer manufacturer = manufacturerService.get(2L);
         System.out.println(manufacturer);
@@ -46,9 +44,7 @@ public class Main {
                 (DriverService) injector.getInstance(DriverService.class);
         System.out.println("All drivers:");
         List<Driver> drivers = driverService.getAll();
-        drivers.stream()
-                .map(Driver::toString)
-                .forEach(System.out::println);
+        drivers.forEach(System.out::println);
         System.out.println(System.lineSeparator() + "Driver with id 3:");
         Driver driver = driverService.get(3L);
         System.out.println(driver);
