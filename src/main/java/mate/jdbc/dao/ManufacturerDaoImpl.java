@@ -37,14 +37,14 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
     }
 
     @Override
-    public Optional<Manufacturer> get(Long id) {
+    public Optional<mate.jdbc.model.Manufacturer> get(Long id) {
         String query = "SELECT * FROM manufacturers"
                 + " WHERE id = (?) AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement getManufacturerStatement = connection.prepareStatement(query)) {
             getManufacturerStatement.setLong(1, id);
             ResultSet resultSet = getManufacturerStatement.executeQuery();
-            Manufacturer manufacturer = null;
+            mate.jdbc.model.Manufacturer manufacturer = null;
             if (resultSet.next()) {
                 manufacturer = getManufacturer(resultSet);
             }
@@ -56,12 +56,12 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
     }
 
     @Override
-    public List<Manufacturer> getAll() {
+    public List<mate.jdbc.model.Manufacturer> getAll() {
         String query = "SELECT * FROM manufacturers WHERE is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement getAllManufacturersStatement
                         = connection.prepareStatement(query)) {
-            List<Manufacturer> manufacturers = new ArrayList<>();
+            List<mate.jdbc.model.Manufacturer> manufacturers = new ArrayList<>();
             ResultSet resultSet = getAllManufacturersStatement.executeQuery();
             while (resultSet.next()) {
                 manufacturers.add(getManufacturer(resultSet));
@@ -75,7 +75,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
     }
 
     @Override
-    public Manufacturer update(Manufacturer manufacturer) {
+    public mate.jdbc.model.Manufacturer update(mate.jdbc.model.Manufacturer manufacturer) {
         String query = "UPDATE manufacturers SET name = ?, country = ?"
                 + " WHERE id = ? AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
@@ -106,11 +106,16 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         }
     }
 
-    private Manufacturer getManufacturer(ResultSet resultSet) throws SQLException {
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    private mate.jdbc.model.Manufacturer getManufacturer(ResultSet resultSet) throws SQLException {
         Long newId = resultSet.getObject("id", Long.class);
         String name = resultSet.getString("name");
         String country = resultSet.getString("country");
-        Manufacturer manufacturer = new Manufacturer(name, country);
+        mate.jdbc.model.Manufacturer manufacturer = new mate.jdbc.model.Manufacturer(name, country);
         manufacturer.setId(newId);
         return manufacturer;
     }
