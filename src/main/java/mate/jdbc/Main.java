@@ -7,12 +7,15 @@ import mate.jdbc.service.DriverService;
 import mate.jdbc.service.ManufacturerService;
 
 public class Main {
+    private static DriverService driverService;
+    private static ManufacturerService manufacturerService;
+
     public static void main(String[] args) {
         Injector injector = Injector.getInstance("mate.jdbc");
-        final ManufacturerService manufacturerService = (ManufacturerService) injector
-                .getInstance(ManufacturerService.class);
-        final DriverService driverService =
+        driverService =
                 (DriverService) injector.getInstance(DriverService.class);
+        manufacturerService = (ManufacturerService) injector
+                .getInstance(ManufacturerService.class);
 
         System.out.println("Get all drivers:");
         driverService.getAll().forEach(System.out::println);
