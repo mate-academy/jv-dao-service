@@ -10,12 +10,13 @@ import java.util.List;
 import java.util.Optional;
 import mate.jdbc.lib.Dao;
 import mate.jdbc.lib.exception.DataProcessingException;
+import mate.jdbc.model.Manufacturer;
 import mate.jdbc.util.ConnectionUtil;
 
 @Dao
 public class ManufacturerDaoImpl implements ManufacturerDao {
     @Override
-    public mate.jdbc.model.Manufacturer create(mate.jdbc.model.Manufacturer manufacturer) {
+    public Manufacturer create(Manufacturer manufacturer) {
         String query = "INSERT INTO manufacturers (name, country) "
                 + "VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
@@ -103,6 +104,11 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             throw new DataProcessingException("Couldn't delete a manufacturer by id " + id + " ",
                     throwable);
         }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 
     private mate.jdbc.model.Manufacturer getManufacturer(ResultSet resultSet) throws SQLException {
