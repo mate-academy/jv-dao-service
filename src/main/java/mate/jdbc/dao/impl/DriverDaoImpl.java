@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import mate.jdbc.dao.DriverDao;
 import mate.jdbc.lib.Dao;
 import mate.jdbc.lib.exception.DataProcessingException;
@@ -39,20 +38,21 @@ public class DriverDaoImpl implements DriverDao {
     }
 
     @Override
-    public Optional<Driver> get(Long id) {
+    public Driver get(Long id) {
         String getQuery = "SELECT * FROM drivers WHERE id = ? "
                 + "AND is_deleted = false;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(getQuery)) {
             statement.setObject(1, id);
             ResultSet resultSet = statement.executeQuery();
+            Driver driver = null;
             if (resultSet.next()) {
-                return Optional.of(createDriver(resultSet));
+                driver = createDriver(resultSet);
             }
+            return driver;
         } catch (SQLException e) {
             throw new DataProcessingException("Can't get user by id: " + id, e);
         }
-        return Optional.empty();
     }
 
     @Override

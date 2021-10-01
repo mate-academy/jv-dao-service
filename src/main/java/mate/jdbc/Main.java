@@ -15,7 +15,7 @@ public class Main {
                 .licenseNumber("3856")
                 .build();
         driver = driverService.create(driver);
-        driver = driverService.get(driver.getId()).orElse(new Driver());
+        driver = driverService.get(driver.getId());
         driver.setName("Alice");
         driver = driverService.update(driver);
         driverService.delete(driver.getId());

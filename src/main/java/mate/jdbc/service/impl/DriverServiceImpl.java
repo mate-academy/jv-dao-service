@@ -1,7 +1,6 @@
 package mate.jdbc.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 import mate.jdbc.dao.DriverDao;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
@@ -20,7 +19,7 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public Optional<Driver> get(Long id) {
+    public Driver get(Long id) {
         return driverDao.get(id);
     }
 
