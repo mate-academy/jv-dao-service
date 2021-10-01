@@ -79,7 +79,7 @@ public class DriverDaoImpl implements DriverDao {
                    PreparedStatement statement = connection.prepareStatement(updateQuery)) {
             statement.setString(1, driver.getName());
             statement.setString(2, driver.getLicenseNumber());
-            statement.setObject(3, driver.getId());
+            statement.setLong(3, driver.getId());
             statement.executeUpdate();
             return driver;
         } catch (SQLException e) {
@@ -92,7 +92,7 @@ public class DriverDaoImpl implements DriverDao {
         String deleteQuery = "Update drivers SET is_deleted = true WHERE id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(deleteQuery)) {
-            statement.setObject(1, id);
+            statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DataProcessingException("Can't delete driver by id " + id, e);
