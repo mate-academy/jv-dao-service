@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Manufacturer {
+public class Driver {
     private Long id;
     private String name;
-    private String country;
+    private String licenseNumber;
 }
