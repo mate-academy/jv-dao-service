@@ -20,7 +20,7 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Driver create(Driver driver) {
-        String query = "INSERT INTO drivers (name, licenseNumber) "
+        String query = "INSERT INTO drivers (name, license_Number) "
                 + "VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement createDriverStatement
