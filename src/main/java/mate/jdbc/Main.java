@@ -23,6 +23,5 @@ public class Main {
         manufacturerService.delete(2L);
         manufacturerService.getAll().stream()
                 .forEach(System.out::println);
-
     }
 }

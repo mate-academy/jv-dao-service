@@ -3,7 +3,7 @@ package mate.jdbc.sevice;
 import java.util.List;
 import mate.jdbc.model.Driver;
 
-public interface DriverService {
+public interface DriverService extends Service<Driver> {
     Driver create(Driver driver);
 
     Driver get(Long id);
