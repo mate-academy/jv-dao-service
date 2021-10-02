@@ -32,7 +32,7 @@ public class DriverDaoImpl implements DriverDao {
             }
             return driver;
         } catch (SQLException throwable) {
-            throw new DataProcessingException("Couldn't create manufacturer. " + driver + " ",
+            throw new DataProcessingException("Couldn't create driver. " + driver + " ",
                     throwable);
         }
     }
