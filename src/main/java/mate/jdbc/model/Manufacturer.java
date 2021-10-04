@@ -5,7 +5,6 @@ import java.util.Objects;
 public class Manufacturer {
     private Long id;
     private String name;
-
     private String country;
 
     public Manufacturer() {
