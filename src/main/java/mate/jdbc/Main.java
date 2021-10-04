@@ -13,15 +13,9 @@ public class Main {
 
     public static void main(String[] args) {
         //Testing manufacturerService
-        Manufacturer zazUkraine = new Manufacturer();
-        zazUkraine.setCountry("Ukraine");
-        zazUkraine.setName("ZAZ");
-        Manufacturer bmw = new Manufacturer();
-        bmw.setName("BMW");
-        bmw.setCountry("Germany");
-        Manufacturer ford = new Manufacturer();
-        ford.setCountry("USA");
-        ford.setName("FORD");
+        Manufacturer zazUkraine = new Manufacturer("Ukraine", "Zaz");
+        Manufacturer bmw = new Manufacturer("BMW", "Germany");
+        Manufacturer ford = new Manufacturer("Ford", "USA");
         List<Manufacturer> manufacturerList = new ArrayList<>();
         manufacturerList.add(zazUkraine);
         manufacturerList.add(bmw);
