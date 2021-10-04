@@ -31,5 +31,6 @@ public class Main {
         System.out.println(manufacturerService.delete(1L));
         manufacturerService.getAll()
                 .forEach(System.out::println);
+        System.out.println(driverService.get(378L));
     }
 }
