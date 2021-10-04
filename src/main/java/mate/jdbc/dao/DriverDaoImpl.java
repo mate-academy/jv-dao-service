@@ -110,8 +110,8 @@ public class DriverDaoImpl implements DriverDao {
     private Driver getDriver(ResultSet resultSet) throws SQLException {
         Long newId = resultSet.getObject(ID_COLUMN_LABEL, Long.class);
         String name = resultSet.getString(NAME_COLUMN_LABEL);
-        String country = resultSet.getString(LICENSE_COLUMN_LABEL);
-        Driver driver = new Driver(name, country);
+        String licenseNumber = resultSet.getString(LICENSE_COLUMN_LABEL);
+        Driver driver = new Driver(name, licenseNumber);
         driver.setId(newId);
         return driver;
     }
