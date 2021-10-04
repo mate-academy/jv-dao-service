@@ -6,4 +6,13 @@ CREATE TABLE `manufacturers` (
                                         `name` VARCHAR(225) NOT NULL,
                                         `country` VARCHAR(225) NOT NULL,
                                         `is_deleted` TINYINT NOT NULL DEFAULT 0,
-                                        PRIMARY KEY (`id`));
+                                        PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE `driver` (
+                                        `id` bigint NOT NULL AUTO_INCREMENT,
+                                        `name` varchar(255) NOT NULL,
+                                        `license_number` varchar(255) NOT NULL,
+                                        `is_deleted` tinyint NOT NULL DEFAULT '0',
+                                        PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3;
