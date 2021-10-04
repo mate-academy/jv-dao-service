@@ -9,7 +9,6 @@ import mate.jdbc.service.ManufacturerService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
-    private static final long TEST_ID = 3L;
     private static final Manufacturer CREATE_METHOD_MANUFACTURER
             = new Manufacturer("Opel", "Germany");
     private static final Manufacturer UPDATE_METHOD_MANUFACTURER
@@ -23,15 +22,15 @@ public class Main {
         ManufacturerService manufacturerService = (ManufacturerService) injector
                 .getInstance(ManufacturerService.class);
         Manufacturer createdManufacturer = manufacturerService.create(CREATE_METHOD_MANUFACTURER);
-        Manufacturer manufacturerById = manufacturerService.get(TEST_ID);
+        Manufacturer manufacturerById = manufacturerService.get(createdManufacturer.getId());
         List<Manufacturer> allManufacturersList = manufacturerService.getAll();
         Manufacturer updatedManufacturer = manufacturerService.update(UPDATE_METHOD_MANUFACTURER);
-        boolean isDeletedManufacturer = manufacturerService.delete(TEST_ID);
+        boolean isDeletedManufacturer = manufacturerService.delete(manufacturerById.getId());
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         Driver createdDriver = driverService.create(CREATE_METHOD_DRIVER);
-        Driver driverById = driverService.get(TEST_ID);
+        Driver driverById = driverService.get(createdDriver.getId());
         List<Driver> allDriversList = driverService.getAll();
         Driver updatedDriver = driverService.update(UPDATE_METHOD_DRIVER);
-        boolean isDeletedDriver = driverService.delete(TEST_ID);
+        boolean isDeletedDriver = driverService.delete(driverById.getId());
     }
 }
