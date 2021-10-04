@@ -46,7 +46,7 @@ public class DriverDaoImpl implements DriverDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement getDriverStatement =
                         connection.prepareStatement(query)) {
-            getDriverStatement.setString(1, String.valueOf(id));
+            getDriverStatement.setLong(1, id);
             ResultSet resultSet = getDriverStatement.executeQuery();
             if (resultSet.next()) {
                 return Optional.of(createDriver(resultSet));
@@ -63,12 +63,11 @@ public class DriverDaoImpl implements DriverDao {
         String query = "SELECT * FROM drivers WHERE is_deleted = FALSE ";
         List<Driver> driverList = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection();
-                Statement getAllDriversStatement =
-                        connection.createStatement()) {
-            ResultSet resultSet = getAllDriversStatement.executeQuery(query);
+                PreparedStatement getAllDriversStatement =
+                        connection.prepareStatement(query)) {
+            ResultSet resultSet = getAllDriversStatement.executeQuery();
             while (resultSet.next()) {
-                Driver driver = createDriver(resultSet);
-                driverList.add(driver);
+                driverList.add(createDriver(resultSet));
             }
         } catch (SQLException throwables) {
             throw new DataProcessingException("Can't get drivers from db", throwables);
@@ -88,7 +87,7 @@ public class DriverDaoImpl implements DriverDao {
             updateStatement.executeUpdate();
             return driver;
         } catch (SQLException throwables) {
-            throw new DataProcessingException("Can't update manufacturer: "
+            throw new DataProcessingException("Can't update driver: "
                     + driver.getName() + " id: " + driver.getId()
                     + " from DB", throwables);
         }

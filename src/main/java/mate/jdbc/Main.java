@@ -16,14 +16,14 @@ public class Main {
         driverService.create(petro);
         driverService.create(volodymyr);
         driverService.getAll().forEach(System.out::println);
-        System.out.println(driverService.get(2L));
-        Driver ivan = new Driver();
-        ivan.setId(1L);
-        ivan.setLicenseNumber("WE53467");
-        ivan.setName("Ivan");
-        driverService.update(ivan);
+        System.out.println(driverService.get(volodymyr.getId()));
+        Driver ashot = new Driver();
+        ashot.setId(petro.getId());
+        ashot.setLicenseNumber("WE53467");
+        ashot.setName("Ashot");
+        driverService.update(ashot);
         driverService.getAll().forEach(System.out::println);
-        driverService.delete(2L);
+        driverService.delete(volodymyr.getId());
         driverService.getAll().forEach(System.out::println);
 
         ManufacturerService manufacturerService =
@@ -33,15 +33,14 @@ public class Main {
         manufacturerService.create(porscheManufacturer);
         manufacturerService.create(mustangManufacturer);
         manufacturerService.getAll().forEach(System.out::println);
-        System.out.println(manufacturerService.get(1L));
+        System.out.println(manufacturerService.get(mustangManufacturer.getId()));
         Manufacturer car = new Manufacturer();
-        car.setId(19L);
+        car.setId(mustangManufacturer.getId());
         car.setCountry("Ukraine");
         car.setName("Zaporozhets");
         manufacturerService.update(car);
         manufacturerService.getAll().forEach(System.out::println);
-        manufacturerService.delete(19L);
+        manufacturerService.delete(porscheManufacturer.getId());
         manufacturerService.getAll().forEach(System.out::println);
-
     }
 }
