@@ -1,12 +1,10 @@
-package mate.jdbc.service;
+package mate.jdbc.dao;
+
+import mate.jdbc.model.Driver;
 
 import java.util.List;
 
-import mate.jdbc.lib.Service;
-import mate.jdbc.model.Driver;
-
-@Service
-public class DriverServiceImpl implements DriverService {
+public class DriverDaoImpl implements DriverDao {
     @Override
     public Driver create(Driver driver) {
         return null;
