@@ -1,7 +1,6 @@
 package mate.jdbc;
 
 import java.util.List;
-import java.util.Optional;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
