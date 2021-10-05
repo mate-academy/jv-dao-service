@@ -18,7 +18,7 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public Driver create(Driver driver) {
         String createDriverRequest = "INSERT INTO drivers (name, licence_number) "
-                + "VALUES(?,?)";
+                + "VALUES(?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement createDriverStatement =
                         connection.prepareStatement(createDriverRequest,
@@ -41,7 +41,7 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public Optional<Driver> get(Long id) {
         String getDriverRequest = "SELECT * FROM drivers "
-                + "WHERE id = (?) AND is_deleted = FALSE;";
+                + "WHERE id = ? AND is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement getDriverStatement =
                         connection.prepareStatement(getDriverRequest)) {
