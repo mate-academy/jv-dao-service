@@ -1,14 +1,12 @@
 package mate.jdbc.service;
 
 import java.util.List;
-import lombok.extern.log4j.Log4j2;
 import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
 import mate.jdbc.model.Manufacturer;
 
 @Service
-@Log4j2
 public class ManufacturerServiceImpl implements ManufacturerService {
     @Inject
     private ManufacturerDao manufacturerDao;
