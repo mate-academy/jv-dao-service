@@ -17,8 +17,7 @@ public class Main {
         Manufacturer createdManufacturer = manufacturerService.create(manManufacturer);
         Manufacturer manufacturerById = manufacturerService.get(createdManufacturer.getId());
         List<Manufacturer> allManufacturersList = manufacturerService.getAll();
-        manManufacturer
-                = new Manufacturer("MAN", "Germany");
+        manManufacturer = new Manufacturer("MAN", "Germany");
         manManufacturer.setId(createdManufacturer.getId());
         Manufacturer updatedManufacturer = manufacturerService.update(manManufacturer);
         boolean isDeletedManufacturer = manufacturerService.delete(manufacturerById.getId());
