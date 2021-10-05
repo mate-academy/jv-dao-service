@@ -9,11 +9,11 @@ public class Main {
 
     public static void main(String[] args) {
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-        Driver dmytro = new Driver("Dmytro","k112233sw");
-        Driver boris = new Driver("Boris","k556677sw");
         System.out.println("Drivers table before operations:");
         driverService.getAll().forEach(System.out::println);
         System.out.println("Adding drivers into table...");
+        Driver dmytro = new Driver("Dmytro","k112233sw");
+        Driver boris = new Driver("Boris","k556677sw");
         driverService.create(dmytro);
         driverService.create(boris);
         System.out.println("Table after adding drivers:");
