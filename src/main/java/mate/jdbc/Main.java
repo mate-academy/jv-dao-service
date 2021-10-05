@@ -1,12 +1,11 @@
 package mate.jdbc;
 
+import java.util.List;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.services.DriverService;
 import mate.jdbc.services.ManufacturerService;
-
-import java.util.List;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");

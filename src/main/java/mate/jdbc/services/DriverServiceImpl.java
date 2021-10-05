@@ -1,18 +1,17 @@
 package mate.jdbc.services;
 
+import java.util.List;
+import java.util.NoSuchElementException;
 import mate.jdbc.dao.DriverDao;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
 import mate.jdbc.model.Driver;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-
 @Service
-public class DriverServiceImpl implements  DriverService{
+public class DriverServiceImpl implements DriverService {
     @Inject
-    DriverDao driverDao;
+    private DriverDao driverDao;
+
     @Override
     public Driver create(Driver driver) {
         return driverDao.create(driver);
