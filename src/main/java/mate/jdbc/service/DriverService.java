@@ -2,18 +2,16 @@ package mate.jdbc.service;
 
 import java.util.List;
 import java.util.Optional;
-import mate.jdbc.model.Manufacturer;
-
-
+import mate.jdbc.model.Driver;
 
 public interface DriverService {
-    Manufacturer create(Manufacturer manufacturer);
+    Driver create(Driver driver);
 
-    Optional<Manufacturer> get(Long id);
+    Optional<Driver> get(Long id);
 
-    List<Manufacturer> getAll();
+    List<Driver> getAll();
 
-    Manufacturer update(Manufacturer manufacturer);
+    Driver update(Driver driver);
 
     boolean delete(Long id);
 }
