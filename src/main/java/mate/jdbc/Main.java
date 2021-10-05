@@ -23,13 +23,11 @@ public class Main {
         Manufacturer updatedManufacturer = manufacturerService.update(manManufacturer);
         boolean isDeletedManufacturer = manufacturerService.delete(manufacturerById.getId());
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-        Driver driverVlad
-                = new Driver("Vled", "45345345");
+        Driver driverVlad = new Driver("Vled", "45345345");
         Driver createdDriver = driverService.create(driverVlad);
         Driver driverById = driverService.get(createdDriver.getId());
         List<Driver> allDriversList = driverService.getAll();
-        driverVlad
-                = new Driver("Vlad", "BC57212");
+        driverVlad = new Driver("Vlad", "BC57212");
         driverVlad.setId(createdDriver.getId());
         Driver updatedDriver = driverService.update(driverById);
         boolean isDeletedDriver = driverService.delete(driverById.getId());
