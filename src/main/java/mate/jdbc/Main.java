@@ -13,25 +13,25 @@ public class Main {
     public static void main(String[] args) {
         ManufacturerService manufacturerService = (ManufacturerService) injector
                 .getInstance(ManufacturerService.class);
-        Manufacturer opelManufacturer = new Manufacturer("MAN", "Germany");
-        Manufacturer createdManufacturer = manufacturerService.create(opelManufacturer);
+        Manufacturer manManufacturer = new Manufacturer("MEN", "Germany");
+        Manufacturer createdManufacturer = manufacturerService.create(manManufacturer);
         Manufacturer manufacturerById = manufacturerService.get(createdManufacturer.getId());
         List<Manufacturer> allManufacturersList = manufacturerService.getAll();
-        Manufacturer hyundaiManufacturer
+        manManufacturer
                 = new Manufacturer("Ford", "USA");
-        hyundaiManufacturer.setId(7L);
-        Manufacturer updatedManufacturer = manufacturerService.update(hyundaiManufacturer);
+        manManufacturer.setId(createdManufacturer.getId());
+        Manufacturer updatedManufacturer = manufacturerService.update(manManufacturer);
         boolean isDeletedManufacturer = manufacturerService.delete(manufacturerById.getId());
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-        Driver driverJohn
-                = new Driver("John", "45345345");
-        Driver createdDriver = driverService.create(driverJohn);
+        Driver driverVlad
+                = new Driver("Vled", "45345345");
+        Driver createdDriver = driverService.create(driverVlad);
         Driver driverById = driverService.get(createdDriver.getId());
         List<Driver> allDriversList = driverService.getAll();
-        Driver driverAlice
+        driverVlad
                 = new Driver("Vlad", "BC57212");
-        driverAlice.setId(2L);
-        Driver updatedDriver = driverService.update(driverAlice);
+        driverVlad.setId(createdDriver.getId());
+        Driver updatedDriver = driverService.update(driverById);
         boolean isDeletedDriver = driverService.delete(driverById.getId());
     }
 }
