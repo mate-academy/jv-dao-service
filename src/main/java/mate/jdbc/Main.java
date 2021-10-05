@@ -1,7 +1,6 @@
 package mate.jdbc;
 
 import java.util.List;
-import java.util.Optional;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
@@ -20,8 +19,8 @@ public class Main {
         Manufacturer manufacturer = new Manufacturer("Ford", "USA");
         Manufacturer manufacturerCreate = manufacturerService.create(manufacturer);
         Driver driverCreate = driverService.create(driver);
-        Optional<Manufacturer> manufacturerFromId = manufacturerService.get(1L);
-        Optional<Driver> driverFromId = driverService.get(1L);
+        Manufacturer manufacturerFromId = manufacturerService.get(2L);
+        Driver driverFromId = driverService.get(2L);
         Manufacturer manufacturerUpdate =
                 manufacturerService.update(new Manufacturer(1L, "BMW", "Germany"));
         Driver driverUpdate =
