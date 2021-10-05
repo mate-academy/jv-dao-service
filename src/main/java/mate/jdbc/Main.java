@@ -31,11 +31,8 @@ public class Main {
         List<Manufacturer> manufacturerList = manufacturerService.getAll();
         manufacturerList.forEach(System.out::println);
         System.out.println("Get method: ");
-        Optional<Driver> driverOptional = driverService.get(createdDriver.getId());
-        driverOptional.ifPresent(System.out::println);
-        Optional<Manufacturer> optionalManufacturer =
-                manufacturerService.get(createdManufacturer.getId());
-        optionalManufacturer.ifPresent(System.out::println);
+        System.out.println(driverService.get(createdDriver.getId()));
+        System.out.println(manufacturerService.get(createdManufacturer.getId()));
         System.out.println("Update method: ");
         Driver driverForUpdate = new Driver("Slavik", "TT 555");
         driverForUpdate.setId(2L);
