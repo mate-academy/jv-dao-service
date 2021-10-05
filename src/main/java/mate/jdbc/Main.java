@@ -20,11 +20,11 @@ public class Main {
         driverService.getAll().forEach(System.out::println);
         manufacturerService.getAll().forEach(System.out::println);
         System.out.println(driverService.get(1L));
-        System.out.println(manufacturerService.get(27L));
+        System.out.println(manufacturerService.get(1L));
         System.out.println(driverService.update(driver));
         System.out.println(manufacturerService.update(manufacturer));
         driverService.delete(1L);
-        manufacturerService.delete(25L);
+        manufacturerService.delete(1L);
         driverService.getAll().forEach(System.out::println);
         manufacturerService.getAll().forEach(System.out::println);
     }
