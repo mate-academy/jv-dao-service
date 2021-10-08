@@ -9,7 +9,7 @@ import mate.jdbc.model.Manufacturer;
 @Service
 public class ManufacturerServiceImpl implements ManufacturerService {
     @Inject
-    ManufacturerDao manufacturerDao;
+    private ManufacturerDao manufacturerDao;
 
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
@@ -19,8 +19,8 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     @Override
     public Manufacturer get(Long id) {
         return manufacturerDao.get(id).orElseThrow(() ->
-                new RuntimeException("The manufacturer was not found by id: " + id +
-                        " Check request details"));
+                new RuntimeException("The manufacturer was not found by id: " + id
+                        + " Check request details"));
     }
 
     @Override
