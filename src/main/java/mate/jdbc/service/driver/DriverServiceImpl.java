@@ -19,7 +19,7 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver get(Long id) {
-        return driverDao.get(id).orElseThrow(NoSuchElementException::new);
+        return driverDao.get(id).orElseThrow();
     }
 
     @Override
