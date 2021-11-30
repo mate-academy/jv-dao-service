@@ -20,14 +20,14 @@ public class Main {
         for (Driver driver : drivers) {
             driverService.create(driver);
         }
-        System.out.println(driverService.get(40L));
+        System.out.println(driverService.get(3L));
         Driver driver = new Driver("Stewe", "fm3280");
         driverService.create(driver);
         driver.setLicenseNumber("tt8608");
         driverService.update(driver);
         driverService.getAll().forEach(System.out::println);
-        driverService.delete(38L);
-        driverService.delete(41L);
+        driverService.delete(2L);
+        driverService.delete(5L);
 
         ManufacturerService manufacturerService = (ManufacturerService) injector
                 .getInstance(ManufacturerService.class);
@@ -38,13 +38,13 @@ public class Main {
         for (Manufacturer manufacturer : manufacturers) {
             manufacturerService.create(manufacturer);
         }
-        System.out.println(manufacturerService.get(13L));
         Manufacturer manufacturer = new Manufacturer("Hyundai", "North Korea");
         manufacturerService.create(manufacturer);
         manufacturer.setCountry("South Korea");
         manufacturerService.update(manufacturer);
+        System.out.println(manufacturerService.get(2L));
         manufacturerService.getAll().forEach(System.out::println);
-        manufacturerService.delete(12L);
-        manufacturerService.delete(15L);
+        manufacturerService.delete(1L);
+        manufacturerService.delete(4L);
     }
 }
