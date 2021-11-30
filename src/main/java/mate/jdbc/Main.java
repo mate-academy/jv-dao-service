@@ -18,7 +18,7 @@ public class Main {
         bob.setName("Bob");
         bob.setLicenseNumber("4R5T6Y");
 
-        DriverService driverService = (DriverService) injector.getInstance(DriverDao.class);
+        DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         driverService.create(kitti);
         driverService.create(bob);
         kitti.setLicenseNumber("1Z2X3C");
