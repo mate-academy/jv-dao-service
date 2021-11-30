@@ -46,7 +46,7 @@ public class DriverDaoImpl implements DriverDao {
             ResultSet resultSet = getDriverStatement.executeQuery();
             Driver driver = null;
             if (resultSet.next()) {
-                driver = (Driver) getDriver(resultSet);
+                driver = getDriver(resultSet);
             }
             return Optional.ofNullable(driver);
         } catch (SQLException throwable) {
