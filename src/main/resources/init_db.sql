@@ -12,6 +12,5 @@ CREATE TABLE `drivers` (
                            `name` varchar(225) NOT NULL,
                            `license_number` varchar(225) NOT NULL,
                            `is_deleted` tinyint DEFAULT '0',
-                           PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+                           PRIMARY KEY (`id`));
 
