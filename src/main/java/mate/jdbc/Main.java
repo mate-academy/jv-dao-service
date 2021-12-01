@@ -7,7 +7,8 @@ import mate.jdbc.service.DriverService;
 import mate.jdbc.service.ManufacturerService;
 
 public class Main {
-    private static Injector injector = Injector.getInstance("mate.jbdc");
+    private static Injector injector = Injector.getInstance("mate.jdbc");
+
     public static void main(String[] args) {
         ManufacturerService manufacturerService = (ManufacturerService)
                 injector.getInstance(ManufacturerService.class);
@@ -39,7 +40,6 @@ public class Main {
 
         manufacturerService.getAll().forEach(System.out::println);
 
-
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
 
         Driver paul = new Driver();
@@ -52,7 +52,7 @@ public class Main {
         andrew.setLicenseNumber("2");
         driverService.create(andrew);
 
-        Driver eugene  = new Driver();
+        Driver eugene = new Driver();
         eugene.setName("Eugene");
         eugene.setLicenseNumber("3");
         driverService.create(eugene);

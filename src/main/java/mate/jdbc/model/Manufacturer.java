@@ -1,10 +1,7 @@
 package mate.jdbc.model;
 
-import mate.jdbc.lib.Inject;
-
 import java.util.Objects;
 
-@Inject
 public class Manufacturer {
     private Long id;
     private String name;
