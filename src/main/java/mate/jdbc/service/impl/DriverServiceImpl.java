@@ -1,10 +1,11 @@
-package mate.jdbc.service.driver;
+package mate.jdbc.service.impl;
 
 import java.util.List;
-import mate.jdbc.dao.driver.DriverDao;
+import mate.jdbc.dao.DriverDao;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
 import mate.jdbc.model.Driver;
+import mate.jdbc.service.DriverService;
 
 @Service
 public class DriverServiceImpl implements DriverService {
@@ -18,7 +19,7 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver get(Long id) {
-        return dao.get(id).get();
+        return dao.get(id).orElseThrow();
     }
 
     @Override
