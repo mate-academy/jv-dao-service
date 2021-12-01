@@ -40,20 +40,20 @@ public class Main {
         manufacturerThird.setName("Third");
         manufacturerThird.setCountry("Third");
 
-        ManufacturerService manufacturerDao =
+        ManufacturerService manufacturerService =
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
-        manufacturerFirst = manufacturerDao.create(manufacturerFirst);
-        manufacturerSecond = manufacturerDao.create(manufacturerSecond);
-        manufacturerThird = manufacturerDao.create(manufacturerThird);
+        manufacturerFirst = manufacturerService.create(manufacturerFirst);
+        manufacturerSecond = manufacturerService.create(manufacturerSecond);
+        manufacturerThird = manufacturerService.create(manufacturerThird);
 
-        System.out.println(manufacturerDao.get(4L));
+        System.out.println(manufacturerService.get(4L));
 
-        System.out.println(manufacturerDao.getAll());
+        System.out.println(manufacturerService.getAll());
 
         manufacturerSecond.setName("newSecond");
         manufacturerSecond.setCountry("newSecond");
-        System.out.println(manufacturerDao.update(manufacturerSecond));
+        System.out.println(manufacturerService.update(manufacturerSecond));
 
-        manufacturerDao.delete(6L);
+        manufacturerService.delete(6L);
     }
 }
