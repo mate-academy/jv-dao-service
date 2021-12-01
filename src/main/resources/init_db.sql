@@ -13,5 +13,3 @@ CREATE TABLE `drivers` (
                                         `is_deleted` tinyint NOT NULL DEFAULT '0',
                                          PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
-
-
