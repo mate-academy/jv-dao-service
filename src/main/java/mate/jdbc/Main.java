@@ -1,10 +1,10 @@
 package mate.jdbc;
 
-import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.DriverService;
+import mate.jdbc.service.ManufacturerService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
@@ -40,13 +40,13 @@ public class Main {
         manufacturerThird.setName("Third");
         manufacturerThird.setCountry("Third");
 
-        ManufacturerDao manufacturerDao =
-                (ManufacturerDao) injector.getInstance(ManufacturerDao.class);
+        ManufacturerService manufacturerDao =
+                (ManufacturerService) injector.getInstance(ManufacturerService.class);
         manufacturerFirst = manufacturerDao.create(manufacturerFirst);
         manufacturerSecond = manufacturerDao.create(manufacturerSecond);
         manufacturerThird = manufacturerDao.create(manufacturerThird);
 
-        System.out.println(manufacturerDao.get(4L).orElse(manufacturerThird));
+        System.out.println(manufacturerDao.get(4L));
 
         System.out.println(manufacturerDao.getAll());
 
