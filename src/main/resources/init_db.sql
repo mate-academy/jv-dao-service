@@ -5,11 +5,11 @@ CREATE TABLE `manufacturers` (
                                         `country` varchar(225) COLLATE utf8_bin NOT NULL,
                                         `is_deleted` tinyint NOT NULL DEFAULT '0',
                                          PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 CREATE TABLE `drivers` (
                                         `id` bigint NOT NULL AUTO_INCREMENT,
                                         `name` varchar(225) COLLATE utf8_bin NOT NULL,
                                         `license_number` varchar(225) COLLATE utf8_bin NOT NULL,
                                         `is_deleted` tinyint NOT NULL DEFAULT '0',
                                          PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
