@@ -61,8 +61,7 @@ public class DriverDaoImpl implements DriverDao {
                 result.add(convertToDriver(resultSet));
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can`t read all data from table: drivers",
-                    e);
+            throw new DataProcessingException("Can`t read all data from table: drivers", e);
         }
         return result;
     }
