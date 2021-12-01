@@ -1,7 +1,7 @@
 package mate.jdbc.service;
 
 import java.util.List;
-import mate.jdbc.dao.manufacturer.ManufacturerDao;
+import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
 import mate.jdbc.model.Manufacturer;
@@ -13,14 +13,6 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        long id = manufacturerDao.getAll().stream()
-                .filter(e -> e.getName().contains(manufacturer.getName())
-                        && e.getCountry().contains(manufacturer.getCountry()))
-                .mapToLong(Manufacturer::getId)
-                .min().orElse(0);
-        if (id != 0 && manufacturerDao.get(id).isPresent()) {
-            return manufacturerDao.get(id).get();
-        }
         return manufacturerDao.create(manufacturer);
     }
 

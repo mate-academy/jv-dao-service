@@ -1,4 +1,4 @@
-package mate.jdbc.dao.driver;
+package mate.jdbc.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import mate.jdbc.dao.DriverDao;
 import mate.jdbc.lib.Dao;
 import mate.jdbc.lib.exception.DataProcessingException;
 import mate.jdbc.model.Driver;
@@ -29,14 +30,14 @@ public class DriverDaoImpl implements DriverDao {
                 driver.setId(resultSet.getObject(1, Long.class));
             }
             return driver;
-        } catch (SQLException throwable) {
-            throw new DataProcessingException("Couldn't create driver. " + driver, throwable);
+        } catch (SQLException e) {
+            throw new DataProcessingException("Couldn't create driver. " + driver, e);
         }
     }
 
     @Override
     public Optional<Driver> get(Long id) {
-        String query = "SELECT * FROM drivers WHERE id = (?) AND is_deleted = FALSE";
+        String query = "SELECT * FROM drivers WHERE id = ? AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
                      PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
@@ -46,8 +47,8 @@ public class DriverDaoImpl implements DriverDao {
                 driver = getDriver(resultSet);
             }
             return Optional.ofNullable(driver);
-        } catch (SQLException throwable) {
-            throw new DataProcessingException("Couldn't get driver by id " + id, throwable);
+        } catch (SQLException e) {
+            throw new DataProcessingException("Couldn't get driver by id " + id, e);
         }
     }
 
@@ -62,9 +63,9 @@ public class DriverDaoImpl implements DriverDao {
                 drivers.add(getDriver(resultSet));
             }
             return drivers;
-        } catch (SQLException throwable) {
-            throw new DataProcessingException("Couldn't get a list of drivers "
-                    + "from drivers table. ", throwable);
+        } catch (SQLException e) {
+            throw new DataProcessingException(
+                    "Couldn't get a list of drivers from drivers table. ", e);
         }
     }
 
@@ -79,9 +80,8 @@ public class DriverDaoImpl implements DriverDao {
             statement.setLong(3, driver.getId());
             statement.executeUpdate();
             return driver;
-        } catch (SQLException throwable) {
-            throw new DataProcessingException("Couldn't update a driver "
-                    + driver, throwable);
+        } catch (SQLException e) {
+            throw new DataProcessingException("Couldn't update a driver " + driver, e);
         }
     }
 
@@ -92,9 +92,8 @@ public class DriverDaoImpl implements DriverDao {
                     PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
-        } catch (SQLException throwable) {
-            throw new DataProcessingException("Couldn't delete a driver by id " + id + " ",
-                    throwable);
+        } catch (SQLException e) {
+            throw new DataProcessingException("Couldn't delete a driver by id " + id + " ", e);
         }
     }
 
