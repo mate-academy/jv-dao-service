@@ -36,7 +36,7 @@ public class Main {
         System.out.println("gotDriver = "
                 + driverService.get(createdDriver.getId()));
         driverService.getAll().forEach(System.out::println);
-        createdDriver.setName("Dmitro's inc.");
+        createdDriver.setName("Dmitro");
         createdDriver.setLicenseNumber("33RIKUTEK");
         System.out.println("updatedDriver = "
                 + driverService.update(createdDriver));
