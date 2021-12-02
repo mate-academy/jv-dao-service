@@ -1,4 +1,4 @@
-CREATE SCHEMA IF NOT EXISTS `taxi` DEFAULT CHARACTER SET utf8;
+CREATE DATABASE `taxi`  DEFAULT CHARACTER SET utf8 DEFAULT ENCRYPTION='N';
 USE `taxi`;
 
 CREATE TABLE `manufacturers` (
@@ -7,3 +7,12 @@ CREATE TABLE `manufacturers` (
                                         `country` VARCHAR(225) NOT NULL,
                                         `is_deleted` TINYINT NOT NULL DEFAULT 0,
                                         PRIMARY KEY (`id`));
+
+CREATE TABLE `drivers` (
+                                        `id` bigint NOT NULL AUTO_INCREMENT,
+                                        `name` varchar(45) DEFAULT NULL,
+                                        `licenseNumber` varchar(45) DEFAULT NULL,
+                                        `is_deleted` tinyint NOT NULL DEFAULT '0',
+                                        PRIMARY KEY (`id`);
+
+
