@@ -18,56 +18,44 @@ public class Main {
         System.out.println("START TEST FOR MANUFACTURERS SERVICE:");
         Manufacturer manufacturerFord = new Manufacturer("Ford", "USA");
         Manufacturer manufacturerToyota = new Manufacturer("Toyota", "Japan");
-
         manufacturerService.create(manufacturerFord);
         manufacturerService.create(manufacturerToyota);
-
-        System.out.println("TEST for Manufacturers.get() manufacturerFord: "
+        System.out.println("TEST for get() manufacturerFord: "
                 + manufacturerService.get(manufacturerFord.getId()));
-        System.out.println("TEST for Manufacturers.get() manufacturerToyota: "
+        System.out.println("TEST for get() manufacturerToyota: "
                 + manufacturerService.get(manufacturerToyota.getId()));
-
-        System.out.println("TEST for Manufacturers.getAll() manufacturers: "
+        System.out.println("TEST for getAll() manufacturers: "
                 + manufacturerService.getAll());
-
         manufacturerFord.setCountry("Germany");
         manufacturerService.update(manufacturerFord);
-        System.out.println("TEST for Manufacturers.update() manufacturerFord: "
+        System.out.println("TEST for update() manufacturerFord: "
                 + manufacturerService.get(manufacturerFord.getId()));
-
         boolean isDeletedManufacturer = manufacturerService.delete(manufacturerToyota.getId());
-        System.out.println("TEST for Manufacturers.delete() manufacturerToyota: "
+        System.out.println("TEST for delete() manufacturerToyota: "
                 + isDeletedManufacturer);
-
-        System.out.println("TEST for Manufacturers.getAll() after work: "
+        System.out.println("TEST for getAll() after work: "
                 + manufacturerService.getAll());
         System.out.println("END MANUFACTURERS SERVICE TEST\n\n");
 
         System.out.println("START TEST FOR DRIVER SERVICE:");
         Driver driverJohn = new Driver("John", "JH5563G");
         Driver driverMark = new Driver("Mark", "TY999FG");
-
         driverService.create(driverJohn);
         driverService.create(driverMark);
-
-        System.out.println("TEST for Drivers.get() driverJohn: "
+        System.out.println("TEST for get() driverJohn: "
                 + driverService.get(driverJohn.getId()));
-        System.out.println("TEST for Drivers.get() driverMark: "
+        System.out.println("TEST for get() driverMark: "
                 + driverService.get(driverMark.getId()));
-
-        System.out.println("TEST for Drivers.getAll() drivers: "
+        System.out.println("TEST for getAll() drivers: "
                 + driverService.getAll());
-
         driverJohn.setName("Collins");
         driverService.update(driverJohn);
-        System.out.println("TEST for Drivers.update() driverJohn: "
+        System.out.println("TEST for update() driverJohn: "
                 + driverService.get(driverJohn.getId()));
-
         boolean isDeletedDriver = driverService.delete(driverMark.getId());
-        System.out.println("TEST for Drivers.delete() driverMark: "
+        System.out.println("TEST for delete() driverMark: "
                 + isDeletedDriver);
-
-        System.out.println("TEST for Drivers.getAll() after work: "
+        System.out.println("TEST for getAll() after work: "
                 + driverService.getAll());
         System.out.println("END DRIVER SERVICE TEST");
     }
