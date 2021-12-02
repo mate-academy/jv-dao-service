@@ -33,7 +33,8 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             }
             return manufacturer;
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't create manufacturer. " + manufacturer + " ", e);
+            throw new DataProcessingException("Can't create manufacturer. "
+                    + manufacturer + " ", e);
         }
     }
 
@@ -101,7 +102,8 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             deleteManufacturerStatement.setLong(1, id);
             return deleteManufacturerStatement.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new DataProcessingException("Couldn't delete a manufacturer by id " + id + " ", e);
+            throw new DataProcessingException("Couldn't delete a manufacturer by id "
+                    + id + " ", e);
         }
     }
 
