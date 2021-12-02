@@ -13,22 +13,27 @@ public class Main {
         ManufacturerService manufacturerService = (ManufacturerService)
                 injector.getInstance(ManufacturerService.class);
 
-        manufacturerService.get(15L);
-        manufacturerService.create(new Manufacturer("Lada", "Ukraine"));
+        Manufacturer lada = new Manufacturer("Lada", "Ukraine");
+        Manufacturer porsche = new Manufacturer("Porsche", "USA");
+        manufacturerService.create(porsche);
+        manufacturerService.create(lada);
+        manufacturerService.get(lada.getId());
         manufacturerService.getAll();
-        Manufacturer manufacturerToUpdate = new Manufacturer("Porsche", "USA");
-        manufacturerToUpdate.setId(13L);
-        manufacturerService.update(manufacturerToUpdate);
-        manufacturerService.delete(16L);
+        lada.setCountry("Russia");
+        manufacturerService.update(lada);
+        manufacturerService.delete(porsche.getId());
+        manufacturerService.getAll();
 
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
 
-        driverService.create(new Driver("driver1", "789"));
-        driverService.get(2L);
+        Driver driver1 = new Driver("driver1", "789");
+        Driver driver2 = new Driver("driver2", "124");
+        driverService.create(driver2);
+        driverService.create(driver1);
+        driverService.get(driver1.getId());
         driverService.getAll();
-        Driver driverToUpdate = new Driver("driver2", "098");
-        driverToUpdate.setId(2L);
-        driverService.update(driverToUpdate);
-        driverService.delete(3L);
+        driver1.setLicenseNumber("098");
+        driverService.update(driver1);
+        driverService.delete(driver2.getId());
     }
 }
