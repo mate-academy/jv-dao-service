@@ -82,7 +82,7 @@ public class DriverDaoImpl implements DriverDao {
             updateDriversStatement.executeUpdate();
             return driver;
         } catch (SQLException throwable) {
-            throw new DataProcessingException("Couldn't update a manufacturer "
+            throw new DataProcessingException("Couldn't update a driver "
                     + driver, throwable);
         }
     }
