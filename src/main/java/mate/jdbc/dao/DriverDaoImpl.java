@@ -69,8 +69,7 @@ public class DriverDaoImpl implements DriverDao {
             return drivers;
         } catch (SQLException throwable) {
             throw new DataProcessingException("Couldn't get a list of drivers "
-                    + "from drivers table. ",
-                    throwable);
+                    + "from drivers table. ", throwable);
         }
     }
 
@@ -107,11 +106,11 @@ public class DriverDaoImpl implements DriverDao {
     }
 
     private Driver getDriver(ResultSet resultSet) throws SQLException {
-        Long newId = resultSet.getObject("id", Long.class);
+        Long id = resultSet.getObject("id", Long.class);
         String name = resultSet.getString("name");
         String licenseNumber = resultSet.getString("licenseNumber");
         Driver driver = new Driver(name, licenseNumber);
-        driver.setId(newId);
+        driver.setId(id);
         return driver;
     }
 }
