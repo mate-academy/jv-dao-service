@@ -1,6 +1,5 @@
 package mate.jdbc;
 
-import java.util.Random;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
@@ -9,15 +8,12 @@ import mate.jdbc.service.ManufacturerService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
-    private static final int RANDOM_RANGE = 9999;
 
     public static void main(String[] args) {
         DriverService driverService =
                 (DriverService) injector.getInstance(DriverService.class);
-        driverService.create(new Driver("Maria",
-                String.valueOf(new Random().nextInt(RANDOM_RANGE))));
-        driverService.create(new Driver("Alice",
-                String.valueOf(new Random().nextInt(RANDOM_RANGE))));
+        driverService.create(new Driver("Maria", "02_12_21_AI"));
+        driverService.create(new Driver("Alice", "06_12_21_KA"));
         Driver updateDriver = new Driver("J.Bond", "007");
         updateDriver.setId(4L);
         System.out.println(driverService.get(4L));
