@@ -1,6 +1,9 @@
 package mate.jdbc.model;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @ToString
 @EqualsAndHashCode
@@ -11,4 +14,11 @@ public class Driver {
     private String name;
     private String licenseNumber;
 
+    public Driver() {
+    }
+
+    public Driver(String name, String licenseNumber) {
+        this.name = name;
+        this.licenseNumber = licenseNumber;
+    }
 }
