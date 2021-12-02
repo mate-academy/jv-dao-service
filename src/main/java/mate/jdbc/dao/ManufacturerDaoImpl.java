@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Dao;
 import mate.jdbc.model.Manufacturer;
@@ -36,7 +37,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
     }
 
     @Override
-    public Manufacturer get(Long id) {
+    public Optional<Manufacturer> get(Long id) {
         String query = "SELECT * FROM manufacturers"
                 + " WHERE id = (?) AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
@@ -47,7 +48,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             if (resultSet.next()) {
                 manufacturer = getManufacturer(resultSet);
             }
-            return manufacturer;
+            return Optional.ofNullable(manufacturer);
         } catch (SQLException throwable) {
             throw new DataProcessingException("Couldn't get manufacturer by id " + id + " ",
                     throwable);
