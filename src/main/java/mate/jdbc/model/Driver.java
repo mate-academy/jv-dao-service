@@ -15,11 +15,6 @@ public class Driver {
         this.licenseNumber = licenseNumber;
     }
 
-    public Driver(Long id, String name, String licenseNumber) {
-        this(name, licenseNumber);
-        this.id = id;
-    }
-
     public Long getId() {
         return id;
     }
