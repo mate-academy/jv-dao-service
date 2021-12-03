@@ -2,17 +2,17 @@ package mate.jdbc.model;
 
 import java.util.Objects;
 
-public class CarDriver {
+public class Driver {
     private Long id;
     private String name;
     private String licenseNumber;
 
-    public CarDriver(String name, String licenseNumber) {
+    public Driver(String name, String licenseNumber) {
         this.name = name;
         this.licenseNumber = licenseNumber;
     }
 
-    public CarDriver(Long id, String name, String licenseNumber) {
+    public Driver(Long id, String name, String licenseNumber) {
         this(name, licenseNumber);
         this.id = id;
     }
@@ -43,7 +43,7 @@ public class CarDriver {
 
     @Override
     public String toString() {
-        return "CarDriver{"
+        return "Driver{"
                 + "id=" + id
                 + ", name='" + name + '\''
                 + ", licenseNumber='" + licenseNumber + '\''
@@ -58,9 +58,9 @@ public class CarDriver {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CarDriver carDriver = (CarDriver) o;
-        return Objects.equals(id, carDriver.id) && Objects.equals(name, carDriver.name)
-                && Objects.equals(licenseNumber, carDriver.licenseNumber);
+        Driver driver = (Driver) o;
+        return Objects.equals(id, driver.id) && Objects.equals(name, driver.name)
+                && Objects.equals(licenseNumber, driver.licenseNumber);
     }
 
     @Override
