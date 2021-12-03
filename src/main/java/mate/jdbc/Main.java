@@ -10,7 +10,6 @@ public class Main {
     private static Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
-        // test your code here
         ManufacturerService manufacturerService = (ManufacturerService)
                 injector.getInstance(ManufacturerService.class);
 
