@@ -40,5 +40,6 @@ public class Main {
         System.out.println(manufacturerService.update(manufacturerFirst));
 
         manufacturerService.delete(6L);
+        System.out.println(manufacturerService);
     }
 }
