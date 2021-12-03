@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import mate.jdbc.lib.Dao;
 import mate.jdbc.lib.exception.DataProcessingException;
 import mate.jdbc.model.Driver;
@@ -35,7 +36,7 @@ public class DriverDaoImpl implements DriverDao {
     }
 
     @Override
-    public Driver get(Long id) {
+    public Optional<Driver> get(Long id) {
         String query = "SELECT * FROM drivers"
                 + " WHERE id = (?) AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
@@ -46,7 +47,7 @@ public class DriverDaoImpl implements DriverDao {
             if (resultSet.next()) {
                 driver = getDriver(resultSet);
             }
-            return driver;
+            return Optional.ofNullable(driver);
         } catch (SQLException throwable) {
             throw new DataProcessingException("Couldn't get driver by id " + id + " ",
                     throwable);
