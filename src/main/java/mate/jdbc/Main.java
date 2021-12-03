@@ -18,7 +18,8 @@ public class Main {
         for (Driver driver : drivers) {
             driverService.create(driver);
         }
-        ManufacturerService manufacturerService = (ManufacturerService) injector.getInstance(ManufacturerService.class);
+        ManufacturerService manufacturerService
+                = (ManufacturerService) injector.getInstance(ManufacturerService.class);
         List<Manufacturer> manufacturers = List.of(new Manufacturer("Hyundai", "Korea"),
                 new Manufacturer("Porsche", "Germany"));
         for (Manufacturer manufacturer : manufacturers) {
