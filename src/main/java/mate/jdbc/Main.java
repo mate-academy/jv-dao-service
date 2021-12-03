@@ -15,12 +15,8 @@ public class Main {
         final ManufacturerService manufacturerService = (ManufacturerService)
                 injector.getInstance(ManufacturerService.class);
 
-        Manufacturer firstManufacturer = new Manufacturer();
-        firstManufacturer.setName("first");
-        firstManufacturer.setCountry("firstCountry");
-        Manufacturer secondManufacturer = new Manufacturer();
-        secondManufacturer.setName("second");
-        secondManufacturer.setCountry("secondCountry");
+        Manufacturer firstManufacturer = new Manufacturer("first", "firstCountry");
+        Manufacturer secondManufacturer = new Manufacturer("second", "secondCountry");
         manufacturerService.create(firstManufacturer);
         manufacturerService.create(secondManufacturer);
         System.out.println(manufacturerService.getAll());
@@ -30,12 +26,8 @@ public class Main {
         manufacturerService.delete(1L);
         System.out.println(manufacturerService.getAll());
 
-        Driver firstDriver = new Driver();
-        firstDriver.setName("first");
-        firstDriver.setLicenseNumber("firstNumber");
-        Driver secondDriver = new Driver();
-        secondDriver.setName("second");
-        secondDriver.setLicenseNumber("secondNumber");
+        Driver firstDriver = new Driver("first", "firstNumber");
+        Driver secondDriver = new Driver("second", "secondNumber");
         driverService.create(firstDriver);
         driverService.create(secondDriver);
         System.out.println(driverService.getAll());
