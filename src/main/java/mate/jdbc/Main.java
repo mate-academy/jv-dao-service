@@ -5,13 +5,14 @@ import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.DriverService;
+import mate.jdbc.service.ManufacturerService;
 
 public class Main {
     private static Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
-        ManufacturerDao manufacturerDao = (ManufacturerDao)
-                injector.getInstance(ManufacturerDao.class);
+        ManufacturerService manufacturerDao = (ManufacturerService)
+                injector.getInstance(ManufacturerService.class);
 
         Manufacturer ferrari = new Manufacturer();
         ferrari.setCountry("Italy");
@@ -57,7 +58,7 @@ public class Main {
         daniel.setLicenseNumber("666");
         driverService.create(daniel);
 
-        System.out.println(driverService.get(3L));
+        System.out.println(driverService.get(2L));
         driverService.getAll().forEach(System.out::println);
 
         daniel.setLicenseNumber("88");

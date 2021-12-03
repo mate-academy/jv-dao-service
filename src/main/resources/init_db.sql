@@ -1,4 +1,5 @@
 CREATE DATABASE `taxi_service_db` DEFAULT CHARACTER SET utf8;
+USE taxi_service_db ;
 
 CREATE TABLE `manufacturers` (
                                  `id` bigint NOT NULL AUTO_INCREMENT,
