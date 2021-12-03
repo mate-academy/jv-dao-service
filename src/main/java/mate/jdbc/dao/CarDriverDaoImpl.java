@@ -97,13 +97,12 @@ public class CarDriverDaoImpl implements CarDriverDao {
         } catch (SQLException e) {
             throw new DataProcessingException("Can't delete car driver by id: " + id, e);
         }
-
     }
 
     private CarDriver getCarDriver(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getObject(1, Long.class);
-        String name = resultSet.getObject(2, String.class);
-        String licenseNumber = resultSet.getObject(2, String.class);
+        String name = resultSet.getString("name");
+        String licenseNumber = resultSet.getString("license_number");
         return new CarDriver(id, name, licenseNumber);
     }
 }
