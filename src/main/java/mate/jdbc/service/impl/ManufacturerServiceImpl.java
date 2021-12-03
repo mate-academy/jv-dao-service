@@ -19,8 +19,12 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     }
 
     @Override
-    public Optional<Manufacturer> get(Long id) {
-        return manufacturerDao.get(id);
+    public Manufacturer get(Long id) {
+        Optional<Manufacturer> manufacturer = manufacturerDao.get(id);
+        if (manufacturer.isPresent()) {
+            return manufacturer.get();
+        }
+        throw new RuntimeException("Can't get driver with id = " + id);
     }
 
     @Override
