@@ -82,6 +82,7 @@ public class DriverDaoImpl implements DriverDao {
             updateDriverStatement.setString(1, driver.getName());
             updateDriverStatement.setString(2, driver.getLicenseNumber());
             updateDriverStatement.setLong(3, driver.getId());
+            updateDriverStatement.executeUpdate();
             return driver;
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't update a driver " + driver, e);
@@ -105,9 +106,7 @@ public class DriverDaoImpl implements DriverDao {
         Long newId = resultSet.getObject("id", Long.class);
         String name = resultSet.getString("name");
         String licenseNumber = resultSet.getString("licenseNumber");
-        Driver driver = new Driver();
-        driver.setId(newId);
-        driver.setName(name);
+        Driver driver = new Driver(name,licenseNumber);
         driver.setLicenseNumber(licenseNumber);
         return driver;
     }

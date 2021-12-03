@@ -30,14 +30,10 @@ public class Main {
         manufacturerService.getAll().forEach(System.out::println);
 
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-        Driver john = new Driver();
-        john.setName("John");
-        john.setLicenseNumber("AF1325355");
+        Driver john = new Driver("John","AF1325355");
         driverService.create(john);
 
-        Driver bob = new Driver();
-        bob.setName("Bob");
-        bob.setLicenseNumber("JD6645665");
+        Driver bob = new Driver("Bob","JD6645665");
         driverService.create(bob);
 
         System.out.println(driverService.get(bob.getId()));
