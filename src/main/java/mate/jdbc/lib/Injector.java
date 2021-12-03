@@ -1,4 +1,4 @@
-package mate.jdbc.util;
+package mate.jdbc.lib;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,9 +10,6 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import mate.jdbc.lib.Dao;
-import mate.jdbc.lib.Inject;
-import mate.jdbc.lib.Service;
 
 public class Injector {
     private static final Map<String, Injector> injectors = new HashMap<>();
