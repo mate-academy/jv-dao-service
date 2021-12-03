@@ -21,8 +21,7 @@ public class Main {
         driverService.delete(deleteDriver.getId());
         List<Driver> allDrivers = driverService.getAll();
 
-        for (Driver d: allDrivers) {
-            System.out.println(d.toString());
-        }
+        allDrivers.stream()
+                .forEach(System.out::println);
     }
 }
