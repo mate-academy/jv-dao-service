@@ -23,7 +23,7 @@ public class DriverDaoImpl implements DriverDao {
                 PreparedStatement createDriverStatement
                         = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             createDriverStatement.setString(1, driver.getName());
-            createDriverStatement.setObject(2, driver.getLicenseNumber());
+            createDriverStatement.setString(2, driver.getLicenseNumber());
             createDriverStatement.executeUpdate();
             ResultSet resultSet = createDriverStatement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -31,7 +31,7 @@ public class DriverDaoImpl implements DriverDao {
             }
             return driver;
         } catch (SQLException throwable) {
-            throw new DataProcessingException("Couldn't create manufacturer. " + driver + " ",
+            throw new DataProcessingException("Couldn't create driver. " + driver + " ",
                     throwable);
         }
     }
@@ -69,8 +69,7 @@ public class DriverDaoImpl implements DriverDao {
             return drivers;
         } catch (SQLException throwable) {
             throw new DataProcessingException("Couldn't get a list of drivers "
-                    + "from drivers table. ",
-                    throwable);
+                    + "from drivers table. ", throwable);
         }
     }
 
