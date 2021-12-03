@@ -1,5 +1,5 @@
 CREATE DATABASE `taxi_service` DEFAULT CHARACTER SET utf8 DEFAULT ENCRYPTION='N';
-
+USE `taxi_service`;
 CREATE TABLE `manufacturers` (
                                  `name` varchar(255) DEFAULT NULL,
                                  `country` varchar(255) DEFAULT NULL,
