@@ -1,6 +1,6 @@
 CREATE SCHEMA `taxi_service` DEFAULT CHARACTER SET utf8;
-
-CREATE TABLE `taxi_service`.`manufacturers` (
+USE `taxi_service`;
+CREATE TABLE `manufacturers` (
   `id` BIGINT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `country` VARCHAR(255) NOT NULL,
@@ -11,7 +11,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
-CREATE TABLE `taxi_service`.`drivers` (
+CREATE TABLE `drivers` (
   `id` BIGINT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `license_number` VARCHAR(255) NOT NULL,
