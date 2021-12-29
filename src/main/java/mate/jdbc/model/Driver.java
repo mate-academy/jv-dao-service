@@ -5,7 +5,9 @@ public class Driver {
     private String name;
     private String licenseNumber;
 
-    public Driver() { }
+    public Driver() {
+
+    }
 
     public Driver(Long id, String name, String licenseNumber) {
         this.id = id;
@@ -39,10 +41,10 @@ public class Driver {
 
     @Override
     public String toString() {
-        return "Driver{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", licenseNumber='" + licenseNumber + '\'' +
-                '}';
+        return "Driver{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", licenseNumber='" + licenseNumber + '\''
+                + '}';
     }
 }

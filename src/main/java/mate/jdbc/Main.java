@@ -1,12 +1,11 @@
 package mate.jdbc;
 
+import java.util.List;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.DriverService;
 import mate.jdbc.service.ManufacturerService;
-
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -56,8 +55,6 @@ public class Main {
         manufacturers = manufacturerService.getAll();
         drivers = driverService.getAll();
         printDataToConsole(manufacturers, drivers);
-
-
     }
 
     private static void showDifference(Object oldObject, Object newObject) {
