@@ -10,8 +10,8 @@ public class Main {
     public static void main(String[] args) {
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         Driver alice = new Driver(4L,"Alice", "127");
-        Driver ben = new Driver("Ben", "124");
-        driverService.create(ben);
+        Driver den = new Driver("Den", "128");
+        driverService.create(den);
         driverService.update(alice);
         driverService.delete(6L);
         driverService.getAll().forEach(System.out::println);
