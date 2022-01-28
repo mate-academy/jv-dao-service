@@ -1,5 +1,6 @@
 package mate.jdbc;
 
+import java.util.NoSuchElementException;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
@@ -11,17 +12,17 @@ public class Main {
     private static Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
-        ManufacturerService manufacturerService =
-                (ManufacturerService) injector.getInstance(ManufacturerService.class);
-        DriverService driverService =
-                (DriverService) injector.getInstance(DriverService.class);
         System.out.println("******************************************************");
         System.out.println("*****************ManufacturerService******************");
         System.out.println("******************************************************");
+        ManufacturerService manufacturerService =
+                (ManufacturerService) injector.getInstance(ManufacturerService.class);
         manufacturerServiceTest(manufacturerService);
         System.out.println("******************************************************");
         System.out.println("********************DriverService*********************");
         System.out.println("******************************************************");
+        DriverService driverService =
+                (DriverService) injector.getInstance(DriverService.class);
         driverServiceTest(driverService);
     }
 
@@ -58,10 +59,10 @@ public class Main {
         //* Get
         System.out.println("***********READ BLOCK***********");
         for (long id = 0; id < 10; id++) {
-            Manufacturer manufacturer = manufacturerService.get(id);
-            if (manufacturer != null) {
+            try {
+                Manufacturer manufacturer = manufacturerService.get(id);
                 System.out.println(manufacturer);
-            } else {
+            } catch (NoSuchElementException e) {
                 System.out.println(("Manufacturer with Id = " + id + " not found"));
             }
         }
@@ -100,10 +101,10 @@ public class Main {
         //* Get
         System.out.println("***********READ BLOCK***********");
         for (long id = 0; id < 10; id++) {
-            Driver driver = driverService.get(id);
-            if (driver != null) {
+            try {
+                Driver driver = driverService.get(id);
                 System.out.println(driver);
-            } else {
+            } catch (NoSuchElementException e) {
                 System.out.println(("Driver with Id = " + id + " not found"));
             }
         }
