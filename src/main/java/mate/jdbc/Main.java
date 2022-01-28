@@ -33,29 +33,22 @@ public class Main {
         }
         //* Read all
         System.out.println("***********CREATE BLOCK RESULTS***********");
-        for (Manufacturer manufacturer : manufacturerService.getAll()) {
-            System.out.println(manufacturer);
-        }
+        manufacturerService.getAll().stream()
+                .forEach(System.out::println);
         //* Delete
-        for (Manufacturer manufacturer : manufacturerService.getAll()) {
-            if (manufacturer.getId() % 2 != 0) {
-                manufacturerService.delete(manufacturer.getId());
-            }
-        }
+        manufacturerService.getAll().stream()
+                .filter(m -> m.getId() % 2 != 0)
+                .forEach(m -> manufacturerService.delete(m.getId()));
         System.out.println("***********DELETE BLOCK RESULTS***********");
-        for (Manufacturer manufacturer : manufacturerService.getAll()) {
-            System.out.println(manufacturer);
-        }
+        manufacturerService.getAll().stream()
+                .forEach(System.out::println);
         //* Update
-        for (Manufacturer manufacturer : manufacturerService.getAll()) {
-            manufacturer.setName("ZAZ_" + manufacturer.getId());
-            manufacturer.setCountry("Ukraine");
-            manufacturerService.update(manufacturer);
-        }
+        manufacturerService.getAll().stream()
+                .map(Main::updateManufacturer)
+                .forEach(manufacturerService::update);
         System.out.println("***********UPDATE BLOCK RESULTS***********");
-        for (Manufacturer manufacturer : manufacturerService.getAll()) {
-            System.out.println(manufacturer);
-        }
+        manufacturerService.getAll().stream()
+                .forEach(System.out::println);
         //* Get
         System.out.println("***********READ BLOCK***********");
         for (long id = 0; id < 10; id++) {
@@ -75,29 +68,22 @@ public class Main {
         }
         //* Read all
         System.out.println("***********CREATE BLOCK RESULTS***********");
-        for (Driver driver : driverService.getAll()) {
-            System.out.println(driver);
-        }
+        driverService.getAll().stream()
+                .forEach(System.out::println);
         //* Delete
-        for (Driver driver : driverService.getAll()) {
-            if (driver.getId() % 2 != 0) {
-                driverService.delete(driver.getId());
-            }
-        }
+        driverService.getAll().stream()
+                .filter(d -> d.getId() % 2 != 0)
+                .forEach(d -> driverService.delete(d.getId()));
         System.out.println("***********DELETE BLOCK RESULTS***********");
-        for (Driver driver : driverService.getAll()) {
-            System.out.println(driver);
-        }
+        driverService.getAll().stream()
+                .forEach(System.out::println);
         //* Update
-        for (Driver driver : driverService.getAll()) {
-            driver.setName("Driver_" + driver.getId());
-            driver.setLicenseNumber(getLicenseNumber(driver.getId()));
-            driverService.update(driver);
-        }
+        driverService.getAll().stream()
+                .map(Main::updateDriver)
+                .forEach(driverService::update);
         System.out.println("***********UPDATE BLOCK RESULTS***********");
-        for (Driver driver : driverService.getAll()) {
-            System.out.println(driver);
-        }
+        driverService.getAll().stream()
+                .forEach(System.out::println);
         //* Get
         System.out.println("***********READ BLOCK***********");
         for (long id = 0; id < 10; id++) {
@@ -117,10 +103,22 @@ public class Main {
         return manufacturer;
     }
 
+    private static Manufacturer updateManufacturer(Manufacturer manufacturer) {
+        manufacturer.setName("ZAZ_" + manufacturer.getId());
+        manufacturer.setCountry("Ukraine");
+        return manufacturer;
+    }
+
     private static Driver newDriver(String name, String licenseNumber) {
         Driver driver = new Driver();
         driver.setName(name);
         driver.setLicenseNumber(licenseNumber);
+        return driver;
+    }
+
+    private static Driver updateDriver(Driver driver) {
+        driver.setName("Driver_" + driver.getId());
+        driver.setLicenseNumber(getLicenseNumber(driver.getId()));
         return driver;
     }
 
