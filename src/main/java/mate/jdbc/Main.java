@@ -14,8 +14,8 @@ public class Main {
             (DriverService) injector.getInstance(DriverService.class);
 
     public static void main(String[] args) {
-        manufacturerService.create(Manufacturer.builder().name("randomName").country("randomCountry")
-                .build());
+        manufacturerService.create(Manufacturer.builder().name("randomName")
+                .country("randomCountry").build());
         manufacturerService.get(1L);
         manufacturerService.update(Manufacturer.builder().id(1L).name("updatedName").country(
                 "updatedCountry").build());
