@@ -21,21 +21,19 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public List<Driver> getAll() {
-        List<Driver> driversList;
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "SELECT * FROM drivers WHERE is_deleted = FALSE";
-            driversList = new ArrayList<>();
-            Driver driver;
-            Statement getAllStatement = connection.createStatement();
-            ResultSet resultSet = getAllStatement.executeQuery(query);
+        String query = "SELECT * FROM drivers WHERE is_deleted = FALSE";
+        try (Connection connection = ConnectionUtil.getConnection();
+                PreparedStatement statement = connection.prepareStatement(query)) {
+            List<Driver> driversList = new ArrayList<>();
+            ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                driver = getDriver(resultSet);
-                driversList.add(driver);
+                driversList.add(getDriver(resultSet));
             }
+            return driversList;
         } catch (SQLException e) {
-            throw new DataProcessingException("Ca`nt get list cars from DB ", e);
+            throw new DataProcessingException("Couldn't get a list of drivers "
+                    + "from drivers table.", e);
         }
-        return driversList;
     }
 
     @Override
@@ -43,8 +41,8 @@ public class DriverDaoImpl implements DriverDao {
         String query = "INSERT INTO drivers (name, license_number) "
                 + "VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement
-                     = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement statement
+                        = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, driver.getName());
             statement.setString(2, driver.getLicenseNumber());
             statement.executeUpdate();
@@ -54,7 +52,7 @@ public class DriverDaoImpl implements DriverDao {
             }
             return driver;
         } catch (SQLException e) {
-            throw new DataProcessingException("Couldn't create manufacturer. " + driver, e);
+            throw new DataProcessingException("Couldn't create driver. " + driver, e);
         }
     }
 
@@ -63,7 +61,7 @@ public class DriverDaoImpl implements DriverDao {
         String query = "SELECT * FROM drivers"
                 + " WHERE id = ? AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             Driver driver = null;
@@ -81,8 +79,7 @@ public class DriverDaoImpl implements DriverDao {
         String query = "UPDATE drivers SET name = ?, license_number = ?"
                 + " WHERE id = ? AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement
-                     = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, driver.getName());
             statement.setString(2, driver.getLicenseNumber());
             statement.setLong(3, driver.getId());
@@ -98,8 +95,8 @@ public class DriverDaoImpl implements DriverDao {
     public boolean delete(Long id) {
         String query = "UPDATE drivers SET is_deleted = TRUE WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement
-                     = connection.prepareStatement(query)) {
+                PreparedStatement statement
+                        = connection.prepareStatement(query)) {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
