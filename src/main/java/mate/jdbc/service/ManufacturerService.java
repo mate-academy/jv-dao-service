@@ -1,5 +1,6 @@
 package mate.jdbc.service;
 
+import mate.jdbc.lib.Service;
 import mate.jdbc.model.Manufacturer;
 import java.util.List;
 import java.util.Optional;
