@@ -1,13 +1,13 @@
 package mate.jdbc;
 
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.DriverService;
 import mate.jdbc.service.ManufacturerService;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 public class Main {
     private static Injector injector = Injector.getInstance("mate.jdbc");
@@ -22,10 +22,10 @@ public class Main {
         Manufacturer manufacturerMonica = manufacturerService.create(manufacturer);
         System.out.println(manufacturerMonica);
 
-        long ManufacturerId = 11L;
-        Optional<Manufacturer> optionalManufacturer = manufacturerService.get(ManufacturerId);
+        long manufacturerId = 11L;
+        Optional<Manufacturer> optionalManufacturer = manufacturerService.get(manufacturerId);
         System.out.println(optionalManufacturer.orElseThrow(() ->
-                new NoSuchElementException("Can't find manufacturer by id: " + ManufacturerId)));
+                new NoSuchElementException("Can't find manufacturer by id: " + manufacturerId)));
 
         List<Manufacturer> allManufacturers = manufacturerService.getAll();
         allManufacturers.forEach(System.out::println);
