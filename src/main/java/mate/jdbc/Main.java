@@ -1,10 +1,9 @@
 package mate.jdbc;
 
+import java.util.ArrayList;
 import java.util.List;
 import mate.jdbc.lib.Injector;
-import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
-import mate.jdbc.service.DriverService;
 import mate.jdbc.service.ManufacturerService;
 
 public class Main {
@@ -14,41 +13,73 @@ public class Main {
         ManufacturerService manufacturerService = (ManufacturerService)
                 injector.getInstance(ManufacturerService.class);
 
+        addingDataToDb(manufacturerService);
+
+        createManufacturerInDb(manufacturerService);
+
+        getManufacturerFromDb(manufacturerService);
+
+        getAllManufacturersFromDb(manufacturerService);
+
+        updateManufacturerInDb(manufacturerService);
+
+        deleteManufacturerById(manufacturerService);
+    }
+
+    private static void addingDataToDb(ManufacturerService manufacturerService) {
+        Manufacturer manufacturerKia = new Manufacturer();
+        manufacturerKia.setName("Kia");
+        manufacturerKia.setCountry("Korea");
+        Manufacturer manufacturerBmv = new Manufacturer();
+        manufacturerBmv.setName("BMV");
+        manufacturerBmv.setCountry("Denmark");
+        Manufacturer manufacturerTesla = new Manufacturer();
+        manufacturerTesla.setName("Tesla");
+        manufacturerTesla.setCountry("USA");
+        Manufacturer manufacturerToyota = new Manufacturer();
+        manufacturerToyota.setName("Toyota");
+        manufacturerToyota.setCountry("China");
+        List<Manufacturer> manufacturers = new ArrayList<>();
+        manufacturers.add(manufacturerKia);
+        manufacturers.add(manufacturerBmv);
+        manufacturers.add(manufacturerTesla);
+        manufacturers.add(manufacturerToyota);
+        for (Manufacturer manufacturer : manufacturers) {
+            manufacturerService.create(manufacturer);
+        }
+    }
+
+    private static void createManufacturerInDb(ManufacturerService manufacturerService) {
         Manufacturer manufacturer = new Manufacturer();
-        manufacturer.setName("Monica");
-        manufacturer.setCountry("Mexico");
-        Manufacturer manufacturerMonica = manufacturerService.create(manufacturer);
-        System.out.println(manufacturerMonica);
+        manufacturer.setName("Mazda");
+        manufacturer.setCountry("China");
+        System.out.println("Created manufacturer in DB: "
+                + manufacturerService.create(manufacturer));
+    }
 
-        long manufacturerId = 11L;
-        System.out.println(manufacturerService.get(manufacturerId));
+    private static void getManufacturerFromDb(ManufacturerService manufacturerService) {
+        Long manufacturerTeslaId = 3L;
+        System.out.println("Tesla manufacturer from DB: "
+                + manufacturerService.get(manufacturerTeslaId));
+    }
 
-        List<Manufacturer> allManufacturers = manufacturerService.getAll();
-        allManufacturers.forEach(System.out::println);
+    private static void getAllManufacturersFromDb(ManufacturerService manufacturerService) {
+        List<Manufacturer> manufacturers = manufacturerService.getAll();
+        System.out.println("All manufacturers from DB: ");
+        manufacturers.forEach(System.out::println);
+    }
 
-        Manufacturer updateManufacturer = new Manufacturer(7L, "Chandler", "Britain");
-        manufacturerService.update(updateManufacturer);
+    private static void updateManufacturerInDb(ManufacturerService manufacturerService) {
+        Long manufacturerBmvId = 2L;
+        Manufacturer newManufacturerForUpdate =
+                new Manufacturer(manufacturerBmvId, "Volkswagen", "Denmark");
+        System.out.println("Updated manufacturer in DB: "
+                + manufacturerService.update(newManufacturerForUpdate));
+    }
 
-        System.out.println(manufacturerService.delete(9L));
-
-        DriverService driverService = (DriverService)
-                injector.getInstance(DriverService.class);
-
-        Driver driver = new Driver();
-        driver.setName("Alex");
-        driver.setLicenseNumber("44831");
-        Driver driverAlex = driverService.create(driver);
-        System.out.println(driverAlex);
-
-        long driverId = 2L;
-        System.out.println(driverService.get(driverId));
-
-        List<Driver> allDivers = driverService.getAll();
-        allDivers.forEach(System.out::println);
-
-        Driver updateDriver = new Driver(1L, "Monica", "22234");
-        driverService.update(updateDriver);
-
-        System.out.println(driverService.delete(2L));
+    private static void deleteManufacturerById(ManufacturerService manufacturerService) {
+        Long manufacturerKiaId = 1L;
+        System.out.println("Deleted manufacturer from DB by ID one: "
+                + manufacturerService.delete(manufacturerKiaId));
     }
 }
