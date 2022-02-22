@@ -34,7 +34,6 @@ public class Main {
         manufacturerService.delete(fourthCar.getId());
         System.out.println("get all after deletion"
                 + manufacturerService.getAll());
-
         DriverService driverService = (DriverService) injector
                 .getInstance(DriverService.class);
         Driver driverFirst = initializeDriver("Petro","5544");
