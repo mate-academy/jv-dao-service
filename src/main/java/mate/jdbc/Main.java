@@ -3,83 +3,79 @@ package mate.jdbc;
 import java.util.ArrayList;
 import java.util.List;
 import mate.jdbc.lib.Injector;
-import mate.jdbc.model.Manufacturer;
-import mate.jdbc.service.ManufacturerService;
+import mate.jdbc.model.Driver;
+import mate.jdbc.service.DriverService;
 
 public class Main {
     private static Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
-        ManufacturerService manufacturerService = (ManufacturerService)
-                injector.getInstance(ManufacturerService.class);
+        DriverService driverService = (DriverService)
+                injector.getInstance(DriverService.class);
 
-        addingDataToDb(manufacturerService);
+        addingDataToDb(driverService);
 
-        createManufacturerInDb(manufacturerService);
+        createManufacturerInDb(driverService);
 
-        getManufacturerFromDb(manufacturerService);
+        getManufacturerFromDb(driverService);
 
-        getAllManufacturersFromDb(manufacturerService);
+        getAllManufacturersFromDb(driverService);
 
-        updateManufacturerInDb(manufacturerService);
+        updateManufacturerInDb(driverService);
 
-        deleteManufacturerById(manufacturerService);
+        deleteManufacturerById(driverService);
     }
 
-    private static void addingDataToDb(ManufacturerService manufacturerService) {
-        Manufacturer manufacturerKia = new Manufacturer();
-        manufacturerKia.setName("Kia");
-        manufacturerKia.setCountry("Korea");
-        Manufacturer manufacturerBmv = new Manufacturer();
-        manufacturerBmv.setName("BMV");
-        manufacturerBmv.setCountry("Denmark");
-        Manufacturer manufacturerTesla = new Manufacturer();
-        manufacturerTesla.setName("Tesla");
-        manufacturerTesla.setCountry("USA");
-        Manufacturer manufacturerToyota = new Manufacturer();
-        manufacturerToyota.setName("Toyota");
-        manufacturerToyota.setCountry("China");
-        List<Manufacturer> manufacturers = new ArrayList<>();
-        manufacturers.add(manufacturerKia);
-        manufacturers.add(manufacturerBmv);
-        manufacturers.add(manufacturerTesla);
-        manufacturers.add(manufacturerToyota);
-        for (Manufacturer manufacturer : manufacturers) {
-            manufacturerService.create(manufacturer);
+    private static void addingDataToDb(DriverService driverService) {
+        Driver driverBob = new Driver();
+        driverBob.setName("Bob");
+        driverBob.setLicenseNumber("45432");
+        Driver driverAlice = new Driver();
+        driverAlice.setName("Alice");
+        driverAlice.setLicenseNumber("48599");
+        Driver driverJohn = new Driver();
+        driverJohn.setName("John");
+        driverJohn.setLicenseNumber("41211");
+        List<Driver> drivers = new ArrayList<>();
+        drivers.add(driverBob);
+        drivers.add(driverAlice);
+        drivers.add(driverJohn);
+        for (Driver driver : drivers) {
+            driverService.create(driver);
         }
     }
 
-    private static void createManufacturerInDb(ManufacturerService manufacturerService) {
-        Manufacturer manufacturer = new Manufacturer();
-        manufacturer.setName("Mazda");
-        manufacturer.setCountry("China");
-        System.out.println("Created manufacturer in DB: "
-                + manufacturerService.create(manufacturer));
+    private static void createManufacturerInDb(DriverService driverService) {
+        Driver driver = new Driver();
+        driver.setName("Joe");
+        driver.setLicenseNumber("17799");
+        System.out.println("Created a new driver in DB: "
+                + driverService.create(driver));
     }
 
-    private static void getManufacturerFromDb(ManufacturerService manufacturerService) {
-        Long manufacturerTeslaId = 3L;
-        System.out.println("Tesla manufacturer from DB: "
-                + manufacturerService.get(manufacturerTeslaId));
+    private static void getManufacturerFromDb(DriverService driverService) {
+        Long driverBobId = 1L;
+        System.out.println("Bob driver from DB: "
+                + driverService.get(driverBobId));
     }
 
-    private static void getAllManufacturersFromDb(ManufacturerService manufacturerService) {
-        List<Manufacturer> manufacturers = manufacturerService.getAll();
+    private static void getAllManufacturersFromDb(DriverService driverService) {
+        List<Driver> drivers = driverService.getAll();
         System.out.println("All manufacturers from DB: ");
-        manufacturers.forEach(System.out::println);
+        drivers.forEach(System.out::println);
     }
 
-    private static void updateManufacturerInDb(ManufacturerService manufacturerService) {
-        Long manufacturerBmvId = 2L;
-        Manufacturer newManufacturerForUpdate =
-                new Manufacturer(manufacturerBmvId, "Volkswagen", "Denmark");
-        System.out.println("Updated manufacturer in DB: "
-                + manufacturerService.update(newManufacturerForUpdate));
+    private static void updateManufacturerInDb(DriverService driverService) {
+        Long driverAliveId = 2L;
+        Driver newDriverForUpdate =
+                new Driver(driverAliveId, "Alice", "11122");
+        System.out.println("Updated driver in DB: "
+                + driverService.update(newDriverForUpdate));
     }
 
-    private static void deleteManufacturerById(ManufacturerService manufacturerService) {
-        Long manufacturerKiaId = 1L;
-        System.out.println("Deleted manufacturer from DB by ID one: "
-                + manufacturerService.delete(manufacturerKiaId));
+    private static void deleteManufacturerById(DriverService driverService) {
+        Long driverBobId = 1L;
+        System.out.println("Deleted driver from DB by ID one: "
+                + driverService.delete(driverBobId));
     }
 }
