@@ -9,9 +9,9 @@ import mate.jdbc.service.ManufacturerService;
 public class Main {
     public static void main(String[] args) {
         Injector injector = Injector.getInstance("mate.jdbc");
+
         final ManufacturerService manufacturerService =
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
-        // CRUD
         Manufacturer toyota = new Manufacturer(null, "Toyota", "Japan");
         Manufacturer bentley = new Manufacturer(null, "Bentley", "United Kingdom");
         toyota = manufacturerService.create(toyota);
