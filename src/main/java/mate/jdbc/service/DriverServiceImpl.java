@@ -14,27 +14,27 @@ public class DriverServiceImpl implements DriverService {
     private DriverDao driverDao;
 
     @Override
-    public Manufacturer create(Driver driver) {
-        return null;
+    public Driver create(Driver driver) {
+        return driverDao.create(driver);
     }
 
     @Override
-    public Optional<Manufacturer> get(Long id) {
-        return Optional.empty();
+    public Optional<Driver> get(Long id) {
+        return driverDao.get(id);
     }
 
     @Override
-    public List<Manufacturer> getAll() {
-        return null;
+    public List<Driver> getAll() {
+        return driverDao.getAll();
     }
 
     @Override
-    public Manufacturer update(Driver driver) {
-        return null;
+    public Driver update(Driver driver) {
+        return driverDao.update(driver);
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        return driverDao.delete(id);
     }
 }
