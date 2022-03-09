@@ -3,6 +3,7 @@ package mate.jdbc.dao;
 import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Dao;
 import mate.jdbc.model.Driver;
+import mate.jdbc.model.Manufacturer;
 import mate.jdbc.util.ConnectionUtil;
 
 import java.sql.*;
@@ -27,13 +28,26 @@ public class DriverDaoImpl implements DriverDao {
             }
             return driver;
         } catch (SQLException e) {
-            throw new DataProcessingException("Couldn't create manufacturer. " + driver, e);
+            throw new DataProcessingException("Couldn't create driver. " + driver, e);
         }
     }
 
     @Override
     public Optional<Driver> get(Long id) {
-        return Optional.empty();
+        String query = "SELECT * FROM drivers"
+                + " WHERE id = ? AND is_deleted = FALSE";
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            Driver driver = null;
+            if (resultSet.next()) {
+                driver = getDriver(resultSet);
+            }
+            return Optional.ofNullable(driver);
+        } catch (SQLException e) {
+            throw new DataProcessingException("Couldn't get driver by id " + id, e);
+        }
     }
 
     @Override
@@ -49,5 +63,12 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public boolean delete(Long id) {
         return false;
+    }
+
+    private Driver getDriver(ResultSet resultSet) throws SQLException {
+        Long id = resultSet.getObject("id", Long.class);
+        String name = resultSet.getString("name");
+        String licenceNumber = resultSet.getString("country");
+        return new Driver(id, name, licenceNumber);
     }
 }
