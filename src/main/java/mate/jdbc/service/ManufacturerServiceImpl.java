@@ -14,26 +14,26 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        return null;
+        return manufacturerDao.create(manufacturer);
     }
 
     @Override
     public Optional<Manufacturer> get(Long id) {
-        return Optional.empty();
+        return manufacturerDao.get(id);
     }
 
     @Override
     public List<Manufacturer> getAll() {
-        return null;
+        return manufacturerDao.getAll();
     }
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        return null;
+        return manufacturerDao.update(manufacturer);
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        return manufacturerDao.delete(id);
     }
 }
