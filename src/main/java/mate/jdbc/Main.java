@@ -1,6 +1,5 @@
 package mate.jdbc;
 
-import java.util.Optional;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
@@ -34,8 +33,8 @@ public class Main {
         System.out.println(".");
         System.out.println(".");
         System.out.println(".");
-        Optional<Manufacturer> getFromDbManufacturer = manufacturerService.get(1L);
-        System.out.println("Result of get(id = 1): " + getFromDbManufacturer.get());
+        Manufacturer getFromDbManufacturer = manufacturerService.get(1L);
+        System.out.println("Result of get(id = 1): " + getFromDbManufacturer);
         System.out.println(".");
         System.out.println(".");
         System.out.println(".");
@@ -67,8 +66,8 @@ public class Main {
         System.out.println(".");
         System.out.println(".");
         System.out.println(".");
-        Optional<Driver> getFromDbDriver = driverService.get(1L);
-        System.out.println("Result of get(id = 1): " + getFromDbDriver.get());
+        Driver getFromDbDriver = driverService.get(1L);
+        System.out.println("Result of get(id = 1): " + getFromDbDriver);
         System.out.println(".");
         System.out.println(".");
         System.out.println(".");
