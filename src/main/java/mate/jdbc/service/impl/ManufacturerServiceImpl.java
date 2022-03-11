@@ -21,7 +21,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     @Override
     public Manufacturer get(Long id) {
         return manufacturerDao.get(id).orElseThrow(() ->
-                new NoSuchElementException("Couldn't det manufacturer by id " + id));
+                new NoSuchElementException("There is no manufacturer with id " + id));
     }
 
     @Override
