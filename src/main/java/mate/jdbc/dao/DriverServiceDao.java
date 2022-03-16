@@ -1,18 +1,17 @@
-package mate.service;
+package mate.jdbc.dao;
 
 import java.util.List;
+import java.util.Optional;
 import mate.jdbc.model.Driver;
 
-public interface DriverService {
+public interface DriverServiceDao {
     Driver create(Driver driver);
 
-    Driver get(Long id);
+    Optional<Driver> get(Long id);
 
     List<Driver> getAll();
 
     Driver update(Driver driver);
 
     boolean delete(Long id);
-
 }
-
