@@ -2,11 +2,13 @@ package mate.jdbc.service.impl;
 
 import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.lib.Inject;
+import mate.jdbc.lib.Service;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.ManufacturerService;
 
 import java.util.List;
 
+@Service
 public class ManufacturerServiceImpl implements ManufacturerService {
     @Inject
     private ManufacturerDao manufacturerDao;
