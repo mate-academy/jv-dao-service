@@ -1,6 +1,5 @@
 package mate.jdbc.model;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Driver {
@@ -55,7 +54,9 @@ public class Driver {
             return false;
         }
         Driver driver = (Driver) o;
-        return id.equals(driver.id) && name.equals(driver.name) && licenseNumber.equals(driver.licenseNumber);
+        return id.equals(driver.id)
+                && name.equals(driver.name)
+                && licenseNumber.equals(driver.licenseNumber);
     }
 
     @Override
