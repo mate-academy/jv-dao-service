@@ -14,9 +14,8 @@ public class Main {
         Driver john = new Driver("John", "432m34");
         driverService.create(bill);
         driverService.create(john);
-        List<Driver> drivers = driverService.getAll();
-        drivers.stream()
-                        .forEach(System.out::println);
+        driverService.getAll()
+                .forEach(System.out::println);
         driverService.get(john.getId());
         bill.setLicenseNumber("453m11");
         driverService.update(bill);
