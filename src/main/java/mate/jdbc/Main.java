@@ -9,11 +9,12 @@ public class Main {
 
     public static void main(String[] args) {
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-        Driver driver = driverService.create(new Driver("Kostya", "12345"));
-        driverService.get(driver.getId());
-        driverService.getAll();
-        driver.setName("Alice");
+        Driver driver = driverService.create(new Driver("Vadim", "PL12345"));
+        System.out.println(driverService.get(driver.getId()));
+        System.out.println(driverService.getAll());
+        driver.setName("Kostya");
         driverService.update(driver);
+        System.out.println(driverService.get(driver.getId()));
         driverService.delete(driver.getId());
     }
 }
