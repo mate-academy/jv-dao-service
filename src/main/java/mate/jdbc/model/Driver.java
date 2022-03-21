@@ -45,11 +45,11 @@ public class Driver {
 
     @Override
     public String toString() {
-        return "Driver{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", licenseNumber='" + licenseNumber + '\'' +
-            '}';
+        return "Driver{"
+            + "id=" + id
+            + ", name='" + name + '\''
+            + ", licenseNumber='" + licenseNumber + '\''
+            + '}';
     }
 }
 

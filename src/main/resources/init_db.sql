@@ -12,3 +12,4 @@ CREATE TABLE `manufacturers` (
                            name VARCHAR(225) NOT NULL,
                            license_number VARCHAR(225) NOT NULL,
                            is_deleted    TINYINT(1) DEFAULT 0 NULL);
+

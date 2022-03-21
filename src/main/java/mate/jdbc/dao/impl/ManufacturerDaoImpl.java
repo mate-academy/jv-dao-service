@@ -110,3 +110,4 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         return new Manufacturer(id, name, country);
     }
 }
+
