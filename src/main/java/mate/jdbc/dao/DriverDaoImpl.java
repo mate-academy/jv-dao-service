@@ -39,9 +39,10 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public Optional<Driver> get(Long id) {
         String query = "SELECT * FROM drivers WHERE is_deleted = false "
-                + "AND id = " + id;
+                + "AND id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setLong(1,id);
             ResultSet resultSet = statement.executeQuery();
             Driver driver = null;
             if (resultSet.next()) {
@@ -97,7 +98,7 @@ public class DriverDaoImpl implements DriverDao {
         }
     }
 
-    private static Driver getDriver(ResultSet resultSet) throws SQLException {
+    private Driver getDriver(ResultSet resultSet) throws SQLException {
         Driver driver = new Driver();
         driver.setId(resultSet.getObject("id",Long.class));
         driver.setName(resultSet.getString("name"));
