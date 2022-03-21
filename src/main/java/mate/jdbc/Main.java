@@ -41,6 +41,5 @@ public class Main {
         driver0002.setName("Roman");
         System.out.println(driverService.update(driver0002));
         driverService.getAll().forEach(System.out::println);
-
     }
 }
