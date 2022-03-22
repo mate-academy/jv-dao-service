@@ -14,13 +14,13 @@ public class Main {
         ManufacturerService manufacturerService
                 = (ManufacturerService) injector.getInstance(ManufacturerService.class);
         Manufacturer bmwManufacturer = manufacturerService
-                .create(new Manufacturer(null, "BMW", "Germany"));
+                .create(new Manufacturer("BMW", "Germany"));
         System.out.println(bmwManufacturer);
         Manufacturer mercedesManufacturer = manufacturerService
-                .create(new Manufacturer(null, "Mercedes", "Germany"));
+                .create(new Manufacturer("Mercedes", "Germany"));
         System.out.println(mercedesManufacturer);
         Manufacturer fordManufacturer = manufacturerService
-                .create(new Manufacturer(null, "FORD", "USA"));
+                .create(new Manufacturer("FORD", "USA"));
         System.out.println(fordManufacturer);
         manufacturerService.delete(mercedesManufacturer.getId());
         fordManufacturer.setCountry("Japan");
@@ -31,9 +31,9 @@ public class Main {
         allManufacturer.forEach(System.out::println);
         DriverService driverService
                 = (DriverService) injector.getInstance(DriverService.class);
-        Driver driver0001 = driverService.create(new Driver(null, "Igor", "0001"));
+        Driver driver0001 = driverService.create(new Driver("Igor", "0001"));
         System.out.println(driver0001);
-        Driver driver0002 = driverService.create(new Driver(null, "Alex", "0002"));
+        Driver driver0002 = driverService.create(new Driver("Alex", "0002"));
         System.out.println(driver0002);
         Driver driver = driverService.get(driver0001.getId());
         System.out.println(driver);
