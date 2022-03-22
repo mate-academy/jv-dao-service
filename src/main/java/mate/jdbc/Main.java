@@ -13,35 +13,42 @@ public class Main {
                 injector.getInstance(ManufacturerService.class);
         manufacturerService.getAll().forEach(System.out::println);
 
-        Driver driver1 = new Driver();
-        driver1.setId(2L);
-        driver1.setName("Alice");
-        driver1.setLicenseNumber("22222");
+        Driver alice = new Driver();
+        alice.setName("Alise");
+        alice.setLicenseNumber("22222");
 
-        Driver driver2 = new Driver();
-        driver2.setName("John");
-        driver2.setLicenseNumber("33333");
+        Driver john = new Driver();
+        john.setName("John");
+        john.setLicenseNumber("33333");
 
-        Driver driver3 = new Driver();
-        driver3.setId(4L);
-        driver3.setName("Jack");
-        driver3.setLicenseNumber("44444");
+        Driver jack = new Driver();
+        jack.setName("Jack");
+        jack.setLicenseNumber("44444");
 
         DriverService driverService = (DriverService)
                 injector.getInstance(DriverService.class);
 
-        driverService.create(driver1);
-        driverService.create(driver2);
-        driverService.create(driver3);
+        System.out.println("_______create driver _________");
+        System.out.println("Was created: " + driverService.create(alice));
+        System.out.println("Was created: " + driverService.create(john));
+        System.out.println("Was created: " + driverService.create(jack));
 
-        System.out.println(driverService.delete(driver3.getId()));
+        System.out.println("_______get driver by id_________");
+        System.out.println(driverService.get(alice.getId()));
+        System.out.println(driverService.get(john.getId()));
+        System.out.println(driverService.get(jack.getId()));
 
-        Driver driver4 = new Driver();
-        driver4.setId(driver1.getId());
-        driver4.setName("Alex");
-        driver4.setLicenseNumber("55555");
-        driverService.update(driver4);
+        System.out.println("_______update driver ___________");
+        alice.setName("AlIsE");
+        alice.setLicenseNumber("77");
+        Driver updateAlice = driverService.update(alice);
+        System.out.println(updateAlice);
 
+        System.out.println("_______delete driver ___________");
+        System.out.println("Was the driver " + jack.getName() + " removed? - "
+                + driverService.delete(jack.getId()));
+
+        System.out.println("_______get all drivers ___________");
         driverService.getAll().forEach(System.out::println);
     }
 }
