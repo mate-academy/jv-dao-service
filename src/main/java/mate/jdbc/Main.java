@@ -11,12 +11,15 @@ public class Main {
     public static void main(String[] args) {
         DriverService driverService = (DriverService)
                 injector.getInstance(DriverService.class);
-        Driver driver = new Driver();
-        driver.setName("Jon");
-        driver.setLicenseNumber("123");
-        driverService.create(driver);
-        driverService.update(new Driver(driver.getId(), "Kevin", "234"));
-        driverService.delete(2L);
+        Driver firstDriver = new Driver();
+        firstDriver.setName("Jon");
+        firstDriver.setLicenseNumber("123");
+        driverService.create(firstDriver);
+        Driver secondDriver = new Driver("Cris", "654");
+        driverService.create(secondDriver);
+        secondDriver.setName("Kevin");
+        driverService.update(secondDriver);
+        driverService.delete(firstDriver.getId());
         driverService.getAll().forEach(System.out::println);
         System.out.println(driverService.get(3L));
         ManufacturerService manufacturerService = (ManufacturerService)
