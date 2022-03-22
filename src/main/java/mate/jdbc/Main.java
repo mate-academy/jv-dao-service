@@ -24,7 +24,7 @@ public class Main {
         Manufacturer renault = new Manufacturer(peugeot.getId(), "Renault", peugeot.getCountry());
         manufacturerService.update(renault);
         List<Manufacturer> allManufacturers = manufacturerService.getAll();
-        allManufacturers.stream().forEach(System.out::println);
+        allManufacturers.forEach(System.out::println);
         DriverService driverService = (DriverService)
                 injector.getInstance(DriverService.class);
         Driver firstDriver = new Driver();
