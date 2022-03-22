@@ -21,7 +21,7 @@ public class Main {
         driverService.update(secondDriver);
         driverService.delete(firstDriver.getId());
         driverService.getAll().forEach(System.out::println);
-        System.out.println(driverService.get(3L));
+        System.out.println(driverService.get(secondDriver.getId()));
         ManufacturerService manufacturerService = (ManufacturerService)
                 injector.getInstance(ManufacturerService.class);
         manufacturerService.getAll().forEach(System.out::println);
