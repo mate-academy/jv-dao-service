@@ -13,29 +13,32 @@ public class Main {
     public static void main(String[] args) {
         ManufacturerService manufacturerService = (ManufacturerService)
                 injector.getInstance(ManufacturerService.class);
-        Manufacturer manufacturer = new Manufacturer();
-        manufacturer.setName("Audi");
-        manufacturer.setCountry("Germany");
-        manufacturerService.create(manufacturer);
-        manufacturer.setName("Peugeot");
-        manufacturer.setCountry("France");
-        manufacturer = manufacturerService.create(manufacturer);
-        manufacturer.setName("Renault");
-        manufacturerService.update(manufacturer);
+        Manufacturer audi = new Manufacturer();
+        audi.setName("Audi");
+        audi.setCountry("Germany");
+        manufacturerService.create(audi);
+        Manufacturer peugeot = new Manufacturer();
+        peugeot.setName("Peugeot");
+        peugeot.setCountry("France");
+        peugeot = manufacturerService.create(peugeot);
+        Manufacturer renault = new Manufacturer(peugeot.getId(), "Renault", peugeot.getCountry());
+        manufacturerService.update(renault);
         List<Manufacturer> allManufacturers = manufacturerService.getAll();
         allManufacturers.stream().forEach(System.out::println);
         DriverService driverService = (DriverService)
                 injector.getInstance(DriverService.class);
-        Driver driver = new Driver();
-        driver.setName("SomeName");
-        driver.setLicenseNumber("12345");
-        driverService.create(driver);
-        driver.setName("NameSome");
-        driver.setLicenseNumber("67890");
-        driver = driverService.create(driver);
-        driver.setName("42");
-        driverService.update(driver);
+        Driver firstDriver = new Driver();
+        firstDriver.setName("SomeName");
+        firstDriver.setLicenseNumber("12345");
+        driverService.create(firstDriver);
+        Driver secondDriver = new Driver();
+        secondDriver.setName("NameSome");
+        secondDriver.setLicenseNumber("67890");
+        secondDriver = driverService.create(secondDriver);
+        Driver driverToUpdate = new Driver(secondDriver.getId(),
+                "42", secondDriver.getLicenseNumber());
+        driverService.update(driverToUpdate);
         List<Driver> allDrivers = driverService.getAll();
-        allDrivers.stream().forEach(System.out::println);
+        allDrivers.forEach(System.out::println);
     }
 }
