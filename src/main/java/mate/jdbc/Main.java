@@ -15,7 +15,7 @@ public class Main {
         driver.setName("Jon");
         driver.setLicenseNumber("123");
         driverService.create(driver);
-        driverService.update(new Driver(2L, "Kevin", "234"));
+        driverService.update(new Driver(driver.getId(), "Kevin", "234"));
         driverService.delete(2L);
         driverService.getAll().forEach(System.out::println);
         System.out.println(driverService.get(3L));
