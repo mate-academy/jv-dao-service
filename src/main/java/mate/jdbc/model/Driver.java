@@ -1,13 +1,20 @@
 package mate.jdbc.model;
 
 import java.util.Objects;
-import mate.jdbc.lib.Service;
 
-@Service
 public class Driver {
     private Long id;
     private String name;
     private String licenseNumber;
+
+    public Driver(){
+
+    }
+
+    public Driver(String name, String licenseNumber) {
+        this.name = name;
+        this.licenseNumber = licenseNumber;
+    }
 
     public Driver(Long id, String name, String licenseNumber) {
         this.id = id;
@@ -61,14 +68,9 @@ public class Driver {
     @Override
     public String toString() {
         return "Driver{"
-                + "id="
-                + id
-                + ", name='"
-                + name
-                + '\''
-                + ", licenseNumber='"
-                + licenseNumber
-                + '\''
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", licenseNumber='" + licenseNumber + '\''
                 + '}';
     }
 }
