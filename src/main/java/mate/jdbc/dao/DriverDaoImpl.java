@@ -107,7 +107,7 @@ public class DriverDaoImpl implements DriverDao {
             driver.setName(resultSet.getString("name"));
             driver.setLicenseNumber(resultSet.getString("licenseNumber"));
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataProcessingException("Can't create driver from resultSet " + resultSet, e);
         }
         return driver;
     }
