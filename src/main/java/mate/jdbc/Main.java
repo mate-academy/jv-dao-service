@@ -1,14 +1,14 @@
 package mate.jdbc;
 
 import mate.jdbc.lib.Injector;
-import mate.jdbc.service.DriverService;
+import mate.jdbc.service.driver.DriverService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
-        DriverService driverService = (DriverService)
+        DriverService driverService = (mate.jdbc.service.driver.DriverService)
                 injector.getInstance(DriverService.class);
-        System.out.println(driverService.get(1L));
+        driverService.getAll().forEach(System.out::println);
     }
 }
