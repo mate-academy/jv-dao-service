@@ -83,20 +83,20 @@ public class DriverDaoImpl implements DriverDao {
             statement.executeUpdate();
             return driver;
         } catch (SQLException e) {
-            throw new RuntimeException("Something wrong during updating data ", e);
+            throw new RuntimeException("Can't update driver " + driver, e);
         }
     }
 
     @Override
-    public int delete(Long id) {
+    public boolean delete(Long id) {
         String deleteDriverRequest =
                 "UPDATE taxi_db.drivers SET is_deleted = TRUE WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(deleteDriverRequest)) {
             statement.setLong(1, id);
-            return statement.executeUpdate();
+            return statement.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new RuntimeException("Something wrong during deleting.", e);
+            throw new RuntimeException("Cant delete driver with id " + id, e);
         }
     }
 

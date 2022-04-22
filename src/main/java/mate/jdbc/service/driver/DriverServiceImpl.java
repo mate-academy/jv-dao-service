@@ -33,7 +33,7 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public int delete(Long id) {
+    public boolean delete(Long id) {
         return driverDao.delete(id);
     }
 }
