@@ -56,7 +56,7 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public List<Driver> getAll() {
         String getAllDriversRequest =
-                "SELECT * " + "FROM taxi_db.drivers" + "WHERE is_deleted = false";
+                "SELECT * FROM taxi_db.drivers WHERE is_deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(getAllDriversRequest)) {
             List<Driver> drivers = new ArrayList<>();
