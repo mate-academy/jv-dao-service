@@ -58,6 +58,7 @@ public class Injector {
     }
 
     private Class<?> findClassExtendingInterface(Class<?> certainInterface) {
+        System.out.println(classes);
         for (Class<?> clazz : classes) {
             Class<?>[] interfaces = clazz.getInterfaces();
             for (Class<?> singleInterface : interfaces) {
