@@ -32,6 +32,5 @@ public class Main {
         driverDao.getAll().forEach(System.out::println);
 
         driverDao.getAll().forEach(System.out::println);
-
     }
 }
