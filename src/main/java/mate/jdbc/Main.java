@@ -23,13 +23,11 @@ public class Main {
 
         List<Driver> allDrivers = driverService.getAll();
 
-        for (Driver allDriver : allDrivers) {
-            System.out.println(allDriver);
+        for (Driver driver : allDrivers) {
+            System.out.println(driver);
         }
-        //allDrivers.forEach(System.out::println);
         ManufacturerService manufacturerService = (ManufacturerService)
                 injector.getInstance(ManufacturerService.class);
         manufacturerService.getAll().forEach(System.out::println);
-
     }
 }
