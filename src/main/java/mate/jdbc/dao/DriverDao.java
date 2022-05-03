@@ -5,13 +5,13 @@ import java.util.Optional;
 import mate.jdbc.model.Driver;
 
 public interface DriverDao {
-    Driver create(Driver manufacturer);
+    Driver create(Driver driver);
 
     Optional<Driver> get(Long id);
 
     List<Driver> getAll();
 
-    Driver update(Driver manufacturer);
+    Driver update(Driver driver);
 
     boolean delete(Long id);
 }
