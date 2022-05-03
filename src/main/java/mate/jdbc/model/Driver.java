@@ -8,9 +8,8 @@ public class Driver {
     private Long licenseNumber;
 
     public Driver(Long id, String name, Long licenseNumber) {
+        this(name, licenseNumber);
         this.id = id;
-        this.name = name;
-        this.licenseNumber = licenseNumber;
     }
 
     public Driver(String name, Long licenseNumber) {
