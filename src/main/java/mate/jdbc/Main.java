@@ -12,9 +12,9 @@ public class Main {
         Injector injector = Injector.getInstance("mate.jdbc");
         ManufacturerService manufacturerService
                 = (ManufacturerService) injector.getInstance(ManufacturerService.class);
-        Manufacturer fiat = new Manufacturer(null, "fiat", "Italy");
-        Manufacturer honda = new Manufacturer(null, "honda", "Japan");
-        Manufacturer ford = new Manufacturer(null, "ford", "USA");
+        Manufacturer fiat = new Manufacturer("fiat", "Italy");
+        Manufacturer honda = new Manufacturer("honda", "Japan");
+        Manufacturer ford = new Manufacturer("ford", "USA");
         manufacturerService.create(fiat);
         manufacturerService.create(honda);
         manufacturerService.create(ford);
@@ -22,17 +22,17 @@ public class Main {
         honda.setCountry("Korea");
         honda.setName("hyundai");
         System.out.println(manufacturerService.update(honda));
-        System.out.println(manufacturerService.get(honda.getId()));
+        System.out.println(manufacturerService.get(fiat.getId()));
         List<Manufacturer> allManufacturers = manufacturerService.getAll();
         for (Manufacturer manufacturer : allManufacturers) {
             System.out.println(manufacturer);
         }
         DriverService driverService
                 = (DriverService) injector.getInstance(DriverService.class);
-        Driver goga = new Driver(null, "Goga", "001");
-        Driver magoga = new Driver(null, "Magoga", "002");
-        Driver petya = new Driver(null, "Petya", "003");
-        Driver vasya = new Driver(null, "Vasya", "004");
+        Driver goga = new Driver("Goga", "001");
+        Driver magoga = new Driver("Magoga", "002");
+        Driver petya = new Driver("Petya", "003");
+        Driver vasya = new Driver("Vasya", "004");
         driverService.create(goga);
         driverService.create(magoga);
         driverService.create(petya);
