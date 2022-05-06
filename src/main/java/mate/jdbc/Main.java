@@ -1,12 +1,11 @@
 package mate.jdbc;
 
+import java.util.List;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.DriverService;
 import mate.jdbc.service.ManufacturerService;
-
-import java.util.List;
 
 public class Main {
     private static Injector injector = Injector.getInstance("mate.jdbc");
@@ -41,7 +40,8 @@ public class Main {
         createManufacturerToyota.setName("Toyota");
         createManufacturerToyota.setCountry("Japan");
 
-        ManufacturerService manufacturerService = (ManufacturerService) injector.getInstance(ManufacturerService.class);
+        ManufacturerService manufacturerService =
+                (ManufacturerService) injector.getInstance(ManufacturerService.class);
         manufacturerService.create(createManufacturerHonda);
         manufacturerService.create(createManufacturerToyota);
 
