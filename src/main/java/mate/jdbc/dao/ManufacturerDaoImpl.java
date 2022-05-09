@@ -73,6 +73,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
+        Manufacturer oldManufacturer = get(manufacturer.getId()).get();
         String query = "UPDATE manufacturers SET name = ?, country = ?"
                 + " WHERE id = ? AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
@@ -82,7 +83,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             statement.setString(2, manufacturer.getCountry());
             statement.setLong(3, manufacturer.getId());
             statement.executeUpdate();
-            return manufacturer;
+            return oldManufacturer;
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't update a manufacturer "
                     + manufacturer, e);
