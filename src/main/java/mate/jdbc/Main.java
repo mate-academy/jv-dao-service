@@ -1,7 +1,6 @@
 package mate.jdbc;
 
 import java.util.List;
-import java.util.Optional;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
@@ -26,9 +25,9 @@ public class Main {
             System.out.println(manufacturer);
         }
         Long id = newManufacturer.getId();
-        Optional<Manufacturer> manufacturer = manufacturerService.get(id);
-        if (!manufacturer.isEmpty()) {
-            System.out.println(manufacturer.get());
+        Manufacturer manufacturer = manufacturerService.get(id);
+        if (manufacturer != null) {
+            System.out.println(manufacturer);
         } else {
             System.out.println("There is no manufacturer with such id (id = " + id + ")");
         }
@@ -52,9 +51,9 @@ public class Main {
             System.out.println(driver);
         }
         Long driverId = newDriver.getId();
-        Optional<Driver> driver = driverService.get(driverId);
-        if (!driver.isEmpty()) {
-            System.out.println(driver.get());
+        Driver driver = driverService.get(driverId);
+        if (driver != null) {
+            System.out.println(driver);
         } else {
             System.out.println("There is no manufacturer with such id (id = " + driverId + ")");
         }
