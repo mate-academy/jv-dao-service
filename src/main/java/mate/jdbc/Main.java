@@ -22,7 +22,7 @@ public class Main {
         alex.setLicenseNumber("2");
         driverService.update(alex);
         driverService.getAll().forEach(System.out::println);
-        driverService.delete(alice);
+        driverService.delete(alice.getId());
         driverService.getAll().forEach(System.out::println);
         ManufacturerService manufacturerService = (ManufacturerService) injector
                 .getInstance(ManufacturerService.class);
