@@ -43,7 +43,7 @@ public class DriverDaoImpl implements DriverDao {
             ResultSet resultSet = getStatement.executeQuery();
             Driver driver = null;
             if (resultSet.next()) {
-                driver = getDriver(resultSet);
+                driver = getDriverFromDB(resultSet);
             }
             return Optional.ofNullable(driver);
         } catch (SQLException e) {
@@ -59,7 +59,7 @@ public class DriverDaoImpl implements DriverDao {
                 PreparedStatement getAllStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = getAllStatement.executeQuery();
             while (resultSet.next()) {
-                drivers.add(getDriver(resultSet));
+                drivers.add(getDriverFromDB(resultSet));
             }
             return drivers;
         } catch (SQLException e) {
@@ -95,7 +95,7 @@ public class DriverDaoImpl implements DriverDao {
         }
     }
 
-    public Driver getDriver(ResultSet resultSet) throws SQLException {
+    public Driver getDriverFromDB(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getObject("id", Long.class);
         String name = resultSet.getString("name");
         String licenseNumber = resultSet.getString("license_number");
