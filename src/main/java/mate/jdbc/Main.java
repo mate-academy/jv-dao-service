@@ -8,23 +8,23 @@ public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
-        DriverService instance = (DriverService) injector.getInstance(DriverService.class);
+        DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
 
         Driver bob = new Driver("Bob", "1111");
         Driver alice = new Driver("Alice", "2222");
         Driver jhon = new Driver("Jhon","3333");
 
-        instance.create(bob);
-        instance.create(alice);
-        instance.create(jhon);
+        driverService.create(bob);
+        driverService.create(alice);
+        driverService.create(jhon);
 
-        System.out.println(instance.get(alice.getId()));
+        System.out.println(driverService.get(alice.getId()));
 
         alice.setLicenseNumber("4444");
-        instance.update(alice);
+        driverService.update(alice);
 
-        instance.delete(jhon.getId());
+        driverService.delete(jhon.getId());
 
-        instance.getAll().forEach(System.out::println);
+        driverService.getAll().forEach(System.out::println);
     }
 }
