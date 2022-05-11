@@ -1,6 +1,5 @@
 package mate.jdbc;
 
-import java.util.List;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
@@ -15,8 +14,8 @@ public class Main {
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
         //create
         Manufacturer createManufacturer = new Manufacturer();
-        createManufacturer.setName("Alfa Romeo");
-        createManufacturer.setCountry("Italy");
+        createManufacturer.setName("Kia");
+        createManufacturer.setCountry("South Korea");
         createManufacturer = manufacturerService.create(createManufacturer);
         System.out.println("create"
                 + System.lineSeparator() + createManufacturer + System.lineSeparator());
@@ -26,10 +25,7 @@ public class Main {
                 + System.lineSeparator() + testManufacturer + System.lineSeparator());
         //getAll
         System.out.println("getAll");
-        List<Manufacturer> allManufacturers = manufacturerService.getAll();
-        for (Manufacturer manufacturer: allManufacturers) {
-            System.out.println(manufacturer);
-        }
+        manufacturerService.getAll().forEach(System.out::println);
         System.out.println(System.lineSeparator());
         //update
         Manufacturer updateManufacturer = new Manufacturer();
@@ -41,15 +37,12 @@ public class Main {
         //delete
         System.out.println("delete");
         manufacturerService.delete(4L);
-        List<Manufacturer> allAfter = manufacturerService.getAll();
-        for (Manufacturer manufacturer: allAfter) {
-            System.out.println(manufacturer);
-        }
+        manufacturerService.getAll().forEach(System.out::println);
         //create
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         Driver createDriver = new Driver();
-        createDriver.setName("Matvii");
-        createDriver.setLicenseNumber("234");
+        createDriver.setName("Volodymyr");
+        createDriver.setLicenseNumber("567");
         createDriver = driverService.create(createDriver);
         System.out.println("create"
                 + System.lineSeparator() + createDriver + System.lineSeparator());
@@ -58,10 +51,7 @@ public class Main {
         System.out.println("get" + System.lineSeparator() + testDriver + System.lineSeparator());
         //getAll
         System.out.println("getAll");
-        List<Driver> allDrivers = driverService.getAll();
-        for (Driver driver: allDrivers) {
-            System.out.println(driver);
-        }
+        driverService.getAll().forEach(System.out::println);
         //update
         Driver updateDriver = new Driver();
         updateDriver.setName("Oleksandra");
@@ -72,9 +62,6 @@ public class Main {
         //delete
         System.out.println("delete");
         driverService.delete(2L);
-        List<Driver> driversAfter = driverService.getAll();
-        for (Driver driver: driversAfter) {
-            System.out.println(driver);
-        }
+        driverService.getAll().forEach(System.out::println);
     }
 }

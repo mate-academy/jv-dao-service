@@ -1,5 +1,7 @@
 package mate.jdbc.model;
 
+import java.util.Objects;
+
 public class Driver {
     private Long id;
     private String name;
@@ -36,6 +38,25 @@ public class Driver {
 
     public void setLicenseNumber(String licenseNumber) {
         this.licenseNumber = licenseNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Driver)) {
+            return false;
+        }
+        Driver driver = (Driver) o;
+        return Objects.equals(id, driver.id)
+                && Objects.equals(name, driver.name)
+                && Objects.equals(licenseNumber, driver.licenseNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

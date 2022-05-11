@@ -56,7 +56,7 @@ public class Manufacturer {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, country);
+        return Objects.hash(id);
     }
 
     @Override
