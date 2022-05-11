@@ -14,9 +14,9 @@ public class Main {
         Driver alex = new Driver("Alex", "1");
         Driver bob = new Driver("Bob", "2");
         Driver alice = new Driver("Alice", "3");
-        alex = driverService.create(alex);
-        bob = driverService.create(bob);
-        alice = driverService.create(alice);
+        driverService.create(alex);
+        driverService.create(bob);
+        driverService.create(alice);
         driverService.getAll().forEach(System.out::println);
         System.out.println(driverService.get(alex.getId()));
         alex.setLicenseNumber("2");
@@ -29,9 +29,9 @@ public class Main {
         Manufacturer bmv = new Manufacturer("BMW", "Germany");
         Manufacturer mercedes = new Manufacturer("Mercedes", "Germany");
         Manufacturer tesla = new Manufacturer("Tesla", "USA");
-        bmv = manufacturerService.create(bmv);
-        mercedes = manufacturerService.create(mercedes);
-        tesla = manufacturerService.create(tesla);
+        manufacturerService.create(bmv);
+        manufacturerService.create(mercedes);
+        manufacturerService.create(tesla);
         manufacturerService.getAll().forEach(System.out::println);
         manufacturerService.delete(mercedes.getId());
         bmv.setName("Opel");

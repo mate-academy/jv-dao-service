@@ -18,12 +18,11 @@ public class Driver {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Driver{");
-        sb.append("id=").append(id);
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", licenseNumber='").append(licenseNumber).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "Driver{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", licenseNumber='" + licenseNumber + '\''
+                + '}';
     }
 
     public void setId(Long id) {
