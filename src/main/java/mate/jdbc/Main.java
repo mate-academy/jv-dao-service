@@ -16,8 +16,13 @@ public class Main {
         Driver secondDriver = new Driver(null, "Bob", "4932493");
         driverService.create(driver);
         driverService.create(secondDriver);
-        driverService.getAll().forEach(System.out::println);
+        Driver getDriver = driverService.get(driver.getId());
+        System.out.println(getDriver);
+        driver.setName("Dima");
+        Driver updateDriver = driverService.update(driver);
+        System.out.println(updateDriver);
         driverService.delete(secondDriver.getId());
+        driverService.getAll().forEach(System.out::println);
 
         ManufacturerService manufacturer = (ManufacturerService)
                 injector.getInstance(ManufacturerService.class);

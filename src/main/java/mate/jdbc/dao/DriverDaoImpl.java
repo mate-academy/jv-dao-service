@@ -39,9 +39,9 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Optional<Driver> get(Long id) {
-        String get = "SELECT * FROM drivers WHERE is_deleted = FALSE AND id = ?;";
+        String getDriverQuery = "SELECT * FROM drivers WHERE is_deleted = FALSE AND id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement getStatement = connection.prepareStatement(get)) {
+                PreparedStatement getStatement = connection.prepareStatement(getDriverQuery)) {
             getStatement.setLong(1, id);
             ResultSet resultSet = getStatement.executeQuery();
             Driver driver = null;
@@ -67,7 +67,7 @@ public class DriverDaoImpl implements DriverDao {
             }
             return driverList;
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't read all information from DB", e);
+            throw new DataProcessingException("Can't read all drivers from DB", e);
         }
     }
 
@@ -83,7 +83,7 @@ public class DriverDaoImpl implements DriverDao {
             updateStatement.executeUpdate();
             return driver;
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't update driver from DB"
+            throw new DataProcessingException("Can't update driver in DB"
                     + driver, e);
         }
     }
