@@ -16,7 +16,7 @@ public class Main {
         driverService.create(rick);
         rick.setLicenseNumber("93835");
         driverService.update(rick);
-        driverService.delete(1L);
+        driverService.delete(rick.getId());
         driverService.getAll().forEach(System.out::println);
 
     }
