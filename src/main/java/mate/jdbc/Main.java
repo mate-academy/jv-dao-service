@@ -19,7 +19,7 @@ public class Main {
         manufacturerService.create(bmwManufacturer);
         manufacturerService.create(audiManufacturer);
         manufacturerService.create(volvoManufacturer);
-        bmwManufacturer.setId(35L);
+        bmwManufacturer.setName("Bmw");
         manufacturerService.update(bmwManufacturer);
         manufacturerService.delete(audiManufacturer.getId());
         List<Manufacturer> allManufacturers = manufacturerService.getAll();
