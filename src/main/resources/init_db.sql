@@ -5,13 +5,11 @@ CREATE TABLE `drivers` (
                            `name` varchar(45) NOT NULL,
                            `licence_number` varchar(45) NOT NULL,
                            `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
-                           PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+                           PRIMARY KEY (`id`));
 
 CREATE TABLE `manufacturers` (
                                  `id` bigint NOT NULL AUTO_INCREMENT,
                                  `name` varchar(255) DEFAULT NULL,
                                  `country` varchar(255) DEFAULT NULL,
                                  `is_deleted` tinyint NOT NULL DEFAULT '0',
-                                 PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+                                 PRIMARY KEY (`id`));

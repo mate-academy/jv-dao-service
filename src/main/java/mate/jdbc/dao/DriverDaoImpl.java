@@ -91,7 +91,7 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public boolean delete(Long id) {
-        String deleteRequest = "UPDATE drivers SET is_deleted = true where id = (?);";
+        String deleteRequest = "UPDATE drivers SET is_deleted = true WHERE id = (?);";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement deleteDriverStatement
                         = connection.prepareStatement(deleteRequest)) {
