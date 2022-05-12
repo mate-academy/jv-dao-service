@@ -11,7 +11,7 @@ import mate.jdbc.model.Manufacturer;
 @Service
 public class ManufacturerServiceImpl implements ManufacturerService {
     @Inject
-    ManufacturerDao manufacturerDao = new ManufacturerDaoImpl();
+    private final ManufacturerDao manufacturerDao = new ManufacturerDaoImpl();
 
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
