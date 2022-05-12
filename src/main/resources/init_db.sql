@@ -7,3 +7,12 @@ CREATE TABLE `manufacturers` (
                                         `country` VARCHAR(225) NOT NULL,
                                         `is_deleted` TINYINT NOT NULL DEFAULT 0,
                                         PRIMARY KEY (`id`));
+
+CREATE TABLE `drivers` (
+                           `id` bigint NOT NULL AUTO_INCREMENT,
+                           `name` varchar(45) DEFAULT NULL,
+                           `licenseNumber` varchar(45) DEFAULT NULL,
+                           `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+                           PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3
+
