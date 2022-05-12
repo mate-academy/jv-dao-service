@@ -20,8 +20,6 @@ public class Main {
         System.out.println(manufacturerService.get(car.getId()));
         System.out.println(manufacturerService.delete(car.getId()));
 
-        System.out.println();
-
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         Driver igor = new Driver(null, "Igor", "123456");
         System.out.println(driverService.create(igor));
