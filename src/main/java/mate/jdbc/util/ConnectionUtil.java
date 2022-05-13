@@ -18,6 +18,7 @@ public class ConnectionUtil {
             throw new RuntimeException("Can't find SQL Driver", e);
         }
     }
+
     public static Connection getConnection() throws SQLException {
         Properties dbProperties = new Properties();
         dbProperties.setProperty("user", USERNAME);
