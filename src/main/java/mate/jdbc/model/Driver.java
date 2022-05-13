@@ -1,7 +1,5 @@
 package mate.jdbc.model;
 
-import java.util.StringJoiner;
-
 public class Driver {
     private Long id;
     private String name;
