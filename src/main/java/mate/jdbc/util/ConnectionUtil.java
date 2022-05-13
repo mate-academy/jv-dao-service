@@ -6,23 +6,18 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class ConnectionUtil {
-    private static final String URL = "YOUR DATABASE URL";
-    private static final String USERNAME = "YOUR USERNAME";
-    private static final String PASSWORD = "YOUR PASSWORD";
-    private static final String JDBC_DRIVER = "YOUR DRIVER";
+    private static final String USERNAME = "mate_student";
+    private static final String PASSWORD = "Cegth0285cnhjyuGfhjkm456";
+    private static final String CONNECTION_URL = "jdbc:mysql://localhost:3306/taxi_service";
 
-    static {
+    public static Connection getConnection() {
         try {
-            Class.forName(JDBC_DRIVER);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Can't find SQL Driver", e);
+            Properties databaseProperties = new Properties();
+            databaseProperties.put("user", USERNAME);
+            databaseProperties.put("password", PASSWORD);
+            return DriverManager.getConnection(CONNECTION_URL, databaseProperties);
+        } catch (SQLException ex) {
+            throw new RuntimeException("Can't create connection to database", ex);
         }
-    }
-
-    public static Connection getConnection() throws SQLException {
-        Properties dbProperties = new Properties();
-        dbProperties.setProperty("user", USERNAME);
-        dbProperties.setProperty("password", PASSWORD);
-        return DriverManager.getConnection(URL, dbProperties);
     }
 }
