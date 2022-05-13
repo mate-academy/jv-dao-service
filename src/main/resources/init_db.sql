@@ -1,6 +1,6 @@
 CREATE DATABASE `taxi_service` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
-CREATE TABLE `driver` (
+CREATE TABLE `drivers` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `license_number` varchar(255) NOT NULL,
