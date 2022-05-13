@@ -1,5 +1,5 @@
-CREATE SCHEMA IF NOT EXISTS `taxi_service` DEFAULT CHARACTER SET utf8;
-USE `taxi_service`;
+CREATE SCHEMA IF NOT EXISTS `taxiservice_db` DEFAULT CHARACTER SET utf8;
+USE `taxiservice_db`;
 
 CREATE TABLE `manufacturers` (
                                         `id` BIGINT(11) NOT NULL AUTO_INCREMENT,
@@ -8,7 +8,7 @@ CREATE TABLE `manufacturers` (
                                         `is_deleted` TINYINT NOT NULL DEFAULT 0,
                                         PRIMARY KEY (`id`));
 
-CREATE TABLE `taxiservice_db`.`drivers` (
+CREATE TABLE `drivers` (
                                             `id` BIGINT(11) NOT NULL AUTO_INCREMENT,
                                             `name` VARCHAR(255) NOT NULL,
                                             `licenseNumber` VARCHAR(255) NOT NULL,
