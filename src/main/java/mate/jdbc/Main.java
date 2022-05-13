@@ -13,11 +13,11 @@ public class Main {
         ManufacturerService manufacturerService = (ManufacturerService) injector
                 .getInstance(ManufacturerService.class);
 
-        Manufacturer Daewoo = new Manufacturer(null,"Daewoo", "Ukraine");
+        Manufacturer daewoo = new Manufacturer(null,"Daewoo", "Ukraine");
         Manufacturer rangeRover = new Manufacturer(null,"Range Rover", "USA");
         Manufacturer honda = new Manufacturer(null,"Honda", "Japan");
 
-        manufacturerService.create(Daewoo);
+        manufacturerService.create(daewoo);
         manufacturerService.create(rangeRover);
         manufacturerService.create(honda);
         System.out.println(manufacturerService.getAll());
