@@ -12,25 +12,25 @@ public class Main {
     public static void main(String[] args) {
         DriverService driverService
                 = (DriverService) injector.getInstance(DriverService.class);
-        Driver driver1 = new Driver(null, "Dima", "11111");
-        Driver driver2 = new Driver(null, "Ivan", "22222");
-        driverService.create(driver1);
-        driverService.create(driver2);
-        driver1.setName("Denis");
-        driverService.update(driver1);
-        System.out.println(driverService.get(driver2.getId()));
-        driverService.delete(driver2.getId());
+        Driver firstDriver = new Driver(null, "Dima", "11111");
+        Driver secondDriver = new Driver(null, "Ivan", "22222");
+        driverService.create(firstDriver);
+        driverService.create(secondDriver);
+        firstDriver.setName("Denis");
+        driverService.update(firstDriver);
+        System.out.println(driverService.get(secondDriver.getId()));
+        driverService.delete(secondDriver.getId());
         driverService.getAll().forEach(System.out::println);
         ManufacturerService manufacturerService
                 = (ManufacturerService) injector.getInstance(ManufacturerService.class);
-        Manufacturer manufacturer1 = new Manufacturer(null, "Volkswagen", "Germany");
-        Manufacturer manufacturer2 = new Manufacturer(null, "Kia", "South Korea");
-        manufacturerService.create(manufacturer1);
-        manufacturerService.create(manufacturer2);
-        manufacturer2.setName("KIA");
-        manufacturerService.update(manufacturer2);
-        System.out.println(manufacturerService.get(manufacturer1.getId()));
-        manufacturerService.delete(manufacturer1.getId());
+        Manufacturer firstManufacturer = new Manufacturer(null, "Volkswagen", "Germany");
+        Manufacturer secondManufacturer = new Manufacturer(null, "Kia", "South Korea");
+        manufacturerService.create(firstManufacturer);
+        manufacturerService.create(secondManufacturer);
+        secondManufacturer.setName("KIA");
+        manufacturerService.update(secondManufacturer);
+        System.out.println(manufacturerService.get(firstManufacturer.getId()));
+        manufacturerService.delete(firstManufacturer.getId());
         manufacturerService.getAll().forEach(System.out::println);
     }
 }
