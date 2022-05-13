@@ -11,9 +11,9 @@ public class Main {
 
     public static void main(String[] args) {
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-        Driver driverAlex = new Driver("alex", "112233");
-        Driver driverVin = new Driver("Vin", "223344");
-        Driver driverKarl = new Driver("Karl", "334455");
+        Driver driverAlex = new Driver(null, "alex", "112233");
+        Driver driverVin = new Driver(null, "Vin", "223344");
+        Driver driverKarl = new Driver(null, "Karl", "334455");
         driverService.create(driverAlex);
         driverService.create(driverVin);
         driverService.create(driverKarl);
@@ -21,7 +21,7 @@ public class Main {
         driverService.update(driverAlex);
         driverService.delete(driverKarl.getId());
         driverService.get(driverVin.getId());
-        driverService.getAll();
+        driverService.getAll().forEach(System.out::println);
 
         ManufacturerService manufacturerService = (ManufacturerService) injector
                 .getInstance(ManufacturerService.class);
@@ -37,6 +37,6 @@ public class Main {
         manufacturerVolvo.setName("Volvo");
         manufacturerService.update(manufacturerVolvo);
         manufacturerService.get(manufacturerVolkswagen.getId());
-        manufacturerService.getAll();
+        manufacturerService.getAll().forEach(System.out::println);
     }
 }
