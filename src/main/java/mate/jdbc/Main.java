@@ -10,8 +10,8 @@ public class Main {
     public static void main(String[] args) {
         // test your code here
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-        Driver sashko = new Driver(1L, "Alex", "12345");
-        Driver viktor = new Driver(2L, "Viktor", "21345");
+        Driver sashko = new Driver("Alex", "12345");
+        Driver viktor = new Driver("Viktor", "21345");
         driverService.create(sashko);
         driverService.create(viktor);
         System.out.println(driverService.get(viktor.getId()));

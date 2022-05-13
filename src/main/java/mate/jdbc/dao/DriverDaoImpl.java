@@ -15,10 +15,9 @@ import mate.jdbc.util.ConnectionUtil;
 
 @Dao
 public class DriverDaoImpl implements DriverDao {
-
     @Override
     public Driver create(Driver driver) {
-        String query = "INSERT INTO drivers (name, licenseNumber) "
+        String query = "INSERT INTO drivers (name, license_number) "
                 + "VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement
@@ -107,6 +106,8 @@ public class DriverDaoImpl implements DriverDao {
         Long id = resultSet.getObject("id", Long.class);
         String name = resultSet.getString("name");
         String licenseNumber = resultSet.getString("license_number");
-        return new Driver(id, name, licenseNumber);
+        Driver driver = new Driver(name, licenseNumber);
+        driver.setId(id);
+        return driver;
     }
 }
