@@ -13,43 +13,43 @@ public class Main {
         ManufacturerService manufacturerService = (ManufacturerService) injector
                 .getInstance(ManufacturerService.class);
 
-        Manufacturer autoZaz = new Manufacturer(null,"Daewoo", "Ukraine");
-        Manufacturer dodge = new Manufacturer(null,"Range Rover", "USA");
-        Manufacturer mazda = new Manufacturer(null,"Honda", "Japan");
+        Manufacturer Daewoo = new Manufacturer(null,"Daewoo", "Ukraine");
+        Manufacturer rangeRover = new Manufacturer(null,"Range Rover", "USA");
+        Manufacturer honda = new Manufacturer(null,"Honda", "Japan");
 
-        manufacturerService.create(autoZaz);
-        manufacturerService.create(dodge);
-        manufacturerService.create(mazda);
+        manufacturerService.create(Daewoo);
+        manufacturerService.create(rangeRover);
+        manufacturerService.create(honda);
         System.out.println(manufacturerService.getAll());
 
-        dodge.setCountry("Canada");
+        rangeRover.setCountry("Canada");
 
-        manufacturerService.update(dodge);
-        System.out.println(manufacturerService.get(dodge.getId()));
+        manufacturerService.update(rangeRover);
+        System.out.println(manufacturerService.get(rangeRover.getId()));
         System.out.println(manufacturerService.getAll());
 
-        manufacturerService.delete(dodge.getId());
+        manufacturerService.delete(rangeRover.getId());
         System.out.println(manufacturerService.getAll());
 
         DriverService driverService = (DriverService) injector
                 .getInstance(DriverService.class);
 
-        Driver petroVasylenko = new Driver(null, "John Lysenko", "AA 11111");
-        Driver nazarKovalenko = new Driver(null, "Marichka Kononenko", "АВ 22222");
-        Driver illiaDanchuk = new Driver(null, "Harry Shevchenco", "CA 33333");
+        Driver johnLysenko = new Driver(null, "John Lysenko", "AA 11111");
+        Driver marichkaKononenko = new Driver(null, "Marichka Kononenko", "АВ 22222");
+        Driver harryShevchenco = new Driver(null, "Harry Shevchenco", "CA 33333");
 
-        driverService.create(petroVasylenko);
-        driverService.create(nazarKovalenko);
-        driverService.create(illiaDanchuk);
+        driverService.create(johnLysenko);
+        driverService.create(marichkaKononenko);
+        driverService.create(harryShevchenco);
         System.out.println(driverService.getAll());
 
-        nazarKovalenko.setName("Nazar Nesterenko");
+        johnLysenko.setName("Nazar Nesterenko");
 
-        driverService.update(nazarKovalenko);
-        System.out.println(driverService.get(nazarKovalenko.getId()));
+        driverService.update(johnLysenko);
+        System.out.println(driverService.get(johnLysenko.getId()));
         System.out.println(driverService.getAll());
 
-        driverService.delete(nazarKovalenko.getId());
+        driverService.delete(johnLysenko.getId());
         System.out.println(driverService.getAll());
     }
 }
