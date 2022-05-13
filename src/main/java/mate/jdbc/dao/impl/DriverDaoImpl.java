@@ -120,7 +120,7 @@ public class DriverDaoImpl implements DriverDao {
             statement.setLong(1, id);
             int quantity = statement.executeUpdate();
             logger.info("delete() method completed successfully with id -> {}", id);
-            return quantity > 1;
+            return quantity > 0;
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't delete a driver by id " + id, e);
         }

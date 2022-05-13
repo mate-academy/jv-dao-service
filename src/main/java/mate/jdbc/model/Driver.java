@@ -38,10 +38,10 @@ public class Driver {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", Driver.class.getSimpleName() + "[", "]")
-                .add("id=" + id)
-                .add("name='" + name + "'")
-                .add("licenseNumber='" + licenseNumber + "'")
-                .toString();
+        return "Driver{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", licenseNumber='" + licenseNumber + '\''
+                + '}';
     }
 }
