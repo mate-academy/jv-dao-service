@@ -18,13 +18,13 @@ import org.apache.logging.log4j.Logger;
 
 @Dao
 public class DriverDaoImpl implements DriverDao {
-    private static final Logger logger = LogManager.getLogger(ManufacturerDaoImpl.class);
+    private static final Logger logger = LogManager.getLogger(DriverDaoImpl.class);
 
     @Override
     public Driver create(Driver driver) {
         logger.info("create() method started with name -> {}, licenseNumber -> {}",
                 driver.getName(), driver.getLicenseNumber());
-        String query = "INSERT INTO drivers (name, licenseNumber) "
+        String query = "INSERT INTO drivers (name, license_number) "
                 + "VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement
@@ -88,8 +88,10 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Driver update(Driver driver) {
-        logger.info("update() method started with id -> {}", driver.getId());
-        String query = "UPDATE drivers SET name = ?, licenseNumber = ?"
+        logger.info("update() method started with"
+                        + " id -> {}, name -> {}, licenseNumber -> {}",
+                driver.getId(), driver.getName(), driver.getLicenseNumber());
+        String query = "UPDATE drivers SET name = ?, license_number = ?"
                 + " WHERE id = ? AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement
@@ -98,8 +100,9 @@ public class DriverDaoImpl implements DriverDao {
             statement.setString(2, driver.getLicenseNumber());
             statement.setLong(3, driver.getId());
             statement.executeUpdate();
-            logger.info("update() method completed successfully with id -> {}",
-                    driver.getId());
+            logger.info("update() method completed successfully with"
+                            + " id -> {}, name -> {}, licenseNumber -> {}",
+                    driver.getId(), driver.getName(), driver.getLicenseNumber());
             return driver;
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't update a driver "
@@ -126,7 +129,9 @@ public class DriverDaoImpl implements DriverDao {
     private Driver getDriver(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getObject("id", Long.class);
         String name = resultSet.getString("name");
-        String licenseNumber = resultSet.getString("licenseNumber");
-        return new Driver(id, name, licenseNumber);
+        String licenseNumber = resultSet.getString("license_number");
+        Driver driver = new Driver(name, licenseNumber);
+        driver.setId(id);
+        return driver;
     }
 }
