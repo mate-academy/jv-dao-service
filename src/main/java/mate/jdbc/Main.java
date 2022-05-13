@@ -21,7 +21,6 @@ public class Main {
         System.out.println(driverService.get(firstDriver.getId()));
         driverService.delete(firstDriver.getId());
         driverService.getAll().forEach(System.out::println);
-
         ManufacturerService manufacturerService
                 = (ManufacturerService) injector.getInstance(ManufacturerService.class);
         Manufacturer firstManufacturer = new Manufacturer(null, "Car", "Country");
