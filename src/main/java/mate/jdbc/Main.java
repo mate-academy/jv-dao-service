@@ -2,6 +2,7 @@ package mate.jdbc;
 
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
+import mate.jdbc.model.Manufacturer;
 import mate.jdbc.servise.DriverService;
 import mate.jdbc.servise.ManufacturerService;
 
@@ -29,6 +30,15 @@ public class Main {
 
         ManufacturerService manufacturerService = (ManufacturerService)
                 injector.getInstance(ManufacturerService.class);
+        Manufacturer firstManufacturer = new Manufacturer(null, "Tesla", "USA");
+        System.out.println(manufacturerService.create(firstManufacturer));
+        manufacturerService.delete(firstManufacturer.getId());
+
+        Manufacturer secondManufacturer = new Manufacturer(null, "Opel", "Germany");
+        System.out.println(manufacturerService.create(secondManufacturer));
+        secondManufacturer.setName("BMW");
+        manufacturerService.update(secondManufacturer);
+
         manufacturerService.getAll().forEach(System.out::println);
     }
 }
