@@ -20,7 +20,7 @@ public class Main {
         driverAlex.setName("Alex");
         driverService.update(driverAlex);
         driverService.delete(driverKarl.getId());
-        driverService.get(driverVin.getId());
+        System.out.println(driverService.get(driverVin.getId()));
         driverService.getAll().forEach(System.out::println);
 
         ManufacturerService manufacturerService = (ManufacturerService) injector
@@ -36,7 +36,7 @@ public class Main {
         manufacturerService.delete(manufacturerRenault.getId());
         manufacturerVolvo.setName("Volvo");
         manufacturerService.update(manufacturerVolvo);
-        manufacturerService.get(manufacturerVolkswagen.getId());
+        System.out.println(manufacturerService.get(manufacturerVolkswagen.getId()));
         manufacturerService.getAll().forEach(System.out::println);
     }
 }
