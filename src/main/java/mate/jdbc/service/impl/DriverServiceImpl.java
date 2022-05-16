@@ -19,8 +19,9 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public Optional<Driver> get(Long id) {
-        return driverDao.get(id);
+    public Driver get(Long id) {
+        Optional<Driver> driver = driverDao.get(id);
+        return driver.orElse(null);
     }
 
     @Override

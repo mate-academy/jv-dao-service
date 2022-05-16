@@ -12,36 +12,30 @@ public class Main {
 
     public static void main(String[] args) {
         // create drivers
-        Driver aliseDriver = new Driver(1L, "Alice", "11111178");
-        Driver tomDriver = new Driver(1L, "Tom", "00000078");
-        Driver annaDriver = new Driver(1L, "Anna", "20202020");
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-        driverService.create(aliseDriver);
-        driverService.create(tomDriver);
-        driverService.create(annaDriver);
+        driverService.create(new Driver(1L, "Alice", "11111178"));
+        driverService.create(new Driver(1L, "Tom", "00000078"));
+        driverService.create(new Driver(1L, "Anna", "20202020"));
         List<Driver> allDrivers = driverService.getAll();//print all drivers
         allDrivers
                 .forEach(System.out::println);
         System.out.println(System.lineSeparator());//update & delete driver
-        driverService.update(new Driver(aliseDriver.getId(), "Maria", "7777777"));
-        driverService.delete(tomDriver.getId());
+        driverService.update(new Driver(1L, "Maria", "7777777"));
+        driverService.delete(2L);
         driverService.getAll().stream().forEach(System.out::println);
         //create manufacturer
-        Manufacturer nissanManufacturer = new Manufacturer(1L, "Nissan", "Japan");
-        Manufacturer teslaManufacturer = new Manufacturer(1L, "Tesla", "USA");
-        Manufacturer toyotaManufacturer = new Manufacturer(1L, "Toyota", "Japan");
         ManufacturerService manufacturerService =
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
-        manufacturerService.create(nissanManufacturer);
-        manufacturerService.create(teslaManufacturer);
-        manufacturerService.create(toyotaManufacturer);
+        manufacturerService.create(new Manufacturer(1L, "Nissan", "Japan"));
+        manufacturerService.create(new Manufacturer(1L, "Tesla", "USA"));
+        manufacturerService.create(new Manufacturer(1L, "Toyota", "Japan"));
         System.out.println(System.lineSeparator());// get all
         List<Manufacturer> allManufacturers = manufacturerService.getAll();
         allManufacturers.stream()
                 .forEach(System.out::println);
         //delete & update
-        manufacturerService.delete(toyotaManufacturer.getId());
-        manufacturerService.update(new Manufacturer(nissanManufacturer.getId(),
+        manufacturerService.delete(2L);
+        manufacturerService.update(new Manufacturer(1L,
                 "Infiniti", "Japan"));
         System.out.println(System.lineSeparator());//print all
         manufacturerService.getAll().forEach(System.out::println);
