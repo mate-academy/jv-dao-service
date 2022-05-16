@@ -13,9 +13,13 @@ import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Dao;
 import mate.jdbc.model.Driver;
 import mate.jdbc.util.ConnectionUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Dao
 public class DriverDaoImpl implements DriverDao {
+    private static final Logger log = LogManager.getLogger(DriverDaoImpl.class);
+
     @Override
     public Driver create(Driver driver) {
         String query = "INSERT INTO drivers (name, license_number) "
@@ -30,8 +34,10 @@ public class DriverDaoImpl implements DriverDao {
             if (resultSet.next()) {
                 driver.setId(resultSet.getLong(1));
             }
+            log.info("{} was created", driver);
             return driver;
         } catch (SQLException e) {
+            log.error("Unable to create {}, DataProcessingException {}", driver, e);
             throw new DataProcessingException("Couldn't create driver. " + driver, e);
         }
     }
@@ -67,7 +73,7 @@ public class DriverDaoImpl implements DriverDao {
             }
             return drivers;
         } catch (SQLException e) {
-            throw new DataProcessingException("Couldn't get a list of drivers "
+            throw new DataProcessingException("Couldn't get all drivers "
                     + "from drivers table.", e);
         }
     }
@@ -83,8 +89,10 @@ public class DriverDaoImpl implements DriverDao {
             statement.setString(2, driver.getLicenseNumber());
             statement.setLong(3, driver.getId());
             statement.executeUpdate();
+            log.info("Element {}, was updated", driver);
             return driver;
         } catch (SQLException e) {
+            log.error("Unable to update {}, DataProcessingException {}", driver, e);
             throw new DataProcessingException("Couldn't update a driver "
                     + driver, e);
         }
@@ -97,8 +105,11 @@ public class DriverDaoImpl implements DriverDao {
                 PreparedStatement statement
                         = connection.prepareStatement(query)) {
             statement.setLong(1, id);
+            log.info("Element with id {}, was deleted", id);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
+            log.error("Unable to delete driver with ID {}, "
+                    + "DataProcessingException {}", id, e);
             throw new DataProcessingException("Couldn't delete a driver by id " + id, e);
         }
     }
