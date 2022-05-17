@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS manufacturers;
 
 CREATE TABLE manufacturers
 (
-    id        SERIAL,
+    id        BIGSERIAL,
     name      VARCHAR(100) NOT NULL,
     country   VARCHAR(100) NOT NULL,
     is_deleted boolean DEFAULT false,
@@ -22,7 +22,7 @@ ALTER TABLE manufacturers
 
 CREATE TABLE drivers
 (
-    id         SERIAL,
+    id         BIGSERIAL,
     name VARCHAR(75) NOT NULL,
     license_number  VARCHAR(155) NOT NULL,
     is_deleted boolean DEFAULT false,
@@ -34,7 +34,7 @@ ALTER TABLE drivers
 
 CREATE TABLE cars
 (
-    id              SERIAL NOT NULL,
+    id              BIGSERIAL NOT NULL,
     name            VARCHAR(35) NOT NULL,
     color           VARCHAR(35),
     manufacturer_id BIGINT NOT NULL,
