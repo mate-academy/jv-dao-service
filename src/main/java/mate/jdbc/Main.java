@@ -11,33 +11,18 @@ public class Main {
     private static Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
-        // create drivers
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-        driverService.create(new Driver(1L, "Alice", "11111178"));
-        driverService.create(new Driver(1L, "Tom", "00000078"));
-        driverService.create(new Driver(1L, "Anna", "20202020"));
-        List<Driver> allDrivers = driverService.getAll();//print all drivers
-        allDrivers
-                .forEach(System.out::println);
-        System.out.println(System.lineSeparator());//update & delete driver
-        driverService.update(new Driver(1L, "Maria", "7777777"));
-        driverService.delete(2L);
+        List<Driver> allDrivers = driverService.getAll();
+        driverService.update(new Driver(allDrivers.get(0).getId(), "Maria", "777-777"));
+        driverService.delete(1L);
         driverService.getAll().stream().forEach(System.out::println);
-        //create manufacturer
+
         ManufacturerService manufacturerService =
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
-        manufacturerService.create(new Manufacturer(1L, "Nissan", "Japan"));
-        manufacturerService.create(new Manufacturer(1L, "Tesla", "USA"));
-        manufacturerService.create(new Manufacturer(1L, "Toyota", "Japan"));
-        System.out.println(System.lineSeparator());// get all
         List<Manufacturer> allManufacturers = manufacturerService.getAll();
-        allManufacturers.stream()
-                .forEach(System.out::println);
-        //delete & update
-        manufacturerService.delete(2L);
-        manufacturerService.update(new Manufacturer(1L,
+        manufacturerService.delete(1L);
+        manufacturerService.update(new Manufacturer(allManufacturers.get(0).getId(),
                 "Infiniti", "Japan"));
-        System.out.println(System.lineSeparator());//print all
         manufacturerService.getAll().forEach(System.out::println);
     }
 }
