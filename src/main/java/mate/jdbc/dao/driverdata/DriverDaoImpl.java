@@ -46,7 +46,7 @@ public class DriverDaoImpl implements DriverDao {
             while (resultSet.next()) {
                 driver = getDriver(resultSet);
             }
-            return Optional.of(driver);
+            return Optional.ofNullable(driver);
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't get driver by id " + id, e);
         }
