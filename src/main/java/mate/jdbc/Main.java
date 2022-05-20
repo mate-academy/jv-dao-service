@@ -12,67 +12,75 @@ public class Main {
     public static void main(String[] args) {
         DriverService driverService =
                 (DriverService) injector.getInstance(DriverService.class);
-        Driver driver = new Driver();
-        driver.setName("Michel Rat");
-        driver.setLicenseNumber("8-800-555-355");
-        driverService.create(driver);
+        Driver driverMichel = new Driver();
+        driverMichel.setName("Michel Rat");
+        driverMichel.setLicenseNumber("8-800-555-355");
+        driverService.create(driverMichel);
 
-        driver.setLicenseNumber("345-66-5-345");
-        driver.setName("Igor Terech");
-        driverService.create(driver);
+        Driver driverIgor = new Driver();
+        driverIgor.setLicenseNumber("345-66-5-345");
+        driverIgor.setName("Igor Terech");
+        driverService.create(driverIgor);
 
-        driver.setLicenseNumber("65-566-555-5-315");
-        driver.setName("Taras Boch");
-        driverService.create(driver);
+        Driver driverTaras = new Driver();
+        driverTaras.setLicenseNumber("65-566-555-5-315");
+        driverTaras.setName("Taras Boch");
+        driverService.create(driverTaras);
 
-        driver.setLicenseNumber("45-664-555-66");
-        driver.setName("Taras Boch");
-        driverService.create(driver);
+        Driver driverIvan = new Driver();
+        driverIvan.setLicenseNumber("45-664-555-66");
+        driverIvan.setName("Ivan Hedch");
+        driverService.create(driverIvan);
 
-        driverService.delete(1L);
-        driver.setName("Mick Rock");
-        driver.setId(5L);
-        driverService.update(driver);
-        System.out.println(driverService.get(5L) + "\n");
+        driverService.delete(driverMichel.getId());
+        driverTaras.setName("Mick Rock");
+        driverService.update(driverTaras);
+        System.out.println(driverService.get(driverIgor.getId()) + "\n");
         driverService.getAll().stream().forEach(System.out::println);
 
         ManufacturerService manufacturerService =
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
-        Manufacturer manufacturer = new Manufacturer();
-        manufacturer.setCountry("Sweden");
-        manufacturer.setName("Volvo");
-        manufacturerService.create(manufacturer);
+        Manufacturer manufacturerVolvo = new Manufacturer();
+        manufacturerVolvo.setCountry("Sweden");
+        manufacturerVolvo.setName("Volvo");
+        manufacturerService.create(manufacturerVolvo);
 
-        manufacturer.setCountry("France");
-        manufacturer.setName("Peugeot");
-        manufacturerService.create(manufacturer);
+        Manufacturer manufacturerPeugeot = new Manufacturer();
+        manufacturerPeugeot.setCountry("France");
+        manufacturerPeugeot.setName("Peugeot");
+        manufacturerService.create(manufacturerPeugeot);
 
-        manufacturer.setCountry("Germany");
-        manufacturer.setName("BMV");
-        manufacturerService.create(manufacturer);
+        Manufacturer manufacturerBmv = new Manufacturer();
+        manufacturerBmv.setCountry("Germany");
+        manufacturerBmv.setName("BMV");
+        manufacturerService.create(manufacturerBmv);
 
-        manufacturer.setCountry("Germany");
-        manufacturer.setName("Audi");
-        manufacturerService.create(manufacturer);
+        Manufacturer manufacturerAudi = new Manufacturer();
+        manufacturerAudi.setCountry("Germany");
+        manufacturerAudi.setName("Audi");
+        manufacturerService.create(manufacturerAudi);
 
-        manufacturer.setCountry("Italy");
-        manufacturer.setName("Maserati");
-        manufacturerService.create(manufacturer);
+        Manufacturer manufacturerMaserati = new Manufacturer();
+        manufacturerMaserati.setCountry("Italy");
+        manufacturerMaserati.setName("Maserati");
+        manufacturerService.create(manufacturerMaserati);
 
-        manufacturer.setCountry("Usa");
-        manufacturer.setName("Ford");
-        manufacturerService.create(manufacturer);
+        Manufacturer manufacturerFord = new Manufacturer();
+        manufacturerFord.setCountry("Usa");
+        manufacturerFord.setName("Ford");
+        manufacturerService.create(manufacturerFord);
 
-        manufacturer.setName("Mercedes-Benz");
-        manufacturer.setId(6L);
-        manufacturerService.update(manufacturer);
+        Manufacturer manufacturerUpdate = manufacturerService.get(manufacturerBmv.getId());
+        manufacturerUpdate.setName("Mercedes-Benz");
+        manufacturerService.update(manufacturerUpdate);
 
-        manufacturer.setName("Tesla");
-        manufacturer.setCountry("USA");
-        manufacturerService.create(manufacturer);
+        Manufacturer manufacturerTesla = new Manufacturer();
+        manufacturerTesla.setName("Tesla");
+        manufacturerTesla.setCountry("USA");
+        manufacturerService.create(manufacturerTesla);
 
-        System.out.println(manufacturerService.get(7L) + "\n");
-        manufacturerService.delete(6L);
+        System.out.println(manufacturerService.get(manufacturerTesla.getId()) + "\n");
+        manufacturerService.delete(manufacturerFord.getId());
         manufacturerService.getAll().stream().forEach(System.out::println);
     }
 }

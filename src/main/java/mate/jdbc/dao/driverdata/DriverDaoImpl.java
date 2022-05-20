@@ -42,7 +42,7 @@ public class DriverDaoImpl implements DriverDao {
                         connection.prepareStatement(query)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            Driver driver = new Driver();
+            Driver driver = null;
             while (resultSet.next()) {
                 driver = getDriver(resultSet);
             }
@@ -84,7 +84,6 @@ public class DriverDaoImpl implements DriverDao {
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't update driver " + driver, e);
         }
-
     }
 
     @Override

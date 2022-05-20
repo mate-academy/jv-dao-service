@@ -15,7 +15,7 @@ public class ConnectionUtil {
         try {
             Class.forName(JDBC_DRIVER);
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Can't find SQL TaxiDatabase", e);
+            throw new RuntimeException("Can't find SQL Driver", e);
         }
     }
 
