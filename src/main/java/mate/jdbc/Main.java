@@ -13,46 +13,44 @@ public class Main {
         ManufacturerService manufacturerService
                 = (ManufacturerService) injector.getInstance(ManufacturerService.class);
         //create
-        Manufacturer manufacturerCreate = new Manufacturer();
-        manufacturerCreate.setName("Toyota");
-        manufacturerCreate.setCountry("Germany");
-        System.out.println(manufacturerService.create(manufacturerCreate));
+        Manufacturer toyotaManufacturer = new Manufacturer();
+        toyotaManufacturer.setName("Toyota");
+        toyotaManufacturer.setCountry("Germany");
+        System.out.println(manufacturerService.create(toyotaManufacturer));
         //get
         System.out.println("Get a manufacturer");
-        System.out.println(manufacturerService.get(2L));
+        System.out.println(manufacturerService.get(toyotaManufacturer.getId()));
         //getAll
         System.out.println("Get all manufacturers");
-        System.out.println(manufacturerService.getAll());
+        manufacturerService.getAll().forEach(System.out::println);
         //update
         System.out.println("Update a manufacturer");
-        Manufacturer manufacturerUpdate = new Manufacturer();
-        manufacturerUpdate.setName("Volvo");
-        manufacturerUpdate.setCountry("Italy");
-        manufacturerUpdate.setId(1L);
-        System.out.println(manufacturerService.update(manufacturerUpdate));
+        toyotaManufacturer.setName("Jeely");
+        toyotaManufacturer.setCountry("China");
+        toyotaManufacturer.setId(1L);
+        System.out.println(manufacturerService.update(toyotaManufacturer));
         //delete
         System.out.println("Delete a manufacturer");
         System.out.println(manufacturerService.delete(4L));
 
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         //create
-        Driver driverCreate = new Driver();
-        driverCreate.setName("Peter");
-        driverCreate.setLicenseNumber("Y6479");
-        System.out.println(driverService.create(driverCreate));
+        Driver peterDriver = new Driver();
+        peterDriver.setName("Peter");
+        peterDriver.setLicenseNumber("Y6479");
+        System.out.println(driverService.create(peterDriver));
         //get
         System.out.println("Get a driver");
-        System.out.println(driverService.get(4L));
+        System.out.println(driverService.get(peterDriver.getId()));
         //getAll
         System.out.println("Get all drivers");
-        System.out.println(driverService.getAll());
+        driverService.getAll().forEach(System.out::println);
         //update
         System.out.println("Update a driver");
-        Driver driverUpdate = new Driver();
-        driverUpdate.setName("Jack");
-        driverUpdate.setLicenseNumber("Y1111");
-        driverUpdate.setId(1L);
-        System.out.println(driverService.update(driverUpdate));
+        peterDriver.setName("Jack");
+        peterDriver.setLicenseNumber("Y1111");
+        peterDriver.setId(1L);
+        System.out.println(driverService.update(peterDriver));
         //delete
         System.out.println("Delete a driver");
         System.out.println(driverService.delete(2L));

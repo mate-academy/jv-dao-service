@@ -67,7 +67,7 @@ public class DriverDaoImpl implements DriverDao {
             }
             return driversList;
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't get drivers from the table ", e);
+            throw new DataProcessingException("Can't get all drivers from the table ", e);
         }
     }
 
