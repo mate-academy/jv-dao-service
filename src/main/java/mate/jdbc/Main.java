@@ -33,7 +33,7 @@ public class Main {
         driver.setLicenseNumber("XZ642387");
         driverService.update(driver);
 
-        driverService.delete(1L);
+        driverService.delete(driver.getId());
 
         System.out.println(driverService.getAll());
 

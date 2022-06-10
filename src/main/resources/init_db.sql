@@ -1,5 +1,5 @@
 CREATE SCHEMA IF NOT EXISTS taxi_service DEFAULT CHARACTER SET utf8;
-USE taxi_service;
+USE `taxi_service`;
 
 CREATE TABLE `manufacturers` (
                                         `id` BIGINT(11) NOT NULL AUTO_INCREMENT,
