@@ -62,10 +62,8 @@ public class DriverDaoJdbcImpl implements DriverDao {
                         = connection.prepareStatement(queryGetAll)) {
             List<Driver> drivers = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet != null) {
-                while (resultSet.next()) {
-                    drivers.add(getDriver(resultSet));
-                }
+            while (resultSet.next()) {
+                drivers.add(getDriver(resultSet));
             }
             return drivers;
         } catch (SQLException e) {

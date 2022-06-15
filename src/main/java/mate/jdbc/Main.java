@@ -8,7 +8,7 @@ import mate.jdbc.service.ManufacturerService;
 public class Main {
 
     private static final Injector injector = Injector.getInstance("mate.jdbc");
-    private static int id_Driver = 0;
+    private static int driverId = 0;
 
     public static void main(String[] args) {
         final ManufacturerService manufacturerService =
@@ -34,8 +34,8 @@ public class Main {
 
     private static Driver getDefaultDriver() {
         Driver driver = new Driver();
-        driver.setName("driver^" + id_Driver);
-        driver.setLicenseNumber("000" + id_Driver++);
+        driver.setName("driver^" + driverId);
+        driver.setLicenseNumber("000" + driverId++);
         return driver;
     }
 }
