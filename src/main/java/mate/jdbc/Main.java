@@ -19,17 +19,14 @@ public class Main {
         manufacturerService.getAll()
                 .forEach(System.out::println);
 
-        driverService.create(getDefaultDriver());
-        driverService.create(getDefaultDriver());
-        driverService.create(getDefaultDriver());
-
+        Driver first = driverService.create(getDefaultDriver());
+        Driver secont = driverService.create(getDefaultDriver());
+        Driver third = driverService.create(getDefaultDriver());
         driverService.getAll()
                 .forEach(System.out::println);
-
-        driverService.update(new Driver(3L, "defoult3", "333"));
-        driverService.update(new Driver(2L, "defoult2", "2222"));
-
-        driverService.delete(2L);
+        driverService.update(new Driver(third.getId(), "defoult3", "333"));
+        driverService.update(new Driver(secont.getId(), "defoult2", "2222"));
+        driverService.delete(secont.getId());
     }
 
     private static Driver getDefaultDriver() {
