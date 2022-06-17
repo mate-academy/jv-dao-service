@@ -1,12 +1,13 @@
 package mate.jdbc;
 
-import java.util.Optional;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.service.DriverService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
+    private static final long BAD_DRIVER_ID = 0L;
+
 
     public static void main(String[] args) {
         final DriverService driverService =
@@ -26,15 +27,16 @@ public class Main {
         System.out.println(firstDriver);
 
         System.out.println("Get: " + "- ".repeat(10));
-        Optional<Driver> driverOptional = driverService.get(firstDriver.getId());
-        driverOptional.ifPresent(System.out::println);
+        Driver driver = driverService.get(firstDriver.getId());
+        System.out.println(driver);
 
         System.out.println("Delete: " + "- ".repeat(10));
-        System.out.println(driverService.delete(firstDriver.getId()));
+        System.out.println(driverService.delete(driver.getId()));
 
         System.out.println("GetAll: " + "- ".repeat(10));
         driverService.getAll().forEach(System.out::println);
 
-        System.out.println("Ok");
+        System.out.println("Get exception: " + "- ".repeat(10));
+        driverService.get(BAD_DRIVER_ID);
     }
 }
