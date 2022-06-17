@@ -8,7 +8,6 @@ public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
     private static final long BAD_DRIVER_ID = 0L;
 
-
     public static void main(String[] args) {
         final DriverService driverService =
                 (DriverService) injector.getInstance(DriverService.class);
