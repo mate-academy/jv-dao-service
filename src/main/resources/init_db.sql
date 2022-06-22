@@ -9,8 +9,8 @@ CREATE TABLE `manufacturers` (
                                         PRIMARY KEY (`id`));
 CREATE TABLE `drivers` (
                            `id` bigint NOT NULL AUTO_INCREMENT,
-                           `name` varchar(45) DEFAULT NULL,
-                           `license` varchar(45) DEFAULT NULL,
+                           `name` varchar(255) DEFAULT NULL,
+                           `license` varchar(255) DEFAULT NULL,
                            `is_deleted` tinyint DEFAULT '0',
                            PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;

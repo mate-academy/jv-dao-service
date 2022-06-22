@@ -15,47 +15,32 @@ import mate.jdbc.util.ConnectionUtil;
 
 @Dao
 public class DriverDaoImpl implements DriverDao {
-    private static final String createDriverQuery
-            = "INSERT INTO drivers(name, license) VALUES(?, ?)";
-    private static final String getDriverQuery
-            = "SELECT * FROM drivers WHERE id = ? AND is_deleted = false";
-    private static final String getAllDriversQuery
-            = "SELECT * FROM drivers WHERE is_deleted = false";
-    private static final String updateDriverQuery
-            = "UPDATE drivers SET name = ?, license = ? WHERE id = ?";
-    private static final String deleteDriverQuery
-            = "UPDATE drivers SET is_deleted = true WHERE id = ? AND is_deleted = false";
-
-    private static final String deleteAllDriversQuery
-            = "DELETE FROM drivers";
-    private static final int ID_INDEX = 1;
-    private static final int NAME_INDEX = 2;
-    private static final int LICENSE_INDEX = 3;
-
     @Override
     public Driver create(Driver driver) {
+        String query = "INSERT INTO drivers(name, license) VALUES(?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement createDriverStatement = connection
-                        .prepareStatement(createDriverQuery, Statement.RETURN_GENERATED_KEYS)) {
+                        .prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             createDriverStatement.setString(1, driver.getName());
             createDriverStatement.setString(2, driver.getLicense());
             createDriverStatement.executeUpdate();
             ResultSet generatedKeys = createDriverStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
-                Long id = generatedKeys.getObject(ID_INDEX, Long.class);
+                Long id = generatedKeys.getObject(1, Long.class);
                 driver.setId(id);
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Cannot create driver", e);
+            throw new DataProcessingException("Cannot create driver: " + driver, e);
         }
         return driver;
     }
 
     @Override
     public Optional<Driver> get(Long id) {
+        String query = "SELECT * FROM drivers WHERE id = ? AND is_deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement getDriverStatement = connection
-                        .prepareStatement(getDriverQuery)) {
+                        .prepareStatement(query)) {
             getDriverStatement.setLong(1, id);
             ResultSet generatedKeys = getDriverStatement.executeQuery();
             return Optional.ofNullable(generatedKeys.next() ? getDriver(generatedKeys) : null);
@@ -66,27 +51,28 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public List<Driver> getAll() {
-        List<Driver> list = new ArrayList<>();
+        String query = "SELECT * FROM drivers WHERE is_deleted = false";
+        List<Driver> driversList = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement getAllDriversStatement = connection
-                        .prepareStatement(getAllDriversQuery)) {
+                        .prepareStatement(query)) {
             ResultSet generatedKeys = getAllDriversStatement.executeQuery();
             while (generatedKeys.next()) {
-                list.add(new Driver(generatedKeys.getObject(ID_INDEX, Long.class),
-                        generatedKeys.getString(NAME_INDEX),
-                        generatedKeys.getString(LICENSE_INDEX)));
+                driversList.add(getDriver(generatedKeys));
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Cannot get drivers", e);
         }
-        return list;
+        return driversList;
     }
 
     @Override
     public Driver update(Driver driver) {
+        String query
+                = "UPDATE drivers SET name = ?, license = ? WHERE id = ? AND is_deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement updateDriverStatement = connection
-                        .prepareStatement(updateDriverQuery)) {
+                        .prepareStatement(query)) {
             updateDriverStatement.setString(1, driver.getName());
             updateDriverStatement.setString(2, driver.getLicense());
             updateDriverStatement.setLong(3, driver.getId());
@@ -99,9 +85,10 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public boolean delete(Long id) {
+        String query = "UPDATE drivers SET is_deleted = true WHERE id = ? AND is_deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement deleteDriverStatement = connection
-                        .prepareStatement(deleteDriverQuery)) {
+                        .prepareStatement(query)) {
             deleteDriverStatement.setLong(1, id);
             return deleteDriverStatement.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -113,7 +100,7 @@ public class DriverDaoImpl implements DriverDao {
     public boolean deleteAll() {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement deleteAllDriversStatement = connection
-                        .prepareStatement(deleteAllDriversQuery)) {
+                        .prepareStatement("DELETE FROM drivers")) {
             return deleteAllDriversStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new RuntimeException("Cannot delete all drivers", e);
@@ -121,9 +108,9 @@ public class DriverDaoImpl implements DriverDao {
     }
 
     private Driver getDriver(ResultSet generatedKeys) throws SQLException {
-        Long id = generatedKeys.getObject(ID_INDEX, Long.class);
-        String name = generatedKeys.getString(NAME_INDEX);
-        String license = generatedKeys.getString(LICENSE_INDEX);
+        Long id = generatedKeys.getObject(1, Long.class);
+        String name = generatedKeys.getString(2);
+        String license = generatedKeys.getString(3);
         return new Driver(id, name, license);
     }
 }
