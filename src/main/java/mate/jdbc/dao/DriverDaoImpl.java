@@ -96,17 +96,6 @@ public class DriverDaoImpl implements DriverDao {
         }
     }
 
-    @Override
-    public boolean deleteAll() {
-        try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement deleteAllDriversStatement = connection
-                        .prepareStatement("DELETE FROM drivers")) {
-            return deleteAllDriversStatement.executeUpdate() > 0;
-        } catch (SQLException e) {
-            throw new RuntimeException("Cannot delete all drivers", e);
-        }
-    }
-
     private Driver getDriver(ResultSet generatedKeys) throws SQLException {
         Long id = generatedKeys.getObject(1, Long.class);
         String name = generatedKeys.getString(2);

@@ -9,7 +9,6 @@ public class Main {
 
     public static void main(String[] args) {
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-        driverService.deleteAll();
         Driver bob = driverService.create(new Driver("bob", "license"));
         Driver john = driverService.create(new Driver("john", "license"));
         System.out.println(bob);
