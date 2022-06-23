@@ -25,7 +25,7 @@ public class Main {
                 + System.lineSeparator());
 
         System.out.println("Get by id: "
-                + driverService.get(1L)
+                + driverService.get(driverBob.getId())
                 + System.lineSeparator());
 
         System.out.println("Get all: ");
@@ -40,7 +40,7 @@ public class Main {
 
         System.out.println(System.lineSeparator());
         System.out.println("After delete driver Alice:");
-        if (driverService.delete(1L)) {
+        if (driverService.delete(driverAlice.getId())) {
             driverService.getAll()
                     .forEach(System.out::println);
         }
