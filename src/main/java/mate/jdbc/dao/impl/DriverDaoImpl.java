@@ -49,7 +49,7 @@ public class DriverDaoImpl implements DriverDao {
             }
             return Optional.ofNullable(driver);
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't get driver by ID " + id);
+            throw new DataProcessingException("Can't get driver by ID " + id, e);
         }
     }
 
@@ -84,7 +84,7 @@ public class DriverDaoImpl implements DriverDao {
             statement.executeUpdate();
             return driver;
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't update driver " + driver);
+            throw new DataProcessingException("Can't update driver " + driver, e);
         }
     }
 
