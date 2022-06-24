@@ -60,10 +60,7 @@ public class DriverDaoImpl implements DriverDao {
         try (PreparedStatement statement = getStatement(query)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Long id = resultSet.getObject("id", Long.class);
-                String name = resultSet.getString("name");
-                String licenseNumber = resultSet.getString("license_number");
-                drivers.add(Driver.of(id, name, licenseNumber));
+                drivers.add(getDriver(resultSet));
             }
             return drivers;
         } catch (SQLException e) {

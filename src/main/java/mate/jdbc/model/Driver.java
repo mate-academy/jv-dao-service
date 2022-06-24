@@ -11,6 +11,15 @@ public class Driver {
         this.licenseNumber = licenseNumber;
     }
 
+    private Driver(String name, String licenseNumber) {
+        this.name = name;
+        this.licenseNumber = licenseNumber;
+    }
+
+    public static Driver of(String name, String licenseNumber) {
+        return new Driver(name, licenseNumber);
+    }
+
     public static Driver of(Long id, String name, String licenseNumber) {
         return new Driver(id, name, licenseNumber);
     }
