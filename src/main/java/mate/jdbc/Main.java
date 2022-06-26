@@ -37,7 +37,7 @@ public class Main {
         manufacturer.setName("Opel");
         manufacturer.setCountry("Germany");
         manufacturerService.create(manufacturer);
-        manufacturerService.get(1L);
+        System.out.println(manufacturerService.get(1L));
 
         manufacturer.setName("Reno");
         manufacturer.setCountry("France");
