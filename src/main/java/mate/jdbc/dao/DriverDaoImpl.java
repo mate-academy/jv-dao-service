@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import mate.jdbc.exception.DataProcessingException;
-import mate.jdbc.lib.Service;
+import mate.jdbc.lib.Dao;
 import mate.jdbc.model.Driver;
 import mate.jdbc.util.ConnectionUtil;
 
-@Service
+@Dao
 public class DriverDaoImpl implements DriverDao {
 
     @Override
