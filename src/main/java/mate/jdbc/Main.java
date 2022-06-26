@@ -1,38 +1,38 @@
 package mate.jdbc;
 
-import mate.jdbc.dao.DriverDao;
-import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
+import mate.jdbc.services.DriverService;
+import mate.jdbc.services.ManufacturerService;
 
 public class Main {
-    private static final Injector injector = Injector.getInstance("mate.jdbc.dao");
+    private static final Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
-        DriverDao driverDao = (DriverDao) injector.getInstance(DriverDao.class);
+        DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         Driver max = new Driver("mad Max", "no_license_never_was");
         Driver alonso = new Driver("Fernando", "McLaren#666");
-        max = driverDao.create(max);
-        alonso = driverDao.create(alonso);
-        driverDao.getAll().forEach(System.out::println);
+        max = driverService.create(max);
+        alonso = driverService.create(alonso);
+        driverService.getAll().forEach(System.out::println);
         alonso.setLicenseNumber("renault#777");
-        driverDao.update(alonso);
-        System.out.println(driverDao.get(alonso.getId()).get());
-        driverDao.delete(max.getId());
-        driverDao.getAll().forEach(System.out::println);
+        driverService.update(alonso);
+        System.out.println(driverService.get(alonso.getId()));
+        driverService.delete(max.getId());
+        driverService.getAll().forEach(System.out::println);
 
-        ManufacturerDao manufacturerDao = (ManufacturerDao) injector
-                .getInstance(ManufacturerDao.class);
+        ManufacturerService manufacturerService = (ManufacturerService) injector
+                .getInstance(ManufacturerService.class);
         Manufacturer mcLaren = new Manufacturer("Bruce McLaren Motor Racing Ltd", "UK");
         Manufacturer redBull = new Manufacturer("Red Bull GmbH", "Austria");
-        mcLaren = manufacturerDao.create(mcLaren);
-        redBull = manufacturerDao.create(redBull);
-        manufacturerDao.getAll().forEach(System.out::println);
+        mcLaren = manufacturerService.create(mcLaren);
+        redBull = manufacturerService.create(redBull);
+        manufacturerService.getAll().forEach(System.out::println);
         mcLaren.setName("McLaren Technology Group");
-        manufacturerDao.update(mcLaren);
-        System.out.println(manufacturerDao.get(mcLaren.getId()).get());
-        manufacturerDao.delete(redBull.getId());
-        manufacturerDao.getAll().forEach(System.out::println);
+        manufacturerService.update(mcLaren);
+        System.out.println(manufacturerService.get(mcLaren.getId()));
+        manufacturerService.delete(redBull.getId());
+        manufacturerService.getAll().forEach(System.out::println);
     }
 }
