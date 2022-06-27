@@ -48,15 +48,15 @@ public class Manufacturer {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Manufacturer that = (Manufacturer) o;
-        return Objects.equals(getId(), that.getId())
-                && Objects.equals(getName(), that.getName())
-                && Objects.equals(getCountry(), that.getCountry());
+        Manufacturer manufacturer = (Manufacturer) o;
+        return Objects.equals(id, manufacturer.id)
+                && Objects.equals(getName(), manufacturer.name)
+                && Objects.equals(getCountry(), manufacturer.country);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getCountry());
+        return Objects.hash(id, name, country);
     }
 
     @Override
