@@ -11,26 +11,26 @@ public class Main {
         DriverService driverService = (DriverService) injector
                 .getInstance(DriverService.class);
 
-        Driver driver1 = new Driver();
-        driver1.setName("Super man");
-        driver1.setLicenseNumber("sm1008us");
-        driverService.create(driver1);
+        Driver driverOne = new Driver();
+        driverOne.setName("Super man");
+        driverOne.setLicenseNumber("sm1008us");
+        driverService.create(driverOne);
 
-        Driver driver2 = new Driver();
-        driver2.setName("John Bambino");
-        driver2.setLicenseNumber("jb1916it");
-        driverService.create(driver2);
+        Driver driverSecond = new Driver();
+        driverSecond.setName("John Bambino");
+        driverSecond.setLicenseNumber("jb1916it");
+        driverService.create(driverSecond);
 
         System.out.println(driverService.getAll());
 
-        driver2.setName("Silvester");
-        driver2.setLicenseNumber("s1234ss");
-        driverService.update(driver2);
+        driverSecond.setName("Silvester");
+        driverSecond.setLicenseNumber("s1234ss");
+        driverService.update(driverSecond);
         System.out.println(driverService.getAll());
 
-        driverService.delete(driver2.getId());
+        driverService.delete(driverSecond.getId());
         System.out.println(driverService.getAll());
 
-        System.out.println(driverService.get(driver1.getId()));
+        System.out.println(driverService.get(driverOne.getId()));
     }
 }
