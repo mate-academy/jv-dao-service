@@ -28,11 +28,11 @@ public class DriverDaoImpl implements DriverDao {
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
-                Long id = resultSet.getLong("id");
+                Long id = resultSet.getObject("id", Long.class);
                 driver.setId(id);
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't create a drive: " + driver.getName(), e);
+            throw new DataProcessingException("Can't create a driver: " + driver, e);
         }
         return driver;
     }
@@ -49,7 +49,7 @@ public class DriverDaoImpl implements DriverDao {
                 return Optional.of(createDriverEntity(resultSet));
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't find a driver with ID: " + id, e);
+            throw new DataProcessingException("Can't get a driver by ID: " + id, e);
         }
         return Optional.empty();
     }
@@ -66,7 +66,7 @@ public class DriverDaoImpl implements DriverDao {
                 driverList.add(createDriverEntity(resultSet));
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't get all drivers", e);
+            throw new DataProcessingException("Can't get all drivers from DB", e);
         }
         return driverList;
     }
@@ -83,11 +83,11 @@ public class DriverDaoImpl implements DriverDao {
             statement.setObject(3, driver.getId());
             int updatedRows = statement.executeUpdate();
             if (updatedRows == 0) {
-                throw new RuntimeException("Driver with ID: "
-                        + driver.getId() + " was not found");
+                throw new RuntimeException("Can't update driver " + driver
+                        + ". There is no driver with such ID");
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't get all drivers", e);
+            throw new DataProcessingException("Can't update a driver " + driver, e);
         }
         return driver;
     }
@@ -106,7 +106,7 @@ public class DriverDaoImpl implements DriverDao {
     }
 
     private Driver createDriverEntity(ResultSet resultSet) throws SQLException {
-        Long id = resultSet.getLong("id");
+        Long id = resultSet.getObject("id", Long.class);
         String name = resultSet.getString("name");
         String licenseNumber = resultSet.getString("license_number");
         Driver driver = new Driver();
