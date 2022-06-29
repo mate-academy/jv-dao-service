@@ -6,10 +6,10 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class ConnectionUtil {
-    private static final String URL = "YOUR DATABASE URL";
-    private static final String USERNAME = "YOUR USERNAME";
-    private static final String PASSWORD = "YOUR PASSWORD";
-    private static final String JDBC_DRIVER = "YOUR DRIVER";
+    private static final String URL = "jdbc:mysql://127.0.0.1:3306/taxi_service_db";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "Vsmahlenko2022";
+    private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
 
     static {
         try {
@@ -19,10 +19,15 @@ public class ConnectionUtil {
         }
     }
 
-    public static Connection getConnection() throws SQLException {
-        Properties dbProperties = new Properties();
-        dbProperties.setProperty("user", USERNAME);
-        dbProperties.setProperty("password", PASSWORD);
-        return DriverManager.getConnection(URL, dbProperties);
+    public static Connection getConnection() {
+        try {
+            Properties dbProperties = new Properties();
+            dbProperties.put("user", USERNAME);
+            dbProperties.put("password", PASSWORD);
+            return DriverManager
+                    .getConnection(URL, dbProperties);
+        } catch (SQLException e) {
+            throw new RuntimeException("Can't create connections to taxi_service_db", e);
+        }
     }
 }
