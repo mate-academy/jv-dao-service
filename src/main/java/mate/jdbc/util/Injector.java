@@ -1,4 +1,8 @@
-package mate.jdbc.lib;
+package mate.jdbc.util;
+
+import mate.jdbc.lib.Dao;
+import mate.jdbc.lib.Inject;
+import mate.jdbc.lib.Service;
 
 import java.io.File;
 import java.io.IOException;
