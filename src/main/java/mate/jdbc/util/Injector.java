@@ -1,9 +1,5 @@
 package mate.jdbc.util;
 
-import mate.jdbc.lib.Dao;
-import mate.jdbc.lib.Inject;
-import mate.jdbc.lib.Service;
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -14,6 +10,9 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import mate.jdbc.lib.Dao;
+import mate.jdbc.lib.Inject;
+import mate.jdbc.lib.Service;
 
 public class Injector {
     private static final Map<String, Injector> injectors = new HashMap<>();
@@ -114,6 +113,7 @@ public class Injector {
             throw new RuntimeException("Can't set value to field ", e);
         }
     }
+
     /**
      * Scans all classes accessible from the context class loader which
      * belong to the given package and subpackages.
@@ -142,6 +142,7 @@ public class Injector {
         }
         return classes;
     }
+
     /**
      * Recursive method used to find all classes in a given directory and subdirs.
      *
