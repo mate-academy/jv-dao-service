@@ -20,12 +20,12 @@ public class Main {
         manufacturerService.create(gelly);
         manufacturerService.create(kia);
 
-        System.out.println(manufacturerService.get(67L));
+        System.out.println(manufacturerService.get(audi.getId()));
 
         Manufacturer kiaModel2 = new Manufacturer(68L,"Kia", "South Korea");
         manufacturerService.update(kiaModel2);
 
-        manufacturerService.delete(68L);
+        manufacturerService.delete(gelly.getId());
 
         manufacturerService.getAll().forEach(System.out::println);
 
@@ -38,11 +38,11 @@ public class Main {
         driverService.create(alice);
         driverService.create(tom);
 
-        System.out.println(driverService.get(2L));
+        System.out.println(driverService.get(bob.getId()));
 
         Driver aliceSister = new Driver(5L, "Alice", "BB3333BB");
         driverService.update(aliceSister);
-        driverService.delete(6L);
+        driverService.delete(alice.getId());
 
         driverService.getAll().forEach(System.out::println);
     }
