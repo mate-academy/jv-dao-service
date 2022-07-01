@@ -21,8 +21,8 @@ public class Main {
         manufacturer = manufacturerService.update(manufacturer);
         System.out.println("Update new manufacturer" + manufacturer);
 
-        System.out.println("Get All manufacturers"
-                + System.lineSeparator() + manufacturerService.getAll());
+        System.out.println("Get All manufacturers" + System.lineSeparator());
+        manufacturerService.getAll().stream().forEach(System.out::println);
 
         System.out.println(manufacturerService.get(manufacturer.getId()));
 
@@ -42,7 +42,8 @@ public class Main {
         driver = driverService.update(driver);
         System.out.println("Update new driver" + driver);
 
-        System.out.println("Get All drivers" + System.lineSeparator() + driverService.getAll());
+        System.out.println("Get All drivers" + System.lineSeparator());
+        driverService.getAll().stream().forEach(System.out::println);
 
         System.out.println(driverService.get(driver.getId()));
 
