@@ -4,12 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.util.Scanner;
 
 public class ConnectionUtil {
-    private static final String URL = "YOUR DATABASE URL";
-    private static final String USERNAME = "YOUR USERNAME";
-    private static final String PASSWORD = "YOUR PASSWORD";
-    private static final String JDBC_DRIVER = "YOUR DRIVER";
+    private static final String URL = "jdbc:mysql://localhost:3306/taxi_service";
+    private static final String USERNAME;
+    private static final String PASSWORD;
+    private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
 
     static {
         try {
@@ -17,6 +18,13 @@ public class ConnectionUtil {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Can't find SQL Driver", e);
         }
+        Scanner scanLogin = new Scanner(System.in);
+        System.out.println("Enter your mySQL Login");
+        USERNAME = scanLogin.nextLine();
+
+        Scanner scanPassword = new Scanner(System.in);
+        System.out.println("Enter your mySQL Password");
+        PASSWORD = scanPassword.nextLine();
     }
 
     public static Connection getConnection() throws SQLException {
