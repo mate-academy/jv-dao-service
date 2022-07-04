@@ -22,7 +22,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     public Manufacturer get(Long id) {
         Optional<Manufacturer> manufacturer = manufacturerDao.get(id);
         if (manufacturer.isEmpty()) {
-            throw new RuntimeException("Can`t find account with id: " + id);
+            throw new RuntimeException("Can`t find manufacturer with id: " + id);
         }
         return manufacturer.get();
     }
