@@ -23,7 +23,7 @@ public class Main {
         manufacturerService.update(toyota);
         System.out.println(manufacturerService.delete(ferrari.getId()));
         manufacturerService.getAll().forEach(System.out::println);
-        System.out.println("------------------------------------------------------");
+
         Driver bob = new Driver(null, "Bob", "B13654424");
         Driver alice = new Driver(null, "Alice", "A0002144");
         Driver ted = new Driver(null, "Ted", "G544061739250");
