@@ -42,11 +42,11 @@ public class Main {
         manufacturerService.update(new Manufacturer(ford.getId(), "Porsche", "Germany"));
 
         //manufacturerService.delete() method check
-        manufacturerService.delete(ford.getId());
+        manufacturerService.delete(audi.getId());
 
         //manufacturerService.get() method check
         System.out.println(manufacturerService.get(lincoln.getId()));
-        System.out.println(manufacturerService.get(audi.getId()));
+        System.out.println(manufacturerService.get(ford.getId()));
 
         //manufacturerService.getAll() method check
         manufacturerService.getAll().forEach(System.out::println);
