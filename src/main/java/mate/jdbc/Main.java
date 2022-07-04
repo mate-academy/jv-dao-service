@@ -22,8 +22,8 @@ public class Main {
 
         System.out.println(manufacturerService.get(audi.getId()));
 
-        Manufacturer kiaModel2 = new Manufacturer(68L,"Kia", "South Korea");
-        manufacturerService.update(kiaModel2);
+        kia.setCountry("South Korea");
+        manufacturerService.update(kia);
 
         manufacturerService.delete(gelly.getId());
 
@@ -40,9 +40,8 @@ public class Main {
 
         System.out.println(driverService.get(bob.getId()));
 
-        Driver aliceSister = new Driver(5L, "Alice", "BB3333BB");
-        driverService.update(aliceSister);
-        driverService.delete(alice.getId());
+        alice.setLicenseNumber("BB3333BB");
+        driverService.update(alice);
 
         driverService.getAll().forEach(System.out::println);
     }
