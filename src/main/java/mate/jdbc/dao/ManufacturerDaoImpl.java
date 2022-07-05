@@ -45,7 +45,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             ResultSet resultSet = statement.executeQuery();
             Manufacturer manufacturer = null;
             if (resultSet.next()) {
-                manufacturer = getManufacturer(resultSet);
+                manufacturer = parseManufacturerFromResultSet(resultSet);
             }
             return Optional.ofNullable(manufacturer);
         } catch (SQLException e) {
@@ -62,7 +62,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             List<Manufacturer> manufacturers = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                manufacturers.add(getManufacturer(resultSet));
+                manufacturers.add(parseManufacturerFromResultSet(resultSet));
             }
             return manufacturers;
         } catch (SQLException e) {
@@ -102,7 +102,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         }
     }
 
-    private Manufacturer getManufacturer(ResultSet resultSet) throws SQLException {
+    private Manufacturer parseManufacturerFromResultSet(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getObject("id", Long.class);
         String name = resultSet.getString("name");
         String country = resultSet.getString("country");
