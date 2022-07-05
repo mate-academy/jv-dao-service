@@ -10,24 +10,26 @@ public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
-        DriverService driverService = (DriverService)
-                injector.getInstance(DriverService.class);
-
-        //driverService.create() method check
         Driver ranjit = new Driver();
         ranjit.setId(21L);
         ranjit.setName("Ranjit");
         ranjit.setLicenseNumber("123456");
-        driverService.create(ranjit);
+
         Driver semen = new Driver();
         semen.setId(22L);
         semen.setName("Semen");
         semen.setLicenseNumber("234567");
-        driverService.create(semen);
+
         Driver michael = new Driver();
         michael.setId(23L);
         michael.setName("Michael");
         michael.setLicenseNumber("345678");
+
+        DriverService driverService = (DriverService)
+                injector.getInstance(DriverService.class);
+        //driverService.create() method check
+        driverService.create(ranjit);
+        driverService.create(semen);
         driverService.create(michael);
 
         //driverService.update() method check
