@@ -10,9 +10,9 @@ public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
-        Manufacturer ferrari = new Manufacturer(null,"Ferrari", "Italy");
-        Manufacturer ford = new Manufacturer(null,"Ford", "USA");
-        Manufacturer toyota = new Manufacturer(null, "Toyota", "Germany");
+        Manufacturer ferrari = new Manufacturer("Ferrari", "Italy");
+        Manufacturer ford = new Manufacturer("Ford", "USA");
+        Manufacturer toyota = new Manufacturer("Toyota", "Germany");
         ManufacturerService manufacturerService =
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
         manufacturerService.create(ferrari);
@@ -24,9 +24,9 @@ public class Main {
         System.out.println(manufacturerService.delete(ferrari.getId()));
         manufacturerService.getAll().forEach(System.out::println);
 
-        Driver bob = new Driver(null, "Bob", "B13654424");
-        Driver alice = new Driver(null, "Alice", "A0002144");
-        Driver ted = new Driver(null, "Ted", "G544061739250");
+        Driver bob = new Driver("Bob", "B13654424");
+        Driver alice = new Driver("Alice", "A0002144");
+        Driver ted = new Driver("Ted", "G544061739250");
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         driverService.create(bob);
         driverService.create(alice);
