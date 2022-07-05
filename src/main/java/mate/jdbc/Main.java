@@ -13,12 +13,17 @@ public class Main {
         ManufacturerService manufacturerService = (ManufacturerService) injector
                 .getInstance(ManufacturerService.class);
 
-        Manufacturer bmw = new Manufacturer("BMW", "Germany");
-        Manufacturer mustang = new Manufacturer("Mustang", "USA");
-        Manufacturer audi = new Manufacturer("Audi", "Germany");
-
+        Manufacturer bmw = new Manufacturer();
+        bmw.setName("BMW");
+        bmw.setCountry("Germany");
         manufacturerService.create(bmw);
+        Manufacturer mustang = new Manufacturer();
+        mustang.setName("Mustang");
+        mustang.setCountry("USA");
         manufacturerService.create(mustang);
+        Manufacturer audi = new Manufacturer();
+        audi.setName("Audi");
+        audi.setCountry("Germany");
         manufacturerService.create(audi);
         manufacturerService.getAll().forEach(System.out::println);
 
@@ -32,12 +37,17 @@ public class Main {
         DriverService driverService = (DriverService) injector
                 .getInstance(DriverService.class);
 
-        Driver dima = new Driver("Dima", "12345");
-        Driver bob = new Driver("Bob", "67890");
-        Driver alice = new Driver("Alice", "15973");
-
+        Driver dima = new Driver();
+        dima.setName("Dima");
+        dima.setLicenseNumber("12345");
         driverService.create(dima);
+        Driver bob = new Driver();
+        bob.setName("Bob");
+        bob.setLicenseNumber("67890");
         driverService.create(bob);
+        Driver alice = new Driver();
+        alice.setName("Alice");
+        alice.setLicenseNumber("15973");
         driverService.create(alice);
         driverService.getAll().forEach(System.out::println);
 
