@@ -23,7 +23,6 @@ public class Main {
         manufacturerService.getAll().forEach(System.out::println);
 
         mustang.setCountry("Great Britain");
-
         manufacturerService.update(mustang);
         System.out.println(manufacturerService.get(mustang.getId()));
 
@@ -43,7 +42,6 @@ public class Main {
         driverService.getAll().forEach(System.out::println);
 
         dima.setLicenseNumber("00000");
-
         driverService.update(dima);
         System.out.println(driverService.get(dima.getId()));
 
