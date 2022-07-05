@@ -18,13 +18,12 @@ public class ConnectionUtil {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Can't find SQL Driver", e);
         }
-        Scanner scanLogin = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your mySQL Login");
-        USERNAME = scanLogin.nextLine();
+        USERNAME = scanner.nextLine();
 
-        Scanner scanPassword = new Scanner(System.in);
         System.out.println("Enter your mySQL Password");
-        PASSWORD = scanPassword.nextLine();
+        PASSWORD = scanner.nextLine();
     }
 
     public static Connection getConnection() throws SQLException {

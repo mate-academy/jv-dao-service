@@ -22,13 +22,13 @@ public class DriverDaoImpl implements DriverDao {
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement =
                          connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, driver.getName());
-            statement.setString(2, driver.getLicenseNumber());
-            statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
                 driver.setId(resultSet.getObject(1, Long.class));
             }
+            statement.setString(1, driver.getName());
+            statement.setString(2, driver.getLicenseNumber());
+            statement.executeUpdate();
             return driver;
         } catch (SQLException e) {
             throw new DataProcessingException("Can't create driver" + driver, e);
@@ -94,9 +94,13 @@ public class DriverDaoImpl implements DriverDao {
     }
 
     private Driver getDriver(ResultSet resultSet) throws SQLException {
+        Driver driver = new Driver();
         Long id = resultSet.getObject("id", Long.class);
         String name = resultSet.getString("name");
         String licenseNumber = resultSet.getString("license_number");
-        return new Driver(id, name, licenseNumber);
+        driver.setId(id);
+        driver.setLicenseNumber(licenseNumber);
+        driver.setName(name);
+        return driver;
     }
 }

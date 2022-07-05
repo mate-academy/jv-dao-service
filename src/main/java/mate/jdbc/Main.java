@@ -12,13 +12,30 @@ public class Main {
     public static void main(String[] args) {
         DriverService driverService = (DriverService)
                 injector.getInstance(DriverService.class);
+
         //driverService.create() method check
-        Driver ranjit = driverService.create(new Driver("Ranjit", "12345"));
-        Driver semen = driverService.create(new Driver("Semen", "23456"));
-        Driver michael = driverService.create(new Driver("Michael", "34567"));
+        Driver ranjit = new Driver();
+        ranjit.setId(21L);
+        ranjit.setName("Ranjit");
+        ranjit.setLicenseNumber("123456");
+        driverService.create(ranjit);
+        Driver semen = new Driver();
+        semen.setId(22L);
+        semen.setName("Semen");
+        semen.setLicenseNumber("234567");
+        driverService.create(semen);
+        Driver michael = new Driver();
+        michael.setId(23L);
+        michael.setName("Michael");
+        michael.setLicenseNumber("345678");
+        driverService.create(michael);
 
         //driverService.update() method check
-        driverService.update(new Driver(ranjit.getId(), "Umesh", "54321"));
+        Driver umesh = new Driver();
+        umesh.setId(ranjit.getId());
+        umesh.setName("Umesh");
+        umesh.setLicenseNumber("54321");
+        driverService.update(umesh);
 
         //driverService.delete() method check
         driverService.delete(semen.getId());
