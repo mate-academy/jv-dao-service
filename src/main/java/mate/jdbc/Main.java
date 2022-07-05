@@ -16,7 +16,7 @@ public class Main {
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
 
         Driver driver = new Driver();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 2; i++) {
             driver.setName("Bob" + i);
             driver.setLicenseNumber(String.valueOf(new Random().nextInt(1000)));
             driverService.create(driver);
@@ -28,7 +28,7 @@ public class Main {
         driverService.getAll().forEach(System.out::println);
 
         Manufacturer manufacturer = new Manufacturer();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 2; i++) {
             manufacturer.setName("Bob" + i);
             manufacturer.setCountry("Country" + i);
             manufacturerService.create(manufacturer);
