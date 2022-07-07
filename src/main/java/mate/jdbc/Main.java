@@ -12,8 +12,8 @@ public class Main {
         Injector injector = Injector.getInstance("mate.jdbc");
         ManufacturerService manufacturerService = (ManufacturerService)
                 injector.getInstance(ManufacturerService.class);
-        Manufacturer bmw = new Manufacturer(0L, "BMW", "Germany");
-        Manufacturer mercedes = new Manufacturer(0L, "Mercedes", "Germany");
+        Manufacturer bmw = new Manufacturer("BMW", "Germany");
+        Manufacturer mercedes = new Manufacturer("Mercedes", "Germany");
         Manufacturer newBmw = manufacturerService.create(bmw);
         Manufacturer newMercedes = manufacturerService.create(mercedes);
         System.out.println(manufacturerService.delete(newMercedes.getId()));
