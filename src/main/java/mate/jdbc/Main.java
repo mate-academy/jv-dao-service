@@ -1,51 +1,45 @@
 package mate.jdbc;
 
-import mate.jdbc.dao.DriverDao;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.DriverService;
 import mate.jdbc.service.ManufacturerService;
-import mate.jdbc.service.impl.DriverServiceImpl;
-import mate.jdbc.service.impl.ManufacturerServiceImpl;
-
-import java.util.Optional;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
-        ManufacturerService manufacturerService = (ManufacturerService) injector.getInstance((ManufacturerService.class));
-        DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-
+        ManufacturerService manufacturerService = (ManufacturerService) injector
+                .getInstance((ManufacturerService.class));
 
         Manufacturer firstManufacturer = new Manufacturer();
-        firstManufacturer.setName("Bob");
-        firstManufacturer.setCountry("Moon");
-        Manufacturer manufacturerBob = manufacturerService.create(firstManufacturer);
-        Manufacturer secondManufecturer = new Manufacturer();
-        secondManufecturer.setName("Jimmy");
-        secondManufecturer.setCountry("Australia");
-        Manufacturer manufacturerJimmy = manufacturerService.create(secondManufecturer);
+        firstManufacturer.setName("Jimmy");
+        firstManufacturer.setCountry("Australia");
+        Manufacturer manufacturerJimmy = manufacturerService.create(firstManufacturer);
         manufacturerService.getAll().forEach(System.out::println);
+        Manufacturer secondManufacturer = new Manufacturer();
+        secondManufacturer.setName("Bob");
+        secondManufacturer.setCountry("Moon");
+        Manufacturer manufacturerBob = manufacturerService.create(secondManufacturer);
         manufacturerService.delete(manufacturerBob.getId());
-        secondManufecturer.setName("Bilbo");
-        manufacturerService.update(secondManufecturer);
+        firstManufacturer.setName("Bilbo");
+        manufacturerService.update(firstManufacturer);
+
+        DriverService driverService = (DriverService) injector
+                .getInstance(DriverService.class);
 
         Driver firstDriver = new Driver();
-        firstDriver.setName("Mark");
-        firstDriver.setLicenseNumber("71777");
-        Driver driverMark = driverService.create(firstDriver);
+        firstDriver.setName("Bibbity");
+        firstDriver.setLicenseNumber("2452211");
+        Driver driverBibbity = driverService.create(firstDriver);
         Driver secondDriver = new Driver();
-        secondDriver.setName("Bibbity");
-        secondManufecturer.setCountry("New Zeeland");
-        Driver driverBibbity = driverService.create(secondDriver);
+        secondDriver.setName("Mark");
+        secondDriver.setLicenseNumber("71777");
         driverService.getAll().forEach(System.out::println);
+        Driver driverMark = driverService.create(secondDriver);
         driverService.delete(driverMark.getId());
-        secondDriver.setName("Bilbo");
-        driverService.update(secondDriver);
-
-
-
+        firstDriver.setName("Bilbo");
+        driverService.update(firstDriver);
     }
 }

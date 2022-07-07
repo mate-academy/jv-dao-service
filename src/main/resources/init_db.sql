@@ -1,9 +1,19 @@
-CREATE SCHEMA IF NOT EXISTS `taxi_service` DEFAULT CHARACTER SET utf8;
-USE `taxi_service`;
+create schema taxi_service collate utf8_general_ci;
 
-CREATE TABLE `manufacturers` (
-                                        `id` BIGINT(11) NOT NULL AUTO_INCREMENT,
-                                        `name` VARCHAR(225) NOT NULL,
-                                        `country` VARCHAR(225) NOT NULL,
-                                        `is_deleted` TINYINT NOT NULL DEFAULT 0,
-                                        PRIMARY KEY (`id`));
+create table drivers
+(
+    id            bigint auto_increment primary key,
+    name          varchar(255)         null,
+    licenseNumber varchar(255)         null,
+    is_deleted    tinyint(1) default 0 not null
+)
+    charset = utf8mb4;
+
+create table manufacturers
+(
+    id         bigint auto_increment    primary key,
+    name       varchar(255)             null,
+    country    varchar(255)             null,
+    is_deleted tinyint(1) default 0     not null
+)
+    charset = utf8mb4;
