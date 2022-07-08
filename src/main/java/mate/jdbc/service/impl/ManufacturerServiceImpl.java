@@ -2,6 +2,7 @@ package mate.jdbc.service.impl;
 
 import java.util.List;
 import mate.jdbc.dao.ManufacturerDao;
+import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.lib.Service;
 import mate.jdbc.model.Manufacturer;
@@ -9,9 +10,8 @@ import mate.jdbc.service.ManufacturerService;
 
 @Service
 public class ManufacturerServiceImpl implements ManufacturerService {
-    private static final Injector injector = Injector.getInstance("mate.jdbc");
-    private final ManufacturerDao manufecturersDao = (ManufacturerDao) injector
-            .getInstance(ManufacturerDao.class);
+    @Inject
+    private ManufacturerDao manufecturersDao;
 
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
