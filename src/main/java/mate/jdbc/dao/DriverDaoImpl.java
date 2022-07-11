@@ -100,7 +100,6 @@ public class DriverDaoImpl implements DriverDao {
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't delete a drivers by id " + id, e);
-
         }
     }
 
