@@ -91,7 +91,7 @@ public class DriverDaoImpl implements DriverDao {
                     + driver.getName() + " and license number "
                     + driver.getLicenseNumber(), e);
         }
-        throw new RuntimeException("Can't update driver with name"
+        throw new DataProcessingException("Can't update driver with name"
                 + driver.getName() + " and license number "
                 + driver.getLicenseNumber() + ". DB rows updated less than 1");
     }
@@ -108,7 +108,7 @@ public class DriverDaoImpl implements DriverDao {
         } catch (SQLException e) {
             throw new DataProcessingException("Can't delete driver with id" + id, e);
         }
-        throw new RuntimeException("Can't delete driver with id: "
+        throw new DataProcessingException("Can't delete driver with id: "
                 + id + ". DB rows updated less than 1");
     }
 
