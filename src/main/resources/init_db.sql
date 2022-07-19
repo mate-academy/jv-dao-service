@@ -14,4 +14,3 @@ CREATE TABLE `manufacturers` (
                                         `license_number` VARCHAR(45) NULL,
                                         `is_deleted` TINYINT(11) NULL DEFAULT 0,
                                         PRIMARY KEY (`id`))
-
