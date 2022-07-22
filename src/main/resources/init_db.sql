@@ -1,4 +1,4 @@
-CREATE SCHEMA IF NOT EXISTS `taxi_service` DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE SCHEMA IF NOT EXISTS `taxi_service` DEFAULT CHARACTER SET utf8mb3;
 USE `taxi_service`;
 
 DROP TABLE IF EXISTS `manufacturers`;
@@ -16,5 +16,3 @@ CREATE TABLE `drivers` (
   `is_deleted` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
-
-
