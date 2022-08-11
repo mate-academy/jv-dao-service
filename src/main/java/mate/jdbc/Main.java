@@ -23,10 +23,10 @@ public class Main {
         driverService.getAll().forEach(System.out::println);
 
         System.out.println("Get driver with id: 1.");
-        System.out.println(driverService.get(1L));
+        System.out.println(driverService.get(john.getId()));
 
         System.out.println("Delete driver with id: 3");
-        System.out.println(driverService.delete(3L));
+        System.out.println(driverService.delete(pamela.getId()));
         driverService.getAll().forEach(System.out::println);
 
         System.out.println("Update driver with name: Steve - change license number.");
