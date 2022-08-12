@@ -1,14 +1,10 @@
 package mate.jdbc;
 
-import mate.jdbc.dao.DriverDaoImpl;
-import mate.jdbc.dao.ManufacturerDaoImpl;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.DriverService;
-import mate.jdbc.service.DriverServiceImpl;
 import mate.jdbc.service.ManufacturerService;
-import mate.jdbc.service.ManufacturerServiceImpl;
 
 public class Main {
     private static final Injector injector
@@ -27,8 +23,8 @@ public class Main {
         manufacturerFord.setName("Ford");
         manufacturerFord.setCountry("USA");
 
-        ManufacturerService manufacturerService
-                = new ManufacturerServiceImpl(new ManufacturerDaoImpl());
+        ManufacturerService manufacturerService = (ManufacturerService)
+                injector.getInstance(ManufacturerService.class);
         manufacturerService.create(manufacturerPeugeot);
         manufacturerService.create(manufacturerVolkswagen);
         manufacturerService.create(manufacturerFord);
@@ -49,8 +45,8 @@ public class Main {
         driverDave.setName("Dave");
         driverDave.setLicenseNumber("22-33-44");
 
-        DriverService driverService
-                = new DriverServiceImpl(new DriverDaoImpl());
+        DriverService driverService = (DriverService)
+                injector.getInstance(DriverService.class);
         driverService.create(driverLeo);
         driverService.create(driverDave);
         driverService.getAll().forEach(System.out::println);
