@@ -17,9 +17,9 @@ public class Main {
         manufacturerService.create(manufacturer);
         manufacturer = new Manufacturer("DELL", "Usa");
         manufacturer = manufacturerService.create(manufacturer);
-        System.out.println(manufacturerService.get(manufacturer.getId()).toString());
+        System.out.println(manufacturerService.get(manufacturer.getId()));
         manufacturer.setCountry(manufacturer.getCountry().toUpperCase());
-        System.out.println(manufacturerService.update(manufacturer).toString());
+        System.out.println(manufacturerService.update(manufacturer));
         manufacturerService.delete(manufacturer.getId());
         DriverService driverService =
                 (DriverService) injector.getInstance(DriverService.class);
@@ -28,9 +28,9 @@ public class Main {
         driverService.create(driver);
         driver = new Driver("Max", "UA7777777");
         driver = driverService.create(driver);
-        System.out.println(driverService.get(driver.getId()).toString());
+        System.out.println(driverService.get(driver.getId()));
         driver.setName(driver.getName().toUpperCase());
-        System.out.println(driverService.update(driver).toString());
+        System.out.println(driverService.update(driver));
         driverService.delete(driver.getId());
 
     }
