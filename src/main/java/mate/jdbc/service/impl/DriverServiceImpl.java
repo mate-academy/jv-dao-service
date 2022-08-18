@@ -3,6 +3,7 @@ package mate.jdbc.service.impl;
 import java.util.List;
 import mate.jdbc.dao.DriverDao;
 import mate.jdbc.dao.impl.DriverDaoImpl;
+import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
 import mate.jdbc.model.Driver;
@@ -20,7 +21,11 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver get(Long id) {
-        return driverDao.get(id).get();
+        if (driverDao.get(id).isPresent()) {
+            return driverDao.get(id).get();
+        } else {
+            throw new DataProcessingException("Couldn't get driver by id: " + id);
+        }
     }
 
     @Override
