@@ -18,7 +18,8 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer get(Long id) {
-        return manufacturerDao.get(id).orElseGet(() -> new Manufacturer());
+        return manufacturerDao.get(id).orElseThrow(() ->
+                new RuntimeException("Service Manufacturer can't get Manufacturer by id " + id));
     }
 
     @Override

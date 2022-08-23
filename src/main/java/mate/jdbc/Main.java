@@ -23,7 +23,7 @@ public class Main {
         bob.setLicenseNumber("XXX213123213");
         driverService.update(bob);
         driverService.getAll().forEach(System.out::println);
-        driverService.get(bob.getId());
+        driverService.delete(bob.getId());
         driverService.getAll().forEach(System.out::println);
 
         Manufacturer opel = new Manufacturer();
