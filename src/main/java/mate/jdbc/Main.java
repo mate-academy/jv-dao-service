@@ -1,32 +1,32 @@
 package mate.jdbc;
 
-import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.DriverService;
+import mate.jdbc.service.ManufacturerService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
-        ManufacturerDao manufacturerDao =
-                (ManufacturerDao) injector.getInstance(ManufacturerDao.class);
-        Manufacturer manufacturerAudi = new Manufacturer(null, "Nissan", "Japan");
-        Manufacturer manufacturerBmw = new Manufacturer(null, "Porsche", "Germany");
-        manufacturerAudi = manufacturerDao.create(manufacturerAudi);
-        manufacturerBmw = manufacturerDao.create(manufacturerBmw);
+        ManufacturerService manufacturerService =
+                (ManufacturerService) injector.getInstance(ManufacturerService.class);
+        Manufacturer manufacturerNissan = new Manufacturer(null, "Nissan", "Japan");
+        Manufacturer manufacturerPorsche = new Manufacturer(null, "Porsche", "Germany");
+        manufacturerService.create(manufacturerNissan);
+        manufacturerService.create(manufacturerPorsche);
         System.out.println("Added two manufacturers");
-        manufacturerDao.getAll().forEach(System.out::println);
-        manufacturerAudi.setCountry("Ukraine");
-        manufacturerDao.update(manufacturerAudi);
+        manufacturerService.getAll().forEach(System.out::println);
+        manufacturerNissan.setCountry("Ukraine");
+        manufacturerService.update(manufacturerNissan);
         System.out.println("Updated audi manufacturer");
-        manufacturerDao.getAll().forEach(System.out::println);
-        manufacturerDao.delete(manufacturerBmw.getId());
+        manufacturerService.getAll().forEach(System.out::println);
+        manufacturerService.delete(manufacturerPorsche.getId());
         System.out.println("Deleted BMW manufacturer");
-        manufacturerDao.getAll().forEach(System.out::println);
+        manufacturerService.getAll().forEach(System.out::println);
         System.out.println("Got audi manufacturer");
-        System.out.println(manufacturerDao.get(manufacturerAudi.getId()));
+        System.out.println(manufacturerService.get(manufacturerNissan.getId()));
 
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         Driver bobDriver = new Driver("Bob","1234567");
