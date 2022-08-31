@@ -1,7 +1,6 @@
 package mate.jdbc;
 
 import mate.jdbc.model.Driver;
-import mate.jdbc.model.Manufacturer;
 import mate.jdbc.services.DriverService;
 import mate.jdbc.services.DriverServiceImpl;
 
@@ -22,11 +21,5 @@ public class Main {
         System.out.println();
         driverService.delete(driverIgor.getId());
         driverService.getAll().forEach(System.out::println);
-        System.out.println();
-
-        Manufacturer manufacturerHonda = new Manufacturer();
-        Manufacturer manufacturerSuzuki = new Manufacturer();
-
-
     }
 }
