@@ -44,8 +44,7 @@ public class Driver {
         return "Driver{"
                 + "id=" + id
                 + ", name='" + name + '\''
-                + ", licenseNumber='"
-                + licenseNumber + '\''
+                + ", licenseNumber='" + licenseNumber + '\''
                 + '}';
     }
 }
