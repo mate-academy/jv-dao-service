@@ -1,11 +1,12 @@
 package mate.jdbc.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import mate.jdbc.model.Manufacturer;
 
 public interface ManufacturerDao {
-    Manufacturer create(Manufacturer manufacturer);
+    Manufacturer create(Manufacturer manufacturer) throws SQLException;
 
     Optional<Manufacturer> get(Long id);
 
