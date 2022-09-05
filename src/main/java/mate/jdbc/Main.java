@@ -16,8 +16,14 @@ public class Main {
         Manufacturer manufacturer = new Manufacturer();
         manufacturer.setName("Dachia");
         manufacturer.setCountry("Romania");
-        manufacturerService.create(manufacturer);
+        Manufacturer manufacturerFromDb = manufacturerService.create(manufacturer);
         System.out.println(manufacturer);
+        System.out.println("--------------------");
+
+        System.out.println("Get manufacturer");
+        Manufacturer optionalManufacturer =
+                manufacturerService.get(manufacturerFromDb.getId());
+        System.out.println(optionalManufacturer);
         System.out.println("--------------------");
 
         System.out.println("GetAll manufacturer");
@@ -25,21 +31,16 @@ public class Main {
         allManufacturer.stream().forEach(System.out::println);
         System.out.println("--------------------");
 
-        System.out.println("Get manufacturer");
-        Manufacturer optionalManufacturer = manufacturerService.get(2L);
-        System.out.println(optionalManufacturer);
-        System.out.println("--------------------");
-
         System.out.println("Update manufacturer");
         Manufacturer updateManufacturer = new Manufacturer();
-        updateManufacturer.setId(14L);
+        updateManufacturer.setId(manufacturerFromDb.getId());
         updateManufacturer.setName("Kia");
         updateManufacturer.setCountry("Korea");
         System.out.println(manufacturerService.update(updateManufacturer));
         System.out.println("--------------------");
 
         System.out.println("Delete manufacturer");
-        System.out.println(manufacturerService.delete(21L));
+        System.out.println(manufacturerService.delete(manufacturerFromDb.getId()));
         System.out.println("--------------------");
 
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
@@ -47,8 +48,13 @@ public class Main {
         Driver driver = new Driver();
         driver.setName("Sergey");
         driver.setLicenseNumber("987445");
-        driverService.create(driver);
+        Driver driverFromDb = driverService.create(driver);
         System.out.println(driver);
+        System.out.println("--------------------");
+
+        System.out.println("Get Driver");
+        Driver optionalDriver = driverService.get(driverFromDb.getId());
+        System.out.println(optionalDriver);
         System.out.println("--------------------");
 
         System.out.println("GetAll drivers");
@@ -56,21 +62,16 @@ public class Main {
         allDrivers.stream().forEach(System.out::println);
         System.out.println("--------------------");
 
-        System.out.println("Get Driver");
-        Driver optionalDriver = driverService.get(3L);
-        System.out.println(optionalDriver);
-        System.out.println("--------------------");
-
         System.out.println("Update Driver");
         Driver updateDriver = new Driver();
-        updateDriver.setId(6L);
+        updateDriver.setId(driverFromDb.getId());
         updateDriver.setName("Slava");
         updateDriver.setLicenseNumber("99999");
         System.out.println(driverService.update(updateDriver));
         System.out.println("--------------------");
 
         System.out.println("Delete driver");
-        System.out.println(driverService.delete(4L));
+        System.out.println(driverService.delete(driverFromDb.getId()));
         System.out.println("--------------------");
     }
 }
