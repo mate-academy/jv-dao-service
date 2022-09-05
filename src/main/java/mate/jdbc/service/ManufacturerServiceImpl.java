@@ -1,5 +1,6 @@
 package mate.jdbc.service;
 
+import java.sql.SQLException;
 import java.util.List;
 import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.lib.Inject;
@@ -13,21 +14,25 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        return manufacturerDao.create(manufacturer);
+        try {
+            return manufacturerDao.create(manufacturer);
+        } catch (SQLException e) {
+            throw new RuntimeException("Can't create Manufacturer ", e);
+        }
     }
 
     @Override
-    public mate.jdbc.model.Manufacturer get(Long id) {
+    public Manufacturer get(Long id) {
         return manufacturerDao.get(id).get();
     }
 
     @Override
-    public List<mate.jdbc.model.Manufacturer> getAll() {
+    public List<Manufacturer> getAll() {
         return manufacturerDao.getAll();
     }
 
     @Override
-    public mate.jdbc.model.Manufacturer update(Manufacturer manufacturer) {
+    public Manufacturer update(Manufacturer manufacturer) {
         return manufacturerDao.update(manufacturer);
     }
 
