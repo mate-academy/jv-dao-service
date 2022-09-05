@@ -20,10 +20,10 @@ public class ConnectionUtil {
     }
 
     public static Connection getConnection() throws SQLException {
+        try {
         Properties dbProperties = new Properties();
         dbProperties.setProperty("user", USERNAME);
         dbProperties.setProperty("password", PASSWORD);
-        try {
         return DriverManager.getConnection(URL, dbProperties);
         } catch (SQLException e) {
             throw new RuntimeException("Can't create connection to DB ", e);
