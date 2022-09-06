@@ -1,6 +1,5 @@
 package mate.jdbc.service;
 
-import java.sql.SQLException;
 import java.util.List;
 import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.lib.Inject;
@@ -14,7 +13,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-            return manufacturerDao.create(manufacturer);
+        return manufacturerDao.create(manufacturer);
     }
 
     @Override
