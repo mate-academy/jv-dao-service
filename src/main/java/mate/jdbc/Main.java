@@ -42,6 +42,6 @@ public class Main {
         driverService.getAll().stream().forEach(System.out::println);
 
         System.out.println("--------------Get one-----------------");
-        System.out.println(driverService.get(1L));
+        System.out.println(driverService.get(hamilton.getId()));
     }
 }
