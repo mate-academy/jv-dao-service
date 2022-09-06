@@ -14,11 +14,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        try {
             return manufacturerDao.create(manufacturer);
-        } catch (SQLException e) {
-            throw new RuntimeException("Can't create Manufacturer ", e);
-        }
     }
 
     @Override
