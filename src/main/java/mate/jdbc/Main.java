@@ -1,7 +1,6 @@
 package mate.jdbc;
 
 import java.util.List;
-import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
@@ -15,8 +14,6 @@ public class Main {
     public static void main(String[] args) {
         ManufacturerService manufacturerService =
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
-        DriverService driverService =
-                (DriverService) injector.getInstance(DriverService.class);
 
         Manufacturer audi = new Manufacturer();
         audi.setName("Audi");
@@ -62,6 +59,9 @@ public class Main {
         manufacturers = manufacturerService.getAll();
         manufacturers.forEach(System.out::println);
         System.out.println("*************** all Manufacturers from db was printed");
+
+        DriverService driverService =
+                (DriverService) injector.getInstance(DriverService.class);
 
         Driver audiDriver = new Driver();
         audiDriver.setName("AudiDriver");
