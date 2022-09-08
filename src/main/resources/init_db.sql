@@ -1,4 +1,4 @@
-CREATE SCHEMA IF NOT EXISTS `taxi_service` DEFAULT CHARACTER SET utf8;
+CREATE SCHEMA IF NOT EXISTS `taxi_service` DEFAULT CHARACTER SET utf8mb4;
 USE `taxi_service`;
 
 CREATE TABLE `manufacturers` (
