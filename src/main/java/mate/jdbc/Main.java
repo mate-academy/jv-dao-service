@@ -5,16 +5,13 @@ import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.ManufacturerService;
 
 public class Main {
-    private static Injector injector = Injector.getInstance("mate.jdbc");
+    private static final Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
-        ManufacturerService manufecturerService = (ManufacturerService)
-                injector.getInstance(ManufacturerService.class);
-
-        System.out.println();
+        ManufacturerService manufacturerService =
+                (ManufacturerService) injector.getInstance(ManufacturerService.class);
         System.out.println("ALL DATA BASE:");
-        System.out.println();
-        manufecturerService.getAll().forEach(System.out::println);
+        manufacturerService.getAll().forEach(System.out::println);
         System.out.println();
         System.out.println("-------------------------------------------");
         System.out.println();
@@ -22,9 +19,36 @@ public class Main {
         Manufacturer mercedesBenz = new Manufacturer();
         mercedesBenz.setName("Mercedes-Benz");
         mercedesBenz.setCountry("Germany");
-        Manufacturer mercedesBenzToDataBase = manufecturerService.create(mercedesBenz);
-        System.out.println(mercedesBenz + " was add to DB");
+        Manufacturer mercedesBenzToDataBase = manufacturerService.create(mercedesBenz);
+        System.out.println(mercedesBenzToDataBase + " was add to DB");
         System.out.println();
         System.out.println("-------------------------------------------");
+        System.out.println();
+
+        Manufacturer getMercedesBenz = manufacturerService.get(mercedesBenz.getId());
+        System.out.println("You need this item: " + getMercedesBenz);
+        System.out.println();
+        System.out.println("-------------------------------------------");
+        System.out.println();
+
+        mercedesBenz.setName("Mercedes-Benz C 220 d 4 MATIC");
+        mercedesBenz.setCountry("Germany, Stuttgart");
+        Manufacturer updatedMercedesBenz = manufacturerService.update(mercedesBenz);
+        System.out.println("You update this item: " + updatedMercedesBenz);
+        System.out.println();
+        System.out.println("-------------------------------------------");
+        System.out.println();
+
+        manufacturerService.delete(mercedesBenz.getId());
+        System.out.println("You delete this item: " + mercedesBenz);
+        System.out.println();
+        System.out.println("-------------------------------------------");
+        System.out.println();
+
+        System.out.println("All DB without " + mercedesBenz);
+        manufacturerService.getAll().forEach(System.out::println);
+        System.out.println();
+        System.out.println("-------------------------------------------");
+        System.out.println();
     }
 }
