@@ -6,14 +6,11 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class ConnectionUtil {
-    private static final String URL = "YOUR DATABASE URL";
-    private static final String USERNAME = "YOUR USERNAME";
-    private static final String PASSWORD = "YOUR PASSWORD";
-    private static final String JDBC_DRIVER = "YOUR DRIVER";
+    private static final String HIDDEN_PASSWORD = null;
 
     static {
         try {
-            Class.forName(JDBC_DRIVER);
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Can't find SQL Driver", e);
         }
@@ -21,8 +18,9 @@ public class ConnectionUtil {
 
     public static Connection getConnection() throws SQLException {
         Properties dbProperties = new Properties();
-        dbProperties.setProperty("user", USERNAME);
-        dbProperties.setProperty("password", PASSWORD);
-        return DriverManager.getConnection(URL, dbProperties);
+        dbProperties.setProperty("user", "root");
+        dbProperties.setProperty("password", HIDDEN_PASSWORD);
+        return DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/taxi_service", dbProperties);
     }
 }
