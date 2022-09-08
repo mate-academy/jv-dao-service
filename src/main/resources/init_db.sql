@@ -28,7 +28,7 @@ CREATE TABLE `drivers` (
                                         `is_deleted` TINYINT NOT NULL DEFAULT 0,
                                         PRIMARY KEY (`id`));
 
-INSERT INTO `manufacturers` (`id`, `name`, `country`) VALUES
+INSERT INTO `drivers` (`id`, `name`, `license_number`) VALUES
 (1,'Ihor','123456789'),
 (2,'Oleg','852741963');
 
