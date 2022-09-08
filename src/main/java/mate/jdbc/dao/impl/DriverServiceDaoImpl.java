@@ -1,4 +1,4 @@
-package mate.jdbc.dao;
+package mate.jdbc.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,14 +8,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import mate.jdbc.dao.DriverDao;
 import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Dao;
 import mate.jdbc.model.Driver;
-import mate.jdbc.service.DriverService;
 import mate.jdbc.util.ConnectionUtil;
 
 @Dao
-public class DriverServiceDaoImpl implements DriverService {
+public class DriverServiceDaoImpl implements DriverDao {
     @Override
     public Driver create(Driver driver) {
         String query = "INSERT INTO drivers (name, license_number) VALUES (?, ?)";

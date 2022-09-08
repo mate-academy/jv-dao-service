@@ -1,6 +1,5 @@
 package mate.jdbc;
 
-import java.util.Optional;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
@@ -33,7 +32,7 @@ public class Main {
         manufacturerService.getAll().forEach(System.out::println);
         System.out.println("*************************************************");
         System.out.println("*      Get manufacturer Bugatti from database      *");
-        Optional<Manufacturer> getManufacturer = manufacturerService.get(bugatti.getId());
+        Manufacturer getManufacturer = manufacturerService.get(bugatti.getId());
         System.out.println(getManufacturer);
         System.out.println("-------------------------------------");
 
