@@ -36,7 +36,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
     }
 
     @Override
-    public Optional<Manufacturer> get(Long id) {
+    public Optional<Manufacturer> read(Long id) {
         String query = "SELECT * FROM manufacturers"
                 + " WHERE id = ? AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
@@ -54,7 +54,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
     }
 
     @Override
-    public List<Manufacturer> getAll() {
+    public List<Manufacturer> readAll() {
         String query = "SELECT * FROM manufacturers WHERE is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement
