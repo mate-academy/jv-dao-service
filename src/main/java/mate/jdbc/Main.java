@@ -17,10 +17,10 @@ public class Main {
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
 
         //manufacturer.create(Manufacturer manufacturer)
-        Manufacturer corn = new Manufacturer("CornIndustry", "Ukraine");
+        Manufacturer corn = new Manufacturer(null, "CornIndustry", "Ukraine");
         manufacturerService.create(corn);
 
-        Manufacturer bavovna = new Manufacturer("BavovnaHimarsovna", "USA/Ukraine");
+        Manufacturer bavovna = new Manufacturer(null, "BavovnaHimarsovna", "USA/Ukraine");
         manufacturerService.create(bavovna);
 
         //manufacturer.getAll()
@@ -48,10 +48,10 @@ public class Main {
                 (DriverService) injector.getInstance(DriverService.class);
 
         //driver.create(Driver driver)
-        Driver truckDriver = new Driver("Vasyl", "12345");
+        Driver truckDriver = new Driver(null, "Vasyl", "12345");
         driverService.create(truckDriver);
 
-        Driver deliveryDriver = new Driver("Petro", "4v315");
+        Driver deliveryDriver = new Driver(null, "Petro", "4v315");
         driverService.create(deliveryDriver);
 
         //driver.getAll()
