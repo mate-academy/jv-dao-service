@@ -20,8 +20,9 @@ public class DriverDaoImpl implements DriverDao {
     public Driver create(Driver driver) {
         String createDriverQuery = "INSERT INTO drivers (name, license_number) " + "VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement createDriverStatement
-                     = connection.prepareStatement(createDriverQuery, Statement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement createDriverStatement
+                        = connection.prepareStatement(createDriverQuery,
+                        Statement.RETURN_GENERATED_KEYS)) {
             createDriverStatement.setString(1, driver.getName());
             createDriverStatement.setString(2, driver.getLicenceNumber());
             createDriverStatement.executeUpdate();
@@ -40,7 +41,8 @@ public class DriverDaoImpl implements DriverDao {
         String getDriverQuery = "SELECT * FROM drivers"
                 + " WHERE id = ? AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement getDriverStatement = connection.prepareStatement(getDriverQuery)) {
+                PreparedStatement getDriverStatement
+                        = connection.prepareStatement(getDriverQuery)) {
             getDriverStatement.setLong(1, id);
             ResultSet resultSet = getDriverStatement.executeQuery();
             Driver driver = new Driver();
@@ -57,8 +59,8 @@ public class DriverDaoImpl implements DriverDao {
     public List<Driver> getAll() {
         String getAllDriversQuery = "SELECT * FROM drivers WHERE is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement getAllDriversStatement
-                     = connection.prepareStatement(getAllDriversQuery)) {
+                PreparedStatement getAllDriversStatement
+                        = connection.prepareStatement(getAllDriversQuery)) {
             List<Driver> drivers = new ArrayList<>();
             ResultSet resultSet = getAllDriversStatement.executeQuery();
             while (resultSet.next()) {
@@ -76,8 +78,8 @@ public class DriverDaoImpl implements DriverDao {
         String updateDriverQuery = "UPDATE drivers SET name = ?, license_number = ?"
                 + " WHERE id = ? AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement updateDriverStatement
-                     = connection.prepareStatement(updateDriverQuery)) {
+                PreparedStatement updateDriverStatement
+                        = connection.prepareStatement(updateDriverQuery)) {
             updateDriverStatement.setString(1, driver.getName());
             updateDriverStatement.setString(2, driver.getLicenceNumber());
             updateDriverStatement.setLong(3, driver.getId());
@@ -93,8 +95,8 @@ public class DriverDaoImpl implements DriverDao {
     public boolean delete(Long id) {
         String deleteDriverQuery = "UPDATE drivers SET is_deleted = TRUE WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement deleteDriverStatement
-                     = connection.prepareStatement(deleteDriverQuery)) {
+                PreparedStatement deleteDriverStatement
+                        = connection.prepareStatement(deleteDriverQuery)) {
             deleteDriverStatement.setLong(1, id);
             return deleteDriverStatement.executeUpdate() > 0;
         } catch (SQLException e) {

@@ -1,6 +1,5 @@
 package mate.jdbc;
 
-import java.util.ArrayList;
 import java.util.List;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
@@ -13,7 +12,7 @@ public class Main {
     private static final Injector injector = Injector.getInstance(PACKAGE);
 
     public static void main(String[] args) {
-        /*MANUFACTURER*//*
+        /*MANUFACTURER*/
         ManufacturerService manufacturerService =
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
 
@@ -42,7 +41,7 @@ public class Main {
         manufacturerService.update(bavovna);
         //manufacturer.get(Long id)
         System.out.println(manufacturerService.get(bavovna.getId()));
-        System.out.println();*/
+        System.out.println();
 
         /*DRIVER*/
         DriverService driverService =
