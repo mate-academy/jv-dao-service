@@ -1,6 +1,7 @@
 CREATE SCHEMA IF NOT EXISTS `taxi_service` DEFAULT CHARACTER SET utf8;
 USE `taxi_service`;
 
+DROP TABLE IF EXISTS `manufacturers`;
 CREATE TABLE `manufacturers` (
                                         `id` BIGINT(11) NOT NULL AUTO_INCREMENT,
                                         `name` VARCHAR(225) NOT NULL,
@@ -21,6 +22,7 @@ INSERT INTO `manufacturers` (`id`, `name`, `country`) VALUES
 (10,'Honda','Japan'),
 (11,'Lexus','Japan');
 
+DROP TABLE IF EXISTS `drivers`;
 CREATE TABLE `drivers` (
                                         `id` BIGINT(11) NOT NULL AUTO_INCREMENT,
                                         `name` VARCHAR(225) NOT NULL,
