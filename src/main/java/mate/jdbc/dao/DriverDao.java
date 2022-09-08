@@ -1,6 +1,6 @@
 package mate.jdbc.dao;
 
-import java.sql.Driver;
+import mate.jdbc.model.Driver;
 import java.util.List;
 import java.util.Optional;
 
