@@ -7,3 +7,12 @@ CREATE TABLE `manufacturers` (
                                         `country` VARCHAR(225) NOT NULL,
                                         `is_deleted` TINYINT NOT NULL DEFAULT 0,
                                         PRIMARY KEY (`id`));
+
+CREATE TABLE drivers
+(
+    id            bigint auto_increment
+        primary key,
+    name          varchar(45)       null,
+    licenseNumber varchar(45)       null,
+    is_deleted    tinyint default 0 not null
+);
