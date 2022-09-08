@@ -9,11 +9,11 @@ CREATE TABLE `manufacturers`
     `is_deleted` TINYINT      NOT NULL DEFAULT 0,
     PRIMARY KEY (`id`)
 );
-create table drivers
+CREATE TABLE drivers
 (
-    id            bigint auto_increment
-        primary key,
-    name          varchar(255)         not null,
-    licenseNumber varchar(255)         not null,
-    is_deleted    tinyint(1) default 0 not null
+    id            BIGINT AUTO_INCREMENT
+        PRIMARY KEY,
+    name          VARCHAR(255)         NOT NULL,
+    licenseNumber VARCHAR(255)         NOT NULL,
+    is_deleted    TINYINT(1) DEFAULT 0 NOT NULL
 );
