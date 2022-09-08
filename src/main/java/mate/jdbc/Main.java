@@ -36,6 +36,7 @@ public class Main {
         Optional<Manufacturer> getManufacturer = manufacturerService.get(bugatti.getId());
         System.out.println(getManufacturer);
         System.out.println("-------------------------------------");
+
         DriverService driverService =
                 (DriverService) injector.getInstance(DriverService.class);
         Driver yarik = new Driver(null, "Yarik", "JV7777777JV");
