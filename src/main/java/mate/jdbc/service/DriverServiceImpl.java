@@ -1,7 +1,6 @@
 package mate.jdbc.service;
 
 import java.util.List;
-import java.util.Optional;
 import mate.jdbc.dao.DriverDao;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
@@ -19,11 +18,8 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver get(Long id) {
-        Optional<Driver> optionalDriver = driverDao.get(id);
-        if (optionalDriver.isPresent()) {
-            return optionalDriver.get();
-        }
-        throw new RuntimeException("Can't get driver for id = " + id);
+        return driverDao.get(id).orElseThrow(() ->
+                new RuntimeException("Can't get driver for id = " + id));
     }
 
     @Override
