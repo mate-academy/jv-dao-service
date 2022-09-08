@@ -52,7 +52,7 @@ public class Main {
 //        manufacturerService.getAll().forEach(System.out::println);
 //        System.out.println();
 //        System.out.println("-------------------------------------------");
-        System.out.println();
+//        System.out.println();
 
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
 
@@ -61,6 +61,12 @@ public class Main {
         driverBob.setLicenseNumber("495904");
         Driver createdDriverBob = driverService.create(driverBob);
         System.out.println(createdDriverBob + " was add to DB");
+        System.out.println();
+        System.out.println("-------------------------------------------");
+        System.out.println();
+
+        System.out.println("ALL DATA BASE:");
+        driverService.getAll().forEach(System.out::println);
         System.out.println();
         System.out.println("-------------------------------------------");
         System.out.println();
