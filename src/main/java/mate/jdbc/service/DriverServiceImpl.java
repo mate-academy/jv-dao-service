@@ -13,8 +13,7 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver create(Driver driver) {
-        driverDao.create(driver);
-        return driver;
+        return driverDao.create(driver);
     }
 
     @Override
