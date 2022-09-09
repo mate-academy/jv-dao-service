@@ -16,13 +16,13 @@ public class Main {
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
 
         System.out.println("Create manufacturers");
-        Manufacturer bmw = new Manufacturer(null, "bmw", "Germany");
+        Manufacturer bmw = new Manufacturer("bmw", "Germany");
         manufacturerService.create(bmw);
 
-        Manufacturer tesla = new Manufacturer(null, "tesla", "USA");
+        Manufacturer tesla = new Manufacturer("tesla", "USA");
         manufacturerService.create(tesla);
 
-        Manufacturer volkswagen = new Manufacturer(null, "volkswagen", "Germany");
+        Manufacturer volkswagen = new Manufacturer("volkswagen", "Germany");
         manufacturerService.create(volkswagen);
 
         System.out.println("Get all manufacturers");
