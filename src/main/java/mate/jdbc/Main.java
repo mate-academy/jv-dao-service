@@ -90,9 +90,7 @@ public class Main {
         System.out.println("tatraDriver name was changed to Alice");
 
         System.out.println(driverService.get(pragaDriver.getId()));
-        System.out.println("Driver with id = "
-                + pragaDriver.getId());
-
+        System.out.println("Driver with id = " + pragaDriver.getId());
         driverService.delete(bentleyDriver.getId());
         System.out.println("bentleyDriver was deleted");
 
