@@ -21,13 +21,13 @@ public class Main {
         System.out.println("-------------------------------------------------");
 
         System.out.println("Read manufacturer");
-        Manufacturer readManufacturer = manufacturerService.read(createManufacturer.getId());
+        Manufacturer readManufacturer = manufacturerService.get(createManufacturer.getId());
         System.out.println(readManufacturer);
         System.out.println("-------------------------------------------------");
 
         System.out.println("Read all manufacturers");
-        List<Manufacturer> allManufacturers = manufacturerService.readAll();
-        allManufacturers.stream().forEach(System.out::println);
+        List<Manufacturer> allManufacturers = manufacturerService.getAll();
+        allManufacturers.forEach(System.out::println);
         System.out.println("-------------------------------------------------");
 
         System.out.println("Update manufacturer");
@@ -51,13 +51,13 @@ public class Main {
         System.out.println("-------------------------------------------------");
 
         System.out.println("Read driver");
-        Driver readDriver = driverService.read(createDriver.getId());
+        Driver readDriver = driverService.get(createDriver.getId());
         System.out.println(readDriver);
         System.out.println("-------------------------------------------------");
 
         System.out.println("Read all drivers");
-        List<Driver> allDrivers = driverService.readAll();
-        allDrivers.stream().forEach(System.out::println);
+        List<Driver> allDrivers = driverService.getAll();
+        allDrivers.forEach(System.out::println);
         System.out.println("-------------------------------------------------");
 
         System.out.println("Update driver");

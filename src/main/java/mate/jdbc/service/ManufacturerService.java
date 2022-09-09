@@ -6,9 +6,9 @@ import mate.jdbc.model.Manufacturer;
 public interface ManufacturerService {
     Manufacturer create(Manufacturer manufacturer);
 
-    Manufacturer read(Long id);
+    Manufacturer get(Long id);
 
-    List<Manufacturer> readAll();
+    List<Manufacturer> getAll();
 
     Manufacturer update(Manufacturer manufacturer);
 

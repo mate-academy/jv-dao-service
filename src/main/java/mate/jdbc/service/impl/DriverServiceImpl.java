@@ -18,16 +18,16 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public Driver read(Long id) {
-        return driverDao.read(id).orElseThrow(
+    public Driver get(Long id) {
+        return driverDao.get(id).orElseThrow(
                 () -> new RuntimeException("There are no driver with this id: "
                         + id + " in the DB.")
         );
     }
 
     @Override
-    public List<Driver> readAll() {
-        return driverDao.readAll();
+    public List<Driver> getAll() {
+        return driverDao.getAll();
     }
 
     @Override

@@ -18,16 +18,16 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     }
 
     @Override
-    public Manufacturer read(Long id) {
-        return manufacturerDao.read(id).orElseThrow(
+    public Manufacturer get(Long id) {
+        return manufacturerDao.get(id).orElseThrow(
                 () -> new RuntimeException("There are no manufacturer with this id: "
                         + id + " in the DB.")
         );
     }
 
     @Override
-    public List<Manufacturer> readAll() {
-        return manufacturerDao.readAll();
+    public List<Manufacturer> getAll() {
+        return manufacturerDao.getAll();
     }
 
     @Override

@@ -6,9 +6,9 @@ import mate.jdbc.model.Driver;
 public interface DriverService {
     Driver create(Driver driver);
 
-    Driver read(Long id);
+    Driver get(Long id);
 
-    List<Driver> readAll();
+    List<Driver> getAll();
 
     Driver update(Driver driver);
 
