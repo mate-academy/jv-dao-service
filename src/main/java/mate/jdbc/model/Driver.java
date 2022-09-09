@@ -8,7 +8,6 @@ public class Driver {
     private String licenseNumber;
 
     public Driver(String name, String licenseNumber) {
-
         this.name = name;
         this.licenseNumber = licenseNumber;
     }
