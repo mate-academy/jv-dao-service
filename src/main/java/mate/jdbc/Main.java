@@ -31,10 +31,8 @@ public class Main {
         System.out.println("\nTesting DriverService: ");
         DriverService driverService =
                 (DriverService) injector.getInstance(DriverService.class);
-        Driver driver = new Driver();
+        Driver driver = new Driver(null, "Bob", "234");
 
-        driver.setLicenseNumber("234");
-        driver.setName("Bob");
         driver = driverService.create(driver);
 
         System.out.println(driverService.get(driver.getId()));
