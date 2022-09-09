@@ -53,7 +53,7 @@ public class Main {
         System.out.println(getDriver);
 
         System.out.println("Update(): ");
-        driver.setName("Fred");
+        createdDriver.setName("Fred");
         Driver updatedDriver = driverService.update(createdDriver);
         System.out.println(updatedDriver);
 
