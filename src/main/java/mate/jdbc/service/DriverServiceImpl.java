@@ -23,7 +23,6 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public List<Driver> getAll() {
-
         return driverDao.getAll();
     }
 
