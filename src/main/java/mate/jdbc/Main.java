@@ -54,15 +54,15 @@ public class Main {
     private static void testDriver() {
         Driver firstDriver = new Driver();
         firstDriver.setName("Roman");
-        firstDriver.setLicense_Number("94869359");
+        firstDriver.setLicenseNumber("94869359");
 
         Driver secondDriver = new Driver();
         secondDriver.setName("Paul");
-        secondDriver.setLicense_Number("unlimited");
+        secondDriver.setLicenseNumber("unlimited");
 
         Driver thirdDriver = new Driver();
         thirdDriver.setName("Zuhra");
-        thirdDriver.setLicense_Number(null);
+        thirdDriver.setLicenseNumber(null);
 
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
 
@@ -87,7 +87,7 @@ public class Main {
 
         //update
         System.out.println("--------------------------------------");
-        thirdDriver.setLicense_Number("1");
+        thirdDriver.setLicenseNumber("1");
         System.out.println(driverService.update(thirdDriver));
     }
 }
