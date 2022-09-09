@@ -46,10 +46,10 @@ public class Main {
                 (DriverService) injector.getInstance(DriverService.class);
 
         System.out.println("Create drivers: ");
-        Driver misha = new Driver(null, "Mikhayl", "856512");
+        Driver misha = new Driver("Mikhayl", "856512");
         driverService.create(misha);
 
-        Driver andrew = new Driver(null, "Andrew", "85631321");
+        Driver andrew = new Driver("Andrew", "85631321");
         driverService.create(andrew);
 
         System.out.println("Get all drivers");
