@@ -20,8 +20,8 @@ public class DriverServiceDaoImpl implements DriverDao {
     public Driver create(Driver driver) {
         String query = "INSERT INTO drivers (name, license_number) VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
-                 PreparedStatement statement
-                         = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+                 PreparedStatement statement = connection
+                         .prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, driver.getName());
             statement.setString(2, driver.getLicenseNumber());
             statement.executeUpdate();
@@ -56,8 +56,7 @@ public class DriverServiceDaoImpl implements DriverDao {
     public List<Driver> getAll() {
         String query = "SELECT * FROM drivers WHERE is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
-                 PreparedStatement statement
-                         = connection.prepareStatement(query)) {
+                 PreparedStatement statement = connection.prepareStatement(query)) {
             List<Driver> drivers = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -75,8 +74,7 @@ public class DriverServiceDaoImpl implements DriverDao {
         String query = "UPDATE drivers SET name = ?, license_number = ?"
                 + " WHERE id = ? AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
-                 PreparedStatement statement
-                         = connection.prepareStatement(query)) {
+                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, driver.getName());
             statement.setString(2, driver.getLicenseNumber());
             statement.setLong(3, driver.getId());
@@ -92,8 +90,7 @@ public class DriverServiceDaoImpl implements DriverDao {
     public boolean delete(Long id) {
         String query = "UPDATE drivers SET is_deleted = TRUE WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
-                 PreparedStatement statement
-                         = connection.prepareStatement(query)) {
+                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
