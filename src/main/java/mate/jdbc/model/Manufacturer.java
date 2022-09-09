@@ -7,9 +7,6 @@ public class Manufacturer {
     private String name;
     private String country;
 
-    public Manufacturer() {
-    }
-
     public Manufacturer(Long id, String name, String country) {
         this.id = id;
         this.name = name;
@@ -41,6 +38,15 @@ public class Manufacturer {
     }
 
     @Override
+    public String toString() {
+        return "Manufacturer{"
+                + "id=" + id
+                + ", name='" + name
+                + '\'' + ", country='"
+                + country + '\'' + '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -51,20 +57,13 @@ public class Manufacturer {
         Manufacturer that = (Manufacturer) o;
         return Objects.equals(id, that.id)
                 && Objects.equals(name, that.name)
-                && Objects.equals(country, that.country);
+                && Objects.equals(country,
+                that.country);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, name, country);
     }
-
-    @Override
-    public String toString() {
-        return "Manufacturer{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + ", country='" + country + '\''
-                + '}';
-    }
 }
+
