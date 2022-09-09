@@ -12,25 +12,23 @@ public class Main {
         Injector injector = Injector.getInstance("mate.jdbc");
         DriverService driverService
                 = (DriverService) injector.getInstance(DriverService.class);
-        Driver driverOleg = new Driver("Oleg", "GH851678");
-        Driver driverJhon = new Driver("Jhon", "FI841687");
-        //driverService.create(driverOleg);
-        //driverService.create(driverJhon);
-        List<Driver> listOfDrivers = driverService.getAll();
-        System.out.println(listOfDrivers);
-        listOfDrivers.get(0);
+        Driver driver = new Driver("Oleg", "GH851678");
+        System.out.println(driverService.create(driver));
+        driver = new Driver("Jhon", "FI841687");
+        System.out.println(driverService.create(driver));
+        driver = new Driver("Max", "FI886538");
+        System.out.println(driverService.create(driver));
+        System.out.println(driverService.get(driver.getId()));
+        System.out.println(driverService.update(driver));
+        System.out.println(driverService.delete(driver.getId()));
+        driverService.getAll().forEach(System.out::println);
         ManufacturerService manufacturerService
                 = (ManufacturerService) injector.getInstance(ManufacturerService.class);
-        System.out.println(manufacturerService.get(listOfDrivers.get(0).getId()));
-        List<Manufacturer> listOfManufaturers = manufacturerService.getAll();
-        System.out.println(listOfManufaturers);
-        //manufacturerService.delete(13L);
-        //manufacturerService.delete(12L);
-        //manufacturerService.delete(11L);
-        //manufacturerService.delete(10L);
-        //manufacturerService.delete(9L);
-        //manufacturerService.delete(8L);
-        List<Manufacturer> listOfManufacturersAfter = manufacturerService.getAll();
-        System.out.println(listOfManufacturersAfter);
+        manufacturerService.getAll().forEach(System.out::println);
+        Manufacturer manufacturer = new Manufacturer("ford", "USA");
+        System.out.println(manufacturerService.create(manufacturer));
+        System.out.println(manufacturerService.get(manufacturer.getId()));
+        System.out.println(manufacturerService.update(manufacturer));
+        manufacturerService.delete(manufacturer.getId());
     }
 }
