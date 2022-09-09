@@ -9,10 +9,10 @@ public class Driver {
 ```
 - Create `ManufacturerService` and its implementation. Annotations `@Service` and `@Inject` have already been given to you.
 ### ManufacturerService methods:
-    - Manufacturer create(Manufacturer manufacturer);
+    - Manufacturer create(Manufacturer taxi_service);
     - Manufacturer get(Long id);
     - List<Manufacturer> getAll();
-    - Manufacturer update(Manufacturer manufacturer);
+    - Manufacturer update(Manufacturer taxi_service);
     - boolean delete(Long id);
 - Create Dao and Service layers for `Driver` and their implementations.
 ### DriverService methods:
