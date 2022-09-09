@@ -13,14 +13,14 @@ public class Main {
         // create
         DriverService driverService
                 = (DriverService) injector.getInstance(DriverService.class);
-        Driver driverDima = new Driver(1L, "Dima", "12345");
-        Driver driverOleg = new Driver(1L, "Oleg", "56789");
+        Driver driverDima = new Driver(null, "Dima", "12345");
+        Driver driverOleg = new Driver(null, "Oleg", "56789");
         driverService.create(driverDima);
         driverService.create(driverOleg);
         ManufacturerService manufacturerService
                 = (ManufacturerService) injector.getInstance(ManufacturerService.class);
-        Manufacturer bmw = new Manufacturer(1L, "BMW", "Germany");
-        Manufacturer vw = new Manufacturer(1L, "VW", "Germany");
+        Manufacturer bmw = new Manufacturer(null, "BMW", "Germany");
+        Manufacturer vw = new Manufacturer(null, "VW", "Germany");
         manufacturerService.create(bmw);
         manufacturerService.create(vw);
         // get all
