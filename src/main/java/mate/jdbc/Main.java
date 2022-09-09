@@ -25,9 +25,9 @@ public class Main {
         DriverService driverService =
                 (DriverService) injector.getInstance(DriverService.class);
         driverService.getAll().forEach(System.out::println);
-        Driver driver = new Driver("Maks", "UA1111");
+        Driver driver = new Driver(null, "Maks", "UA1111");
         driverService.create(driver);
-        driver = new Driver("Masha", "UA2222");
+        driver = new Driver(null, "Masha", "UA2222");
         driver = driverService.create(driver);
         System.out.println(driverService.get(driver.getId()).toString());
         driver.setName(driver.getName().toUpperCase());
