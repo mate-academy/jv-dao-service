@@ -71,7 +71,7 @@ public class Main {
         System.out.println("-------------------------------------------");
         System.out.println();
 
-        Driver getDriver = driverService.get(driverBob.getId()).get();
+        Driver getDriver = driverService.get(driverBob.getId());
         System.out.println("You need this item: " + getDriver);
         System.out.println();
         System.out.println("-------------------------------------------");
