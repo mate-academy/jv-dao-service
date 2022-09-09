@@ -21,9 +21,9 @@ public class ConnectionUtil {
     }
 
     public static Connection getConnection() throws SQLException {
-            Properties dbProperties = new Properties();
-            dbProperties.setProperty("user", USERNAME);
-            dbProperties.setProperty("password", PASSWORD);
-            return DriverManager.getConnection(URL, dbProperties);
+        Properties dbProperties = new Properties();
+        dbProperties.setProperty("user", USERNAME);
+        dbProperties.setProperty("password", PASSWORD);
+        return DriverManager.getConnection(URL, dbProperties);
     }
 }
