@@ -22,20 +22,21 @@ public class Main {
         System.out.println(createdManufacturer);
 
         System.out.println("Get(): ");
-        Manufacturer getManufacturer = manufacturerService.get(manufacturer.getId());
+        Manufacturer getManufacturer = manufacturerService.get(createdManufacturer.getId());
         System.out.println(getManufacturer);
 
         System.out.println("Update(): ");
-        manufacturer.setName("Toyota");
-        Manufacturer updatedManufacturer = manufacturerService.update(manufacturer);
+        createdManufacturer.setName("Toyota");
+        Manufacturer updatedManufacturer = manufacturerService.update(createdManufacturer);
         System.out.println(updatedManufacturer);
 
         System.out.println("Delete(): ");
-        boolean deletedManufacturer = manufacturerService.delete(manufacturer.getId());
+        boolean deletedManufacturer = manufacturerService.delete(createdManufacturer.getId());
         System.out.println(deletedManufacturer);
 
         System.out.println("GetAll(): ");
-        System.out.println(manufacturerService.getAll());
+        List<Manufacturer> getAllManufacturers = manufacturerService.getAll();
+        getAllManufacturers.forEach(System.out::println);
 
         final DriverService driverService = (DriverService) injector
                 .getInstance(DriverService.class);
@@ -48,16 +49,16 @@ public class Main {
         System.out.println(createdDriver);
 
         System.out.println("Get(): ");
-        Driver getDriver = driverService.get(driver.getId());
+        Driver getDriver = driverService.get(createdDriver.getId());
         System.out.println(getDriver);
 
         System.out.println("Update(): ");
         driver.setName("Fred");
-        Driver updatedDriver = driverService.update(driver);
+        Driver updatedDriver = driverService.update(createdDriver);
         System.out.println(updatedDriver);
 
         System.out.println("Delete(): ");
-        boolean deletedDriver = driverService.delete(driver.getId());
+        boolean deletedDriver = driverService.delete(createdDriver.getId());
         System.out.println(deletedDriver);
 
         System.out.println("GetAll(): ");
