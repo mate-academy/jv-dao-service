@@ -64,8 +64,8 @@ public class DriverDaoImpl implements DriverDao {
             }
             return drivers;
         } catch (SQLException e) {
-            throw new DataProcessingException("Couldn't get a list of manufacturers "
-                    + "from manufacturers table.", e);
+            throw new DataProcessingException("Couldn't get a list of drivers "
+                    + "from drivers table.", e);
         }
     }
 
@@ -96,7 +96,7 @@ public class DriverDaoImpl implements DriverDao {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new DataProcessingException("Couldn't delete a manufacturer by id " + id, e);
+            throw new DataProcessingException("Couldn't delete a driver by id " + id, e);
         }
     }
 
