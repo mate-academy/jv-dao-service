@@ -5,9 +5,6 @@ public class Driver {
     private String name;
     private String licenceNumber;
 
-    public Driver() {
-    }
-
     public Driver(Long id, String name, String licenceNumber) {
         this.id = id;
         this.name = name;
