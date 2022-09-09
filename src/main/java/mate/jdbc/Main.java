@@ -6,6 +6,7 @@ import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.DriverService;
+import mate.jdbc.service.ManufacturerService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
@@ -19,28 +20,28 @@ public class Main {
         ford.setName("Ford");
         ford.setCountry("USA");
 
-        ManufacturerDao manufacturerDao = (ManufacturerDao) injector
+        ManufacturerService manufacturerService = (ManufacturerService) injector
                 .getInstance(ManufacturerDao.class);
-        manufacturerDao.create(chery);
-        manufacturerDao.create(ford);
+        manufacturerService.create(chery);
+        manufacturerService.create(ford);
 
-        List<Manufacturer> manufacturers = manufacturerDao.getAll();
+        List<Manufacturer> manufacturers = manufacturerService.getAll();
         manufacturers.forEach(System.out::println);
 
         chery = manufacturers.get(0);
         chery.setCountry("China");
-        manufacturerDao.update(chery);
-        System.out.println(manufacturerDao.get(chery.getId()));
-        manufacturerDao.delete(chery.getId());
-        manufacturerDao.getAll().forEach(System.out::println);
+        manufacturerService.update(chery);
+        System.out.println(manufacturerService.get(chery.getId()));
+        manufacturerService.delete(chery.getId());
+        manufacturerService.getAll().forEach(System.out::println);
 
         DriverService driverService =
                 (DriverService) injector.getInstance(DriverService.class);
 
-        Driver driverAndrii = new Driver(null, "Andrii", "ooa2002");
+        Driver driverAndrii = new Driver("Andrii", "ooa2002");
         driverService.create(driverAndrii);
 
-        Driver deliveryJulia = new Driver(null, "Julia", "oao2007");
+        Driver deliveryJulia = new Driver("Julia", "oao2007");
         driverService.create(deliveryJulia);
 
         List<Driver> drivers = driverService.getAll();
