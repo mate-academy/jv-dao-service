@@ -4,7 +4,6 @@ import java.util.List;
 import mate.jdbc.lib.Service;
 import mate.jdbc.model.Driver;
 
-@Service
 public interface DriverService {
     Driver create(Driver driver);
 
