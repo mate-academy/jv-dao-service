@@ -1,64 +1,63 @@
 package mate.jdbc;
 
-import java.util.Optional;
-import mate.jdbc.dao.DriverDao;
-import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
+import mate.jdbc.service.DriverService;
+import mate.jdbc.service.ManufacturerService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
-        final ManufacturerDao manufacturerDao = (ManufacturerDao) injector
-                .getInstance(ManufacturerDao.class);
+        final ManufacturerService manufacturerService = (ManufacturerService) injector
+                .getInstance(ManufacturerService.class);
         Manufacturer manufacturer = new Manufacturer();
 
         System.out.println("Create: ");
         manufacturer.setName("Mercedes-Benz");
         manufacturer.setCountry("Germany");
-        Manufacturer mercedes = manufacturerDao.create(manufacturer);
+        Manufacturer mercedes = manufacturerService.create(manufacturer);
         System.out.println(mercedes);
 
         System.out.println("Get manufacturer: ");
-        Optional<Manufacturer> optionalManufacturer = manufacturerDao.get(mercedes.getId());
-        System.out.println(optionalManufacturer);
+        Manufacturer getManufacturer = manufacturerService.get(mercedes.getId());
+        System.out.println(getManufacturer);
 
         System.out.println("Get all manufacturers: ");
-        System.out.println(manufacturerDao.getAll());
+        System.out.println(manufacturerService.getAll());
 
         System.out.println("Update manufacturer: ");
         manufacturer.setName("Pontiac");
-        System.out.println(manufacturerDao.update(manufacturer));
+        System.out.println(manufacturerService.update(manufacturer));
 
         System.out.println("Delete manufacturer: ");
-        boolean deleteManufacturer = manufacturerDao.delete(manufacturer.getId());
+        boolean deleteManufacturer = manufacturerService.delete(manufacturer.getId());
         System.out.println(deleteManufacturer);
 
-        final DriverDao driverDao = (DriverDao) injector
-                .getInstance(DriverDao.class);
+        final DriverService driverService = (DriverService) injector
+                .getInstance(DriverService.class);
         Driver driver = new Driver();
 
         System.out.println("Create: ");
         driver.setName("Tom");
         driver.setLicenseNumber("111111");
-        Driver tom = driverDao.create(driver);
+        Driver tom = driverService.create(driver);
         System.out.println(tom);
 
         System.out.println("Get driver: ");
-        Optional<Driver> optionalDriver = driverDao.get(tom.getId());
-        System.out.println(optionalDriver);
+        Driver getDriver = driverService.get(tom.getId());
+        System.out.println(getDriver);
 
         System.out.println("Get all drivers: ");
-        System.out.println(driverDao.getAll());
+        System.out.println(driverService.getAll());
 
         System.out.println("Update drivers: ");
         manufacturer.setName("Alice");
-        System.out.println(driverDao.update(driver));
+        System.out.println(driverService.update(driver));
 
         System.out.println("Delete driver: ");
-        boolean deleteDriver = driverDao.delete(driver.getId());
+        boolean deleteDriver = driverService.delete(driver.getId());
         System.out.println(deleteDriver);
     }
 }
