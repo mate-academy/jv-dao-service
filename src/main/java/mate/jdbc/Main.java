@@ -97,6 +97,5 @@ public class Main {
         drivers = driverService.getAll();
         System.out.println("All drivers from db:");
         drivers.forEach(System.out::println);
-        
     }
 }
