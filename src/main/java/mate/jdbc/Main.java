@@ -35,7 +35,7 @@ public class Main {
 
         //get
         System.out.println("--------------------------------------");
-        System.out.println(manufacturerService.get(10L));
+        System.out.println(manufacturerService.get(firstManufacturer.getId()));
 
         //update
         System.out.println("--------------------------------------");
@@ -44,7 +44,7 @@ public class Main {
 
         //delete
         System.out.println("--------------------------------------");
-        System.out.println(manufacturerService.delete(3L));
+        System.out.println(manufacturerService.delete(thirdManufacturer.getId()));
 
         //getAll
         injector.getInstance(ManufacturerService.class);
@@ -54,15 +54,15 @@ public class Main {
     private static void testDriver() {
         Driver firstDriver = new Driver();
         firstDriver.setName("Roman");
-        firstDriver.setLicenseNumber("94869359");
+        firstDriver.setLicense_Number("94869359");
 
         Driver secondDriver = new Driver();
         secondDriver.setName("Paul");
-        secondDriver.setLicenseNumber("unlimited");
+        secondDriver.setLicense_Number("unlimited");
 
         Driver thirdDriver = new Driver();
         thirdDriver.setName("Zuhra");
-        thirdDriver.setLicenseNumber(null);
+        thirdDriver.setLicense_Number(null);
 
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
 
@@ -74,11 +74,11 @@ public class Main {
 
         //get
         System.out.println("--------------------------------------");
-        System.out.println(driverService.get(2L));
+        System.out.println(driverService.get(secondDriver.getId()));
 
         //delete
         System.out.println("--------------------------------------");
-        System.out.println(driverService.delete(1L));
+        System.out.println(driverService.delete(firstDriver.getId()));
         driverService.getAll().forEach(System.out::println);
 
         //getAll
@@ -87,7 +87,7 @@ public class Main {
 
         //update
         System.out.println("--------------------------------------");
-        thirdDriver.setLicenseNumber("1");
+        thirdDriver.setLicense_Number("1");
         System.out.println(driverService.update(thirdDriver));
     }
 }

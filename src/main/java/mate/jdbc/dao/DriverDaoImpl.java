@@ -16,14 +16,14 @@ import mate.jdbc.util.ConnectionUtil;
 public class DriverDaoImpl implements DriverDao {
     @Override
     public Driver create(Driver driver) {
-        String query = "INSERT INTO drivers (name, licenseNumber)"
+        String query = "INSERT INTO drivers (name, license_Number)"
                 + "VALUES(?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement =
                         connection.prepareStatement(
                                 query, PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, driver.getName());
-            preparedStatement.setString(2, driver.getLicenseNumber());
+            preparedStatement.setString(2, driver.getLicense_Number());
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -71,12 +71,12 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Driver update(Driver driver) {
-        String query = "UPDATE drivers SET name = ?, licenseNumber = ?"
+        String query = "UPDATE drivers SET name = ?, license_Number = ?"
                 + " WHERE id = ? AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, driver.getName());
-            preparedStatement.setString(2, driver.getLicenseNumber());
+            preparedStatement.setString(2, driver.getLicense_Number());
             preparedStatement.setLong(3, driver.getId());
             preparedStatement.executeUpdate();
             return driver;
@@ -103,7 +103,7 @@ public class DriverDaoImpl implements DriverDao {
     private Driver getDriver(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getObject("id", Long.class);
         String name = resultSet.getString("name");
-        String licenseNumber = resultSet.getString("licenseNumber");
+        String licenseNumber = resultSet.getString("license_Number");
         return new Driver(id, name, licenseNumber);
     }
 

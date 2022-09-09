@@ -5,15 +5,15 @@ import java.util.Objects;
 public class Driver {
     private Long id;
     private String name;
-    private String licenseNumber;
+    private String license_Number;
 
     public Driver() {
     }
 
-    public Driver(Long id, String name, String licenseNumber) {
+    public Driver(Long id, String name, String license_Number) {
         this.id = id;
         this.name = name;
-        this.licenseNumber = licenseNumber;
+        this.license_Number = license_Number;
     }
 
     public Long getId() {
@@ -32,12 +32,12 @@ public class Driver {
         this.name = name;
     }
 
-    public String getLicenseNumber() {
-        return licenseNumber;
+    public String getLicense_Number() {
+        return license_Number;
     }
 
-    public void setLicenseNumber(String licenseNumber) {
-        this.licenseNumber = licenseNumber;
+    public void setLicense_Number(String license_Number) {
+        this.license_Number = license_Number;
     }
 
     @Override
@@ -47,7 +47,7 @@ public class Driver {
                 + id + ", name='"
                 + name + '\''
                 + ", licenseNumber='"
-                + licenseNumber + '\'' + '}';
+                + license_Number + '\'' + '}';
     }
 
     @Override
@@ -62,11 +62,11 @@ public class Driver {
         return Objects
                 .equals(id, driver.id)
                 && Objects.equals(name, driver.name)
-                && Objects.equals(licenseNumber, driver.licenseNumber);
+                && Objects.equals(license_Number, driver.license_Number);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, licenseNumber);
+        return Objects.hash(id, name, license_Number);
     }
 }
