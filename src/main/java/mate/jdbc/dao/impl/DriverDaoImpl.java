@@ -74,6 +74,36 @@ public class DriverDaoImpl implements DriverDao {
         return drivers;
     }
 
+    @Override
+    public Driver update(Driver driver) {
+        String updateQuery = "UPDATE drivers SET name = ?, country = ?"
+                + "WHERE id = ? AND is_deleted = false";
+        try (Connection connection = ConnectionUtil.getConnection();
+                    PreparedStatement preparedStatement =
+                            connection.prepareStatement(updateQuery)) {
+            preparedStatement.setString(1, driver.getName());
+            preparedStatement.setString(2, driver.getLicenseNumber());
+            preparedStatement.setLong(3, driver.getId());
+            return driver;
+        } catch (SQLException e) {
+            throw new DataProcessingException("Can't update driver "
+                    + driver.getId() + "!", e);
+        }
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        String deleteQuery = "UPDATE drivers SET is_deleted = true where id = ?";
+        try (Connection connection = ConnectionUtil.getConnection();
+                     PreparedStatement preparedStatement =
+                                connection.prepareStatement(deleteQuery)) {
+            preparedStatement.setLong(1, id);
+            return preparedStatement.executeUpdate() >= 1;
+        } catch (SQLException e) {
+            throw new DataProcessingException("Can't delete element! id = " + id + "!", e);
+        }
+    }
+
     private Driver parseDrivers(ResultSet resultSet) throws SQLException {
         Driver driver = new Driver();
         driver.setId(resultSet.getObject("id", Long.class));

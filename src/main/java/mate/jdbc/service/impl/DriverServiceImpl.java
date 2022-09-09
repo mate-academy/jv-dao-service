@@ -30,11 +30,11 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver update(Driver driver) {
-        return null;
+        return driverDao.update(driver);
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        return driverDao.delete(id);
     }
 }
