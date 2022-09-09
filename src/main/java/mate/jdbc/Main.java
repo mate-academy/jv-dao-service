@@ -14,7 +14,6 @@ public class Main {
     public static void main(String[] args) {
         ManufacturerService manufacturerService =
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
-
         Manufacturer tatra = new Manufacturer();
         tatra.setName("Tatra");
         tatra.setCountry("Czech Republic");
@@ -50,8 +49,7 @@ public class Main {
         System.out.println("Tatra was changed to Praga");
 
         System.out.println(manufacturerService.get(tatra.getId()));
-        System.out.println("Manufacturer id = "
-                + tatra.getId());
+        System.out.println("Manufacturer id = " + tatra.getId());
 
         manufacturerService.delete(jaguar.getId());
         System.out.println("Jaguar was deleted");
@@ -59,9 +57,7 @@ public class Main {
         manufacturers = manufacturerService.getAll();
         System.out.println("All manufacturers from db:");
         manufacturers.forEach(System.out::println);
-        
-        DriverService driverService =
-                (DriverService) injector.getInstance(DriverService.class);
+        DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
 
         Driver pragaDriver = new Driver();
         pragaDriver.setName("Valdemar");
@@ -83,8 +79,7 @@ public class Main {
         bentleyDriver.setLicenseNumber("A1-974-264-779-132");
         driverService.create(bentleyDriver);
         
-        System.out.println("Added: tatraDriver, volvoDriver, "
-                + "ferrariDriver, bentleyDriver");
+        System.out.println("Added: tatraDriver, volvoDriver, " + "ferrariDriver, bentleyDriver");
 
         List<Driver> drivers = driverService.getAll();
         System.out.println("All drivers from db:");
