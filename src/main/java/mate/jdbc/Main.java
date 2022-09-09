@@ -19,7 +19,9 @@ public class Main {
         john.setLicenseNumber("2345");
         driverService.create(john);
 
-        Driver jack = new Driver("Jack","4567");
+        Driver jack = new Driver();
+        jack.setName("Jack");
+        jack.setLicenseNumber("4567");
         driverService.create(jack);
 
         driverService.delete(bob.getId());
