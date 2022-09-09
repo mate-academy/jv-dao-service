@@ -28,7 +28,6 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-
         return manufacturerDao.update(manufacturer);
     }
 
