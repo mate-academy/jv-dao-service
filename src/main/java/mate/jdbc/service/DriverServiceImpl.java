@@ -28,7 +28,6 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver update(Driver driver) {
-
         return driverDao.update(driver);
     }
 
