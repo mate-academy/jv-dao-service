@@ -45,9 +45,9 @@ public class Main {
         manufacturers.forEach(System.out::println);
         System.out.println("All manufacturers from db");
 
-        tatra.setName("Škoda");
+        tatra.setName("Praga");
         tatra = manufacturerService.update(tatra);
-        System.out.println("Tatra was changed to Škoda");
+        System.out.println("Tatra was changed to Praga");
 
         System.out.println(manufacturerService.get(tatra.getId()));
         System.out.println("Manufacturer id = "
@@ -63,10 +63,10 @@ public class Main {
         DriverService driverService =
                 (DriverService) injector.getInstance(DriverService.class);
 
-        Driver škodaDriver = new Driver();
-        škodaDriver.setName("Valdemar");
-        škodaDriver.setLicenseNumber("A1-324-675-178-980");
-        driverService.create(škodaDriver);
+        Driver pragaDriver = new Driver();
+        pragaDriver.setName("Valdemar");
+        pragaDriver.setLicenseNumber("A1-324-675-178-980");
+        driverService.create(pragaDriver);
 
         Driver volvoDriver = new Driver();
         volvoDriver.setName("Anna");
@@ -90,13 +90,13 @@ public class Main {
         System.out.println("All drivers from db:");
         drivers.forEach(System.out::println);
 
-        škodaDriver.setName("Alice");
-        škodaDriver = driverService.update(škodaDriver);
+        pragaDriver.setName("Alice");
+        pragaDriver = driverService.update(pragaDriver);
         System.out.println("tatraDriver name was changed to Alice");
 
-        System.out.println(driverService.get(škodaDriver.getId()));
+        System.out.println(driverService.get(pragaDriver.getId()));
         System.out.println("Driver with id = "
-                + škodaDriver.getId());
+                + pragaDriver.getId());
 
         driverService.delete(bentleyDriver.getId());
         System.out.println("bentleyDriver was deleted");
