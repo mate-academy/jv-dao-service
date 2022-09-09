@@ -13,9 +13,9 @@ public class Main {
         ManufacturerService manufacturerService = (ManufacturerService) injector
                 .getInstance(ManufacturerService.class);
         manufacturerService.getAll().forEach(System.out::println);
-        Manufacturer manufacturer = new Manufacturer("Nissan", "Japan");
+        Manufacturer manufacturer = new Manufacturer(null, "Nissan", "Japan");
         manufacturerService.create(manufacturer);
-        manufacturer = new Manufacturer("Jeep", "Usa");
+        manufacturer = new Manufacturer(null, "Jeep", "Usa");
         manufacturer = manufacturerService.create(manufacturer);
         System.out.println(manufacturerService.get(manufacturer.getId()).toString());
         manufacturer.setCountry(manufacturer.getCountry().toUpperCase());
