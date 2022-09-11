@@ -20,8 +20,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer get(Long id) {
-        Optional<Manufacturer> optional = manufacturerDao.get(id);
-        return optional.orElseThrow(()
+        return manufacturerDao.get(id).orElseThrow(()
                 -> new RuntimeException("Can't find manufacturer by id: " + id));
     }
 
