@@ -49,14 +49,10 @@ public class Driver {
 
         Driver driver = (Driver) o;
 
-        if (id != null ? !id.equals(driver.id) : driver.id != null) {
-            return false;
-        }
-        if (name != null ? !name.equals(driver.name) : driver.name != null) {
-            return false;
-        }
-        return licenseNumber != null ? licenseNumber.equals(driver.licenseNumber)
-                : driver.licenseNumber == null;
+        return (id == driver.id || id != null && id.equals(driver.id))
+                && (name == driver.name || name != null && name.equals(driver.name))
+                && (licenseNumber == driver.licenseNumber || licenseNumber != null
+                && licenseNumber.equals(driver.licenseNumber));
     }
 
     @Override
