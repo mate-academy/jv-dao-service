@@ -8,8 +8,8 @@ import mate.jdbc.lib.Service;
 import mate.jdbc.model.Manufacturer;
 
 @Service
-@Inject
 public class ManufacturerServiceImpl implements ManufacturerService {
+    @Inject
     private final ManufacturerDao manufacturerDao = new ManufacturerDaoImpl();
 
     @Override
@@ -20,7 +20,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     @Override
     public Manufacturer get(Long id) {
         return manufacturerDao.get(id).orElseThrow(
-                () -> new RuntimeException("Can't get driver by id" + id));
+                () -> new RuntimeException("Can't get manufacturer by id" + id));
     }
 
     @Override
