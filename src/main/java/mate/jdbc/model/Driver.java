@@ -5,6 +5,9 @@ public class Driver {
     private String name;
     private String licenseNumber;
 
+    public Driver() {
+    }
+
     public Driver(Long id, String name, String licenseNumber) {
         this.id = id;
         this.name = name;
@@ -37,14 +40,23 @@ public class Driver {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Driver)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Driver)) {
+            return false;
+        }
 
         Driver driver = (Driver) o;
 
-        if (id != null ? !id.equals(driver.id) : driver.id != null) return false;
-        if (name != null ? !name.equals(driver.name) : driver.name != null) return false;
-        return licenseNumber != null ? licenseNumber.equals(driver.licenseNumber) : driver.licenseNumber == null;
+        if (id != null ? !id.equals(driver.id) : driver.id != null) {
+            return false;
+        }
+        if (name != null ? !name.equals(driver.name) : driver.name != null) {
+            return false;
+        }
+        return licenseNumber != null ? licenseNumber.equals(driver.licenseNumber)
+                : driver.licenseNumber == null;
     }
 
     @Override
@@ -57,10 +69,12 @@ public class Driver {
 
     @Override
     public String toString() {
-        return "Driver{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", licenseNumber='" + licenseNumber + '\'' +
-                '}';
+        return "Driver{"
+                + "id=" + id
+                + ", name='" + name
+                + '\'' + ", licenseNumber='"
+                + licenseNumber
+                + '\''
+                + '}';
     }
 }
