@@ -1,11 +1,10 @@
 package mate.jdbc.service;
 
+import java.util.List;
 import mate.jdbc.model.Driver;
 
-import java.util.List;
-
 public interface DriverService {
-    Driver create (Driver driver);
+    Driver create(Driver driver);
 
     Driver get(Long id);
 
