@@ -17,9 +17,14 @@ public class Main {
         Manufacturer honda = new Manufacturer();
         honda.setCountry("Japan");
         honda.setName("Honda");
+        Manufacturer audi = new Manufacturer();
+        audi.setName("Audi");
+        audi.setCountry("Germany");
 
         ManufacturerService manufacturerService =
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
+        manufacturerService.create(audi);
+        System.out.println(manufacturerService.get(audi.getId()));
         manufacturerService.create(vw);
         manufacturerService.create(honda);
         System.out.println(manufacturerService.getAll());
