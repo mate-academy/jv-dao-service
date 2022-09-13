@@ -10,7 +10,7 @@ import mate.jdbc.model.Driver;
 @Service
 public class DriverServiceImpl implements DriverService {
     @Inject
-    private final DriverDao driverDao = new DriverDaoImpl();
+    private DriverDao driverDao;
 
     @Override
     public Driver create(Driver driver) {
