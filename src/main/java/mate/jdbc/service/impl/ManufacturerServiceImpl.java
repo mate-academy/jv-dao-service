@@ -2,6 +2,7 @@ package mate.jdbc.service.impl;
 
 import java.util.List;
 import mate.jdbc.dao.ManufacturerDao;
+import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
 import mate.jdbc.model.Manufacturer;
@@ -10,30 +11,31 @@ import mate.jdbc.service.ManufacturerService;
 @Service
 public class ManufacturerServiceImpl implements ManufacturerService {
     @Inject
-    private ManufacturerDao dao;
+    private ManufacturerDao manufacturerDao;
 
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        return dao.create(manufacturer);
+        return manufacturerDao.create(manufacturer);
     }
 
     @Override
     public Manufacturer get(Long id) {
-        return dao.get(id).get();
+        return manufacturerDao.get(id).orElseThrow(
+                () -> new DataProcessingException("Not found manufacturer in DB by id: " + id));
     }
 
     @Override
     public List<Manufacturer> getAll() {
-        return dao.getAll();
+        return manufacturerDao.getAll();
     }
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        return dao.update(manufacturer);
+        return manufacturerDao.update(manufacturer);
     }
 
     @Override
     public boolean delete(Long id) {
-        return dao.delete(id);
+        return manufacturerDao.delete(id);
     }
 }

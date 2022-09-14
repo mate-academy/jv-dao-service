@@ -13,18 +13,18 @@ public class Main {
         ManufacturerService manufacturerService = (ManufacturerService)
                 injector.getInstance(ManufacturerService.class);
         Manufacturer manufacturer = new Manufacturer(null, "Alfa Romeo", "Italy");
-        StringBuilder str = new StringBuilder("Info:");
-        str.append("\nManufacturerService:")
+        StringBuilder stringBuilder = new StringBuilder("Info:");
+        stringBuilder.append("\nManufacturerService:")
                 .append("\nCreate:\n\t")
                 .append(manufacturerService.create(manufacturer))
                 .append(" was created.")
                 .append("\nRead(get):\n\t")
                 .append(manufacturerService.get(manufacturer.getId()))
                 .append("\nRead(getAll):");
-        manufacturerService.getAll().forEach(m -> str.append("\n\t").append(m));
+        manufacturerService.getAll().forEach(m -> stringBuilder.append("\n\t").append(m));
         manufacturer.setName("Porsche");
         manufacturer.setCountry("Germany");
-        str.append("\nUpdate:\n\t")
+        stringBuilder.append("\nUpdate:\n\t")
                 .append(manufacturerService.update(manufacturer))
                 .append(" was updated.")
                 .append("\nDelete:\n\tManufacturer ")
@@ -34,22 +34,22 @@ public class Main {
         DriverService driverService = (DriverService)
                 injector.getInstance(DriverService.class);
         Driver driver = new Driver(null, "Francesco Ravioli", "69396");
-        str.append("\nDriverService:")
+        stringBuilder.append("\nDriverService:")
                 .append("\nCreate:\n\t")
                 .append(driverService.create(driver))
                 .append(" was created.")
                 .append("\nRead(get):\n\t")
                 .append(driverService.get(driver.getId()))
                 .append("\nRead(getAll):");
-        driverService.getAll().forEach(d -> str.append("\n\t").append(d));
+        driverService.getAll().forEach(d -> stringBuilder.append("\n\t").append(d));
         driver.setName("Karl Schmidt");
         driver.setLicenseNumber("36963");
-        str.append("\nUpdate:\n\t")
+        stringBuilder.append("\nUpdate:\n\t")
                 .append(driverService.update(driver))
                 .append(" was updated.")
                 .append("\nDelete:\n\tDriver ")
                 .append(driverService.delete(driver.getId()) ? "successfully" : "unsuccessfully")
                 .append(" deleted.");
-        System.out.println(str);
+        System.out.println(stringBuilder);
     }
 }
