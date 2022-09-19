@@ -7,7 +7,7 @@ import mate.jdbc.lib.Service;
 import mate.jdbc.model.Driver;
 
 @Service
-public class DriverServiceImpl implements DriverService{
+public class DriverServiceImpl implements DriverService {
     @Inject
     private DriverDao driverDao;
 

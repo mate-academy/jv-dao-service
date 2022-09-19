@@ -20,7 +20,7 @@ public class ConnectionUtil {
     }
 
     public static Connection getConnection() {
-        try{
+        try {
             Properties dbProperties = new Properties();
             dbProperties.setProperty("user", USERNAME);
             dbProperties.setProperty("password", PASSWORD);
@@ -28,6 +28,5 @@ public class ConnectionUtil {
         } catch (SQLException e) {
             throw new RuntimeException("Can't create connection to DB", e);
         }
-
     }
 }
