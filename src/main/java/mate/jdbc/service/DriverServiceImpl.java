@@ -18,7 +18,8 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver get(Long id) {
-        return driverDao.get(id).orElse(null);
+        return driverDao.get(id).orElseThrow(() -> new RuntimeException(
+                "There is no driver in DB with id: " + id));
     }
 
     @Override
