@@ -11,8 +11,8 @@ public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
-        Driver john = new Driver("John", "Joni182");
-        Driver bob = new Driver("Bob", "bib123");
+        Driver john = new Driver(null, "John", "Joni182");
+        Driver bob = new Driver(null, "Bob", "bib123");
         DriverService manager = (DriverService) injector.getInstance(DriverService.class);
         manager.create(john);
         manager.create(bob);
@@ -29,8 +29,8 @@ public class Main {
         manager.getAll().forEach(d -> manager.delete(d.getId()));
         System.out.println(System.lineSeparator());
 
-        Manufacturer bmw = new Manufacturer("BMW", "Germany");
-        Manufacturer ford = new Manufacturer("Ford", "USA");
+        Manufacturer bmw = new Manufacturer(null, "BMW", "Germany");
+        Manufacturer ford = new Manufacturer(null, "Ford", "USA");
         ManufacturerService factory = (ManufacturerService)
                 injector.getInstance(ManufacturerService.class);
         factory.create(bmw);

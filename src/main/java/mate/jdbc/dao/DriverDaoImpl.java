@@ -28,8 +28,8 @@ public class DriverDaoImpl implements DriverDao {
             }
             return drivers;
         } catch (SQLException throwable) {
-            throw new DataProcessingException("Couldn't get a list of manufacturers "
-                    + "from manufacturers table. ",
+            throw new DataProcessingException("Couldn't get a list of drivers "
+                    + "from drivers table. ",
                     throwable);
         }
     }
@@ -44,13 +44,12 @@ public class DriverDaoImpl implements DriverDao {
             updateStatement.setString(1, driver.getName());
             updateStatement.setString(2, driver.getLicenseNumber());
             updateStatement.setLong(3, driver.getId());
-            updateStatement.executeUpdate();
             if (updateStatement.executeUpdate() > 0) {
                 return driver;
             }
             throw new RuntimeException("Can't update. Driver does not exist.");
         } catch (SQLException throwable) {
-            throw new DataProcessingException("Couldn't update a manufacturer "
+            throw new DataProcessingException("Couldn't update driver "
                     + driver + " ", throwable);
         }
     }
@@ -72,7 +71,7 @@ public class DriverDaoImpl implements DriverDao {
             }
             return driver;
         } catch (SQLException throwable) {
-            throw new DataProcessingException("Couldn't create manufacturer. " + driver + " ",
+            throw new DataProcessingException("Couldn't create driver. " + driver + " ",
                     throwable);
         }
     }
@@ -91,7 +90,7 @@ public class DriverDaoImpl implements DriverDao {
             }
             return Optional.ofNullable(driver);
         } catch (SQLException throwable) {
-            throw new DataProcessingException("Couldn't get manufacturer by id " + id + " ",
+            throw new DataProcessingException("Couldn't get driver by id " + id + " ",
                     throwable);
         }
     }
@@ -104,15 +103,15 @@ public class DriverDaoImpl implements DriverDao {
             deleteStatement.setLong(1, id);
             return deleteStatement.executeUpdate() > 0;
         } catch (SQLException throwable) {
-            throw new DataProcessingException("Couldn't delete a manufacturer by id " + id + " ",
+            throw new DataProcessingException("Couldn't delete a driver by id " + id + " ",
                     throwable);
         }
     }
 
     private Driver getDriver(ResultSet resultSet) throws SQLException {
-        Driver driver = new Driver(resultSet.getString("name"),
-                resultSet.getString("licenseNumber"));
-        driver.setId(resultSet.getObject("id", Long.class));
-        return driver;
+        Long id = resultSet.getObject("id", Long.class);
+        String name = resultSet.getString("name");
+        String licenseNumber = resultSet.getString("licenseNumber");
+        return new Driver(id, name, licenseNumber);
     }
 }
