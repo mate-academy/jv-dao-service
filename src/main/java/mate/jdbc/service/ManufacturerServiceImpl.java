@@ -18,10 +18,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer get(Long id) {
-        if (manufacturerDao.get(id).isEmpty()) {
-            throw new RuntimeException("DB is not contain manufacturer with id: " + id);
-        }
-        return manufacturerDao.get(id).get();
+        return manufacturerDao.get(id).orElseThrow();
     }
 
     @Override
