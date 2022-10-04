@@ -3,6 +3,7 @@ package mate.jdbc.service;
 import java.util.List;
 import java.util.Optional;
 import mate.jdbc.dao.DriverDao;
+import mate.jdbc.exception.DataNotFoundExeption;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
 import mate.jdbc.model.Driver;
@@ -20,7 +21,7 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public Driver get(Long id) {
         Optional<Driver> driver = driverDao.get(id);
-        return driver.orElseGet(Driver::new);
+        return driver.orElseThrow(() -> new DataNotFoundExeption("Driver not found by id '" + id));
     }
 
     @Override

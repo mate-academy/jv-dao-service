@@ -3,6 +3,7 @@ package mate.jdbc.service;
 import java.util.List;
 import java.util.Optional;
 import mate.jdbc.dao.ManufacturerDao;
+import mate.jdbc.exception.DataNotFoundExeption;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
 import mate.jdbc.model.Manufacturer;
@@ -21,7 +22,8 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     @Override
     public Manufacturer get(Long id) {
         Optional<Manufacturer> manufacturer = manufacturerDao.get(id);
-        return manufacturer.orElseGet(Manufacturer::new);
+        return manufacturer.orElseThrow(() ->
+                new DataNotFoundExeption("Manufacturer not found by id '" + id));
     }
 
     @Override

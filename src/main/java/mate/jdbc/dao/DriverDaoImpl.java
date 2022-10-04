@@ -33,7 +33,7 @@ public class DriverDaoImpl implements DriverDao {
             }
             return driver;
         } catch (SQLException e) {
-            throw new DataProcessingException("Couldn't create driver. " + driver, e);
+            throw new DataProcessingException("Couldn't create driver " + driver, e);
         }
     }
 
