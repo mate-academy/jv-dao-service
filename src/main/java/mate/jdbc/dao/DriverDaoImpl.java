@@ -1,14 +1,17 @@
 package mate.jdbc.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Dao;
 import mate.jdbc.model.Driver;
 import mate.jdbc.util.ConnectionUtil;
-
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Dao
 public class DriverDaoImpl implements DriverDao {
@@ -16,8 +19,8 @@ public class DriverDaoImpl implements DriverDao {
     public Driver create(Driver driver) {
         String insert = "INSERT INTO drivers(name, license_number) VALUES(?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
-        PreparedStatement createStmt
-                = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement createStmt
+                        = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS)) {
             createStmt.setString(1, driver.getName());
             createStmt.setString(2, driver.getLicenseNumber());
             createStmt.executeUpdate();
@@ -36,8 +39,8 @@ public class DriverDaoImpl implements DriverDao {
     public Optional<Driver> get(Long id) {
         String select = "SELECT * FROM drivers WHERE id = ? AND is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
-        PreparedStatement selectStmt
-                = connection.prepareStatement(select)) {
+                PreparedStatement selectStmt
+                        = connection.prepareStatement(select)) {
             selectStmt.setObject(1, id);
             ResultSet resultSet = selectStmt.executeQuery();
             Driver driver = null;
@@ -54,8 +57,8 @@ public class DriverDaoImpl implements DriverDao {
     public List<Driver> getAll() {
         String select = "SELECT * FROM drivers WHERE is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement selectStmt
-                     = connection.prepareStatement(select)) {
+                PreparedStatement selectStmt
+                        = connection.prepareStatement(select)) {
             List<Driver> drivers = new ArrayList<>();
             ResultSet resultSet = selectStmt.executeQuery();
             while (resultSet.next()) {
@@ -73,15 +76,15 @@ public class DriverDaoImpl implements DriverDao {
         String update = "UPDATE drivers SET name = ?, "
                 + "license_number = ? WHERE id = ? AND is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement updateStmt
-                     = connection.prepareStatement(update)) {
+                PreparedStatement updateStmt
+                        = connection.prepareStatement(update)) {
             updateStmt.setString(1, driver.getName());
             updateStmt.setString(2, driver.getLicenseNumber());
             updateStmt.setObject(3, driver.getId());
             updateStmt.executeUpdate();
             return driver;
         } catch (SQLException e) {
-            throw new DataProcessingException("Cannot update the driver: "+ driver, e);
+            throw new DataProcessingException("Cannot update the driver: " + driver, e);
         }
     }
 
@@ -89,12 +92,12 @@ public class DriverDaoImpl implements DriverDao {
     public boolean delete(Long id) {
         String delete = "UPDATE drivers SET is_deleted = TRUE WHERE id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement updateStmt
-                     = connection.prepareStatement(delete)) {
+                PreparedStatement updateStmt
+                        = connection.prepareStatement(delete)) {
             updateStmt.setObject(1, id);
             return updateStmt.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new DataProcessingException("Cannot delete the driver by id: "+ id, e);
+            throw new DataProcessingException("Cannot delete the driver by id: " + id, e);
         }
     }
 
