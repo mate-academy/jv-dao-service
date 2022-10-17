@@ -4,7 +4,6 @@ import java.util.List;
 import mate.jdbc.model.Manufacturer;
 
 public interface ManufacturerService {
-
     public Manufacturer create(Manufacturer manufacturer);
 
     public Manufacturer get(Long id);

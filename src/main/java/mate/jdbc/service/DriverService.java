@@ -4,7 +4,6 @@ import java.util.List;
 import mate.jdbc.model.Driver;
 
 public interface DriverService {
-
     public Driver create(Driver driver);
 
     public Driver get(Long id);

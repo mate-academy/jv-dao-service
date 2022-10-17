@@ -46,5 +46,7 @@ public class Main {
 
         System.out.println("All drivers list: ");
         System.out.println(driverService.getAll());
+
+        System.out.println(driverService.get(55L));
     }
 }
