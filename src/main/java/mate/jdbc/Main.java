@@ -1,9 +1,9 @@
 package mate.jdbc;
 
-import mate.jdbc.dao.DriverDao;
-import mate.jdbc.dao.DriverDaoImpl;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
+import mate.jdbc.service.DriverService;
+import mate.jdbc.service.DriverServiceImpl;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
@@ -21,30 +21,30 @@ public class Main {
         driverThree.setName("Volodymyr");
         driverThree.setLicenseNumber("224557");
 
-        DriverDao driverDao = new DriverDaoImpl();
+        DriverService driverService = new DriverServiceImpl();
 
         System.out.println("Creating new driver: " + driverOne.getName());
-        driverDao.create(driverOne);
+        driverService.create(driverOne);
         System.out.println("Creating new driver: " + driverTwo.getName());
-        driverDao.create(driverTwo);
+        driverService.create(driverTwo);
         System.out.println("Creating new driver: " + driverThree.getName());
-        driverDao.create(driverThree);
+        driverService.create(driverThree);
 
         System.out.println("All drivers list: ");
-        System.out.println(driverDao.getAll());
+        System.out.println(driverService.getAll());
 
         System.out.println("Update driver " + driverOne.getName() + " license number");
         driverOne.setLicenseNumber("457888");
-        driverDao.update(driverOne);
+        driverService.update(driverOne);
 
         System.out.println("All drivers list: ");
-        System.out.println(driverDao.getAll());
+        System.out.println(driverService.getAll());
 
         System.out.println("Delete driver: " + driverThree.getName()
                 + " with id: " + driverThree.getId());
-        System.out.println(driverDao.delete(driverTwo.getId()));
+        System.out.println(driverService.delete(driverTwo.getId()));
 
         System.out.println("All drivers list: ");
-        System.out.println(driverDao.getAll());
+        System.out.println(driverService.getAll());
     }
 }
