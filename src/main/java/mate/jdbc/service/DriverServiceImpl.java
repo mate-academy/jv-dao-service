@@ -2,14 +2,14 @@ package mate.jdbc.service;
 
 import java.util.List;
 import mate.jdbc.dao.DriverDao;
-import mate.jdbc.dao.DriverDaoImpl;
-import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Inject;
+import mate.jdbc.lib.Service;
 import mate.jdbc.model.Driver;
 
-@Inject
+@Service
 public class DriverServiceImpl implements DriverService {
-    private final DriverDao driverDao = new DriverDaoImpl();
+    @Inject
+    private DriverDao driverDao;
 
     @Override
     public Driver create(Driver driver) {
@@ -18,11 +18,8 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver get(Long id) {
-        try {
-            return driverDao.get(id).orElseThrow();
-        } catch (Exception e) {
-            throw new DataProcessingException("Couldn't get driver by id " + id, e);
-        }
+        return driverDao.get(id).orElseThrow(()
+                -> new RuntimeException("Couldn't get manufacturer by id " + id));
     }
 
     @Override
