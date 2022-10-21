@@ -1,31 +1,34 @@
 package mate.jdbc.service;
 
+import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.model.Manufacturer;
 import java.util.List;
 
 public class ManufacturerServiceImpl implements ManufacturerService {
+    ManufacturerDao manufacturerDao;
+
     @Override
     public Manufacturer create(final Manufacturer manufacturer) {
-        return null;
+        return manufacturerDao.create(manufacturer);
     }
 
     @Override
     public Manufacturer get(final Long id) {
-        return null;
+        return manufacturerDao.get(id).get();
     }
 
     @Override
     public List<Manufacturer> getAll() {
-        return null;
+        return manufacturerDao.getAll();
     }
 
     @Override
     public Manufacturer update(final Manufacturer manufacturer) {
-        return null;
+        return manufacturerDao.update(manufacturer);
     }
 
     @Override
     public boolean delete(final Long id) {
-        return false;
+        return manufacturerDao.delete(id);
     }
 }
