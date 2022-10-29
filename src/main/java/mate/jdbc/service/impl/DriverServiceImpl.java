@@ -20,12 +20,15 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver get(Long id) {
-        return driverDao.get(id);
+        if (driverDao.get(id).isEmpty()) {
+            return driverDao.get(id).get();
+        }
+        return null;
     }
 
     @Override
     public List<Driver> getAll() {
-        return driverDao.getALl();
+        return driverDao.getAll();
     }
 
     @Override

@@ -3,10 +3,7 @@ package mate.jdbc;
 import java.util.List;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
-import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.DriverService;
-import mate.jdbc.service.ManufacturerService;
-import mate.jdbc.service.impl.ManufactureServiceImpl;
 
 public class Main {
 
@@ -25,17 +22,6 @@ public class Main {
         Driver driver3 = new Driver();
         driver3.setName("John");
         driver3.setLicenseNumber("hdsaf9ahdflkas");
-
-        Manufacturer manufacturer1 = new Manufacturer();
-        manufacturer1.setCountry("USA");
-        manufacturer1.setName("Ford");
-        Manufacturer manufacturer2 = new Manufacturer();
-        manufacturer2.setCountry("Japan");
-        manufacturer2.setName("Toyota");
-        Manufacturer manufacturer3 = new Manufacturer();
-        manufacturer3.setCountry("Britain");
-        manufacturer3.setName("Jaguar");
-        ManufacturerService manufacturerService = new ManufactureServiceImpl();
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
 
         System.out.println("Creating drivers...");
@@ -53,9 +39,7 @@ public class Main {
         System.out.println("Getting all drivers...");
         List<Driver> driverList = driverService.getAll();
         System.out.println("All drivers");
-        for (Driver driver: driverList) {
-            System.out.println(driver);
-        }
+        driverList.forEach(System.out::println);
         System.out.println("All drivers were successfully getted" + System.lineSeparator());
 
         System.out.println("Updating driver1...");
