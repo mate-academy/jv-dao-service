@@ -2,7 +2,6 @@ package mate.jdbc.service.impl;
 
 import java.util.List;
 import mate.jdbc.dao.ManufacturerDao;
-import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
 import mate.jdbc.model.Manufacturer;
@@ -20,9 +19,8 @@ public class ManufactureServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer get(Long id) {
-        return manufacturerDao.get(id).orElseThrow(()
-                -> new DataProcessingException("Manufacturer with this id = "
-                + id + "don`t exist", new Exception()));
+        return manufacturerDao.get(id).orElseThrow(() -> new RuntimeException(
+                "Manufacturer with this id don`t exist id = " + id));
     }
 
     @Override

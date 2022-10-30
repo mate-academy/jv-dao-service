@@ -2,7 +2,6 @@ package mate.jdbc.service.impl;
 
 import java.util.List;
 import mate.jdbc.dao.DriverDao;
-import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
 import mate.jdbc.model.Driver;
@@ -21,9 +20,8 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver get(Long id) {
-        return driverDao.get(id).orElseThrow(()
-                -> new DataProcessingException("Driver with id = "
-                + id + "don`t exist", new Exception()));
+        return driverDao.get(id).orElseThrow(() -> new RuntimeException(
+                "Driver with this id don`t exist id = " + id));
     }
 
     @Override
