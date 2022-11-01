@@ -12,5 +12,6 @@ CREATE TABLE `driver` (
                           `id` bigint NOT NULL AUTO_INCREMENT,
                           `name` varchar(45) NOT NULL,
                           `license_number` varchar(45) NOT NULL,
+                          `is_deleted` TINYINT NOT NULL DEFAULT 0,
                           PRIMARY KEY (`id`)
 );
