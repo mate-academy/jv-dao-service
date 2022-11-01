@@ -23,7 +23,8 @@ public class Main {
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         Driver driver = new Driver(null, TEST_DRIVER_NAME, TEST_DRIVER_LICENSE);
         System.out.println("Driver created: " + driverService.create(driver));
-        System.out.println("Same driver, but accessed through get: " + driverService.get(driver.getId()));
+        System.out.println("Same driver, but accessed through get: "
+                + driverService.get(driver.getId()));
         driver.setLicenseNumber(driver.getLicenseNumber() + "_updated");
         driver.setName(driver.getName() + "_updated");
         System.out.println("Driver updated: " + driverService.update(driver));
@@ -37,8 +38,10 @@ public class Main {
     }
 
     private static void testManufacturerService() {
-        ManufacturerService manufacturerService = (ManufacturerService) injector.getInstance(ManufacturerService.class);
-        Manufacturer manufacturer = new Manufacturer(null, TEST_MANUFACTURER_NAME, TEST_MANUFACTURER_COUNTRY);
+        ManufacturerService manufacturerService
+                = (ManufacturerService) injector.getInstance(ManufacturerService.class);
+        Manufacturer manufacturer
+                = new Manufacturer(null, TEST_MANUFACTURER_NAME, TEST_MANUFACTURER_COUNTRY);
         System.out.println("Manufacturer created: " + manufacturerService.create(manufacturer));
         System.out.println("Same manufacturer, but accessed through get: "
                 + manufacturerService.get(manufacturer.getId()));
