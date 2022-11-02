@@ -10,102 +10,102 @@ import java.util.List;
 import java.util.Optional;
 import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Dao;
-import mate.jdbc.model.Manufacturer;
+import mate.jdbc.model.Driver;
 import mate.jdbc.util.ConnectionUtil;
 
 @Dao
-public class ManufacturerDaoImpl implements ManufacturerDao {
+public class DriverDaoImpl implements DriverDao {
     @Override
-    public Manufacturer create(Manufacturer manufacturer) {
-        String query = "INSERT INTO manufacturer (name, country) "
+    public Driver create(Driver driver) {
+        String query = "INSERT INTO driver (name, license_number) "
                 + "VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement
                         = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, manufacturer.getName());
-            statement.setString(2, manufacturer.getCountry());
+            statement.setString(1, driver.getName());
+            statement.setString(2, driver.getLicenseNumber());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
-                manufacturer.setId(resultSet.getObject(1, Long.class));
+                driver.setId(resultSet.getObject(1, Long.class));
             }
-            return manufacturer;
+            return driver;
         } catch (SQLException e) {
-            throw new DataProcessingException("Couldn't create manufacturer. " + manufacturer, e);
+            throw new DataProcessingException("Couldn't create driver. " + driver, e);
         }
     }
 
     @Override
-    public Optional<Manufacturer> get(Long id) {
-        String query = "SELECT * FROM manufacturer"
+    public Optional<Driver> get(Long id) {
+        String query = "SELECT * FROM driver"
                 + " WHERE id = ? AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            Manufacturer manufacturer = null;
+            Driver driver = null;
             if (resultSet.next()) {
-                manufacturer = getManufacturer(resultSet);
+                driver = getDriver(resultSet);
             }
-            return Optional.ofNullable(manufacturer);
+            return Optional.ofNullable(driver);
         } catch (SQLException e) {
-            throw new DataProcessingException("Couldn't get manufacturer by id " + id, e);
+            throw new DataProcessingException("Couldn't get driver by id " + id, e);
         }
     }
 
     @Override
-    public List<Manufacturer> getAll() {
-        String query = "SELECT * FROM manufacturer WHERE is_deleted = FALSE";
+    public List<Driver> getAll() {
+        String query = "SELECT * FROM driver WHERE is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement
                         = connection.prepareStatement(query)) {
-            List<Manufacturer> manufacturers = new ArrayList<>();
+            List<Driver> drivers = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                manufacturers.add(getManufacturer(resultSet));
+                drivers.add(getDriver(resultSet));
             }
-            return manufacturers;
+            return drivers;
         } catch (SQLException e) {
-            throw new DataProcessingException("Couldn't get a list of manufacturers "
-                    + "from manufacturers table.", e);
+            throw new DataProcessingException("Couldn't get a list of drivers "
+                    + "from driver table.", e);
         }
     }
 
     @Override
-    public Manufacturer update(Manufacturer manufacturer) {
-        String query = "UPDATE manufacturer SET name = ?, country = ?"
+    public Driver update(Driver driver) {
+        String query = "UPDATE driver SET name = ?, license_number = ?"
                 + " WHERE id = ? AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement
                         = connection.prepareStatement(query)) {
-            statement.setString(1, manufacturer.getName());
-            statement.setString(2, manufacturer.getCountry());
-            statement.setLong(3, manufacturer.getId());
+            statement.setString(1, driver.getName());
+            statement.setString(2, driver.getLicenseNumber());
+            statement.setLong(3, driver.getId());
             statement.executeUpdate();
-            return manufacturer;
+            return driver;
         } catch (SQLException e) {
-            throw new DataProcessingException("Couldn't update a manufacturer "
-                    + manufacturer, e);
+            throw new DataProcessingException("Couldn't update a driver "
+                    + driver, e);
         }
     }
 
     @Override
     public boolean delete(Long id) {
-        String query = "UPDATE manufacturer SET is_deleted = TRUE WHERE id = ?";
+        String query = "UPDATE driver SET is_deleted = TRUE WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement
                         = connection.prepareStatement(query)) {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new DataProcessingException("Couldn't delete a manufacturer by id " + id, e);
+            throw new DataProcessingException("Couldn't delete a driver by id " + id, e);
         }
     }
 
-    private Manufacturer getManufacturer(ResultSet resultSet) throws SQLException {
+    private Driver getDriver(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getObject("id", Long.class);
         String name = resultSet.getString("name");
-        String country = resultSet.getString("country");
-        return new Manufacturer(id, name, country);
+        String licenceNumber = resultSet.getString("license_number");
+        return new Driver(id, name, licenceNumber);
     }
 }
