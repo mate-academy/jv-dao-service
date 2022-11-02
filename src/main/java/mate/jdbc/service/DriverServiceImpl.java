@@ -5,7 +5,7 @@ import mate.jdbc.dao.DriverDao;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
 import mate.jdbc.model.Driver;
-import mate.jdbc.service.exception.DriverNotExistsException;
+import mate.jdbc.service.exception.DriverNotFoundException;
 
 @Service
 public class DriverServiceImpl implements DriverService {
@@ -20,7 +20,7 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public Driver get(Long id) {
         return driverDao.get(id).orElseThrow(()
-                -> new DriverNotExistsException(
+                -> new DriverNotFoundException(
                         "There are no driver with id: " + id));
     }
 
