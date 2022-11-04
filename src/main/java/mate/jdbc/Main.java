@@ -24,8 +24,8 @@ public class Main {
         manufacturerService.create(new Manufacturer("Tesla", "Germany"));
         manufacturerService.get(1L);
         manufacturerService.delete(5L);
-        for (Manufacturer manufacturer : manufacturerService.getAll()) {
-            System.out.println(manufacturer);
+        for (Manufacturer allManufacturers : manufacturerService.getAll()) {
+            System.out.println(allManufacturers);
         }
         manufacturerService.update(new Manufacturer(1L, "Opel", "Germany"));
     }
@@ -34,9 +34,8 @@ public class Main {
         driverService.create(new Driver(11L, "Afanasij", "2150120"));
         driverService.get(3L);
         driverService.delete(5L);
-        List<Driver> all = driverService.getAll();
-        for (Driver driver: all) {
-            System.out.println(driver);
+        for (Driver allDrivers: driverService.getAll()) {
+            System.out.println(allDrivers);
         }
         driverService.update(new Driver(1L, "Anton", "0235987"));
     }
