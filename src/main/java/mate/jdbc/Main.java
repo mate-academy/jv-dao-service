@@ -1,12 +1,11 @@
 package mate.jdbc;
 
+import java.util.List;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.DriverService;
 import mate.jdbc.service.ManufacturerService;
-
-import java.util.List;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
@@ -15,8 +14,23 @@ public class Main {
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         ManufacturerService manufacturerService =
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
-/*
-        //Driver test
+
+        testDriverService(driverService);
+
+        testManufacturerService(manufacturerService);
+    }
+
+    private static void testManufacturerService(ManufacturerService manufacturerService) {
+        manufacturerService.create(new Manufacturer("Tesla", "Germany"));
+        manufacturerService.get(1L);
+        manufacturerService.delete(5L);
+        for (Manufacturer manufacturer : manufacturerService.getAll()) {
+            System.out.println(manufacturer);
+        }
+        manufacturerService.update(new Manufacturer(1L, "Opel", "Germany"));
+    }
+
+    private static void testDriverService(DriverService driverService) {
         driverService.create(new Driver(11L, "Afanasij", "2150120"));
         driverService.get(3L);
         driverService.delete(5L);
@@ -25,17 +39,5 @@ public class Main {
             System.out.println(driver);
         }
         driverService.update(new Driver(1L, "Anton", "0235987"));
-
-
- */
-        //Manufacturer test
-        manufacturerService.create(new Manufacturer("Tesla", "Germany"));
-        manufacturerService.get(1L);
-        manufacturerService.delete(5L);
-        for (Manufacturer manufacturer : manufacturerService.getAll()) {
-            System.out.println(manufacturer);
-        }
-        manufacturerService.update(new Manufacturer(1L, "Opel", "Germany"));
-
     }
 }
