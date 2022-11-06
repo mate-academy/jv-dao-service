@@ -42,10 +42,16 @@ public class Driver {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Driver driver = (Driver) o;
-        return Objects.equals(id, driver.id) && Objects.equals(name, driver.name) && Objects.equals(licenseNumber, driver.licenseNumber);
+        return Objects.equals(id, driver.id)
+                && Objects.equals(name, driver.name)
+                && Objects.equals(licenseNumber, driver.licenseNumber);
     }
 
     @Override
@@ -55,10 +61,10 @@ public class Driver {
 
     @Override
     public String toString() {
-        return "Driver{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", licenseNumber='" + licenseNumber + '\'' +
-                '}';
+        return "Driver{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", licenseNumber='" + licenseNumber + '\''
+                + '}';
     }
 }
