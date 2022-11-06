@@ -1,4 +1,4 @@
-CREATE DATABASE `taxi_service_db` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE SCHEMA IF NOT EXISTS `taxi_service` DEFAULT CHARACTER SET utf8;
 
 CREATE TABLE `manufacturers` (
   `id` bigint NOT NULL AUTO_INCREMENT,
@@ -6,7 +6,7 @@ CREATE TABLE `manufacturers` (
   `country` varchar(225) NOT NULL,
   `is_deleted` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb3;
+);
 
 CREATE TABLE `drivers` (
   `id` bigint NOT NULL AUTO_INCREMENT,

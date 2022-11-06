@@ -15,9 +15,9 @@ public class Main {
         ManufacturerService manufacturerService = (ManufacturerService) injector
                     .getInstance(ManufacturerService.class);
         Driver driver = driverService
-                        .create(new Driver("Daniel Morales", "113 334 587"));
+                        .create(new Driver(null, "Daniel Morales", "113 334 587"));
         Manufacturer manufacturer = manufacturerService
-                        .create(new Manufacturer("Peugeot", "France"));
+                        .create(new Manufacturer(null, "Peugeot", "France"));
         System.out.println(manufacturerService.get(manufacturer.getId()));
         System.out.println(driverService.get(driver.getId()));
         manufacturer.setName("Ford");

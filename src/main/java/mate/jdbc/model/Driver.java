@@ -7,9 +7,7 @@ public class Driver {
     private String name;
     private String licenseNumber;
 
-    public Driver(String name, String licenseNumber) {
-        this.name = name;
-        this.licenseNumber = licenseNumber;
+    public Driver() {
     }
 
     public Driver(Long id, String name, String licenseNumber) {
@@ -64,10 +62,7 @@ public class Driver {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (licenseNumber != null ? licenseNumber.hashCode() : 0);
-        return result;
+        return Objects.hash(id, name, licenseNumber);
     }
 
     @Override
