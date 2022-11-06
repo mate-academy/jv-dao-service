@@ -3,13 +3,14 @@ package mate.jdbc;
 import mate.jdbc.dao.DriverDao;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
+import mate.jdbc.services.Service;
 import mate.jdbc.services.impl.DriverService;
 
 public class Main {
     public static void main(String[] args) {
         Injector injector = Injector.getInstance("mate.jdbc");
 
-        DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
+        Service<Driver> driverService = (Service<Driver>) injector.getInstance(Service.class);
 
         Driver driver = new Driver();
         driver.setName("Bob");
