@@ -2,6 +2,7 @@ package mate.jdbc.service.impl;
 
 import java.util.List;
 import mate.jdbc.dao.ManufacturerDao;
+import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
 import mate.jdbc.model.Manufacturer;
@@ -19,7 +20,10 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer get(Long id) {
-        return manufacturerDao.get(id).isPresent() ? manufacturerDao.get(id).get() : null;
+        if (manufacturerDao.get(id).isEmpty()) {
+            throw new DataProcessingException("There is no element in database with id " + id);
+        }
+        return manufacturerDao.get(id).get();
     }
 
     @Override

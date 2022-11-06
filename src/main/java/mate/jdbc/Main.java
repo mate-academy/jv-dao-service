@@ -22,7 +22,6 @@ public class Main {
         boolean deletedManufacturer = manufacturerService.delete(6L);
         printAllManufacturerActions(insertedManufacturer, manufacturerFromDB,
                 allManufacturersFromDB, updatedManufacturer, deletedManufacturer);
-
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         Driver driver = new Driver("Mary Burns", "T37954403");
         Driver insertedDriver = driverService.create(driver);
