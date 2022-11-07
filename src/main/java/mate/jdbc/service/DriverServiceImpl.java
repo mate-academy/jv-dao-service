@@ -1,9 +1,11 @@
 package mate.jdbc.service;
 
+import mate.jdbc.lib.Service;
 import mate.jdbc.model.Driver;
 
 import java.util.List;
 
+@Service
 public class DriverServiceImpl implements DriverService {
     @Override
     public Driver create(Driver driver) {
