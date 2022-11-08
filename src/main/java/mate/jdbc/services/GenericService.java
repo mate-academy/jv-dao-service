@@ -1,12 +1,11 @@
 package mate.jdbc.services;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface Service<T> {
+public interface GenericService<T> {
     T create(T t);
 
-    Optional<T> get(Long id);
+    T get(Long id);
 
     List<T> getALl();
 

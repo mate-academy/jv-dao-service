@@ -14,11 +14,3 @@ CREATE TABLE `drivers` (
                                         `license_number` VARCHAR(225) NOT NULL,
                                         `is_deleted` TINYINT NOT NULL DEFAULT 0,
                                         PRIMARY KEY (`id`));
-
--- Just for test
-
-INSERT INTO drivers (name, license_number)
-    -> VALUES
-    -> ("Anton", "457434"),
-    -> ("Kate", "5646453"),
-    -> ("Vlad", "5436356");

@@ -1,14 +1,14 @@
 package mate.jdbc.services.impl;
 
 import java.util.List;
-import java.util.Optional;
 import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.lib.Inject;
+import mate.jdbc.lib.Service;
 import mate.jdbc.model.Manufacturer;
-import mate.jdbc.services.Service;
+import mate.jdbc.services.GenericService;
 
-@mate.jdbc.lib.Service
-public class ManufacturerService implements Service<Manufacturer> {
+@Service
+public class ManufacturerService implements GenericService<Manufacturer> {
     @Inject
     private ManufacturerDao manufacturerDao;
 
@@ -18,8 +18,9 @@ public class ManufacturerService implements Service<Manufacturer> {
     }
 
     @Override
-    public Optional<Manufacturer> get(Long id) {
-        return manufacturerDao.get(id);
+    public Manufacturer get(Long id) {
+        return manufacturerDao.get(id).orElseThrow(() ->
+                new RuntimeException("No object in DB with id=" + id));
     }
 
     @Override

@@ -2,13 +2,14 @@ package mate.jdbc;
 
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
-import mate.jdbc.services.Service;
+import mate.jdbc.services.GenericService;
 
 public class Main {
-    public static void main(String[] args) {
-        Injector injector = Injector.getInstance("mate.jdbc");
+    private static final Injector injector = Injector.getInstance("mate.jdbc");
 
-        Service<Driver> driverService = (Service<Driver>) injector.getInstance(Service.class);
+    public static void main(String[] args) {
+        GenericService<Driver> driverService =
+                (GenericService<Driver>) injector.getInstance(GenericService.class);
 
         Driver driver = new Driver();
         driver.setName("Bob");

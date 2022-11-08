@@ -1,14 +1,14 @@
 package mate.jdbc.services.impl;
 
 import java.util.List;
-import java.util.Optional;
 import mate.jdbc.dao.DriverDao;
 import mate.jdbc.lib.Inject;
+import mate.jdbc.lib.Service;
 import mate.jdbc.model.Driver;
-import mate.jdbc.services.Service;
+import mate.jdbc.services.GenericService;
 
-@mate.jdbc.lib.Service
-public class DriverService implements Service<Driver> {
+@Service
+public class DriverService implements GenericService<Driver> {
     @Inject
     private DriverDao driverDao;
 
@@ -18,8 +18,9 @@ public class DriverService implements Service<Driver> {
     }
 
     @Override
-    public Optional<Driver> get(Long id) {
-        return driverDao.get(id);
+    public Driver get(Long id) {
+        return driverDao.get(id).orElseThrow(() ->
+                new RuntimeException("No object in DB with id=" + id));
     }
 
     @Override
