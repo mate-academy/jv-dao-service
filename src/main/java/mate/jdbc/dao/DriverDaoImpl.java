@@ -61,10 +61,10 @@ public class DriverDaoImpl implements DriverDao {
             while (driversSet.next()) {
                 driversList.add(parseResultSet(driversSet));
             }
+            return driversList;
         } catch (SQLException e) {
             throw new DataProcessingException("Can't get all drivers", e);
         }
-        return driversList;
     }
 
     @Override
@@ -80,10 +80,10 @@ public class DriverDaoImpl implements DriverDao {
             if (preparedStatement.executeUpdate() == 0) {
                 throw new RuntimeException("Driver not found " + driver);
             }
+            return driver;
         } catch (SQLException e) {
             throw new DataProcessingException("Can't update driver " + driver, e);
         }
-        return driver;
     }
 
     @Override
