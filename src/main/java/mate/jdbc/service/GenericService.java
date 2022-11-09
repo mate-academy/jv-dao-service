@@ -2,14 +2,14 @@ package mate.jdbc.service;
 
 import java.util.List;
 
-public interface GenericService<T> {
+public interface GenericService<T, R> {
     T create(T o);
 
-    T get(Long id);
+    T get(R id);
 
     List<T> getAll();
 
     T update(T o);
 
-    boolean delete(Long id);
+    boolean delete(R id);
 }
