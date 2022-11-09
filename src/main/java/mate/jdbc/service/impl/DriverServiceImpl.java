@@ -20,10 +20,9 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver get(Long id) {
-        if (driverDao.get(id).isEmpty()) {
-            throw new DataProcessingException("There is no element in database with id " + id);
-        }
-        return driverDao.get(id).get();
+        return driverDao.get(id)
+                .orElseThrow(() -> new DataProcessingException(
+                        "There is no element in database with id " + id));
     }
 
     @Override
