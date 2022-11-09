@@ -14,5 +14,5 @@ CREATE TABLE `drivers` (
                            `id` bigint NOT NULL AUTO_INCREMENT,
                            `is_deleted` tinyint DEFAULT '0',
                            PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+);
 
