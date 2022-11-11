@@ -31,13 +31,13 @@ public class Main {
 
         manufacturerDao.getAll().forEach(System.out::println);
 
-        System.out.println(manufacturerDao.delete(1L));
+        System.out.println(manufacturerDao.delete(manufacturer1.getId()));
 
         manufacturerBmw.setName("Audi");
         Manufacturer manufacturerBmwUpdate = manufacturerDao.update(manufacturerBmw);
         System.out.println(manufacturerBmwUpdate);
 
-        Optional<Manufacturer> manufacturerOptional = manufacturerDao.get(2L);
+        Optional<Manufacturer> manufacturerOptional = manufacturerDao.get(manufacturer2.getId());
         System.out.println(manufacturerOptional);
 
         Driver driverBmw = new Driver();
@@ -59,13 +59,13 @@ public class Main {
 
         driverDao.getAll().forEach(System.out::println);
 
-        System.out.println(driverDao.delete(1L));
+        System.out.println(driverDao.delete(driver1.getId()));
 
         driverBmw.setName("Shura");
         Driver driverBmwUpdate = driverDao.update(driverBmw);
         System.out.println(driverBmwUpdate);
 
-        Optional<Driver> driverOptional = driverDao.get(2L);
+        Optional<Driver> driverOptional = driverDao.get(driver2.getId());
         System.out.println(driverOptional);
     }
 }

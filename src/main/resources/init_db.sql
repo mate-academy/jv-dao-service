@@ -15,6 +15,3 @@ CREATE TABLE `drivers` (
   `license_number` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 );
-
-
-
