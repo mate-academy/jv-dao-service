@@ -19,20 +19,14 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver get(Long id) {
-        if (driverDao.get(id).isEmpty()) {
-            throw new RuntimeException("Couldn't get driver by id " + id
-                    + ". Driver does not exist");
-        }
-        return driverDao.get(id).get();
+        return driverDao.get(id)
+                .orElseThrow(() -> new RuntimeException("Couldn't get driver by id " + id
+                + ". Driver does not exist"));
     }
 
     @Override
     public List<Driver> getAll() {
-        List<Driver> drivers = driverDao.getAll();
-        if (drivers.isEmpty()) {
-            throw new RuntimeException("Couldn't get list of drivers. Data base is empty");
-        }
-        return drivers;
+        return driverDao.getAll();
     }
 
     @Override

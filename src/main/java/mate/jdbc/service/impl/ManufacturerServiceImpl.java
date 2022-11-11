@@ -19,20 +19,14 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer get(Long id) {
-        if (manufacturerDao.get(id).isEmpty()) {
-            throw new RuntimeException("Couldn't get manufacturer by id " + id
-                    + ". Manufacturer does not exist");
-        }
-        return manufacturerDao.get(id).get();
+        return manufacturerDao.get(id)
+                        .orElseThrow(() -> new RuntimeException("Couldn't get manufacturer by id "
+                                + id + ". Manufacturer does not exist"));
     }
 
     @Override
     public List<Manufacturer> getAll() {
-        List<Manufacturer> manufacturers = manufacturerDao.getAll();
-        if (manufacturers.isEmpty()) {
-            throw new RuntimeException("Couldn't get list of manufacturers. Data base is empty");
-        }
-        return manufacturers;
+        return manufacturerDao.getAll();
     }
 
     @Override
