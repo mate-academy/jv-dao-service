@@ -42,13 +42,21 @@ public class Driver {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Driver driver = (Driver) o;
 
-        if (!Objects.equals(id, driver.id)) return false;
-        if (!Objects.equals(name, driver.name)) return false;
+        if (!Objects.equals(id, driver.id)) {
+            return false;
+        }
+        if (!Objects.equals(name, driver.name)) {
+            return false;
+        }
         return Objects.equals(licenseNumber, driver.licenseNumber);
     }
 
