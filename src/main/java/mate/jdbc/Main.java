@@ -2,7 +2,9 @@ package mate.jdbc;
 
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
+import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.DriverService;
+import mate.jdbc.service.ManufacturerService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
@@ -16,5 +18,14 @@ public class Main {
         driverService.update(driverALice);
         driverService.getAll();
         driverService.delete(1L);
+        Manufacturer manufacturerFiat = new Manufacturer(null, "Fiat", "Italy");
+        Manufacturer manufacturerBmw = new Manufacturer(2L, "BMW", "Germany");
+        ManufacturerService manufacturerService = (ManufacturerService) injector
+                .getInstance(ManufacturerService.class);
+        manufacturerService.create(manufacturerFiat);
+        manufacturerService.get(2L);
+        manufacturerService.update(manufacturerBmw);
+        manufacturerService.getAll();
+        manufacturerService.delete(2L);
     }
 }
