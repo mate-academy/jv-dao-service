@@ -10,7 +10,6 @@ import mate.jdbc.services.ManufacturerService;
 
 @Service
 public class ManufacturerServiceImpl implements ManufacturerService {
-
     @Inject
     private ManufacturerDao manufacturerDao;
 
