@@ -34,7 +34,7 @@ public class DriverDaoImpl implements DriverDao {
             return driver;
         } catch (SQLException e) {
             throw new DataProcessingException("Can`t add driver" + driver
-                    + "to DB",e);
+                    + "to DB", e);
         }
     }
 
@@ -76,7 +76,7 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Driver update(Driver driver) {
-        String query = "UPDATE manufacturers SET name = ?, country = ? "
+        String query = "UPDATE drivers SET name = ?, country = ? "
                 + "WHERE id = ? AND is_deleted = false;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
@@ -93,14 +93,14 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public boolean delete(Long id) {
-        String query = "UPDATE manufacturers SET is_deleted = true WHERE id = ?";
+        String query = "UPDATE drivers SET is_deleted = true WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
                         query)) {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new DataProcessingException("Can`t delete element from db" + id,e);
+            throw new DataProcessingException("Can`t delete element from db" + id, e);
         }
     }
 
@@ -111,7 +111,7 @@ public class DriverDaoImpl implements DriverDao {
             driver.setName(resultSet.getString(2));
             driver.setLicenseNumber(resultSet.getString(3));
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can`t get driver",e);
         }
         return driver;
     }
