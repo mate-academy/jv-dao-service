@@ -20,8 +20,8 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver get(Long id) {
-        return driverDao.get(id)
-                .orElseThrow(() -> new DataProcessingException(
+        return driverDao.get(id).orElseThrow(
+                () -> new DataProcessingException(
                         "There is no element with id: " + id));
     }
 

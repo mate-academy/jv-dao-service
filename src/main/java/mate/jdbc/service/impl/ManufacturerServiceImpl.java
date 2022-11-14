@@ -1,7 +1,9 @@
 package mate.jdbc.service.impl;
 
 import java.util.List;
+
 import mate.jdbc.dao.ManufacturerDao;
+import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
 import mate.jdbc.model.Manufacturer;
@@ -14,17 +16,19 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        return null;
+        return manufacturerDao.create(manufacturer);
     }
 
     @Override
     public Manufacturer get(Long id) {
-        return null;
+        return manufacturerDao.get(id).orElseThrow(
+                () -> new DataProcessingException(
+                        "There is no element with id: " + id));
     }
 
     @Override
     public List<Manufacturer> getAll() {
-        return null;
+        return manufacturerDao.getAll();
     }
 
     @Override
