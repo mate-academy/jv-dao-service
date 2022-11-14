@@ -21,10 +21,8 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     @Override
     public Manufacturer get(Long id) {
         Optional<Manufacturer> manufacturer = manufacturerDao.get(id);
-        if (manufacturer.isEmpty()) {
-            throw new RuntimeException("No such manufacturer with id: " + id);
-        }
-        return manufacturer.get();
+        return manufacturer.orElseThrow(() ->
+                new RuntimeException("No such manufacturer with id: " + id));
     }
 
     @Override
