@@ -25,7 +25,7 @@ public class DriverDaoImpl implements DriverDao {
             statement.setString(2, driver.getLicenseNumber());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
-            while (resultSet.next()) {
+            if (resultSet.next()) {
                 driver.setId(resultSet.getObject(1, Long.class));
             }
             return driver;
@@ -42,7 +42,7 @@ public class DriverDaoImpl implements DriverDao {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             Driver driver = null;
-            while (resultSet.next()) {
+            if (resultSet.next()) {
                 driver = getDriver(resultSet);
             }
             return Optional.ofNullable(driver);
@@ -59,7 +59,7 @@ public class DriverDaoImpl implements DriverDao {
             statement.setString(1, licenseNumber);
             ResultSet resultSet = statement.executeQuery();
             Driver driver = null;
-            while (resultSet.next()) {
+            if (resultSet.next()) {
                 driver = getDriver(resultSet);
             }
             return Optional.ofNullable(driver);
@@ -105,7 +105,6 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public boolean delete(Long id) {
         String query = "UPDATE drivers SET is_deleted = TRUE WHERE id = ?;";
-
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
