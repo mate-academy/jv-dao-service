@@ -14,7 +14,7 @@ public class Main {
                 .getInstance(ManufacturerService.class);
         System.out.println("All manufacturers:");
         manufacturerService.getAll().stream().forEach(System.out::println);
-        Manufacturer manufacturer = new Manufacturer(0L, "Bentley", "England");
+        Manufacturer manufacturer = new Manufacturer("Bentley", "England");
         Manufacturer newManufacturer = manufacturerService.create(manufacturer);
         System.out.println("New manufacturer: " + System.lineSeparator()
                 + manufacturerService.get(newManufacturer.getId()));
@@ -27,7 +27,7 @@ public class Main {
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         System.out.println("All drivers:");
         driverService.getAll().stream().forEach(System.out::println);
-        Driver driver = new Driver(3L, "Krasnov Mark", "987654");
+        Driver driver = new Driver("Krasnov Mark", "987654");
         Driver newDriver = driverService.create(driver);
         System.out.println("New driver: " + System.lineSeparator()
                 + driverService.get(newDriver.getId()));
