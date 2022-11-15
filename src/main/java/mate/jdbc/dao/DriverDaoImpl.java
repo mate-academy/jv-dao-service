@@ -102,7 +102,6 @@ public class DriverDaoImpl implements DriverDao {
                          = connection.prepareStatement(query)) {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
-
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't delete driver dy id " + id
                     + " in drivers table", e);
