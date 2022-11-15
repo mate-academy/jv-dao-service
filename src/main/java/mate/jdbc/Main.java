@@ -15,7 +15,7 @@ public class Main {
         driver.setName("Marya");
         driver.setLicenseNumber("000777");
         driverService.update(driver);
-        System.out.println("Driver updated:" + driverService.getAll());
+        System.out.println("Driver updated: " + driverService.getAll());
         driverService.delete(driver.getId());
         System.out.println("Driver deleted: " + driverService.getAll());
     }
