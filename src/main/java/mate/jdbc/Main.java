@@ -1,7 +1,65 @@
 package mate.jdbc;
 
+import mate.jdbc.lib.Injector;
+import mate.jdbc.model.Driver;
+import mate.jdbc.model.Manufacturer;
+import mate.jdbc.service.DriverService;
+import mate.jdbc.service.ManufacturerService;
+
 public class Main {
+    private static final Long FIRST_ID = 1L;
+    private static final Long SECOND_ID = 2L;
+    private static Injector injector = Injector.getInstance("mate.jdbc");
+
     public static void main(String[] args) {
-        // test your code here
+        System.out.println("ManufacturerService work:");
+        testManufacturerServiceWork();
+        System.out.println("--------------------");
+        System.out.println("DriverService work:");
+        testDriverServiceWork();
+    }
+
+    private static void testManufacturerServiceWork() {
+        ManufacturerService manufacturerService = (ManufacturerService) injector
+                .getInstance(ManufacturerService.class);
+        Manufacturer manufacturerDaewoo = new Manufacturer("Daewoo", "South Korea");
+        Manufacturer manufacturerNissan = new Manufacturer("Nissan", "Japan");
+        Manufacturer createdManufacturerDaewoo = manufacturerService.create(manufacturerDaewoo);
+        Manufacturer createdManufacturerNissan = manufacturerService.create(manufacturerNissan);
+        System.out.println("Created manufacturers:");
+        System.out.println(createdManufacturerDaewoo);
+        System.out.println(createdManufacturerNissan);
+        System.out.println("Get first manufacturer:");
+        System.out.println(manufacturerService.get(FIRST_ID));
+        System.out.println("Get all manufacturers:");
+        manufacturerService.getAll().forEach(System.out::println);
+        Manufacturer newManufacturer = new Manufacturer(SECOND_ID, "Ford", "USA");
+        System.out.println("Updated manufacturer:");
+        System.out.println(manufacturerService.update(newManufacturer));
+        if (manufacturerService.delete(SECOND_ID)) {
+            System.out.println("Second manufacturer was deleted");
+        }
+    }
+
+    private static void testDriverServiceWork() {
+        DriverService driverService = (DriverService) injector
+                .getInstance(DriverService.class);
+        Driver driverJohn = new Driver("John", "12345678");
+        Driver driverBob = new Driver("Bob", "87654321");
+        Driver createdDriverJohn = driverService.create(driverJohn);
+        Driver createdDriverBob = driverService.create(driverBob);
+        System.out.println("Created drivers:");
+        System.out.println(createdDriverJohn);
+        System.out.println(createdDriverBob);
+        System.out.println("Get first driver:");
+        System.out.println(driverService.get(FIRST_ID));
+        System.out.println("Get all drivers:");
+        driverService.getAll().forEach(System.out::println);
+        Driver newDriver = new Driver(SECOND_ID, "Den", "15935728");
+        System.out.println("Updated driver:");
+        System.out.println(driverService.update(newDriver));
+        if (driverService.delete(SECOND_ID)) {
+            System.out.println("Second driver was deleted");
+        }
     }
 }
