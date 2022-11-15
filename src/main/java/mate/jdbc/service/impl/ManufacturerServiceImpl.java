@@ -32,12 +32,11 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        return null;
+        return manufacturerDao.update(manufacturer);
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        return manufacturerDao.delete(id);
     }
 }
-
