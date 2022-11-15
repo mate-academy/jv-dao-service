@@ -109,7 +109,7 @@ public class DriverDaoImpl implements DriverDao {
             String licenseNumber = resultSet.getString("license_number");
             return new Driver(id, name, licenseNumber);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Couldn't parse result set for driver ", e);
         }
     }
 }
