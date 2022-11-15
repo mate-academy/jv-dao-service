@@ -17,8 +17,5 @@ public class Main {
         driver1.setLicenseNumber("12345");
         driverService.create(driver1);
         driverService.getAll().forEach(System.out::println);
-
-        driverService.delete(8L);
-        driverService.getAll().forEach(System.out::println);
     }
 }
