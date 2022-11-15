@@ -12,13 +12,11 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-
         return manufacturerDao.create(manufacturer);
     }
 
     @Override
     public Manufacturer get(Long id) {
-
         return manufacturerDao.get(id).orElseThrow(() -> new NoSuchElementException(
                 "Can't get manufacturer by id: " + id));
     }
@@ -30,13 +28,11 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-
         return manufacturerDao.update(manufacturer);
     }
 
     @Override
     public boolean delete(Long id) {
-
         return manufacturerDao.delete(id);
     }
 }
