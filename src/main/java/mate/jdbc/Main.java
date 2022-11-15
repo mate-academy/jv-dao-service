@@ -18,8 +18,8 @@ public class Main {
         Manufacturer newManufacturer = manufacturerService.create(manufacturer);
         System.out.println("New manufacturer: " + System.lineSeparator()
                 + manufacturerService.get(newManufacturer.getId()));
-        Manufacturer manufacturerToUpdate = new Manufacturer(5L, "BMW", "Estonia");
-        Manufacturer updatedManufacturer = manufacturerService.update(manufacturerToUpdate);
+        manufacturer.setCountry("Italy");
+        Manufacturer updatedManufacturer = manufacturerService.update(manufacturer);
         System.out.println("Updated manufacturer: " + System.lineSeparator()
                 + manufacturerService.get(updatedManufacturer.getId()));
         System.out.println("Deletion: " + manufacturerService.delete(updatedManufacturer.getId()));
@@ -31,10 +31,10 @@ public class Main {
         Driver newDriver = driverService.create(driver);
         System.out.println("New driver: " + System.lineSeparator()
                 + driverService.get(newDriver.getId()));
-        Driver driverToUpdete = new Driver(3L, "Krasnov Alex", "987654");
-        Driver updatedDriver = driverService.update(driverToUpdete);
+        driver.setName("Krasnov Alex");
+        Driver updatedDriver = driverService.update(driver);
         System.out.println("Updated driver: " + System.lineSeparator()
                 + driverService.get(updatedDriver.getId()));
-        System.out.println("Deletion: " + driverService.delete(driverToUpdete.getId()));
+        System.out.println("Deletion: " + driverService.delete(updatedDriver.getId()));
     }
 }
