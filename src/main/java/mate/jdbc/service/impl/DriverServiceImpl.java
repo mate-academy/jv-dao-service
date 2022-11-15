@@ -19,8 +19,7 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver get(Long id) {
-        return driverDao.get(id).orElseThrow(
-                () -> new RuntimeException("There are no users with such id :" + id));
+        return driverDao.get(id).orElseThrow();
     }
 
     @Override
