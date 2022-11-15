@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-        Driver driver = new Driver("Michael","000111");
+        Driver driver = new Driver("Michael", "000111");
         driverService.create(driver);
         System.out.println("Driver created: " + driverService.getAll());
         driver.setName("Marya");
