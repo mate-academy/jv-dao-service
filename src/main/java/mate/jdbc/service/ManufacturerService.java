@@ -1,19 +1,17 @@
 package mate.jdbc.service;
 
-
-import mate.jdbc.model.Manufacturer;
-
 import java.util.List;
 import java.util.Optional;
+import mate.jdbc.model.Manufacturer;
 
 public interface ManufacturerService {
-  Manufacturer create(Manufacturer manufacturer);
+    Manufacturer create(Manufacturer manufacturer);
 
-  Optional<Manufacturer> get(Long id);
+    Optional<Manufacturer> get(Long id);
 
-  List<Manufacturer> getAll();
+    List<Manufacturer> getAll();
 
-  Manufacturer update(Manufacturer manufacturer);
+    Manufacturer update(Manufacturer manufacturer);
 
-  boolean delete(Long id);
+    boolean delete(Long id);
 }
