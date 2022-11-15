@@ -30,7 +30,7 @@ public class DriverDaoImpl implements DriverDao {
                 driver.setId(resultSet.getObject(1,Long.class));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DataProcessingException("Can`t create Driver", e);
         }
         return driver;
     }
@@ -41,7 +41,7 @@ public class DriverDaoImpl implements DriverDao {
         try {
             Connection connection = ConnectionUtil.getConnection();
             PreparedStatement preparedStatement
-                    = connection.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+                    = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             Driver driver = new Driver();
@@ -61,7 +61,7 @@ public class DriverDaoImpl implements DriverDao {
         try {
             Connection connection = ConnectionUtil.getConnection();
             PreparedStatement preparedStatement
-                    = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+                    = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Driver driverNew = parseQuery(resultSet);
