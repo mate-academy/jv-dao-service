@@ -20,10 +20,11 @@ public class Main {
         manufacturerService.create(new Manufacturer("Volvo", "Sweden"));
         manufacturerService.create(new Manufacturer("Mazda", "Japan"));
 
-        driverService.delete(1L);
-        manufacturerService.delete(2L);
-
-        driverService.getAll().forEach(System.out::println);
-        manufacturerService.getAll().forEach(System.out::println);
+        //driverService.delete(1L);
+        //manufacturerService.delete(2L);
+        System.out.println(driverService.get(5L));
+        System.out.println(manufacturerService.get(50L));
+        //driverService.getAll().forEach(System.out::println);
+        //manufacturerService.getAll().forEach(System.out::println);
     }
 }
