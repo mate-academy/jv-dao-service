@@ -1,6 +1,7 @@
 package mate.jdbc.service.impl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import mate.jdbc.dao.DriverDao;
 import mate.jdbc.lib.Inject;
@@ -21,11 +22,9 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public Driver get(Long id) {
         Optional<Driver> result = driverDao.get(id);
-        if (result.isEmpty()) {
-            throw new RuntimeException("There is no driver with this id. "
-                    + id);
-        }
-        return result.get();
+        return result.orElseThrow(()
+                -> new NoSuchElementException("There is no driver with this id. "
+                + id));
     }
 
     @Override
