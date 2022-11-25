@@ -15,6 +15,7 @@ public class Main {
         Driver ivan = new Driver("ivan", "889");
         driverService.create(ivan);
         System.out.println(driverService.get(3L));
+        System.out.println(driverService.get(23L));
         driverService.delete(ivan.getId());
         driverService.getAll().stream().forEach(System.out::println);
     }
