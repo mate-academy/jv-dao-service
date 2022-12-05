@@ -10,41 +10,14 @@ public class Manufacturer {
     public Manufacturer() {
     }
 
+    public Manufacturer(String name, String country) {
+        this.name = name;
+        this.country = country;
+    }
     public Manufacturer(Long id, String name, String country) {
         this.id = id;
         this.name = name;
         this.country = country;
-    }
-
-    private Manufacturer(Builder builder) {
-        id = builder.id;
-        name = builder.name;
-        country = builder.country;
-    }
-
-    public static class Builder {
-        private Long id;
-        private String name;
-        private String country;
-
-        public Builder setId(Long id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder setName(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public Builder setCountry(String country) {
-            this.country = country;
-            return this;
-        }
-
-        public Manufacturer build() {
-            return new Manufacturer(this);
-        }
     }
 
     public Long getId() {

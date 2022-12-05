@@ -17,30 +17,21 @@ public class Main {
         final ManufacturerService manufacturerService = (ManufacturerService)
                 myInject.getInstance(ManufacturerService.class);
 
-        final Manufacturer.Builder germanManufacturer =
-                new Manufacturer.Builder().setCountry("Germany");
-        final Manufacturer.Builder franceManufacturer =
-                new Manufacturer.Builder().setCountry("France");
-        final Manufacturer.Builder japanManufacturer =
-                new Manufacturer.Builder().setCountry("Japan");
-
-        manufacturerService.create(germanManufacturer.setName("Opel").build());
-        manufacturerService.create(franceManufacturer.setName("Renault").build());
+        manufacturerService.create(new Manufacturer("Opel", "Germany"));
+        manufacturerService.create(new Manufacturer("Renault", "France"));
         List<Manufacturer> manufacturers = manufacturerService.getAll();
         manufacturers.forEach(System.out::println);
         manufacturerService.delete(1L);
-        manufacturerService.update(japanManufacturer.setId(2L).setName("Nissan").build());
+        manufacturerService.update(new Manufacturer("Nissan", "Japan"));
         System.out.println(manufacturerService.get(1L));
         System.out.println(manufacturerService.get(2L));
 
-        Driver.Builder driverBuilder = new Driver.Builder();
-        driverService.create(driverBuilder.setName("Vasil").setLicenseNumber("2317245").build());
-        driverService.create(driverBuilder.setName("Kolya").setLicenseNumber("6243121").build());
+        driverService.create(new Driver("Vasil", "2317245"));
+        driverService.create(new Driver("Kolya", "6243121"));
         List<Driver> drivers = driverService.getAll();
         drivers.forEach(System.out::println);
         driverService.delete(2L);
-        driverService.update(driverBuilder
-                .setId(1L).setName("Victor").setLicenseNumber("54654454").build());
+        driverService.update(new Driver("Victor", "54654454"));
         System.out.println(driverService.get(1L));
         System.out.println(driverService.get(2L));
     }

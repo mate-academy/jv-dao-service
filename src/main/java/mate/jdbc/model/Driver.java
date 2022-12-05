@@ -10,41 +10,15 @@ public class Driver {
     public Driver() {
     }
 
-    public Driver(Long id, String name, String licenseNumber) {
-        this.id = id;
+    public Driver(String name, String licenseNumber) {
         this.name = name;
         this.licenseNumber = licenseNumber;
     }
 
-    private Driver(Builder builder) {
-        id = builder.id;
-        name = builder.name;
-        licenseNumber = builder.licenseNumber;
-    }
-
-    public static class Builder {
-        private Long id;
-        private String name;
-        private String licenseNumber;
-
-        public Builder setId(Long id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder setName(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public Builder setLicenseNumber(String licenseNumber) {
-            this.licenseNumber = licenseNumber;
-            return this;
-        }
-
-        public Driver build() {
-            return new Driver(id, name, licenseNumber);
-        }
+    public Driver(Long id, String name, String licenseNumber) {
+        this.id = id;
+        this.name = name;
+        this.licenseNumber = licenseNumber;
     }
 
     public Long getId() {
