@@ -1,7 +1,6 @@
 package mate.jdbc.service;
 
 import java.util.List;
-import java.util.Optional;
 import mate.jdbc.dao.ManufacturerDaoImpl;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
@@ -10,7 +9,12 @@ import mate.jdbc.model.Manufacturer;
 @Service
 public class ManufacturerServiceImpl implements ManufacturerService {
     @Inject
-    ManufacturerDaoImpl connectToManufacturersTable;
+    private ManufacturerDaoImpl connectToManufacturersTable;
+
+    public void setConnectToManufacturersTable(ManufacturerDaoImpl connectToManufacturersTable) {
+        this.connectToManufacturersTable = connectToManufacturersTable;
+    }
+
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
         return connectToManufacturersTable.create(manufacturer);

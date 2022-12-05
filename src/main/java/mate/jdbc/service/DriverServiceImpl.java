@@ -9,7 +9,12 @@ import mate.jdbc.model.Driver;
 @Service
 public class DriverServiceImpl implements DriverService {
     @Inject
-    DriverDao connectToDriversTable;
+    private DriverDao connectToDriversTable;
+
+    public void setConnectToDriversTable(DriverDao connectToDriversTable) {
+        this.connectToDriversTable = connectToDriversTable;
+    }
+
     @Override
     public Driver create(Driver driver) {
         return connectToDriversTable.create(driver);

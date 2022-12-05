@@ -42,7 +42,9 @@ public class Driver {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o) {
+            return true;
+        }
         if (o == null || !(o.getClass().equals(Driver.class))) {
             return false;
         }
@@ -59,10 +61,7 @@ public class Driver {
 
     @Override
     public String toString() {
-        return "Driver{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", licenseNumber='" + licenseNumber + '\'' +
-                '}';
+        return "Driver{" + "id=" + id + ", name='" + name + '\''
+                + ", licenseNumber='" + licenseNumber + '\'' + '}';
     }
 }
