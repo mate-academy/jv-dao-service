@@ -11,32 +11,28 @@ public class DriverServiceImpl implements DriverService {
     @Inject
     private DriverDao driverDao;
 
-    public void setConnectToDriversTable(DriverDao connectToDriversTable) {
-        this.connectToDriversTable = connectToDriversTable;
-    }
-
     @Override
     public Driver create(Driver driver) {
-        return connectToDriversTable.create(driver);
+        return driverDao.create(driver);
     }
 
     @Override
     public Driver get(Long id) {
-        return connectToDriversTable.get(id).orElse(null);
+        return driverDao.get(id).orElse(null);
     }
 
     @Override
     public List<Driver> getAll() {
-        return connectToDriversTable.getAll();
+        return driverDao.getAll();
     }
 
     @Override
     public Driver update(Driver driver) {
-        return connectToDriversTable.update(driver);
+        return driverDao.update(driver);
     }
 
     @Override
     public boolean delete(Long id) {
-        return connectToDriversTable.delete(id);
+        return driverDao.delete(id);
     }
 }
