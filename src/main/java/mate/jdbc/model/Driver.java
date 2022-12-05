@@ -16,6 +16,35 @@ public class Driver {
         this.licenseNumber = licenseNumber;
     }
 
+    private Driver(Builder builder) {
+        id = builder.id;
+        name = builder.name;
+        licenseNumber = builder.licenseNumber;
+    }
+    public static class Builder {
+        private Long id;
+        private String name;
+        private String licenseNumber;
+
+        public Builder setId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder setLicenseNumber(String licenseNumber) {
+            this.licenseNumber = licenseNumber;
+            return this;
+        }
+
+        public Driver build(){
+            return new Driver(id, name, licenseNumber);
+        }
+    }
     public Long getId() {
         return id;
     }
