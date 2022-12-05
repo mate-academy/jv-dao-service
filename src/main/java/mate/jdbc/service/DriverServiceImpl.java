@@ -1,31 +1,37 @@
 package mate.jdbc.service;
 
 import java.util.List;
+import mate.jdbc.dao.DriverDao;
+import mate.jdbc.lib.Inject;
+import mate.jdbc.lib.Service;
 import mate.jdbc.model.Driver;
 
+@Service
 public class DriverServiceImpl implements DriverService {
+    @Inject
+    DriverDao connectToDriversTable;
     @Override
     public Driver create(Driver driver) {
-        return null;
+        return connectToDriversTable.create(driver);
     }
 
     @Override
     public Driver get(Long id) {
-        return null;
+        return connectToDriversTable.get(id).orElse(null);
     }
 
     @Override
     public List<Driver> getAll() {
-        return null;
+        return connectToDriversTable.getAll();
     }
 
     @Override
     public Driver update(Driver driver) {
-        return null;
+        return connectToDriversTable.update(driver);
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        return connectToDriversTable.delete(id);
     }
 }
