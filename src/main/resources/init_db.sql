@@ -1,9 +1,17 @@
-CREATE SCHEMA IF NOT EXISTS `taxi_service` DEFAULT CHARACTER SET utf8;
+CREATE DATABASE taxi_service DEFAULT CHAR SET utf8mb4;
+
 USE `taxi_service`;
 
-CREATE TABLE `manufacturers` (
-                                        `id` BIGINT(11) NOT NULL AUTO_INCREMENT,
-                                        `name` VARCHAR(225) NOT NULL,
-                                        `country` VARCHAR(225) NOT NULL,
-                                        `is_deleted` TINYINT NOT NULL DEFAULT 0,
-                                        PRIMARY KEY (`id`));
+CREATE TABLE manufacturers (
+	`id` BIGINT UNIQUE NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(64) NULL,
+    `country` VARCHAR(32) NULL,
+    `is_deleted` TINYINT NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE drivers (
+	`id` BIGINT UNIQUE NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(64) NULL,
+    `license_number` VARCHAR(32) NULL,
+    `is_deleted` TINYINT NOT NULL DEFAULT FALSE
+);

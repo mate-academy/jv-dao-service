@@ -10,6 +10,11 @@ public class Manufacturer {
     public Manufacturer() {
     }
 
+    public Manufacturer(String name, String country) {
+        this.name = name;
+        this.country = country;
+    }
+
     public Manufacturer(Long id, String name, String country) {
         this.id = id;
         this.name = name;
@@ -45,7 +50,7 @@ public class Manufacturer {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (o == null || getClass().equals(o.getClass())) {
             return false;
         }
         Manufacturer that = (Manufacturer) o;
