@@ -21,6 +21,7 @@ public class Driver {
         name = builder.name;
         licenseNumber = builder.licenseNumber;
     }
+
     public static class Builder {
         private Long id;
         private String name;
@@ -41,10 +42,11 @@ public class Driver {
             return this;
         }
 
-        public Driver build(){
+        public Driver build() {
             return new Driver(id, name, licenseNumber);
         }
     }
+
     public Long getId() {
         return id;
     }
