@@ -1,6 +1,7 @@
 package mate.jdbc;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
@@ -22,8 +23,12 @@ public class Main {
         List<Manufacturer> manufacturers = manufacturerService.getAll();
         manufacturers.forEach(System.out::println);
         manufacturerService.delete(1L);
-        manufacturerService.update(new Manufacturer("Nissan", "Japan"));
-        System.out.println(manufacturerService.get(1L));
+        manufacturerService.update(new Manufacturer(2L, "Nissan", "Japan"));
+        try {
+            System.out.println(manufacturerService.get(1L));
+        } catch (NoSuchElementException e) {
+            System.out.println("Manufacturer deleted");
+        }
         System.out.println(manufacturerService.get(2L));
 
         driverService.create(new Driver("Vasil", "2317245"));
@@ -31,8 +36,13 @@ public class Main {
         List<Driver> drivers = driverService.getAll();
         drivers.forEach(System.out::println);
         driverService.delete(2L);
-        driverService.update(new Driver("Victor", "54654454"));
+        driverService.update(new Driver(1L, "Victor", "54654454"));
         System.out.println(driverService.get(1L));
-        System.out.println(driverService.get(2L));
+        try {
+            System.out.println(driverService.get(2L));
+        } catch (NoSuchElementException e)  {
+            System.out.println("Driver deleted");
+        }
+
     }
 }
