@@ -40,7 +40,7 @@ public class Main {
         System.out.println(driverService.get(1L));
         try {
             System.out.println(driverService.get(2L));
-        } catch (NoSuchElementException e)  {
+        } catch (NoSuchElementException e) {
             System.out.println("Driver deleted");
         }
 
