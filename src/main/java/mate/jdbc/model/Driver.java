@@ -34,7 +34,9 @@ public class Driver {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Driver)) return false;
+        if (o == null || !(o.getClass().equals(Driver.class))) {
+            return false;
+        }
         Driver driver = (Driver) o;
         return Objects.equals(id, driver.id)
                 && Objects.equals(name, driver.name)
@@ -44,5 +46,14 @@ public class Driver {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, licenseNumber);
+    }
+
+    @Override
+    public String toString() {
+        return "Driver{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", licenseNumber='" + licenseNumber + '\'' +
+                '}';
     }
 }
