@@ -1,6 +1,5 @@
 package mate.jdbc;
 
-import java.util.List;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
@@ -15,11 +14,8 @@ public class Main {
                 injector.getInstance(ManufacturerService.class);
 
         manufacturerService.create(new Manufacturer("Audi", "Germany"));
-        manufacturerService.get(1L);
-        List<Manufacturer> manufacturers = manufacturerService.getAll();
-        for (Manufacturer manufacturer : manufacturers) {
-            System.out.println(manufacturer);
-        }
+        System.out.println(manufacturerService.get(46L));
+        manufacturerService.getAll().stream().forEach(System.out::println);
 
         DriverService driverService = (DriverService)
                 injector.getInstance(DriverService.class);
@@ -28,9 +24,6 @@ public class Main {
         andrewDriver.setLicenseNumber("845985");
         driverService.update(andrewDriver);
         driverService.delete(1L);
-        List<Driver> driverList = driverService.getAll();
-        for (Driver d : driverList) {
-            System.out.println(d);
-        }
+        driverService.getAll().stream().forEach(System.out::println);
     }
 }
