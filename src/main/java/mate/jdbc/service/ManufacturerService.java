@@ -2,14 +2,12 @@ package mate.jdbc.service;
 
 import java.util.List;
 import java.util.Optional;
-
-import mate.jdbc.lib.Service;
 import mate.jdbc.model.Manufacturer;
-@Service
+
 public interface ManufacturerService {
     Manufacturer create(Manufacturer manufacturer);
 
-    Manufacturer get(Long id);
+    Optional<Manufacturer> get(Long id);
 
     List<Manufacturer> getAll();
 
