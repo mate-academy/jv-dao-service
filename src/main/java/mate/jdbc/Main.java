@@ -9,10 +9,10 @@ public class Main {
 
     public static void main(String[] args) {
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-        Driver driver = new Driver(1L, "Kate", "H905");
+        Driver driver = new Driver(3L, "Kate", "H905");
         driverService.create(driver);
-        System.out.println(driverService.get(1L));
-        Driver updatedDriver = new Driver(1L, "Simon", "Y458");
+        System.out.println(driverService.get(3L));
+        Driver updatedDriver = new Driver(3L, "Simon", "Y458");
         driverService.update(updatedDriver);
         driverService.delete(1L);
         driverService.getAll().forEach(System.out::println);
