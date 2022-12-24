@@ -10,6 +10,9 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import mate.jdbc.lib.anotation.Dao;
+import mate.jdbc.lib.anotation.Inject;
+import mate.jdbc.lib.anotation.Service;
 
 public class Injector {
     private static final Map<String, Injector> injectors = new HashMap<>();

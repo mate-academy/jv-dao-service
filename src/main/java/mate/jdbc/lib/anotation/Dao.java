@@ -1,4 +1,4 @@
-package mate.jdbc.lib;
+package mate.jdbc.lib.anotation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
