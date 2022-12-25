@@ -1,16 +1,8 @@
 package mate.jdbc.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
-@RequiredArgsConstructor
+@Data
 public class Driver {
     private Long id;
     private String name;

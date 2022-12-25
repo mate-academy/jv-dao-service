@@ -7,15 +7,17 @@ import mate.jdbc.service.DriverService;
 public class Main {
 
     private static final Injector injector = Injector.getInstance("mate.jdbc");
+    private static final DriverService driverService = (DriverService) injector
+            .getInstance(DriverService.class);
 
     public static void main(String[] args) {
-        Driver driver1 = new Driver(null, "bob", "123");
-        Driver driver2 = new Driver(null, "alice", "5678");
-        DriverService manager = (DriverService) injector.getInstance(DriverService.class);
-        manager.create(driver1);
-        manager.create(driver2);
-        System.out.println("List of all drivers:");
-        manager.getAll().forEach(System.out::println);
+        final Driver driverJohn = new Driver(1L,"John","2034");
+        final Driver driverMike = new Driver(1L,"Mike","2035");
+        driverService.create(driverJohn);
+        driverService.get(1L);
+        driverService.getAll().forEach(System.out::println);
+        driverService.update(driverMike);
+        driverService.delete(1L);
 
     }
 }
