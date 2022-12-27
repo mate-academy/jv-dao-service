@@ -12,13 +12,13 @@ public class Main {
     public static void main(String[] args) {
         DriverService driverService
                 = (DriverService) injector.getInstance(DriverService.class);
-        Driver driver = new Driver();
-        driver.setName("Bob");
-        driver.setLicenseNumber("RA1455");
-        driverService.create(driver);
+        Driver driverBob = new Driver();
+        driverBob.setName("Bob");
+        driverBob.setLicenseNumber("RA1455");
+        driverService.create(driverBob);
 
-        Driver driver1 = new Driver(1L, "John", "AK4687");
-        driverService.update(driver1);
+        Driver driverJohn = new Driver(1L, "John", "AK4687");
+        driverService.update(driverJohn);
 
         System.out.println(driverService.get(1L));
 
@@ -29,19 +29,19 @@ public class Main {
         ManufacturerService manufacturerService
                 = (ManufacturerService) injector.getInstance(ManufacturerService.class);
 
-        Manufacturer manufacturer = new Manufacturer();
-        manufacturer.setName("saab");
-        manufacturer.setCountry("sweden");
-        manufacturerService.create(manufacturer);
+        Manufacturer manufacturerSaab = new Manufacturer();
+        manufacturerSaab.setName("saab");
+        manufacturerSaab.setCountry("sweden");
+        manufacturerService.create(manufacturerSaab);
 
         System.out.println(manufacturerService.get(21L));
 
-        Manufacturer manufacturer1 = new Manufacturer();
-        manufacturer1.setId(16L);
-        manufacturer1.setName("citroen");
-        manufacturer1.setCountry("france");
+        Manufacturer manufacturerCitroen = new Manufacturer();
+        manufacturerCitroen.setId(16L);
+        manufacturerCitroen.setName("citroen");
+        manufacturerCitroen.setCountry("france");
 
-        manufacturerService.update(manufacturer1);
+        manufacturerService.update(manufacturerCitroen);
 
         manufacturerService.delete(18L);
 
