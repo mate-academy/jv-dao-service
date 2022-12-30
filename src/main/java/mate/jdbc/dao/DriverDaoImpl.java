@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import mate.jdbc.exception.DataProcessingException;
+import mate.jdbc.lib.Dao;
 import mate.jdbc.model.Driver;
 import mate.jdbc.util.ConnectionUtil;
 
+@Dao
 public class DriverDaoImpl implements DriverDao {
     @Override
     public Driver create(Driver driver) {
@@ -21,7 +23,7 @@ public class DriverDaoImpl implements DriverDao {
                         .prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS)) {
             createPreparedStatement.setString(1, driver.getName());
             createPreparedStatement.setString(2, driver.getLicenseNumber());
-            createPreparedStatement.executeQuery();
+            createPreparedStatement.executeUpdate();
             ResultSet generatedKeys = createPreparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 Long id = generatedKeys.getObject(1, Long.class);
@@ -106,7 +108,11 @@ public class DriverDaoImpl implements DriverDao {
             Long id = resultSet.getObject("id", Long.class);
             String name = resultSet.getString("name");
             String licenseNumber = resultSet.getString("licenseNumber");
-            return new Driver(id, name, licenseNumber);
+            Driver driver = new Driver();
+            driver.setId(id);
+            driver.setName(name);
+            driver.setLicenseNumber(licenseNumber);
+            return driver;
         } catch (SQLException e) {
             throw new DataProcessingException("Invalid data from resultSet: " + resultSet, e);
         }
