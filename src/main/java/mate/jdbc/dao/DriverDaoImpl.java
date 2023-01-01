@@ -26,8 +26,7 @@ public class DriverDaoImpl implements DriverDao {
             createPreparedStatement.executeUpdate();
             ResultSet generatedKeys = createPreparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
-                Long id = generatedKeys.getObject(1, Long.class);
-                driver.setId(id);
+                driver.setId(generatedKeys.getObject(1, Long.class));
                 return driver;
             }
             return driver;
