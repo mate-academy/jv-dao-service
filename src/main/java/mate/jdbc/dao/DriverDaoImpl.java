@@ -30,7 +30,7 @@ public class DriverDaoImpl implements DriverDao {
             }
             return driver;
         } catch (SQLException e) {
-            throw new DataProcessingException("Cant create driver" + driver,e);
+            throw new DataProcessingException("Cant create driver" + driver, e);
         }
     }
 
@@ -39,7 +39,7 @@ public class DriverDaoImpl implements DriverDao {
         String query = "SELECT* FROM driver WHERE is_deleted = false AND id =?";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setLong(1,id);
+            statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             Driver driver = null;
             if (resultSet.next()) {
@@ -48,7 +48,7 @@ public class DriverDaoImpl implements DriverDao {
             return Optional.ofNullable(driver);
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't get a driver "
-                    + "from driver table.",e);
+                    + "from driver table.", e);
         }
     }
 
@@ -102,6 +102,6 @@ public class DriverDaoImpl implements DriverDao {
         String name = resultSet.getString("name");
         String licenseNumber = resultSet.getString("licenseNumber");
         Long id = resultSet.getObject("id", Long.class);
-        return new Driver(id,name,licenseNumber);
+        return new Driver(id, name, licenseNumber);
     }
 }
