@@ -19,7 +19,8 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver get(Long id) {
-        return driverDao.get(id).orElseThrow(() -> new NoSuchElementException("Can't find Driver with ID: " + id));
+        return driverDao.get(id).orElseThrow(() ->
+                new NoSuchElementException("Can't find Driver with ID: " + id));
     }
 
     @Override
