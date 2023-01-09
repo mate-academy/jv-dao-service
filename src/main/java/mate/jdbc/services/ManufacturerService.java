@@ -8,7 +8,7 @@ public interface ManufacturerService {
 
     Manufacturer create(Manufacturer manufacturer);
 
-    Optional<Manufacturer> get(Long id);
+    Manufacturer get(Long id);
 
     List<Manufacturer> getAll();
 
