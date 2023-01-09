@@ -15,10 +15,10 @@ public class Main {
         ManufacturerService manufacturerService = new ManufacturerServiceImpl();
         DriverService driverService = new DriverServiceImpl();
 
-        manufacturerService.create(new Manufacturer(0L, "Mercedes-Benz", "Germany"));
-        manufacturerService.create(new Manufacturer(0L, "Lexus", "Belgium"));
-        driverService.create(new Driver(0L, "Hassan", "AB-272727"));
-        driverService.create(new Driver(0L, "Mahmud", "AM-486948"));
+        manufacturerService.create(new Manufacturer(null, "Mercedes-Benz", "Germany"));
+        manufacturerService.create(new Manufacturer(null, "Lexus", "Belgium"));
+        driverService.create(new Driver(null, "Hassan", "AB-272727"));
+        driverService.create(new Driver(null, "Mahmud", "AM-486948"));
 
         Manufacturer manufacturer = manufacturerService.get(1L);
         System.out.println("Get 1st manufacturer from DB: " + manufacturer);
