@@ -1,7 +1,6 @@
 package mate.jdbc.services;
 
 import java.util.List;
-import java.util.Optional;
 import mate.jdbc.model.Manufacturer;
 
 public interface ManufacturerService {

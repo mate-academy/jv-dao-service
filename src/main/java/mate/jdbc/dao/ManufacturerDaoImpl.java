@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Dao;
 import mate.jdbc.model.Manufacturer;
@@ -49,7 +48,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             if (resultSet.next()) {
                 manufacturer = getManufacturer(resultSet);
             }
-            return Optional.ofNullable(manufacturer);
+            return manufacturer;
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't get manufacturer by id " + id, e);
         }
