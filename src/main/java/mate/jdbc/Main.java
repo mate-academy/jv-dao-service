@@ -1,19 +1,21 @@
 package mate.jdbc;
 
 import java.util.List;
+import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.DriverService;
-import mate.jdbc.service.DriverServiceImpl;
 import mate.jdbc.service.ManufacturerService;
-import mate.jdbc.service.ManufacturerServiceImpl;
 
 public class Main {
+    private static final Injector injector = Injector.getInstance("mate.jdbc");
+
     public static void main(String[] args) {
         System.out.println("Magic STARTS...");
 
-        ManufacturerService manufacturerService = new ManufacturerServiceImpl();
-        DriverService driverService = new DriverServiceImpl();
+        ManufacturerService manufacturerService =
+                (ManufacturerService) injector.getInstance(ManufacturerService.class);
+        DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
 
         manufacturerService.create(new Manufacturer(null, "Mercedes-Benz", "Germany"));
         manufacturerService.create(new Manufacturer(null, "Lexus", "Belgium"));
