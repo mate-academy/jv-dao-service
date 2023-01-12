@@ -19,7 +19,7 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public Driver create(Driver driver) {
         String query = "INSERT INTO drivers (name, license_number)"
-                + "values (?, ?);";
+                + "values (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement =
                          connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
@@ -89,7 +89,7 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public boolean delete(Long id) {
         String query = "UPDATE drivers"
-                + " SET is_deleted = TRUE WHERE id = ?;";
+                + " SET is_deleted = TRUE WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
