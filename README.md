@@ -7,7 +7,7 @@ public class Driver {
     private String licenseNumber;
 }
 ```
-- Create `ManufacturerService` and its implementation. Annotations `@Service` and `@Inject` have already been given to you.
+✅- Create `ManufacturerService` and its implementation. Annotations `@Service` and `@Inject` have already been given to you.
 ### ManufacturerService methods:
     - Manufacturer create(Manufacturer manufacturer);
     - Manufacturer get(Long id);
