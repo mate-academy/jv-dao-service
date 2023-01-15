@@ -31,7 +31,7 @@ public class Main {
         manufacturer.setCountry("Ukraine");
 
         manufacturerService.create(manufacturer);
-        manufacturerService.get(1L);
+        manufacturerService.get(2L);
         manufacturerService.getAll().forEach(System.out::println);
 
         Manufacturer manufacturer1 = new Manufacturer(2L, "BWM", "Germany");
