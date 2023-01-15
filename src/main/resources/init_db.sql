@@ -10,7 +10,7 @@ CREATE TABLE `manufacturers` (
 CREATE TABLE `drivers` (
                            `id` bigint NOT NULL AUTO_INCREMENT,
                            `name` varchar(225) DEFAULT NULL,
-                           `licenseNumber` varchar(225) DEFAULT NULL,
+                           `license_number` varchar(225) DEFAULT NULL,
                            `is_deleted` tinyint DEFAULT '0',
                            PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3
