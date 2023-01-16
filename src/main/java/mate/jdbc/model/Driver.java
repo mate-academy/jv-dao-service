@@ -61,10 +61,11 @@ public class Driver {
 
     @Override
     public String toString() {
-        return System.lineSeparator() + "Driver{"
+        return "Driver{"
                 + "id=" + id
                 + ", name='" + name + '\''
                 + ", licenseNumber='" + licenseNumber + '\''
                 + '}';
     }
 }
+

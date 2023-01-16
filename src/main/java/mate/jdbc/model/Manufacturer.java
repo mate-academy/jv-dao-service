@@ -61,7 +61,7 @@ public class Manufacturer {
 
     @Override
     public String toString() {
-        return System.lineSeparator() + "Manufacturer{"
+        return "Manufacturer{"
                 + "id=" + id
                 + ", name='" + name + '\''
                 + ", country='" + country + '\''
