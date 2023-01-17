@@ -32,7 +32,7 @@ public class DriverDaoImpl implements DriverDao {
             }
             return driver;
         } catch (SQLException e) {
-            throw new DataProcessingException("Couldn't create manufacturer. " + driver, e);
+            throw new DataProcessingException("Couldn't create driver. " + driver, e);
         }
     }
 
@@ -44,14 +44,13 @@ public class DriverDaoImpl implements DriverDao {
                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            Driver driver = null;
             if (resultSet.next()) {
-                driver = getDriver(resultSet);
+                return Optional.of(getDriver(resultSet));
             }
-            return Optional.ofNullable(driver);
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't get driver by id " + id, e);
         }
+        return Optional.empty();
     }
 
     @Override
@@ -85,7 +84,7 @@ public class DriverDaoImpl implements DriverDao {
             statement.executeUpdate();
             return driver;
         } catch (SQLException e) {
-            throw new DataProcessingException("Couldn't update a manufacturer "
+            throw new DataProcessingException("Couldn't update a driver "
                     + driver, e);
         }
     }
