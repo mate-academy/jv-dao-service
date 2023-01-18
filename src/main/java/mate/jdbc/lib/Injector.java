@@ -57,60 +57,6 @@ public class Injector {
         return newInstanceOfClass;
     }
 
-    private Class<?> findClassExtendingInterface(Class<?> certainInterface) {
-        for (Class<?> clazz : classes) {
-            Class<?>[] interfaces = clazz.getInterfaces();
-            for (Class<?> singleInterface : interfaces) {
-                if (singleInterface.equals(certainInterface)
-                        && (clazz.isAnnotationPresent(Service.class)
-                        || clazz.isAnnotationPresent(Dao.class))) {
-                    return clazz;
-                }
-            }
-        }
-        throw new RuntimeException("Can't find class which implements "
-                + certainInterface.getName()
-                + " interface and has valid annotation (Dao or Service)");
-    }
-
-    private Object getNewInstance(Class<?> certainClass) {
-        if (instanceOfClasses.containsKey(certainClass)) {
-            return instanceOfClasses.get(certainClass);
-        }
-        Object newInstance = createInstance(certainClass);
-        instanceOfClasses.put(certainClass, newInstance);
-        return newInstance;
-    }
-
-    private boolean isFieldInitialized(Field field, Object instance) {
-        field.setAccessible(true);
-        try {
-            return field.get(instance) != null;
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException("Can't get access to field");
-        }
-    }
-
-    private Object createInstance(Class<?> clazz) {
-        Object newInstance;
-        try {
-            Constructor<?> classConstructor = clazz.getConstructor();
-            newInstance = classConstructor.newInstance();
-        } catch (Exception e) {
-            throw new RuntimeException("Can't create object of the class", e);
-        }
-        return newInstance;
-    }
-
-    private void setValueToField(Field field, Object instanceOfClass, Object classToInject) {
-        try {
-            field.setAccessible(true);
-            field.set(instanceOfClass, classToInject);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException("Can't set value to field ", e);
-        }
-    }
-
     /**
      * Scans all classes accessible from the context class loader which
      * belong to the given package and subpackages.
@@ -170,5 +116,59 @@ public class Injector {
             }
         }
         return classes;
+    }
+
+    private Class<?> findClassExtendingInterface(Class<?> certainInterface) {
+        for (Class<?> clazz : classes) {
+            Class<?>[] interfaces = clazz.getInterfaces();
+            for (Class<?> singleInterface : interfaces) {
+                if (singleInterface.equals(certainInterface)
+                        && (clazz.isAnnotationPresent(Service.class)
+                        || clazz.isAnnotationPresent(Dao.class))) {
+                    return clazz;
+                }
+            }
+        }
+        throw new RuntimeException("Can't find class which implements "
+                + certainInterface.getName()
+                + " interface and has valid annotation (Dao or Service)");
+    }
+
+    private Object getNewInstance(Class<?> certainClass) {
+        if (instanceOfClasses.containsKey(certainClass)) {
+            return instanceOfClasses.get(certainClass);
+        }
+        Object newInstance = createInstance(certainClass);
+        instanceOfClasses.put(certainClass, newInstance);
+        return newInstance;
+    }
+
+    private boolean isFieldInitialized(Field field, Object instance) {
+        field.setAccessible(true);
+        try {
+            return field.get(instance) != null;
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException("Can't get access to field");
+        }
+    }
+
+    private Object createInstance(Class<?> clazz) {
+        Object newInstance;
+        try {
+            Constructor<?> classConstructor = clazz.getConstructor();
+            newInstance = classConstructor.newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException("Can't create object of the class", e);
+        }
+        return newInstance;
+    }
+
+    private void setValueToField(Field field, Object instanceOfClass, Object classToInject) {
+        try {
+            field.setAccessible(true);
+            field.set(instanceOfClass, classToInject);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException("Can't set value to field ", e);
+        }
     }
 }

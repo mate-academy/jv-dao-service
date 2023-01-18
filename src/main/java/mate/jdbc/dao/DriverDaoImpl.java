@@ -19,7 +19,7 @@ public class DriverDaoImpl implements DriverDao {
     public Driver create(Driver driver) {
         String query = "INSERT INTO drivers(name, licenseNumber) VALUE(?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
-                    PreparedStatement createDriver =
+                PreparedStatement createDriver =
                         connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             createDriver.setString(1, driver.getName());
             createDriver.setString(2, driver.getLicenseNumber());
@@ -57,8 +57,8 @@ public class DriverDaoImpl implements DriverDao {
     public List<Driver> getAll() {
         String query = "SELECT * FROM drivers WHERE is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
-                    PreparedStatement getAllDrivers =
-                            connection.prepareStatement(query)) {
+                PreparedStatement getAllDrivers =
+                        connection.prepareStatement(query)) {
             List<Driver> driverList = new ArrayList<>();
             ResultSet resultSet = getAllDrivers.executeQuery();
             while (resultSet.next()) {
