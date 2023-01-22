@@ -16,6 +16,10 @@ public class Main {
         driver.setName("Nazar");
         driver.setLicenseNumber("113TY67IO");
         driverService.create(driver);
+        driver.setLicenseNumber("LI766P34K");
+        driverService.update(driver);
+        driverService.getAll().forEach(System.out::println);
+        driverService.delete(driver.getId());
         driverService.getAll().forEach(System.out::println);
 
         ManufacturerService manufacturerService = (ManufacturerService) injector
@@ -24,6 +28,11 @@ public class Main {
         manufacturer.setName("Lexus");
         manufacturer.setCountry("Japan");
         manufacturerService.create(manufacturer);
+        manufacturerService.getAll().forEach(System.out::println);
+        manufacturer.setCountry("China");
+        manufacturerService.update(manufacturer);
+        manufacturerService.getAll().forEach(System.out::println);
+        manufacturerService.delete(manufacturer.getId());
         manufacturerService.getAll().forEach(System.out::println);
     }
 }
