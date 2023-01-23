@@ -19,7 +19,7 @@ public class Main {
         driverOne.setLicenseNumber("1234");
         driverService.update(driverOne);
         driverService.getAll().forEach(System.out::println);
-        driverService.delete(1L);
+        driverService.delete(driverOne.getId());
         driverService.getAll().forEach(System.out::println);
     }
 }
