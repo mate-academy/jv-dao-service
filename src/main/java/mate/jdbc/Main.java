@@ -22,7 +22,7 @@ public class Main {
         Manufacturer testManufacturer = manufacturerService.get(2L);
         testManufacturer.setName("BMV");
         manufacturerService.update(testManufacturer);
-        manufacturerService.delete(1L);
+        manufacturerService.delete(testManufacturer.getId());
         System.out.println(manufacturerService.getAll());
         List<Driver> driverList = List.of(
                 new Driver("driver0001", "KNJ589778"),
@@ -35,7 +35,7 @@ public class Main {
         Driver findDriver = driverService.get(2L);
         findDriver.setLicenseNumber("ABC000000");
         driverService.update(findDriver);
-        driverService.delete(1L);
+        driverService.delete(findDriver.getId());
         System.out.println(driverService.getAll());
     }
 }
