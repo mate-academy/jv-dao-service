@@ -19,10 +19,10 @@ public class Main {
         driverService.create(driverTwo);
         List<Driver> drivers = driverService.getAll();
         System.out.println(drivers);
-        System.out.println(driverService.get(1L));
+        System.out.println(driverService.get(driverOne.getId()));
         Driver driverThree = driverService
-                .update(new Driver(1L,"Valentino Rossi", "KV573988"));
-        driverService.delete(1L);
+                .update(new Driver(driverOne.getId(),"Valentino Rossi", "KV573988"));
+        driverService.delete(driverOne.getId());
         System.out.println(driverService.getAll());
 
         ManufacturerService manufacturerService = (ManufacturerService)
@@ -33,10 +33,11 @@ public class Main {
         manufacturerService.create(manufacturerTwo);
         List<Manufacturer> manufacturers = manufacturerService.getAll();
         System.out.println(manufacturers);
-        System.out.println(manufacturerService.get(1L));
+        System.out.println(manufacturerService.get(manufacturerOne.getId()));
         Manufacturer manufacturerThree = manufacturerService
-                .update(new Manufacturer(1L,"Mercedes-Benz 126, 1987", "Germany"));
-        manufacturerService.delete(2L);
+                .update(new Manufacturer(manufacturerOne.getId(),
+                        "Mercedes-Benz 126, 1987", "Germany"));
+        manufacturerService.delete(manufacturerOne.getId());
         System.out.println(manufacturerService.getAll());
     }
 }
