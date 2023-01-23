@@ -11,7 +11,7 @@ PRIMARY KEY (`id`));
 CREATE TABLE `drivers` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
-  `licenseNumber` varchar(45) DEFAULT NULL,
+  `license_Number` varchar(45) DEFAULT NULL,
   `is_deleted` varchar(45) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
