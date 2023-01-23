@@ -14,10 +14,14 @@ public class Main {
         driver.setName("Bob");
         driver.setLicenseNumber("123");
         driverService.create(driver);
+        Driver driver1 = new Driver();
+        driver.setName("Bill");
+        driver.setLicenseNumber("321");
+        driverService.create(driver1);
         driver.setName("Bobby");
         driverService.update(driver);
-        driverService.delete(1L);
-        System.out.println(driverService.get(2L));
+        driverService.delete(driver1.getId());
+        System.out.println(driverService.get(driver.getId()));
         driverService.getAll().forEach(System.out::println);
     }
 }
