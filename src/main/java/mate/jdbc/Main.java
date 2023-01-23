@@ -8,6 +8,12 @@ import mate.jdbc.service.DriverService;
 import mate.jdbc.service.ManufacturerService;
 
 public class Main {
+    private static final int ID_MANUFACTURER_TO_GET = 4;
+    private static final int ID_MANUFACTURER_TO_UPDATE = 4;
+    private static final int ID_MANUFACTURER_TO_DELETE = 5;
+    private static final int ID_DRIVER_TO_GET = 4;
+    private static final int ID_DRIVER_TO_UPDATE = 3;
+    private static final int ID_DRIVER_TO_DELETE = 6;
     private static Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
@@ -26,10 +32,20 @@ public class Main {
         System.out.println("Manufacturers data will be displayed");
         
         manufacturers.forEach(manufacturerService::create);
-        System.out.println(manufacturerService.get(4L));
-        System.out.println(manufacturerService.update(
-                new Manufacturer(4L, "Volvo", "Sweden")));
-        manufacturerService.delete(5L);
+        Manufacturer manufacturerToGet = manufacturerService
+                .get(manufacturers.get(ID_MANUFACTURER_TO_GET)
+                .getId());
+        System.out.println(manufacturerService.get(manufacturerToGet.getId()));
+        Manufacturer manufacturerToUpdate = manufacturerService
+                .get(manufacturers.get(ID_MANUFACTURER_TO_UPDATE)
+                .getId());
+        manufacturerToUpdate.setName("Volvo");
+        manufacturerToUpdate.setName("Sweden");
+        System.out.println(manufacturerService.update(manufacturerToUpdate));
+        Manufacturer manufacturerToDelete =
+                manufacturerService.get(manufacturers.get(ID_MANUFACTURER_TO_DELETE)
+                        .getId());
+        manufacturerService.delete(manufacturerToDelete.getId());
         manufacturerService.getAll().forEach(System.out::println);
 
         List<Driver> drivers = List.of(
@@ -47,10 +63,14 @@ public class Main {
         System.out.println("Drivers data will be displayed");
 
         drivers.forEach(driverService::create);
-        System.out.println(driverService.get(3L));
-        System.out.println(driverService.update(
-                new Driver(3L, "Boris", "Slovakia")));
-        driverService.delete(6L);
+        Driver driverToGet = driverService.get(drivers.get(ID_DRIVER_TO_GET).getId());
+        System.out.println(driverService.get(driverToGet.getId()));
+        Driver driverToUpdate = driverService.get(drivers.get(ID_DRIVER_TO_UPDATE).getId());
+        driverToUpdate.setName("Boris");
+        driverToUpdate.setLicenseNumber("Slovakia");
+        System.out.println(driverService.update(driverToUpdate));
+        Driver driverToDelete = driverService.get(drivers.get(ID_DRIVER_TO_DELETE).getId());
+        driverService.delete(driverToDelete.getId());
         driverService.getAll().forEach(System.out::println);
     }
 }
