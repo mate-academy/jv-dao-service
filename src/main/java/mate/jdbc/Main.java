@@ -6,6 +6,7 @@ import mate.jdbc.service.DriverService;
 
 public class Main {
     private static Injector injector = Injector.getInstance("mate.jdbc");
+
     public static void main(String[] args) {
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         Driver firstDriver = new Driver();
