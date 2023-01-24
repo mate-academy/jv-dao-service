@@ -12,15 +12,12 @@ public class Main {
 
     public static void main(String[] args) {
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-        for (Driver driver : driverService.getAll()) {
-            driverService.delete(driver.getId());
-        }
         List<Driver> drivers = List.of(new Driver("Bob", "11111"),
                 new Driver("Alice", "22222"),
                 new Driver("Kate", "33333"));
-        for (Driver driver : drivers) {
-            System.out.println(driverService.create(driver));
-        }
+        drivers.stream()
+                .map(driverService::create)
+                .forEach(System.out::println);
         Driver driver = driverService.get(drivers.get(0).getId());
         driver.setLicenseNumber("44444");
         System.out.println(driver);
@@ -35,9 +32,9 @@ public class Main {
                 new Manufacturer("Fiat", "Italy"),
                 new Manufacturer("BMW", "Germany"),
                 new Manufacturer("Nissan", "Japan"));
-        for (Manufacturer manufacturer : manufacturers) {
-            System.out.println(manufacturer = manufacturerService.create(manufacturer));
-        }
+        manufacturers.stream()
+                .map(manufacturerService::create)
+                .forEach(System.out::println);
         Manufacturer manufacturer = manufacturerService.get(
                 manufacturers.get(0).getId());
         System.out.println(manufacturer);
