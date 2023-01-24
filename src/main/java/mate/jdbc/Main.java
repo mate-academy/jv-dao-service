@@ -8,10 +8,11 @@ public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
+        // test your code here
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-        Driver driverOne = new Driver(null, "One", "1234");
-        Driver driverTwo = new Driver(null, "Two", "qwerty");
-        Driver driverThree = new Driver(null, "Three", "asd56");
+        Driver driverOne = new Driver("One", "1234");
+        Driver driverTwo = new Driver("Two", "qwerty");
+        Driver driverThree = new Driver("Three", "asd56");
         System.out.println(driverService.create(driverOne));
         System.out.println(driverService.create(driverTwo));
         System.out.println(driverService.create(driverThree));
