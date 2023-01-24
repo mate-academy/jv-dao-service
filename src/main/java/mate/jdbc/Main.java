@@ -11,8 +11,8 @@ public class Main {
 
     public static void main(String[] args) {
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-        Driver petrenkoPP = new Driver(1L, "Petrenko P.P.", "KIA000001");
-        Driver ivanenkoII = new Driver(2L, "Ivanenko I.I.", "KIB000001");
+        Driver petrenkoPP = new Driver("Petrenko P.P.", "KIA000001");
+        Driver ivanenkoII = new Driver("Ivanenko I.I.", "KIB000001");
         driverService.create(petrenkoPP);
         driverService.create(ivanenkoII);
         System.out.println(driverService.get(petrenkoPP.getId()));
