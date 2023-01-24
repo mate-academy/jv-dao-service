@@ -18,8 +18,8 @@ public class Main {
         driverService.getAll().forEach(System.out::println);
         driverOne.setLicenseNumber("zxc999");
         System.out.println(driverService.update(driverOne));
-        System.out.println(driverService.get(1L));
-        System.out.println(driverService.delete(2L));
+        System.out.println(driverService.get(driverOne.getId()));
+        System.out.println(driverService.delete(driverTwo.getId()));
         driverService.getAll().forEach(System.out::println);
     }
 }
