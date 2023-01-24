@@ -17,10 +17,9 @@ public class Main {
                 new Manufacturer("Skoda", "Czech Republic"),
                 new Manufacturer("Nissan", "Japan"),
                 new Manufacturer("Tesla", "USA"));
-        for (Manufacturer manufacturer: manufacturers) {
-            manufacturerService.create(manufacturer);
-        }
-        Manufacturer unicManufacturer = manufacturerService.get(manufacturers.get(0).getId());
+        manufacturers.forEach(manufacturerService::create);
+        Manufacturer unicManufacturer = manufacturerService
+                .get(manufacturers.stream().findAny().get().getId());
         unicManufacturer.setName("Honda");
         unicManufacturer.setCountry("IDK");
         manufacturerService.update(unicManufacturer);
@@ -38,7 +37,8 @@ public class Main {
         for (Driver driver: drivers) {
             driverService.create(driver);
         }
-        Driver unicDriver = driverService.get(drivers.stream().findFirst().get().getId());
+        drivers.forEach(driverService::create);
+        Driver unicDriver = driverService.get(drivers.stream().findAny().get().getId());
         unicDriver.setName("Vitaliy");
         unicDriver.setLicenseNumber("999385710");
         driverService.update(unicDriver);
