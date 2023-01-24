@@ -1,10 +1,9 @@
 package mate.jdbc;
 
+import java.util.List;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.ManufacturerService;
-
-import java.util.List;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
@@ -18,7 +17,7 @@ public class Main {
                 new Manufacturer("Honda", "Japan"));
         manufacturers.forEach(manufacturer -> {
             manufacturer = manufacturerService.create(manufacturer);
-                    System.out.println(manufacturer);
+            System.out.println(manufacturer);
         });
         manufacturers = manufacturerService.getAll();
         manufacturers.forEach(manufacturer -> {
