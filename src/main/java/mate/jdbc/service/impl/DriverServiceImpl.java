@@ -20,10 +20,8 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver get(Long id) {
-        if (driverDao.get(id).isEmpty()) {
-            throw new NoSuchElementException("Can't get driver with id " + id);
-        }
-        return driverDao.get(id).get();
+        return driverDao.get(id).orElseThrow(() ->
+                new NoSuchElementException("Can't get driver with id " + id));
     }
 
     @Override
