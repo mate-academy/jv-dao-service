@@ -48,7 +48,7 @@ public class DriverDaoImpl implements DriverDao {
                 return Optional.of(getDriver(resultSet));
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can`t get info about drivers from DB", e);
+            throw new DataProcessingException("Can`t get driver from DB by id " + id, e);
         }
         return Optional.empty();
     }
@@ -64,7 +64,7 @@ public class DriverDaoImpl implements DriverDao {
                 driverList.add(getDriver(resultSet));
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can`t get info about drivers from DB", e);
+            throw new DataProcessingException("Can`t get list of drivers from DB", e);
         }
         return driverList;
     }
