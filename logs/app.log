@@ -1,0 +1,11 @@
+2023-01-24 14:30:14,136 INFO mate.jdbc.dao.DriverDaoImpl:24 Method create was called with driver Driver{id=4, name='Den', licenseNumber='19875'}
+2023-01-24 14:30:14,964 INFO mate.jdbc.dao.DriverDaoImpl:24 Method create was called with driver Driver{id=5, name='Karl', licenseNumber='20060'}
+2023-01-24 14:30:14,995 INFO mate.jdbc.dao.DriverDaoImpl:24 Method create was called with driver Driver{id=6, name='Kate', licenseNumber='00100'}
+2023-01-24 14:31:43,140 INFO mate.jdbc.dao.DriverDaoImpl:73 The all data from DB was successful fetched
+2023-01-24 14:33:20,449 INFO mate.jdbc.dao.DriverDaoImpl:73 The all data from DB was successful fetched
+2023-01-24 14:33:20,480 INFO mate.jdbc.dao.DriverDaoImpl:73 The all data from DB was successful fetched
+2023-01-24 15:08:41,346 INFO mate.jdbc.dao.DriverDaoImpl:73 The all data from DB was successful fetched
+2023-01-24 15:08:41,420 INFO mate.jdbc.dao.DriverDaoImpl:73 The all data from DB was successful fetched
+2023-01-24 16:52:07,475 INFO mate.jdbc.dao.DriverDaoImpl:24 Method create was called with driver Driver{id=null, name='Romeo', licenseNumber='66617'}
+2023-01-24 16:52:08,250 INFO mate.jdbc.dao.DriverDaoImpl:73 The all data from DB was successful fetched
+2023-01-24 16:52:08,273 INFO mate.jdbc.dao.DriverDaoImpl:73 The all data from DB was successful fetched
