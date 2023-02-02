@@ -109,15 +109,10 @@ public class DriverDaoImpl implements DriverDao {
         }
     }
 
-    private static Driver parseDriver(ResultSet resultSet) {
-        try {
-            String name = resultSet.getString("name");
-            String licenseNumber = resultSet.getString("license_number");
-            Long id = resultSet.getObject("id", Long.class);
-            return new Driver(id, name, licenseNumber);
-        } catch (SQLException e) {
-            throw new RuntimeException("Can't parse driver from ResultSet "
-                    + resultSet, e);
-        }
+    private Driver parseDriver(ResultSet resultSet) throws SQLException {
+        String name = resultSet.getString("name");
+        String licenseNumber = resultSet.getString("license_number");
+        Long id = resultSet.getObject("id", Long.class);
+        return new Driver(id, name, licenseNumber);
     }
 }
