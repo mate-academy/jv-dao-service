@@ -16,14 +16,13 @@ import mate.jdbc.util.ConnectionUtil;
 
 @Dao
 public class DriverDaoImp implements DriverDao {
-
     @Override
     public Driver create(Driver driver) {
-        String insertDriver =
-                "INSERT INTO manufacturers(name,licence_number) values(?, ?);";
+        String insertDriverQuery =
+                "INSERT INTO drivers(name,licence_number) VALUES(?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement
-                         = connection.prepareStatement(insertDriver,
+                         = connection.prepareStatement(insertDriverQuery,
                          Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, driver.getName());
             statement.setString(2, driver.getLicenseNumber());
@@ -40,11 +39,11 @@ public class DriverDaoImp implements DriverDao {
 
     @Override
     public Optional<Driver> get(Long id) {
-        String getDriverRequest =
+        String getDriverQuery =
                 "SELECT * FROM drivers WHERE id = ? AND is_deleted = false;";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement getDriverById =
-                         connection.prepareStatement(getDriverRequest)) {
+                         connection.prepareStatement(getDriverQuery)) {
             getDriverById.setLong(1, id);
             ResultSet resultSet = getDriverById.executeQuery();
             Driver driver = null;
@@ -53,27 +52,27 @@ public class DriverDaoImp implements DriverDao {
             }
             return Optional.ofNullable(driver);
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't driver by id " + id, e);
+            throw new DataProcessingException("Can't get driver by id " + id, e);
         }
     }
 
     @Override
     public List<Driver> getAll() {
-        List<Driver> allDrivers = new ArrayList<>();
-        String getAllDriver =
+        List<Driver> drivers = new ArrayList<>();
+        String getAllDriverQuery =
                 "SELECT * FROM drivers WHERE is_deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement getAllDriverStatement =
-                         connection.prepareStatement(getAllDriver)) {
+                         connection.prepareStatement(getAllDriverQuery)) {
             ResultSet resultSet = getAllDriverStatement.executeQuery();
             while (resultSet.next()) {
-                allDrivers.add(parseDriver(resultSet));
+                drivers.add(parseDriver(resultSet));
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Can't get all drivers "
-                    + allDrivers, e);
+                    + drivers, e);
         }
-        return allDrivers;
+        return drivers;
     }
 
     @Override
@@ -104,8 +103,8 @@ public class DriverDaoImp implements DriverDao {
             deleteDriverStatement.setLong(1, id);
             return deleteDriverStatement.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't delete drivers from DB "
-                    + deleteDriverRequest, e);
+            throw new DataProcessingException("Can't delete drivers from DB :"
+                    + id, e);
         }
     }
 
@@ -116,7 +115,7 @@ public class DriverDaoImp implements DriverDao {
             Long driverId = resultSet.getObject("id", Long.class);
             return new Driver(driverId, driverName, driverLicence);
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't parse driver from ResultSet "
+            throw new DataProcessingException("Can't parse driver from result set "
                     + resultSet, e);
         }
     }

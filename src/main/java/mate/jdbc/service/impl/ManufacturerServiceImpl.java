@@ -1,4 +1,4 @@
-package mate.jdbc.service.imp;
+package mate.jdbc.service.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,8 +9,7 @@ import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.ManufacturerService;
 
 @Service
-
-public class ManufacturerServiceImp implements ManufacturerService {
+public class ManufacturerServiceImpl implements ManufacturerService {
     @Inject
     private ManufacturerDao manufacturerDao;
 

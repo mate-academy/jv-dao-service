@@ -1,4 +1,4 @@
-package mate.jdbc.service.imp;
+package mate.jdbc.service.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +9,7 @@ import mate.jdbc.model.Driver;
 import mate.jdbc.service.DriverService;
 
 @Service
-public class DriverServiceImp implements DriverService {
+public class DriverServiceImpl implements DriverService {
     @Inject
     private DriverDao driverDao;
 
