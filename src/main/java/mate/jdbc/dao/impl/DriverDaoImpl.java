@@ -1,4 +1,4 @@
-package mate.jdbc.dao.imp;
+package mate.jdbc.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +15,7 @@ import mate.jdbc.model.Driver;
 import mate.jdbc.util.ConnectionUtil;
 
 @Dao
-public class DriverDaoImp implements DriverDao {
+public class DriverDaoImpl implements DriverDao {
     @Override
     public Driver create(Driver driver) {
         String insertDriverQuery =
@@ -108,15 +108,10 @@ public class DriverDaoImp implements DriverDao {
         }
     }
 
-    private Driver parseDriver(ResultSet resultSet) {
-        try {
-            String driverName = resultSet.getString("name");
-            String driverLicence = resultSet.getString("licenseNumber");
-            Long driverId = resultSet.getObject("id", Long.class);
-            return new Driver(driverId, driverName, driverLicence);
-        } catch (SQLException e) {
-            throw new DataProcessingException("Can't parse driver from result set "
-                    + resultSet, e);
-        }
+    private Driver parseDriver(ResultSet resultSet) throws SQLException {
+        String driverName = resultSet.getString("name");
+        String driverLicence = resultSet.getString("licenseNumber");
+        Long driverId = resultSet.getObject("id", Long.class);
+        return new Driver(driverId, driverName, driverLicence);
     }
 }
