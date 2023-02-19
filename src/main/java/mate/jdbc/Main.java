@@ -18,12 +18,12 @@ public class Main {
         System.out.println("Create driver with name=Bob, licence number=98765432: "
                 + driverService.create(bob));;
         System.out.println("Get driver peter: " + driverService
-                .get(peter.getId()).toString());;
-        System.out.println("Get all drivers: " + driverService.getAll().toString());;
+                .get(peter.getId()));;
+        System.out.println("Get all drivers: " + driverService.getAll());;
         peter.setName("Mark");
         peter.setLicenseNumber("12131415");
         System.out.println("Update driver with name=Mark, licence number=12131415: "
-                + driverService.update(peter).toString());;
+                + driverService.update(peter));;
         System.out.println("Delete driver peter: "
                 + driverService.delete(peter.getId()));
     }
