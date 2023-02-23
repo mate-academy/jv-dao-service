@@ -13,16 +13,16 @@ public class Main {
         ManufacturerService manufacturerService
                 = (ManufacturerService) injector.getInstance(ManufacturerService.class);
         // test your code here
-        Manufacturer manufacturer = new Manufacturer(null, "toyota", "japan");
-        Manufacturer manufacturer2 = new Manufacturer(null, "kia", "korea");
+        Manufacturer manufacturerToyota = new Manufacturer(null, "toyota", "japan");
+        Manufacturer manufacturerKia = new Manufacturer(null, "kia", "korea");
         // initialize field values using setters or constructor
-        manufacturerService.create(manufacturer);
-        manufacturerService.create(manufacturer2);
+        manufacturerService.create(manufacturerToyota);
+        manufacturerService.create(manufacturerKia);
         System.out.println(manufacturerService.getAll());
 
         manufacturerService.delete(2L);
-        manufacturer.setCountry("ukraine");
-        manufacturerService.update(manufacturer);
+        manufacturerToyota.setCountry("ukraine");
+        manufacturerService.update(manufacturerToyota);
 
         manufacturerService.update(new Manufacturer(null, "mercedes", "germany"));
         System.out.println(manufacturerService.get(2L));
@@ -30,14 +30,14 @@ public class Main {
 
         DriverService driverService
                 = (DriverService) injector.getInstance(DriverService.class);
-        Driver driver = new Driver(null, "Mickael", "fdfd-0343");
-        Driver driver2 = new Driver(null, "Calvin", "fybn-0163");
-        driverService.create(driver);
-        driverService.create(driver2);
+        Driver driverMickael = new Driver(null, "Mickael", "fdfd-0343");
+        Driver driverCalvin = new Driver(null, "Calvin", "fybn-0163");
+        driverService.create(driverMickael);
+        driverService.create(driverCalvin);
         System.out.println(driverService.getAll());
         driverService.delete(2L);
-        driver.setLicenseNumber("popo-0163");
-        driverService.update(driver);
+        driverMickael.setLicenseNumber("popo-0163");
+        driverService.update(driverMickael);
         System.out.println(driverService.get(2L));
     }
 }
