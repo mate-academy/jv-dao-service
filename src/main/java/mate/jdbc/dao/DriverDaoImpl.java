@@ -91,7 +91,7 @@ public class DriverDaoImpl implements DriverDao {
             statement.executeUpdate();
             return driver;
         } catch (SQLException e) {
-            throw new DataProcessingException("Couldn't update a driver "
+            throw new DataProcessingException("Couldn't update the driver "
                     + driver, e);
         }
     }
@@ -105,7 +105,7 @@ public class DriverDaoImpl implements DriverDao {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new DataProcessingException("Couldn't delete a driver by id " + id, e);
+            throw new DataProcessingException("Couldn't delete the driver by id " + id, e);
         }
     }
 
