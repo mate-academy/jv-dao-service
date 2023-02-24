@@ -9,7 +9,7 @@ import mate.jdbc.model.Driver;
 @Service
 public class DriverServiceImpl implements DriverService {
     @Inject
-    DriverDao dao;
+    private DriverDao dao;
 
     @Override
     public Driver create(Driver driver) {
