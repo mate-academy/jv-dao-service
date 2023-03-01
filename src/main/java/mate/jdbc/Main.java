@@ -10,18 +10,13 @@ public class Main {
     private static final Injector injector = Injector.getInstance("mate");
 
     public static void main(String[] args) {
-
-        final Driver driver = new Driver();
-        driver.setName("Roman");
-        driver.setLicenseNumber("22");
-
+        final Driver driver = new Driver(6L,"Valerija","21");
         DriverService driverService = new DriverServiceImpl(new DriverDaoImpl());
-
         driverService.createDriver(driver);
         driverService.getDriver(2L);
         driverService.getAllDriver();
         driverService.updateDriver(driver);
-        driverService.deleteDriver(2L);
+        driverService.deleteDriver(6L);
 
     }
 }

@@ -36,44 +36,33 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Optional<Driver> get(Long id) {
-        Driver driver = new Driver();
         String query = "select * from driver "
                 + "where id = ? and driver_deleted = false";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
+            Driver driver = null;
             while (resultSet.next()) {
-                Long id1 = resultSet.getObject(1, Long.class);
-                String name = resultSet.getString("name");
-                String licenseNumber = resultSet.getString("licenseNumber");
-                driver.setId(id1);
-                driver.setName(name);
-                driver.setLicenseNumber(licenseNumber);
+                driver = getDriver(resultSet);
             }
+            return Optional.ofNullable(driver);
         } catch (SQLException e) {
             throw new RuntimeException("Couldn't get driver by id " + id, e);
         }
-        return Optional.ofNullable(driver);
+
     }
 
     @Override
     public List<Driver> getAll() {
         List<Driver> allDriver = new ArrayList<>();
-        Driver driver;
         String query = "select * from driver where driver_deleted = false ";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
+            Driver driver = null;
             while (resultSet.next()) {
-                driver = new Driver();
-                Long id = resultSet.getObject("id", Long.class);
-                String name = resultSet.getString("name");
-                String licenseNumber = resultSet.getString("licenseNumber");
-                driver.setId(id);
-                driver.setName(name);
-                driver.setLicenseNumber(licenseNumber);
-                allDriver.add(driver);
+                allDriver.add(getDriver(resultSet));
             }
             return allDriver;
         } catch (SQLException e) {
@@ -93,11 +82,11 @@ public class DriverDaoImpl implements DriverDao {
             preparedStatement.setString(2, driver.getLicenseNumber());
             preparedStatement.setLong(3, driver.getId());
             preparedStatement.executeUpdate();
+            return driver;
         } catch (SQLException e) {
             throw new RuntimeException("Couldn't update a driver "
                     + driver, e);
         }
-        return driver;
     }
 
     @Override
@@ -111,5 +100,12 @@ public class DriverDaoImpl implements DriverDao {
         } catch (SQLException e) {
             throw new RuntimeException("Couldn't delete a manufacturer by id " + id, e);
         }
+    }
+
+    private Driver getDriver(ResultSet resultSet) throws SQLException {
+        Long id = resultSet.getObject("id", Long.class);
+        String name = resultSet.getString("name");
+        String country = resultSet.getString("licenseNumber");
+        return new Driver(id, name, country);
     }
 }
