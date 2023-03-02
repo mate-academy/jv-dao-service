@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Dao;
@@ -82,11 +83,14 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             statement.setString(2, manufacturer.getCountry());
             statement.setLong(3, manufacturer.getId());
             statement.executeUpdate();
-            return manufacturer;
+            if (statement.executeUpdate() > 0) {
+                return manufacturer;
+            }
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't update a manufacturer "
                     + manufacturer, e);
         }
+        throw new NoSuchElementException("Manufacturer does`t exist in DB");
     }
 
     @Override
