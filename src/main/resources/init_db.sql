@@ -7,7 +7,7 @@ CREATE TABLE `manufacturers` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb3;
 
-CREATE TABLE `taxi_driver` (
+CREATE TABLE `drivers` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT 'null',
   `licenceNumber` varchar(255) DEFAULT 'null',
