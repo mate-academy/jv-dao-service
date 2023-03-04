@@ -1,7 +1,6 @@
-package mate.jdbc.serviceimpl;
+package mate.jdbc.impl;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import mate.jdbc.dao.DriverDao;
 import mate.jdbc.dao.DriverDaoImpl;
 import mate.jdbc.lib.Inject;
@@ -21,10 +20,7 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver get(Long id) {
-        if (driverDao.get(id).isEmpty()) {
-            throw new NoSuchElementException("Can't get manufacturer with ID " + id);
-        }
-        return driverDao.get(id).get();
+        return driverDao.get(id).orElseThrow();
     }
 
     @Override
