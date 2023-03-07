@@ -10,7 +10,8 @@ public class Main {
     private static final Injector INJECTOR = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
-        ManufacturerService manufacturerService = (ManufacturerService) INJECTOR.getInstance(ManufacturerService.class);
+        ManufacturerService manufacturerService =
+                (ManufacturerService) INJECTOR.getInstance(ManufacturerService.class);
         Manufacturer mercedes = new Manufacturer("Mercedes", "Germany");
         Manufacturer bmw = new Manufacturer("BMW", "Germany");
         Manufacturer honda = new Manufacturer("Honda", "Japan");
