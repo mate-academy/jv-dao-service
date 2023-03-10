@@ -14,22 +14,33 @@ public class Main {
         //test ManufacturerService
         ManufacturerService manufacturerService
                 = (ManufacturerService) injector.getInstance(ManufacturerService.class);
-        List<Manufacturer> allManufacturers = manufacturerService.getAll();
-        allManufacturers.stream().forEach(System.out::println);
-        System.out.println(manufacturerService.get(2L));
+        // Manufacturer create test
         Manufacturer testManufacturer =
                 manufacturerService.create(new Manufacturer("Kia", "South Korea"));
         System.out.println(testManufacturer);
+        // Manufacturer get test
+        System.out.println(manufacturerService.get(2L));
+        // Manufacturer delete test
         manufacturerService.delete(3L);
+        // Manufacturer update test
         manufacturerService.update(new Manufacturer(2L,"Tesla", "USA"));
+        // Manufacturer getAll test
+        List<Manufacturer> allManufacturers = manufacturerService.getAll();
+        allManufacturers.stream().forEach(System.out::println);
+
         //test DriverService
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-        List<Driver> allDrivers = driverService.getAll();
-        allDrivers.forEach(System.out::println);
-        System.out.println(driverService.get(2L));
+        // Driver create test
         Driver testDriver = driverService.create(new Driver("Bob", "MG8593845"));
         System.out.println(testDriver);
-        driverService.delete(3L);
+        // Driver get test
+        System.out.println(driverService.get(2L));
+        // Driver update test
         driverService.update(new Driver(2L,"Mycola", "ND897986087"));
+        // Driver delete test
+        driverService.delete(3L);
+        // Driver getAll test
+        List<Driver> allDrivers = driverService.getAll();
+        allDrivers.forEach(System.out::println);
     }
 }
