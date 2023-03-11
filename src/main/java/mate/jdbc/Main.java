@@ -21,12 +21,18 @@ public class Main {
         tesla.setCountry("USA");
         System.out.println(manufacturerService.create(tesla));
 
+        Manufacturer lucid = new Manufacturer();
+        lucid.setName("Lucid");
+        lucid.setCountry("USA");
+        System.out.println(manufacturerService.create(lucid));
+
         List<Manufacturer> manufacturers = manufacturerService.getAll();
         manufacturers.forEach(System.out::println);
 
         System.out.println(manufacturerService.get(tesla.getId()));
 
         tesla.setName("Volvo");
+        tesla.setCountry("Sweden");
         System.out.println(manufacturerService.update(tesla));
 
         manufacturerService.delete(tesla.getId());
@@ -39,12 +45,18 @@ public class Main {
         teslaDriver.setLicenseNumber("1234567");
         driverService.create(teslaDriver);
 
+        Driver lucidDriver = new Driver();
+        lucidDriver.setName("Bob");
+        lucidDriver.setLicenseNumber("8901234");
+        driverService.create(lucidDriver);
+
         List<Driver> drivers = driverService.getAll();
         drivers.forEach(System.out::println);
 
         System.out.println(driverService.get(teslaDriver.getId()));
 
         teslaDriver.setName("John");
+        teslaDriver.setLicenseNumber("7654321");
         System.out.println(driverService.update(teslaDriver));
 
         driverService.delete(teslaDriver.getId());
