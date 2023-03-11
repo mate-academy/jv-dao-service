@@ -16,10 +16,10 @@ public class Driver {
     - boolean delete(Long id);
 - Create Dao and Service layers for `Driver` and their implementations.
 ### DriverService methods:
-    - Driver create(Driver driver);
+    - Driver create(Driver manufacturer);
     - Driver get(Long id);
     - List<Driver> getAll();
-    - Driver update(Driver driver);
+    - Driver update(Driver manufacturer);
     - boolean delete(Long id);
 
 - Do not forget about DB naming rules mentioned in previous homework.
