@@ -30,7 +30,7 @@ public class DriverDaoImpl implements DriverDao {
                 driver.setId(object);
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can`t insert data to DB. Data: " + driver, e);
+            throw new DataProcessingException("Can`t insert driver to DB. Driver: " + driver, e);
         }
         return driver;
     }
@@ -48,7 +48,7 @@ public class DriverDaoImpl implements DriverDao {
             Driver driver = createNewDriver(resultSet);
             return Optional.ofNullable(driver);
         } catch (SQLException e) {
-            throw new DataProcessingException("Can`t get data form DB. Data ID: " + id, e);
+            throw new DataProcessingException("Can`t get driver form DB. Driver ID: " + id, e);
         }
     }
 
@@ -64,7 +64,7 @@ public class DriverDaoImpl implements DriverDao {
                 allDrivers.add(driver);
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can`t get all data form DB", e);
+            throw new DataProcessingException("Can`t get all drivers form DB", e);
         }
         return allDrivers;
     }
@@ -81,7 +81,7 @@ public class DriverDaoImpl implements DriverDao {
             updateDriverStatement.executeUpdate();
             return driver;
         } catch (SQLException e) {
-            throw new DataProcessingException("Can`t update data to DB. Data: " + driver, e);
+            throw new DataProcessingException("Can`t update driver to DB. Driver: " + driver, e);
         }
     }
 
@@ -94,7 +94,7 @@ public class DriverDaoImpl implements DriverDao {
             deleteDriverStatement.setLong(1, id);
             return deleteDriverStatement.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new DataProcessingException("Can`t delete data to DB. Data ID: " + id, e);
+            throw new DataProcessingException("Can`t delete driver to DB. Driver ID: " + id, e);
         }
     }
 

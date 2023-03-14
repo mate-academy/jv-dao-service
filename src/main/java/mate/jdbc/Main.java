@@ -17,10 +17,6 @@ public class Main {
                 (ManufacturerServiceImpl) injector.getInstance(ManufacturerService.class);
 
         System.out.println("MANUFACTURER TEST:" + System.lineSeparator());
-        //test getAll
-        System.out.println("getAll:");
-        List<Manufacturer> allManufacturer = manufacturerService.getAll();
-        allManufacturer.forEach(System.out::println);
         //test create
         System.out.println(System.lineSeparator() + "create:");
         Manufacturer manufacturer = new Manufacturer("SKODA", "Czech Republic");
@@ -41,15 +37,15 @@ public class Main {
         //test get
         System.out.println(System.lineSeparator() + "get:");
         System.out.println(manufacturerService.get(5L));
+        //test getAll
+        System.out.println("getAll:");
+        List<Manufacturer> allManufacturer = manufacturerService.getAll();
+        allManufacturer.forEach(System.out::println);
         //------------------------------------------------------------
         DriverServiceImpl driverService =
                 (DriverServiceImpl) injector.getInstance(DriverService.class);
 
         System.out.println(System.lineSeparator() + "DRIVER TEST:" + System.lineSeparator());
-        //test getAll
-        System.out.println("getAll:");
-        List<Driver> allDriver = driverService.getAll();
-        allDriver.forEach(System.out::println);
         //test create
         System.out.println(System.lineSeparator() + "create:");
         Driver driver = new Driver("Pavlo", "1235789");
@@ -70,6 +66,9 @@ public class Main {
         //test get
         System.out.println(System.lineSeparator() + "get:");
         System.out.println(driverService.get(5L));
-        // test your code here
+        //test getAll
+        System.out.println("getAll:");
+        List<Driver> allDriver = driverService.getAll();
+        allDriver.forEach(System.out::println);
     }
 }

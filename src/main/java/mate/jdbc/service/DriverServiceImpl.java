@@ -20,7 +20,7 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public Driver get(Long id) {
         Optional<Driver> driver = driverDao.get(id);
-        return driver.orElseThrow(() -> new RuntimeException("Data is null. ID:" + id));
+        return driver.orElseThrow(() -> new RuntimeException("Driver is null. ID:" + id));
     }
 
     @Override
