@@ -1,6 +1,5 @@
 package mate.jdbc;
 
-import java.util.Optional;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
@@ -25,15 +24,12 @@ public class Main {
         service.getAll().forEach(System.out::println);
         System.out.println("*************** create new manufacturers *******************");
         Manufacturer newManufacturer = service.create(testManufacturer);
-        service.get(newManufacturer.getId()).ifPresent(System.out::println);
+        System.out.println(service.get(newManufacturer.getId()));
         System.out.println("*************** get&update manufacturers *******************");
-        Optional<Manufacturer> optionalManufacturer = service.get(newManufacturer.getId());
-        if (optionalManufacturer.isPresent()) {
-            testManufacturer = optionalManufacturer.get();
-            testManufacturer.setCountry("Ukraine");
-            testManufacturer = service.update(testManufacturer);
-            service.get(testManufacturer.getId()).ifPresent(System.out::println);
-        }
+        testManufacturer = service.get(newManufacturer.getId());
+        testManufacturer.setCountry("Ukraine");
+        testManufacturer = service.update(testManufacturer);
+        System.out.println(service.get(testManufacturer.getId()));
         System.out.println("*************** delete manufacturers *******************");
         service.delete(testManufacturer.getId());
         service.getAll().forEach(System.out::println);
@@ -44,15 +40,12 @@ public class Main {
         service.getAll().forEach(System.out::println);
         System.out.println("*************** create new driver *******************");
         Driver newDriver = service.create(testDriver);
-        service.get(newDriver.getId()).ifPresent(System.out::println);
+        System.out.println(service.get(newDriver.getId()));
         System.out.println("*************** get&update driver *******************");
-        Optional<Driver> optionalDriver = service.get(newDriver.getId());
-        if (optionalDriver.isPresent()) {
-            testDriver = optionalDriver.get();
-            testDriver.setLicenseNumber("new license number");
-            testDriver = service.update(testDriver);
-            service.get(testDriver.getId()).ifPresent(System.out::println);
-        }
+        testDriver = service.get(newDriver.getId());
+        testDriver.setLicenseNumber("new license number");
+        testDriver = service.update(testDriver);
+        System.out.println(service.get(testDriver.getId()));
         System.out.println("*************** delete driver *******************");
         service.delete(testDriver.getId());
         service.getAll().forEach(System.out::println);
