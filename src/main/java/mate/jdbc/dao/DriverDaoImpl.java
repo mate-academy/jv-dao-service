@@ -22,7 +22,8 @@ public class DriverDaoImpl implements DriverDao {
                 PreparedStatement createDriverStatement =
                         connection.prepareStatement(insertDriverQuery,
                              Statement.RETURN_GENERATED_KEYS)) {
-            setNameAndCountry(createDriverStatement, driver);
+            createDriverStatement.setString(1, driver.getName());
+            createDriverStatement.setString(2, driver.getLicenseNumber());
             createDriverStatement.executeUpdate();
             ResultSet generatedKeys = createDriverStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
@@ -44,11 +45,15 @@ public class DriverDaoImpl implements DriverDao {
                         connection.prepareStatement(getDriverQuery)) {
             getDriverStatement.setLong(1, id);
             ResultSet resultSet = getDriverStatement.executeQuery();
-            resultSet.next();
-            Driver driver = createNewDriver(resultSet);
+            Driver driver;
+            if (resultSet.next()) {
+                driver = createNewDriver(resultSet);
+            } else {
+                driver = null;
+            }
             return Optional.ofNullable(driver);
         } catch (SQLException e) {
-            throw new DataProcessingException("Can`t get driver form DB. Driver ID: " + id, e);
+            throw new DataProcessingException("Can`t get driver from DB. Driver ID: " + id, e);
         }
     }
 
@@ -64,19 +69,20 @@ public class DriverDaoImpl implements DriverDao {
                 allDrivers.add(driver);
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can`t get all drivers form DB", e);
+            throw new DataProcessingException("Can`t get all drivers from DB", e);
         }
         return allDrivers;
     }
 
     @Override
     public Driver update(Driver driver) {
-        String updateDriverQuery = "UPDATE drivers SET name = ?, license_number = ?, "
-                + "is_deleted = false WHERE id = ?";
+        String updateDriverQuery = "UPDATE drivers SET name = ?, license_number = ? "
+                + "WHERE id = ? AND is_deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement updateDriverStatement =
                         connection.prepareStatement(updateDriverQuery)) {
-            setNameAndCountry(updateDriverStatement, driver);
+            updateDriverStatement.setString(1, driver.getName());
+            updateDriverStatement.setString(2, driver.getLicenseNumber());
             updateDriverStatement.setLong(3, driver.getId());
             updateDriverStatement.executeUpdate();
             return driver;
@@ -96,12 +102,6 @@ public class DriverDaoImpl implements DriverDao {
         } catch (SQLException e) {
             throw new DataProcessingException("Can`t delete driver to DB. Driver ID: " + id, e);
         }
-    }
-
-    private void setNameAndCountry(PreparedStatement preparedStatement,
-                                   Driver driver) throws SQLException {
-        preparedStatement.setString(1, driver.getName());
-        preparedStatement.setString(2, driver.getLicenseNumber());
     }
 
     private Driver createNewDriver(ResultSet resultSet) throws SQLException {
