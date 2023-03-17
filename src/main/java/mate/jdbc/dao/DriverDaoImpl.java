@@ -22,7 +22,7 @@ public class DriverDaoImpl implements DriverDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement
                         = connection.prepareStatement(
-                                createDriverRequest, Statement.RETURN_GENERATED_KEYS)) {
+                        createDriverRequest, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, driver.getName());
             statement.setString(2, driver.getLicenseNumber());
             statement.executeUpdate();
@@ -44,11 +44,8 @@ public class DriverDaoImpl implements DriverDao {
                 PreparedStatement statement = connection.prepareStatement(getDriverRequest)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            Driver driver = new Driver();
             if (resultSet.next()) {
-                driver.setId(resultSet.getObject(1, Long.class));
-                driver.setName(resultSet.getString(2));
-                driver.setLicenseNumber(resultSet.getString(3));
+                Driver driver = getDriver(resultSet);
                 return Optional.of(driver);
             }
         } catch (SQLException e) {
@@ -67,10 +64,7 @@ public class DriverDaoImpl implements DriverDao {
                         connection.prepareStatement(getAllDriversRequest)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Driver driver = new Driver();
-                driver.setId(resultSet.getObject(1, Long.class));
-                driver.setName(resultSet.getString(2));
-                driver.setLicenseNumber(resultSet.getString(3));
+                Driver driver = getDriver(resultSet);
                 driversList.add(driver);
             }
         } catch (SQLException e) {
@@ -107,5 +101,13 @@ public class DriverDaoImpl implements DriverDao {
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't delete driver with id " + id, e);
         }
+    }
+
+    private Driver getDriver(ResultSet resultSet) throws SQLException {
+        Driver driver = new Driver();
+        driver.setId(resultSet.getObject(1, Long.class));
+        driver.setName(resultSet.getString(2));
+        driver.setLicenseNumber(resultSet.getString(3));
+        return driver;
     }
 }
