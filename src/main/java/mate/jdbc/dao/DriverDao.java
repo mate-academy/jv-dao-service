@@ -13,5 +13,5 @@ public interface DriverDao {
 
     Driver update(Driver driver);
 
-    Boolean delete(Long id);
+    boolean delete(Long id);
 }
