@@ -36,7 +36,7 @@ public class DriverDaoImpl implements DriverDao {
     }
 
     @Override
-    public Driver get(Long id) {
+    public Optional<Driver> get(Long id) {
         String query = "SELECT * FROM drivers"
                 + " WHERE id = ? AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
@@ -47,7 +47,7 @@ public class DriverDaoImpl implements DriverDao {
             if (resultSet.next()) {
                 driver = getDriver(resultSet);
             }
-            return Optional.ofNullable(driver).get();
+            return Optional.ofNullable(driver);
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't get manufacturer by id " + id, e);
         }
