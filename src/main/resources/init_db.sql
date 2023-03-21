@@ -10,8 +10,8 @@ CREATE TABLE `manufacturers` (
 
 CREATE TABLE `drivers` (
                                           `id` BIGINT(11) NOT NULL AUTO_INCREMENT,
-                                          `name` VARCHAR(255) DEFAULT NULL,
-                                          `license_number` VARCHAR(255) DEFAULT NULL,
+                                          `name` VARCHAR(255),
+                                          `license_number` VARCHAR(255),
                                           `is_deleted` TINYINT DEFAULT '0',
                                           PRIMARY KEY (`id`));
 

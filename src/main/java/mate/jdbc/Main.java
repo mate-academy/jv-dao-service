@@ -26,7 +26,7 @@ public class Main {
         manufacturerService.update(new Manufacturer(2L,"Tesla", "USA"));
         // Manufacturer getAll test
         List<Manufacturer> allManufacturers = manufacturerService.getAll();
-        allManufacturers.stream().forEach(System.out::println);
+        allManufacturers.forEach(System.out::println);
 
         //test DriverService
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
