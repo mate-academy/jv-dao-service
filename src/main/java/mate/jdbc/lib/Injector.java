@@ -3,9 +3,7 @@ package mate.jdbc.lib;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.net.URL;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -14,12 +12,11 @@ import java.util.Map;
 
 public class Injector {
     private static final Map<String, Injector> injectors = new HashMap<>();
-    private final Map<Class<?>, Object> instanceOfClasses = new HashMap<>();
-    private final List<Class<?>> classList = new ArrayList<>();
+    private final List<Class<?>> classes = new ArrayList<>();
 
     private Injector(String mainPackageName) {
         try {
-            classList.addAll(getClasses(mainPackageName));
+            classes.addAll(getClasses(mainPackageName));
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException("Can't get information about all classes", e);
         }
@@ -35,82 +32,34 @@ public class Injector {
     }
 
     public Object getInstance(Class<?> certainInterface) {
-        Object newInstanceOfClass = null;
-        Class<?> classInstance = findClassExtendingInterface(certainInterface);
-        Object instanceOfCurrentClass = createInstance(classInstance);
-        Field[] declaredFields = classInstance.getDeclaredFields();
-        for (Field field : declaredFields) {
-            if (isFieldInitialized(field, instanceOfCurrentClass)) {
-                continue;
-            }
-            if (field.getDeclaredAnnotation(Inject.class) != null) {
-                Object classToInject = getInstance(field.getType());
-                newInstanceOfClass = getNewInstance(classInstance);
-                setValueToField(field, newInstanceOfClass, classToInject);
-            } else {
-                throw new RuntimeException("Field " + field.getName() + " in class "
-                        + classInstance.getName() + " hasn't annotation Inject", null);
-            }
-        }
-        if (newInstanceOfClass == null) {
-            return getNewInstance(classInstance);
-        }
-        return newInstanceOfClass;
+        Class<?> clazz = findClassExtendingInterface(certainInterface);
+        return createInstance(clazz);
     }
 
     private Class<?> findClassExtendingInterface(Class<?> certainInterface) {
-        for (Class<?> classList : classList) {
-            Class<?>[] interfaces = classList.getInterfaces();
+        for (Class<?> clazz : classes) {
+            Class<?>[] interfaces = clazz.getInterfaces();
             for (Class<?> singleInterface : interfaces) {
                 if (singleInterface.equals(certainInterface)
-                        && (classList.isAnnotationPresent(Service.class)
-                        || classList.isAnnotationPresent(Dao.class))) {
-                    return classList;
+                        && clazz.isAnnotationPresent(Dao.class)) {
+                    return clazz;
                 }
             }
         }
         throw new RuntimeException("Can't find class which implements "
                 + certainInterface.getName()
-                + " interface and has valid annotation (Dao or Service)", null);
+                + " interface and has valid annotation (Dao or Service)");
     }
 
-    private Object getNewInstance(Class<?> certainClass) {
-        if (instanceOfClasses.containsKey(certainClass)) {
-            return instanceOfClasses.get(certainClass);
-        }
-        Object newInstance = createInstance(certainClass);
-        instanceOfClasses.put(certainClass, newInstance);
-        return newInstance;
-    }
-
-    private boolean isFieldInitialized(Field field, Object instance) {
-        try {
-            field.setAccessible(true);
-            return field.get(instance) != null;
-        } catch (IllegalAccessException | SecurityException e) {
-            throw new RuntimeException("Can't get access to field " + field.getName(), e);
-        }
-    }
-
-    private Object createInstance(Class<?> classInstance) {
+    private Object createInstance(Class<?> clazz) {
         Object newInstance;
         try {
-            Constructor<?> classConstructor = classInstance.getConstructor();
+            Constructor<?> classConstructor = clazz.getConstructor();
             newInstance = classConstructor.newInstance();
         } catch (Exception e) {
-            throw new RuntimeException("Can't create object of the class "
-                    + classInstance.getName(), e);
+            throw new RuntimeException("Can't create object of the class", e);
         }
         return newInstance;
-    }
-
-    private void setValueToField(Field field, Object instanceOfClass, Object classToInject) {
-        try {
-            field.setAccessible(true);
-            field.set(instanceOfClass, classToInject);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException("Can't set value to field ", e);
-        }
     }
 
     /**
@@ -126,7 +75,7 @@ public class Injector {
             throws IOException, ClassNotFoundException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         if (classLoader == null) {
-            throw new RemoteException("Class loader is null", null);
+            throw new RuntimeException("Class loader is null");
         }
         String path = packageName.replace('.', '/');
         Enumeration<URL> resources = classLoader.getResources(path);
@@ -152,26 +101,25 @@ public class Injector {
      */
     private static List<Class<?>> findClasses(File directory, String packageName)
             throws ClassNotFoundException {
-        List<Class<?>> classListFound = new ArrayList<>();
+        List<Class<?>> classes = new ArrayList<>();
         if (!directory.exists()) {
-            return classListFound;
+            return classes;
         }
         File[] files = directory.listFiles();
         if (files != null) {
             for (File file : files) {
                 if (file.isDirectory()) {
                     if (file.getName().contains(".")) {
-                        throw new RuntimeException(
-                                "File name shouldn't consist point.", null);
+                        throw new RuntimeException("File name shouldn't consist point.");
                     }
-                    classListFound.addAll(findClasses(file, packageName + "."
+                    classes.addAll(findClasses(file, packageName + "."
                             + file.getName()));
                 } else if (file.getName().endsWith(".class")) {
-                    classListFound.add(Class.forName(packageName + '.'
+                    classes.add(Class.forName(packageName + '.'
                             + file.getName().substring(0, file.getName().length() - 6)));
                 }
             }
         }
-        return classListFound;
+        return classes;
     }
 }
