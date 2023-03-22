@@ -19,7 +19,8 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver get(Long id) {
-        return driverDao.get(id).orElse(null);
+        return driverDao.get(id).orElseThrow(
+                () -> new RuntimeException("Can't get manufacturer with id: " + id));
     }
 
     @Override

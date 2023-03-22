@@ -8,12 +8,12 @@ import mate.jdbc.service.ManufacturerService;
 
 public class Main {
     private static Injector injector = Injector.getInstance("mate.jdbc");
+    static final DriverService driverService
+            = (DriverService) injector.getInstance(DriverService.class);
+    static final ManufacturerService manufacturerService
+            = (ManufacturerService) injector.getInstance(ManufacturerService.class);
 
     public static void main(String[] args) {
-        final DriverService driverService
-                = (DriverService) injector.getInstance(DriverService.class);
-        final ManufacturerService manufacturerService
-                = (ManufacturerService) injector.getInstance(ManufacturerService.class);
         Driver bob = new Driver();
         bob.setName("Bob");
         bob.setLicenseNumber("BOB11111");
