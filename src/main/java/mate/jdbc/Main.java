@@ -1,6 +1,5 @@
 package mate.jdbc;
 
-import java.util.List;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
@@ -12,21 +11,19 @@ public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
+        // Testing ManufacturerService
         ManufacturerService manufacturerService =
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
-        DriverService driverService =
-                (DriverService) injector.getInstance(DriverService.class);
-        // Testing ManufacturerService
+        Manufacturer kia = new Manufacturer("Kia", "South Korea");
+        Manufacturer bmw = new Manufacturer("BMW", "Germany");
+        Manufacturer reno = new Manufacturer("Reno", "France");
+        Manufacturer audi = new Manufacturer("Audi", "Germany");
         // create Manufacturer in DB
         System.out.println("Create manufacturers in DataBase:");
-        List<Manufacturer> manufacturerList =
-                List.of(new Manufacturer("Kia", "SouthKorea"),
-                new Manufacturer("BMW", "Germany"),
-                new Manufacturer("Zaporozhets", "Ukraine"),
-                new Manufacturer("Audi", "Germany"));
-        for (Manufacturer manufacturer : manufacturerList) {
-            System.out.println(manufacturerService.create(manufacturer));
-        }
+        Manufacturer kiaManufacturer = manufacturerService.create(kia);
+        Manufacturer bmwManufacturer = manufacturerService.create(bmw);
+        Manufacturer renoManufacturer = manufacturerService.create(reno);
+        Manufacturer audiManufacturer = manufacturerService.create(audi);
         // getAll
         System.out.println("Get all manufacturers from DataBase:");
         manufacturerService.getAll().forEach(System.out::println);
@@ -44,16 +41,18 @@ public class Main {
         System.out.println("Delete manufacturer in DataBase:");
         System.out.println(manufacturerService.delete(INDEX));
         //Testing DriverService
-        //create
+        DriverService driverService =
+                (DriverService) injector.getInstance(DriverService.class);
+        Driver bob = new Driver("Bob", "0001");
+        Driver alice = new Driver("Alice", "0002");
+        Driver stepan = new Driver("Stepan", "0003");
+        Driver petro = new Driver("Petro", "0004");
+        //create Drivers in DB
         System.out.println("Create drivers in DataBase:");
-        List<Driver> driversList =
-                List.of(new Driver("Bob", "0001"),
-                new Driver("Alice", "0002"),
-                new Driver("Stepan", "0003"),
-                new Driver("Petro", "0004"));
-        for (Driver driver : driversList) {
-            System.out.println(driverService.create(driver));
-        }
+        Driver bobDriver = driverService.create(bob);
+        Driver aliceDriver = driverService.create(alice);
+        Driver stepanDriver = driverService.create(stepan);
+        Driver petroDriver = driverService.create(petro);
         //getAll
         System.out.println("Get all drivers from DataBase:");
         driverService.getAll().forEach(System.out::println);

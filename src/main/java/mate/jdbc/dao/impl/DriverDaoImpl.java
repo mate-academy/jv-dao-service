@@ -19,7 +19,7 @@ import mate.jdbc.util.ConnectionUtil;
 public class DriverDaoImpl implements DriverDao {
     @Override
     public Driver create(Driver driver) {
-        String insertQuery = "INSERT INTO drivers (name, driver_license) VALUES (?, ?);";
+        String insertQuery = "INSERT INTO drivers (name, driver_license) VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement insertStatement =
                         connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS)) {
@@ -40,7 +40,7 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Optional<Driver> get(Long id) {
-        String getQuery = "SELECT * FROM drivers WHERE is_deleted = FALSE AND id = (?);";
+        String getQuery = "SELECT * FROM drivers WHERE is_deleted = FALSE AND id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement getStatement = connection.prepareStatement(getQuery)) {
             getStatement.setLong(1, id);
@@ -73,8 +73,8 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Driver update(Driver driver) {
-        String updateQuery = "UPDATE drivers SET name = (?), driver_license = (?) WHERE "
-                + "is_deleted = FALSE AND id = (?);";
+        String updateQuery = "UPDATE drivers SET name = ?, driver_license = ? WHERE "
+                + "is_deleted = FALSE AND id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement updateStatement = connection.prepareStatement(updateQuery)) {
             updateStatement.setString(1, driver.getName());
@@ -92,7 +92,7 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public boolean delete(Long id) {
-        String deleteQuery = "UPDATE drivers SET is_deleted = TRUE WHERE id = (?);";
+        String deleteQuery = "UPDATE drivers SET is_deleted = TRUE WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement deleteStatement =
                         connection.prepareStatement(deleteQuery)) {
