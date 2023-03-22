@@ -15,39 +15,48 @@ public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
     private static final String MANUFACTURERS_DB = "manufacturers";
     private static final String DRIVERS_DB = "drivers";
+    private static final Long SECOND_ID = 2L;
+    private static final Long THIRD_ID = 3L;
+    private static final ManufactureService manufactureService =
+            (ManufactureService) injector.getInstance(ManufactureService.class);
+    private static final DriverService driverService =
+            (DriverService) injector.getInstance(DriverService.class);
 
     public static void main(String[] args) {
-        ManufactureService manufactureService =
-                (ManufactureService) injector.getInstance(ManufactureService.class);
-        Manufacturer volkswagen = manufactureService.create(
-                new Manufacturer("Volkswagen", "Germany"));
-        Manufacturer hyundai = manufactureService.create(
-                new Manufacturer("Hyundai", "South Korea"));
-        Manufacturer cherry = manufactureService.create(
-                new Manufacturer("Cherry", "China"));
-        System.out.println(manufactureService.get(2L));
-        System.out.println(manufactureService.get(3L));
-        Manufacturer cherryToHaval = manufactureService.update(
-                new Manufacturer(3L, "Haval", "China"));
-        manufactureService.delete(2L);
-        manufactureService.getAll().forEach(System.out::println);
+        testManufacturerService();
         clear(MANUFACTURERS_DB);
+        testDriverService();
+        clear(DRIVERS_DB);
+    }
 
-        DriverService driverService =
-                (DriverService) injector.getInstance(DriverService.class);
+    private static void testDriverService() {
         Driver bob = driverService.create(
                 new Driver("Bob", "NY12345678"));
         Driver john = driverService.create(
                 new Driver("John", "FL12345678"));
         Driver alice = driverService.create(
                 new Driver("Alice", "NE12345678"));
-        System.out.println(driverService.get(2L));
-        System.out.println(driverService.get(3L));
+        System.out.println(driverService.get(SECOND_ID));
+        System.out.println(driverService.get(THIRD_ID));
         Driver aliceToEmma = driverService.update(
-                new Driver(3L, "Emma", "TE12345678"));
-        driverService.delete(2L);
+                new Driver(THIRD_ID, "Emma", "TE12345678"));
+        driverService.delete(SECOND_ID);
         driverService.getAll().forEach(System.out::println);
-        clear(DRIVERS_DB);
+    }
+
+    private static void testManufacturerService() {
+        Manufacturer volkswagen = manufactureService.create(
+                new Manufacturer("Volkswagen", "Germany"));
+        Manufacturer hyundai = manufactureService.create(
+                new Manufacturer("Hyundai", "South Korea"));
+        Manufacturer cherry = manufactureService.create(
+                new Manufacturer("Cherry", "China"));
+        System.out.println(manufactureService.get(SECOND_ID));
+        System.out.println(manufactureService.get(THIRD_ID));
+        Manufacturer cherryToHaval = manufactureService.update(
+                new Manufacturer(THIRD_ID, "Haval", "China"));
+        manufactureService.delete(SECOND_ID);
+        manufactureService.getAll().forEach(System.out::println);
     }
 
     private static void clear(String nameDB) {
