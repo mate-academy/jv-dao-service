@@ -45,7 +45,7 @@ public class DriverDaoImpl implements DriverDao {
                 PreparedStatement getStatement = connection.prepareStatement(getQuery)) {
             getStatement.setLong(1, id);
             ResultSet resultSet = getStatement.executeQuery();
-            while (resultSet.next()) {
+            if (resultSet.next()) {
                 return Optional.of(getDriverFromResultSet(resultSet));
             }
         } catch (SQLException e) {
@@ -95,7 +95,7 @@ public class DriverDaoImpl implements DriverDao {
         String deleteQuery = "UPDATE drivers SET is_deleted = TRUE WHERE id = (?);";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement deleteStatement =
-                        connection.prepareStatement(deleteQuery, Statement.RETURN_GENERATED_KEYS)) {
+                        connection.prepareStatement(deleteQuery)) {
             deleteStatement.setLong(1, id);
             return deleteStatement.executeUpdate() > 0;
         } catch (SQLException e) {

@@ -29,7 +29,7 @@ public class Main {
         }
         // getAll
         System.out.println("Get all manufacturers from DataBase:");
-        System.out.println(manufacturerService.getAll());
+        manufacturerService.getAll().forEach(System.out::println);
         // get
         System.out.println("Get manufacturer by id:");
         Manufacturer manufacturer = manufacturerService.get(INDEX);
@@ -56,7 +56,7 @@ public class Main {
         }
         //getAll
         System.out.println("Get all drivers from DataBase:");
-        System.out.println(driverService.getAll());
+        driverService.getAll().forEach(System.out::println);
         //get
         System.out.println("Get driver by id");
         Driver driver = driverService.get(INDEX);
