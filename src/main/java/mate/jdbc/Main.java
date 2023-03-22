@@ -5,16 +5,14 @@ import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.DriverService;
-import mate.jdbc.service.DriverServiceImpl;
 import mate.jdbc.service.ManufacturerService;
-import mate.jdbc.service.ManufacturerServiceImpl;
 
 public class Main {
     private static Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
-        ManufacturerServiceImpl manufacturerService =
-                (ManufacturerServiceImpl) injector.getInstance(ManufacturerService.class);
+        ManufacturerService manufacturerService =
+                (ManufacturerService) injector.getInstance(ManufacturerService.class);
 
         System.out.println("MANUFACTURER TEST:" + System.lineSeparator());
         //test create
@@ -42,8 +40,8 @@ public class Main {
         List<Manufacturer> allManufacturer = manufacturerService.getAll();
         allManufacturer.forEach(System.out::println);
         //------------------------------------------------------------
-        DriverServiceImpl driverService =
-                (DriverServiceImpl) injector.getInstance(DriverService.class);
+        DriverService driverService =
+                (DriverService) injector.getInstance(DriverService.class);
 
         System.out.println(System.lineSeparator() + "DRIVER TEST:" + System.lineSeparator());
         //test create

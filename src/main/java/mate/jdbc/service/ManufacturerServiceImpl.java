@@ -21,7 +21,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     public Manufacturer get(Long id) {
         Optional<Manufacturer> optionalManufacturer = manufacturerDao.get(id);
         return optionalManufacturer.orElseThrow(() ->
-                new RuntimeException("Data is null. ID:" + id));
+                new RuntimeException("Could not get manufacturer. ID:" + id));
     }
 
     @Override
