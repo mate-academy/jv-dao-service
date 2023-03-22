@@ -5,12 +5,12 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import mate.jdbc.exception.DataProcessingException;
 
 public class Injector {
     private static final Map<String, Injector> injectors = new HashMap<>();
@@ -21,7 +21,7 @@ public class Injector {
         try {
             classList.addAll(getClasses(mainPackageName));
         } catch (IOException | ClassNotFoundException e) {
-            throw new DataProcessingException("Can't get information about all classes", e);
+            throw new RuntimeException("Can't get information about all classes", e);
         }
     }
 
@@ -48,7 +48,7 @@ public class Injector {
                 newInstanceOfClass = getNewInstance(classInstance);
                 setValueToField(field, newInstanceOfClass, classToInject);
             } else {
-                throw new DataProcessingException("Field " + field.getName() + " in class "
+                throw new RuntimeException("Field " + field.getName() + " in class "
                         + classInstance.getName() + " hasn't annotation Inject", null);
             }
         }
@@ -69,7 +69,7 @@ public class Injector {
                 }
             }
         }
-        throw new DataProcessingException("Can't find class which implements "
+        throw new RuntimeException("Can't find class which implements "
                 + certainInterface.getName()
                 + " interface and has valid annotation (Dao or Service)", null);
     }
@@ -88,7 +88,7 @@ public class Injector {
             field.setAccessible(true);
             return field.get(instance) != null;
         } catch (IllegalAccessException | SecurityException e) {
-            throw new DataProcessingException("Can't get access to field " + field.getName(), e);
+            throw new RuntimeException("Can't get access to field " + field.getName(), e);
         }
     }
 
@@ -98,7 +98,7 @@ public class Injector {
             Constructor<?> classConstructor = classInstance.getConstructor();
             newInstance = classConstructor.newInstance();
         } catch (Exception e) {
-            throw new DataProcessingException("Can't create object of the class "
+            throw new RuntimeException("Can't create object of the class "
                     + classInstance.getName(), e);
         }
         return newInstance;
@@ -109,7 +109,7 @@ public class Injector {
             field.setAccessible(true);
             field.set(instanceOfClass, classToInject);
         } catch (IllegalAccessException e) {
-            throw new DataProcessingException("Can't set value to field ", e);
+            throw new RuntimeException("Can't set value to field ", e);
         }
     }
 
@@ -126,7 +126,7 @@ public class Injector {
             throws IOException, ClassNotFoundException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         if (classLoader == null) {
-            throw new DataProcessingException("Class loader is null", null);
+            throw new RemoteException("Class loader is null", null);
         }
         String path = packageName.replace('.', '/');
         Enumeration<URL> resources = classLoader.getResources(path);
@@ -161,7 +161,7 @@ public class Injector {
             for (File file : files) {
                 if (file.isDirectory()) {
                     if (file.getName().contains(".")) {
-                        throw new DataProcessingException(
+                        throw new RuntimeException(
                                 "File name shouldn't consist point.", null);
                     }
                     classListFound.addAll(findClasses(file, packageName + "."

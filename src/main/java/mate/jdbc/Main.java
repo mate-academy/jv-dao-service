@@ -6,9 +6,10 @@ import mate.jdbc.service.DriverService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
+    private static DriverService driverService = (DriverService)
+            injector.getInstance(DriverService.class);
 
     public static void main(String[] args) {
-        DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         // Create model
         Driver driver = new Driver();
         driver.setName("Bohdan");
