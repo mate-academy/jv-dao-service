@@ -8,7 +8,6 @@ public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
-        // test your code here
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         // Create model
         Driver driver = new Driver();
@@ -19,7 +18,6 @@ public class Main {
         System.out.println(driverService.get(1L));
         System.out.println(driverService.getAll());
         // Update data
-        driver.setId(1L);
         driver.setName("Myhaylo");
         driverService.update(driver);
         System.out.println(driverService.getAll());
