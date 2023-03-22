@@ -8,12 +8,14 @@ import mate.jdbc.service.DriverService;
 import mate.jdbc.service.ManufacturerService;
 
 public class Main {
-    private static Injector injector = Injector.getInstance("mate.jdbc");
+    private static final Injector injector = Injector.getInstance("mate.jdbc");
+    private static final ManufacturerService manufacturerService
+            = (ManufacturerService) injector.getInstance(ManufacturerService.class);
+    private static final DriverService driverService
+            = (DriverService) injector.getInstance(DriverService.class);
 
     public static void main(String[] args) {
         //test ManufacturerService
-        ManufacturerService manufacturerService
-                = (ManufacturerService) injector.getInstance(ManufacturerService.class);
         // Manufacturer create test
         Manufacturer testManufacturer =
                 manufacturerService.create(new Manufacturer("Kia", "South Korea"));
@@ -29,7 +31,6 @@ public class Main {
         allManufacturers.forEach(System.out::println);
 
         //test DriverService
-        DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         // Driver create test
         Driver testDriver = driverService.create(new Driver("Bob", "MG8593845"));
         System.out.println(testDriver);
