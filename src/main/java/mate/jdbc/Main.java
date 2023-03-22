@@ -8,20 +8,21 @@ import mate.jdbc.service.ManufacturerService;
 
 public class Main {
     private static Injector injector = Injector.getInstance("mate.jdbc");
+    private static ManufacturerService manufacturerService
+            = (ManufacturerService) injector.getInstance(ManufacturerService.class);
+    private static DriverService driverService
+            = (DriverService) injector.getInstance(DriverService.class);
 
     public static void main(String[] args) {
-        ManufacturerService manufacturerService
-                = (ManufacturerService) injector.getInstance(ManufacturerService.class);
         Manufacturer manufacturerToyota = new Manufacturer("Toyota", "Japan");
-        Manufacturer manufacturerLexus = new Manufacturer(1L,"Lexus", "Japan");
+        Manufacturer manufacturerLexus = new Manufacturer(1L, "Lexus", "Japan");
         manufacturerService.create(manufacturerToyota);
         System.out.println(manufacturerService.get(1L));
         manufacturerService.update(manufacturerLexus);
         manufacturerService.delete(1L);
         System.out.println(manufacturerService.getAll());
         Driver driverPetro = new Driver("Petro", "545454");
-        Driver driverDmytro = new Driver(1L,"Dmytro", "545454");
-        DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
+        Driver driverDmytro = new Driver(1L, "Dmytro", "545454");
         driverService.create(driverPetro);
         System.out.println(driverService.get(1L));
         driverService.update(driverDmytro);
