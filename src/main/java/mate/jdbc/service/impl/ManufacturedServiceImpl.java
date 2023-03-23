@@ -11,7 +11,7 @@ import mate.jdbc.model.Manufacturer;
 @Service
 public class ManufacturedServiceImpl implements ManufacturedDao {
     @Inject
-    private static ManufacturedDao manufacturedDao;
+    private ManufacturedDao manufacturedDao;
 
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
