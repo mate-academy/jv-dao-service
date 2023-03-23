@@ -1,7 +1,7 @@
 package mate.jdbc.service.impl;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
 import mate.jdbc.dao.DriverDao;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
@@ -24,8 +24,9 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public Optional<Driver> get(Long id) {
-        return driver.get(id);
+    public Driver get(Long id) {
+        return driver.get(id).orElseThrow(() ->
+                new NoSuchElementException("Can't get driver with that id: " + id));
     }
 
     @Override
