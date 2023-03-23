@@ -60,7 +60,7 @@ public class DriverDaoImpl implements DriverDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement =
                         connection.prepareStatement(query)) {
-            List<Driver> drivers  = new LinkedList<>();
+            List<Driver> drivers = new LinkedList<>();
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 drivers.add(getDriver(resultSet));
