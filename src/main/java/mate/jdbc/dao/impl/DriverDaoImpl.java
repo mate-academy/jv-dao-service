@@ -16,7 +16,6 @@ import mate.jdbc.util.ConnectionUtil;
 
 @Dao
 public class DriverDaoImpl implements DriverDao {
-
     @Override
     public Driver create(Driver driver) {
         String insertQuery = "INSERT INTO drivers(name, license_number) VALUES (?, ?);";
@@ -39,7 +38,7 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Optional<Driver> get(Long id) {
-        String getQuery = "SELECT * FROM drivers WHERE id = ? AND is_deleted = false";
+        String getQuery = "SELECT * FROM drivers WHERE id = ? AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement getDriverStatement = connection.prepareStatement(getQuery)) {
             getDriverStatement.setLong(1, id);
@@ -57,7 +56,7 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public List<Driver> getAll() {
         List<Driver> driversList = new ArrayList<>();
-        String dbQuery = "SELECT * FROM drivers WHERE is_deleted = false";
+        String dbQuery = "SELECT * FROM drivers WHERE is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement getAllDriverStatement = connection.prepareStatement(dbQuery)) {
             ResultSet resultSet = getAllDriverStatement.executeQuery();
@@ -91,7 +90,7 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public boolean delete(Long id) {
-        String deleteQuery = "UPDATE drivers SET is_deleted = true WHERE id = ?;";
+        String deleteQuery = "UPDATE drivers SET is_deleted = TRUE WHERE id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement deleteDriverStatement
                         = connection.prepareStatement(deleteQuery)) {
@@ -104,13 +103,10 @@ public class DriverDaoImpl implements DriverDao {
     }
 
     private Driver createDriver(ResultSet resultSet) throws SQLException {
-        Long id = resultSet.getObject("id", Long.class);
-        String name = resultSet.getString("name");
-        String licenceNumber = resultSet.getString("license_number");
         Driver driver = new Driver();
-        driver.setId(id);
-        driver.setName(name);
-        driver.setLicenseNumber(licenceNumber);
+        driver.setId(resultSet.getObject("id", Long.class));
+        driver.setName(resultSet.getString("name"));
+        driver.setLicenseNumber(resultSet.getString("license_number"));
         return driver;
     }
 }
