@@ -2,14 +2,14 @@ package mate.jdbc.service.impl;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import mate.jdbc.dao.ManufacturedDao;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
 import mate.jdbc.model.Manufacturer;
+import mate.jdbc.service.ManufacturedService;
 
 @Service
-public class ManufacturedServiceImpl implements ManufacturedDao {
+public class ManufacturedServiceImpl implements ManufacturedService {
     @Inject
     private ManufacturedDao manufacturedDao;
 
@@ -19,9 +19,9 @@ public class ManufacturedServiceImpl implements ManufacturedDao {
     }
 
     @Override
-    public Optional<Manufacturer> get(Long id) {
-        return Optional.ofNullable(manufacturedDao.get(id).orElseThrow(()
-                -> new NoSuchElementException("Can`t get manufacturer by id ")));
+    public Manufacturer get(Long id) {
+        return manufacturedDao.get(id).orElseThrow(()
+                -> new NoSuchElementException("Can`t get manufacturer by id "));
     }
 
     @Override

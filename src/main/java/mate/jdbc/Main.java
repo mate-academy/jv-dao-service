@@ -6,15 +6,17 @@ import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.DriverService;
 import mate.jdbc.service.ManufacturedService;
+import mate.jdbc.service.impl.DriverServiceImpl;
+import mate.jdbc.service.impl.ManufacturedServiceImpl;
 
 public class Main {
     private static final Long MANUFACTURER_ID = 7L;
     private static final Long DRIVER_ID = 1L;
     private static final Injector injector = Injector.getInstance("mate.jdbc");
     private static final ManufacturedService manufacturedService =
-            (ManufacturedService) injector.getInstance(ManufacturedService.class);
+            (ManufacturedServiceImpl) injector.getInstance(ManufacturedService.class);
     private static final DriverService driverService =
-            (DriverService) injector.getInstance(DriverService.class);
+            (DriverServiceImpl) injector.getInstance(DriverService.class);
 
     public static void main(String[] args) {
         Manufacturer firstManufacturer = new Manufacturer();
