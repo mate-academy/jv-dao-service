@@ -17,3 +17,5 @@ ALTER TABLE `taxi_service`.`drivers`
 CHANGE COLUMN `name` `name` VARCHAR(255) NOT NULL ,
 CHANGE COLUMN `licenseNumber` `licenseNumber` VARCHAR(255) NOT NULL ,
 CHANGE COLUMN `is_deleted` `is_deleted` TINYINT NOT NULL DEFAULT 0 ;
+ALTER TABLE `taxi_service`.`drivers`
+CHANGE COLUMN `is_deleted` `isDeleted` TINYINT NOT NULL DEFAULT '0' ;

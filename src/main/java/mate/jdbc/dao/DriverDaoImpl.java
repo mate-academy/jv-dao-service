@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Dao;
 import mate.jdbc.model.Driver;
@@ -17,13 +18,13 @@ public class DriverDaoImpl implements DriverDao {
     private static final String CREATE_QUERY = "INSERT INTO drivers"
             + " (name, licenseNumber) VALUES (?, ?)";
     private static final String GET_QUERY = "SELECT * FROM drivers"
-            + " WHERE id = ? AND is_deleted = FALSE";
+            + " WHERE id = ? AND isDeleted = FALSE";
     private static final String GET_ALL_QUERY = "SELECT * FROM drivers"
-            + " WHERE is_deleted = FALSE";
+            + " WHERE isDeleted = FALSE";
     private static final String UPDATE_QUERY = "UPDATE drivers SET name = ?,"
-            + " licenseNumber = ? WHERE id = ? AND is_deleted = FALSE";
+            + " licenseNumber = ? WHERE id = ? AND isDeleted = FALSE";
     private static final String DELETE_QUERY = "UPDATE drivers"
-            + " SET is_deleted = TRUE WHERE id = ?";
+            + " SET isDeleted = TRUE WHERE id = ?";
 
     @Override
     public Driver create(Driver driver) {
@@ -45,7 +46,7 @@ public class DriverDaoImpl implements DriverDao {
     }
 
     @Override
-    public Driver get(Long id) {
+    public Optional<Driver> get(Long id) {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement getDriverStatement = connection.prepareStatement(GET_QUERY)) {
             getDriverStatement.setLong(1, id);
@@ -54,7 +55,7 @@ public class DriverDaoImpl implements DriverDao {
             if (resultSet.next()) {
                 driver = getDriver(resultSet);
             }
-            return driver;
+            return Optional.ofNullable(driver);
         } catch (SQLException exception) {
             throw new DataProcessingException("Couldn't get driver by id " + id, exception);
         }
