@@ -15,36 +15,21 @@ public class Main {
             (DriverService) injector.getInstance(DriverService.class);
 
     public static void main(String[] args) {
-        Driver firstDriver = new Driver();
-        firstDriver.setName("Bob");
-        firstDriver.setLicenseNumber("19283735");
-        Driver secondDriver = new Driver();
-        secondDriver.setName("John");
-        secondDriver.setLicenseNumber("17342964");
-        driverService.create(firstDriver);
-        driverService.create(secondDriver);
+        driverService.create(new Driver("Bob","19283735"));
+        driverService.create(new Driver("John", "17342964"));
+        driverService.create(new Driver("Alice", "18452074"));
         List<Driver> allDrivers = driverService.getAll();
         allDrivers.forEach(System.out::println);
-        driverService.get(firstDriver.getId());
-        secondDriver.setName("Bill");
-        driverService.update(secondDriver);
-        System.out.println(secondDriver);
-        driverService.delete(secondDriver.getId());
+        System.out.println(driverService.get(3L));
+        driverService.update(new Driver(2L, "Bill", "18345285"));
+        driverService.delete(1L);
 
-        Manufacturer firstCar = new Manufacturer();
-        firstCar.setName("Reno");
-        firstCar.setCountry("France");
-        Manufacturer secondCar = new Manufacturer();
-        secondCar.setName("Toyota");
-        secondCar.setCountry("Japan");
-        manufacturerService.create(firstCar);
-        manufacturerService.create(secondCar);
+        manufacturerService.create(new Manufacturer("Reno","France"));
+        manufacturerService.create(new Manufacturer("Toyota","Japan"));
         List<Manufacturer> allManufacturers = manufacturerService.getAll();
         allManufacturers.forEach(System.out::println);
-        System.out.println(manufacturerService.get(firstCar.getId()));
-        secondCar.setName("Mazda");
-        manufacturerService.update(secondCar);
-        System.out.println(secondCar);
-        manufacturerService.delete(secondCar.getId());
+        System.out.println(manufacturerService.get(3L));
+        manufacturerService.update(new Manufacturer(2L, "Mazda", "China"));
+        manufacturerService.delete(1L);
     }
 }
