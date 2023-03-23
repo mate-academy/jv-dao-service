@@ -51,11 +51,10 @@ public class DriverDaoImpl implements DriverDao {
                 PreparedStatement getDriverStatement = connection.prepareStatement(GET_QUERY)) {
             getDriverStatement.setLong(1, id);
             ResultSet resultSet = getDriverStatement.executeQuery();
-            Driver driver = null;
             if (resultSet.next()) {
-                driver = getDriver(resultSet);
+                return Optional.of(getDriver(resultSet));
             }
-            return Optional.ofNullable(driver);
+            throw new DataProcessingException("Couldn't get driver by id" + id);
         } catch (SQLException exception) {
             throw new DataProcessingException("Couldn't get driver by id " + id, exception);
         }
