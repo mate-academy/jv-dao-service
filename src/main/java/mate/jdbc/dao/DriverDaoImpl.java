@@ -10,106 +10,107 @@ import java.util.List;
 import java.util.Optional;
 import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Dao;
-import mate.jdbc.model.Manufacturer;
+import mate.jdbc.model.Driver;
 import mate.jdbc.util.ConnectionUtil;
 
 @Dao
-public class ManufacturerDaoImpl implements ManufacturerDao {
+public class DriverDaoImpl implements DriverDao {
     @Override
-    public Manufacturer create(Manufacturer manufacturer) {
-        String query = "INSERT INTO manufacturers (name, country) VALUES(?, ?);";
+    public Driver create(Driver driver) {
+        String query = "INSERT INTO drivers (name, license_number) VALUES(?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement =
                         connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setString(1, manufacturer.getName());
-            preparedStatement.setString(2, manufacturer.getCountry());
+            preparedStatement.setString(1, driver.getName());
+            preparedStatement.setString(2, driver.getLicenseNumber());
             preparedStatement.executeUpdate();
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 Long id = generatedKeys.getObject(1, Long.class);
-                manufacturer.setId(id);
+                driver.setId(id);
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't insert manufacturer " + manufacturer
+            throw new DataProcessingException("Can't insert driver " + driver
                     + "to DB", e);
         }
-        return manufacturer;
+        return driver;
     }
 
     @Override
-    public Optional<Manufacturer> get(Long id) {
-        String query = "SELECT * FROM manufacturers WHERE id = ? AND is_deleted = FALSE;";
+    public Optional<Driver> get(Long id) {
+        String query = "SELECT * FROM drivers WHERE id = ? AND is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement =
                         connection.prepareStatement(query)) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            Manufacturer manufacturer = null;
+            Driver driver = null;
             if (resultSet.next()) {
-                manufacturer = getManufacturer(resultSet);
-                return Optional.of(manufacturer);
+                driver = getDriver(resultSet);
+                return Optional.of(driver);
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't get manufacturer with ID: " + id
+            throw new DataProcessingException("Can't get a driver with ID: " + id
                     + " from DB", e);
         }
         return Optional.empty();
     }
 
     @Override
-    public List<Manufacturer> getAll() {
-        List<Manufacturer> allManufacturer = new ArrayList<>();
-        String query = "SELECT * FROM manufacturers WHERE is_deleted = FALSE;";
+    public List<Driver> getAll() {
+        List<Driver> allDriver = new ArrayList<>();
+        String query = "SELECT * FROM drivers WHERE is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement =
                         connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement
                     .executeQuery(query);
-            Manufacturer manufacturer = null;
+            Driver driver = null;
             while (resultSet.next()) {
-                manufacturer = getManufacturer(resultSet);
-                allManufacturer.add(manufacturer);
+                driver = getDriver(resultSet);
+                allDriver.add(driver);
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't get all manufacturers from DB", e);
+            throw new DataProcessingException("Can't get all drivers from DB", e);
         }
-        return allManufacturer;
+        return allDriver;
     }
 
     @Override
-    public Manufacturer update(Manufacturer manufacturer) {
-        String query = "UPDATE manufacturers SET name = ?, country = ?"
+    public Driver update(Driver driver) {
+        String query = "UPDATE drivers SET name = ?, license_number = ?"
                 + "WHERE id = ? AND is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement =
                         connection.prepareStatement(query)) {
-            preparedStatement.setString(1, manufacturer.getName());
-            preparedStatement.setString(2, manufacturer.getCountry());
-            preparedStatement.setLong(3, manufacturer.getId());
+            preparedStatement.setString(1, driver.getName());
+            preparedStatement.setString(2, driver.getLicenseNumber());
+            preparedStatement.setLong(3, driver.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't update manufacturer to DB", e);
+            throw new DataProcessingException("Can't update driver to DB", e);
         }
-        return manufacturer;
+        return driver;
     }
 
     @Override
     public boolean delete(Long id) {
-        String query = "UPDATE manufacturers SET is_deleted = TRUE WHERE id = ?;";
+        String query = "UPDATE drivers SET is_deleted = TRUE WHERE id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement =
                         connection.prepareStatement(query)) {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() >= 1;
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't delete manufacturer from DB by id: " + id, e);
+            throw new DataProcessingException("Can't delete a driver from DB by id: " + id, e);
         }
     }
 
-    private Manufacturer getManufacturer(ResultSet resultSet) throws SQLException {
-        Long id = resultSet.getObject("id", Long.class);
-        String name = resultSet.getString("name");
-        String country = resultSet.getString("country");
-        return new Manufacturer(id, name, country);
+    private Driver getDriver(ResultSet resultSet) throws SQLException {
+        Driver driver = new Driver();
+        driver.setId(resultSet.getObject("id", Long.class));
+        driver.setName(resultSet.getString("name"));
+        driver.setLicenseNumber(resultSet.getString("license_number"));
+        return driver;
     }
 }
