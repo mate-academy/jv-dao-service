@@ -1,16 +1,16 @@
-package mate.jdbc.dao;
+package mate.jdbc.service;
 
 import mate.jdbc.model.Manufacturer;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface ManufacturerDao {
+public interface ManufacturerService {
     Manufacturer create(Manufacturer manufacturer);
 
     List<Manufacturer> getAll();
 
-    Optional<Manufacturer> get(Long id);
+    Manufacturer get(Long id);
 
     Manufacturer update(Manufacturer manufacturer);
 
