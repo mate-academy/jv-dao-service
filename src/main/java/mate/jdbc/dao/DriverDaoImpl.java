@@ -17,7 +17,7 @@ import mate.jdbc.util.ConnectionUtil;
 public class DriverDaoImpl implements DriverDao {
     @Override
     public Driver create(Driver driver) {
-        String insertRequest = "INSERT INTO drivers(name, licenseNumber) VALUES (?, ?);";
+        String insertRequest = "INSERT INTO drivers(name, license_number) VALUES (?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement insertDriverStatement = connection
                         .prepareStatement(insertRequest, Statement.RETURN_GENERATED_KEYS)) {
@@ -75,7 +75,7 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public Driver update(Driver driver) {
         String updateRequest = "UPDATE drivers SET name = ?, "
-                + "licenseNumber = ?, is_deleted = FALSE WHERE id = ?;";
+                + "license_number = ?, is_deleted = FALSE WHERE id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement updateDriverStatement = connection
                         .prepareStatement(updateRequest)) {
@@ -106,7 +106,7 @@ public class DriverDaoImpl implements DriverDao {
         try {
             Long idOfDriver = resultSet.getObject("id", Long.class);
             String nameOfDriver = resultSet.getString("name");
-            String licenseNumberOfDriver = resultSet.getString("licenseNumber");
+            String licenseNumberOfDriver = resultSet.getString("license_number");
             Driver driver = new Driver();
             driver.setId(idOfDriver);
             driver.setName(nameOfDriver);
@@ -115,6 +115,5 @@ public class DriverDaoImpl implements DriverDao {
         } catch (SQLException e) {
             throw new DataProcessingException("Can't get data from ResultSet", e);
         }
-
     }
 }
