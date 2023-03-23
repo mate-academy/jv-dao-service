@@ -1,7 +1,5 @@
 package mate.jdbc.model;
 
-import java.util.Objects;
-
 public class Manufacturer {
     private Long id;
     private String name;
@@ -10,7 +8,12 @@ public class Manufacturer {
     public Manufacturer() {
     }
 
-    public Manufacturer(Long id, String name, String country) {
+    public Manufacturer(String name, String country) {
+        this.name = name;
+        this.country = country;
+    }
+
+    public Manufacturer(String name, String country, Long id) {
         this.id = id;
         this.name = name;
         this.country = country;
@@ -41,30 +44,9 @@ public class Manufacturer {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Manufacturer that = (Manufacturer) o;
-        return Objects.equals(id, that.id)
-                && Objects.equals(name, that.name)
-                && Objects.equals(country, that.country);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, country);
-    }
-
-    @Override
     public String toString() {
         return "Manufacturer{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + ", country='" + country + '\''
-                + '}';
+                + "id=" + id + ", name='" + name + '\''
+                + ", country='" + country + '\'' + '}';
     }
 }
