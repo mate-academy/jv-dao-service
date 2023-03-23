@@ -16,6 +16,13 @@ import mate.jdbc.util.ConnectionUtil;
 
 @Dao
 public class DriverDaoImpl implements DriverDao {
+    private static final String ID_COLUMN = "id";
+    private static final String NAME_COLUMN = "name";
+    private static final String LICENSE_NUMBER_COLUMN = "license_number";
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
+
     @Override
     public Driver create(Driver driver) {
         String query = "INSERT INTO drivers (name, license_number) "
@@ -23,12 +30,12 @@ public class DriverDaoImpl implements DriverDao {
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement
                          = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, driver.getName());
-            statement.setString(2, driver.getLicenseNumber());
+            statement.setString(INDEX_3, driver.getName());
+            statement.setString(INDEX_2, driver.getLicenseNumber());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
-                driver.setId(resultSet.getObject(1, Long.class));
+                driver.setId(resultSet.getObject(INDEX_1, Long.class));
             }
             return driver;
         } catch (SQLException e) {
@@ -43,7 +50,7 @@ public class DriverDaoImpl implements DriverDao {
                 + " WHERE id = ? AND is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setLong(1, id);
+            statement.setLong(INDEX_1, id);
             ResultSet resultSet = statement.executeQuery();
             Driver driver = null;
             if (resultSet.next()) {
@@ -80,9 +87,9 @@ public class DriverDaoImpl implements DriverDao {
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement
                          = connection.prepareStatement(query)) {
-            statement.setString(1, driver.getName());
-            statement.setString(2, driver.getLicenseNumber());
-            statement.setLong(3, driver.getId());
+            statement.setString(INDEX_1, driver.getName());
+            statement.setString(INDEX_2, driver.getLicenseNumber());
+            statement.setLong(INDEX_3, driver.getId());
             statement.executeUpdate();
             return driver;
         } catch (SQLException e) {
@@ -97,7 +104,7 @@ public class DriverDaoImpl implements DriverDao {
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement
                          = connection.prepareStatement(query)) {
-            statement.setLong(1, id);
+            statement.setLong(INDEX_1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't delete a driver by id " + id, e);
@@ -105,9 +112,9 @@ public class DriverDaoImpl implements DriverDao {
     }
 
     private Driver getDriver(ResultSet resultSet) throws SQLException {
-        Long id = resultSet.getObject("id", Long.class);
-        String name = resultSet.getString("name");
-        String licenseNumber = resultSet.getString("license_number");
+        Long id = resultSet.getObject(ID_COLUMN, Long.class);
+        String name = resultSet.getString(NAME_COLUMN);
+        String licenseNumber = resultSet.getString(LICENSE_NUMBER_COLUMN);
         Driver driver = new Driver();
         driver.setId(id);
         driver.setName(name);
