@@ -10,7 +10,7 @@ import mate.jdbc.service.impl.DriverServiceImpl;
 import mate.jdbc.service.impl.ManufacturedServiceImpl;
 
 public class Main {
-    private static final Long MANUFACTURER_ID = 7L;
+    private static final Long MANUFACTURER_ID = 15L;
     private static final Long DRIVER_ID = 1L;
     private static final Injector injector = Injector.getInstance("mate.jdbc");
     private static final ManufacturedService manufacturedService =
