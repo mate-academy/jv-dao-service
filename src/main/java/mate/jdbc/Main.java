@@ -11,9 +11,7 @@ public class Main {
 
     public static void main(String[] args) {
         // Create model
-        Driver driver = new Driver();
-        driver.setName("Bohdan");
-        driver.setLicenseNumber("lic0285442_2456cer");
+        Driver driver = new Driver("Bohdan", "lic0285442_2456cer");
         System.out.println(driverService.create(driver));
         // Read data
         System.out.println(driverService.get(1L));
