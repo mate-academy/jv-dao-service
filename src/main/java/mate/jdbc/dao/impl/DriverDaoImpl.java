@@ -108,5 +108,4 @@ public class DriverDaoImpl implements DriverDao {
                 resultSet.getString("licenseNumber")
         );
     }
-
 }
