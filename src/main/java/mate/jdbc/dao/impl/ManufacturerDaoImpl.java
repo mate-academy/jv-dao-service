@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import mate.jdbc.dao.ManufacturerDao;
-import mate.jdbc.exception.DataException;
+import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Dao;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.util.ConnectionUtil;
@@ -22,11 +22,11 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        String insertManufacturerRequest =
+        String insertManufacturerQuery =
                 "INSERT INTO manufacturers (name, country) VALUES (?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement = connection
-                           .prepareStatement(insertManufacturerRequest,
+                           .prepareStatement(insertManufacturerQuery,
                                Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, manufacturer.getName());
             preparedStatement.setString(2, manufacturer.getCountry());
@@ -37,7 +37,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
                 manufacturer.setId(id);
             }
         } catch (SQLException e) {
-            throw new DataException("Can`t create manufacturer " + manufacturer, e);
+            throw new DataProcessingException("Can`t create manufacturer " + manufacturer, e);
         }
         return manufacturer;
     }
@@ -53,7 +53,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
                 return Optional.of(convertToManufacturer(resultSet));
             }
         } catch (SQLException e) {
-            throw new DataException("Can`t get manufacturer by id " + id, e);
+            throw new DataProcessingException("Can`t get manufacturer by id " + id, e);
         }
         return Optional.empty();
     }
@@ -70,7 +70,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
                 manufacturerList.add(convertToManufacturer(resultSet));
             }
         } catch (SQLException e) {
-            throw new DataException("Can`t get all manufacturers from db ", e);
+            throw new DataProcessingException("Can`t get all manufacturers from db ", e);
         }
         return manufacturerList;
     }
@@ -87,20 +87,21 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             statement.executeUpdate();
             return manufacturer;
         } catch (SQLException e) {
-            throw new DataException("Can`t update data for manufacturer " + manufacturer, e);
+            throw new DataProcessingException("Can`t update data for manufacturer "
+                    + manufacturer, e);
         }
     }
 
     @Override
     public boolean delete(Long id) {
-        String deleteRequest = "UPDATE manufacturers SET is_deleted = TRUE where id = ?;";
+        String deleteQuery = "UPDATE manufacturers SET is_deleted = TRUE where id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement = connection
-                        .prepareStatement(deleteRequest)) {
+                        .prepareStatement(deleteQuery)) {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new DataException("Can`t get all books from db ", e);
+            throw new DataProcessingException("Can`t get all books from db ", e);
         }
     }
 
