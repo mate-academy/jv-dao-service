@@ -16,6 +16,10 @@ import mate.jdbc.util.ConnectionUtil;
 
 @Dao
 public class DriverDaoImpl implements DriverDao {
+    private static final String DRIVER_ID = "id";
+    private static final String DRIVER_NAME = "name";
+    private static final String DRIVER_LICENSE_NUMBER = "license_number";
+
     @Override
     public Driver create(Driver driver) {
         String insertManufacturerRequest =
@@ -102,9 +106,9 @@ public class DriverDaoImpl implements DriverDao {
 
     private Driver convertToDriver(ResultSet resultSet) throws SQLException {
         Driver driver = new Driver();
-        driver.setId(resultSet.getObject("id", Long.class));
-        driver.setName(resultSet.getString("name"));
-        driver.setLicenseNumber(resultSet.getString("license_number"));
+        driver.setId(resultSet.getObject(DRIVER_ID, Long.class));
+        driver.setName(resultSet.getString(DRIVER_NAME));
+        driver.setLicenseNumber(resultSet.getString(DRIVER_LICENSE_NUMBER));
         return driver;
     }
 }

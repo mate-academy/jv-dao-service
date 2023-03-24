@@ -16,6 +16,10 @@ import mate.jdbc.util.ConnectionUtil;
 
 @Dao
 public class ManufacturerDaoImpl implements ManufacturerDao {
+    private static final String MANUFACTURER_ID = "id";
+    private static final String MANUFACTURER_NAME = "name";
+    private static final String MANUFACTURER_COUNTRY = "country";
+
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
         String insertManufacturerRequest =
@@ -102,9 +106,9 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     private Manufacturer convertToManufacturer(ResultSet resultSet) throws SQLException {
         Manufacturer manufacturer = new Manufacturer();
-        manufacturer.setId(resultSet.getObject("id", Long.class));
-        manufacturer.setName(resultSet.getString("name"));
-        manufacturer.setCountry(resultSet.getString("country"));
+        manufacturer.setId(resultSet.getObject(MANUFACTURER_ID, Long.class));
+        manufacturer.setName(resultSet.getString(MANUFACTURER_NAME));
+        manufacturer.setCountry(resultSet.getString(MANUFACTURER_COUNTRY));
         return manufacturer;
     }
 }
