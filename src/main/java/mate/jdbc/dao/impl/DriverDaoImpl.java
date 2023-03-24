@@ -50,7 +50,7 @@ public class DriverDaoImpl implements DriverDao {
             }
             return Optional.ofNullable(driver);
         } catch (SQLException e) {
-            throw new RuntimeException("Couldn't get driver by id: " + id, e);
+            throw new DataProcessingException("Couldn't get driver by id: " + id, e);
         }
     }
 
@@ -67,7 +67,7 @@ public class DriverDaoImpl implements DriverDao {
             }
             return drivers;
         } catch (SQLException e) {
-            throw new RuntimeException("Couldn't get a list of drivers", e);
+            throw new DataProcessingException("Couldn't get a list of drivers", e);
         }
     }
 
@@ -84,7 +84,7 @@ public class DriverDaoImpl implements DriverDao {
             statement.executeQuery();
             return driver;
         } catch (SQLException e) {
-            throw new RuntimeException("Can't update a driver", e);
+            throw new DataProcessingException("Can't update a driver", e);
         }
     }
 
@@ -97,7 +97,7 @@ public class DriverDaoImpl implements DriverDao {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new RuntimeException("Can't delete driver by id: " + id, e);
+            throw new DataProcessingException("Can't delete driver by id: " + id, e);
         }
     }
 
