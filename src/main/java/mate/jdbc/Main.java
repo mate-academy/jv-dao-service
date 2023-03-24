@@ -19,10 +19,15 @@ public class Main {
         audi.setName("Audi");
         audi.setCountry("Germany");
         Manufacturer ferrari = new Manufacturer();
-        ferrari.setName("Ferrari");
+        ferrari.setName("Fiat");
         ferrari.setCountry("Italia");
         System.out.println(manufacturerService.create(audi));
         System.out.println(manufacturerService.create(ferrari));
+
+        ferrari.setName("Ferrari");
+        System.out.println(manufacturerService.update(ferrari));
+        manufacturerService.delete(ferrari.getId());
+        System.out.println(manufacturerService.getAll());
 
         List<Driver> allDrivers = driverService.getAll();
         allDrivers.forEach(System.out::println);

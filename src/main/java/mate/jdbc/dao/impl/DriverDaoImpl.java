@@ -30,7 +30,7 @@ public class DriverDaoImpl implements DriverDao {
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement
                          = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(INDEX_3, driver.getName());
+            statement.setString(INDEX_1, driver.getName());
             statement.setString(INDEX_2, driver.getLicenseNumber());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
