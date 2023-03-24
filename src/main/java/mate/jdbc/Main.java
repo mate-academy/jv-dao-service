@@ -21,9 +21,8 @@ public class Main {
         System.out.println(manufactureService.get(bmw.getId()) + System.lineSeparator());
         List<Manufacturer> manufacturers = manufactureService.getAll();
         System.out.println("getAll manufacturers");
-        for (Manufacturer manufacturer : manufacturers) {
-            System.out.println(manufacturer);
-        }
+        manufacturers.stream()
+                .forEach(System.out::println);
         System.out.println();
         bmw.setName("MINI");
         System.out.println("update manufacturer");
@@ -41,9 +40,8 @@ public class Main {
         System.out.println(driverService.get(bob.getId()) + System.lineSeparator());
         List<Driver> drivers = driverService.getAll();
         System.out.println("getAll drivers");
-        for (Driver driver : drivers) {
-            System.out.println(driver);
-        }
+        drivers.stream()
+                .forEach(System.out::println);
         System.out.println();
         bob.setName("BOB");
         System.out.println("update driver");
