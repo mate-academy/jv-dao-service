@@ -1,5 +1,7 @@
-package mate.jdbc.service.Impl;
+package mate.jdbc.service.impl;
 
+import java.sql.SQLException;
+import java.util.List;
 import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Inject;
@@ -7,13 +9,11 @@ import mate.jdbc.lib.Service;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.ManufacturerService;
 
-import java.sql.SQLException;
-import java.util.List;
-
 @Service
 public class ManufacturerServiceImpl implements ManufacturerService {
     @Inject
     private ManufacturerDao manufacturerDao;
+
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
         return manufacturerDao.create(manufacturer);
@@ -21,7 +21,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer get(Long id) {
-        return null; return manufacturerDao.get(id)
+        return manufacturerDao.get(id)
                 .orElseThrow(() -> new DataProcessingException("Can't get manufacturer by id = ["
                         + id + "]", new SQLException()));
     }
