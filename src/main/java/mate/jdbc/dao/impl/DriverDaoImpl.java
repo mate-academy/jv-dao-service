@@ -1,4 +1,4 @@
-package mate.jdbc.dao;
+package mate.jdbc.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import mate.jdbc.dao.DriverDao;
 import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Dao;
 import mate.jdbc.model.Driver;
@@ -17,10 +19,10 @@ import mate.jdbc.util.ConnectionUtil;
 public class DriverDaoImpl implements DriverDao {
     @Override
     public Driver create(Driver driver) {
-        String insertDriverRequest = "INSERT INTO drivers(name, license_number) VALUES(?, ?);";
+        String insertDriverQuery = "INSERT INTO drivers(name, license_number) VALUES(?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement createDriverStatement =
-                        connection.prepareStatement(insertDriverRequest,
+                        connection.prepareStatement(insertDriverQuery,
                              Statement.RETURN_GENERATED_KEYS)) {
             createDriverStatement.setString(1, driver.getName());
             createDriverStatement.setString(2, driver.getLicenseNumber());
@@ -39,16 +41,15 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Optional<Driver> get(Long id) {
-        String getDriverRequest =
+        String getDriverQuery =
                 "SELECT * FROM drivers WHERE id = ? AND is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement getDriverStatement =
-                        connection.prepareStatement(getDriverRequest)) {
+                        connection.prepareStatement(getDriverQuery)) {
             getDriverStatement.setLong(1, id);
             ResultSet resultSet = getDriverStatement.executeQuery();
             if (resultSet.next()) {
-                Driver driver = parseDriver(resultSet);
-                return Optional.of(driver);
+                return Optional.of(parseDriver(resultSet));
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Can't get driver from DataBase by ID: "
@@ -59,11 +60,11 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public List<Driver> getAll() {
-        String getAllDriverRequest = "SELECT * FROM drivers WHERE is_deleted = FALSE;";
+        String getAllDriverQuery = "SELECT * FROM drivers WHERE is_deleted = FALSE;";
         List<Driver> driverList = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement getAllDriversStatement =
-                         connection.prepareStatement(getAllDriverRequest)) {
+                         connection.prepareStatement(getAllDriverQuery)) {
             ResultSet resultSet = getAllDriversStatement.executeQuery();
             while (resultSet.next()) {
                 driverList.add(parseDriver(resultSet));
@@ -76,11 +77,11 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Driver update(Driver driver) {
-        String updateDriverRequest = "UPDATE drivers SET name = ?, license_number = ? "
+        String updateDriverQuery = "UPDATE drivers SET name = ?, license_number = ? "
                 + "WHERE id = ? AND is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement updateDriverStatement
-                         = connection.prepareStatement(updateDriverRequest)) {
+                         = connection.prepareStatement(updateDriverQuery)) {
             updateDriverStatement.setString(1, driver.getName());
             updateDriverStatement.setString(2, driver.getLicenseNumber());
             updateDriverStatement.setLong(3, driver.getId());
@@ -94,11 +95,11 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public boolean delete(Long id) {
-        String deleteDriverRequest =
+        String deleteDriverQuery =
                 "UPDATE drivers SET is_deleted = TRUE WHERE id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement deleteDriverStatement =
-                         connection.prepareStatement(deleteDriverRequest,
+                         connection.prepareStatement(deleteDriverQuery,
                              Statement.RETURN_GENERATED_KEYS)) {
             deleteDriverStatement.setLong(1, id);
             return deleteDriverStatement.executeUpdate() >= 1;
