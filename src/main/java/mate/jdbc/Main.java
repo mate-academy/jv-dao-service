@@ -21,16 +21,16 @@ public class Main {
                 new Manufacturer("Mazda", "Japan"));
         Manufacturer tesla = manufacturerService.create(
                 new Manufacturer("Tesla", "U.S."));
-        System.out.println(manufacturerService.getAll());
         System.out.println(manufacturerService.get(audi.getId()));
-        manufacturerService.delete(mazda.getId());
         tesla.setCountry("France");
+        manufacturerService.delete(mazda.getId());
+        System.out.println(manufacturerService.getAll());
         manufacturerService.update(tesla);
         System.out.println(manufacturerService.getAll());
         manufacturerService.getAll().forEach(m -> manufacturerService.delete(m.getId()));
         //Test driver
-        Driver testDriver1 = new Driver( "Sasha", "NDFU957054SM9IJ");
-        Driver testDriver2 = new Driver( "Dasha", "GHFU859024SM8IJ");
+        Driver testDriver1 = new Driver("Sasha", "NDFU957054SM9IJ");
+        Driver testDriver2 = new Driver("Dasha", "GHFU859024SM8IJ");
         driverService.create(testDriver1);
         driverService.create(testDriver2);
         System.out.println(driverService.get(testDriver1.getId()));
