@@ -19,7 +19,7 @@ public class Main {
         manufacturerService.create(mercedes);
         manufacturerService.create(audi);
         manufacturerService.getAll().forEach(System.out::println);
-        Manufacturer car = manufacturerService.get(audi.getId()).get();
+        Manufacturer car = manufacturerService.get(audi.getId());
         System.out.println(car);
         mercedes.setCountry("Canada");
         manufacturerService.update(mercedes);

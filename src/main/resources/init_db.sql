@@ -1,5 +1,4 @@
 CREATE SCHEMA taxi CHARACTER SET utf8mb4;
-USE taxi;
 
 CREATE TABLE manufacturers (
                               id bigint NOT NULL AUTO_INCREMENT,
