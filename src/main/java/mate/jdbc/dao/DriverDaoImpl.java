@@ -58,7 +58,7 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public List<Driver> getAll() {
-        List<Driver> allDriver = new ArrayList<>();
+        List<Driver> allDrivers = new ArrayList<>();
         String query = "SELECT * FROM drivers WHERE is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement =
@@ -68,12 +68,12 @@ public class DriverDaoImpl implements DriverDao {
             Driver driver = null;
             while (resultSet.next()) {
                 driver = getDriver(resultSet);
-                allDriver.add(driver);
+                allDrivers.add(driver);
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Can't get all drivers from DB", e);
         }
-        return allDriver;
+        return allDrivers;
     }
 
     @Override
@@ -88,7 +88,7 @@ public class DriverDaoImpl implements DriverDao {
             preparedStatement.setLong(3, driver.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't update driver to DB", e);
+            throw new DataProcessingException("Can't update driver " + driver + "to DB", e);
         }
         return driver;
     }

@@ -15,21 +15,30 @@ public class Main {
             (DriverService) injector.getInstance(DriverService.class);
 
     public static void main(String[] args) {
-        driverService.create(new Driver("Bob","19283735"));
-        driverService.create(new Driver("John", "17342964"));
-        driverService.create(new Driver("Alice", "18452074"));
+        Driver bob = new Driver("Bob","19283735");
+        Driver john = new Driver("John", "17342964");
+        Driver alice = new Driver("Alice", "18452074");
+        driverService.create(bob);
+        driverService.create(john);
+        driverService.create(alice);
         List<Driver> allDrivers = driverService.getAll();
         allDrivers.forEach(System.out::println);
-        System.out.println(driverService.get(3L));
-        driverService.update(new Driver(2L, "Bill", "18345285"));
-        driverService.delete(1L);
+        System.out.println(driverService.get(alice.getId()));
+        john.setName("Bill");
+        john.setLicenseNumber("18345285");
+        driverService.update(john);
+        driverService.delete(bob.getId());
 
-        manufacturerService.create(new Manufacturer("Reno","France"));
-        manufacturerService.create(new Manufacturer("Toyota","Japan"));
+        Manufacturer reno = new Manufacturer("Reno","France");
+        Manufacturer toyota = new Manufacturer("Toyota","Japan");
+        manufacturerService.create(reno);
+        manufacturerService.create(toyota);
         List<Manufacturer> allManufacturers = manufacturerService.getAll();
         allManufacturers.forEach(System.out::println);
-        System.out.println(manufacturerService.get(3L));
-        manufacturerService.update(new Manufacturer(2L, "Mazda", "China"));
-        manufacturerService.delete(1L);
+        System.out.println(manufacturerService.get(toyota.getId()));
+        reno.setName("Mazda");
+        reno.setCountry("China");
+        manufacturerService.update(reno);
+        manufacturerService.delete(toyota.getId());
     }
 }
