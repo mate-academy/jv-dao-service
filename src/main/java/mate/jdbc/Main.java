@@ -12,11 +12,9 @@ public class Main {
     public static void main(String[] args) {
         ManufacturerService manufacturerService
                 = (ManufacturerService) injector.getInstance(ManufacturerService.class);
-
         Manufacturer mercedes = new Manufacturer("Mercedes", "Germany");
         Manufacturer ferraris = new Manufacturer("Ferraris", "France");
         Manufacturer lada = new Manufacturer("Lada", "USSR");
-
         manufacturerService.create(mercedes);
         manufacturerService.create(ferraris);
         manufacturerService.create(lada);
@@ -27,17 +25,15 @@ public class Main {
         ferrari.setCountry("Italy");
         manufacturerService.update(ferrari);
         System.out.println("updated" + manufacturerService.get(ferrari.getId()));
-        manufacturerService.getAll().forEach(manufacturer -> manufacturerService
-                .delete(manufacturer.getId()));
+        manufacturerService.getAll()
+                .forEach(manufacturer -> manufacturerService.delete(manufacturer.getId()));
         manufacturerService.getAll().forEach(System.out::println);
 
         DriverService driverService
                 = (DriverService) injector.getInstance(DriverService.class);
-
         Driver bob = new Driver("Bob", "123455");
         Driver john = new Driver("John", "678909");
         Driver alice = new Driver("ALice", "777777");
-
         driverService.create(bob);
         driverService.create(john);
         driverService.create(alice);
@@ -49,8 +45,7 @@ public class Main {
         driverService.update(johan);
         System.out.println("updated" + driverService.get(johan.getId()));
 
-        driverService.getAll().forEach(driver -> driverService
-                .delete(driver.getId()));
+        driverService.getAll().forEach(driver -> driverService.delete(driver.getId()));
         driverService.getAll().forEach(System.out::println);
     }
 }
