@@ -7,7 +7,6 @@ CREATE TABLE `manufacturers` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
-
 CREATE TABLE `drivers` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) DEFAULT NULL,
@@ -15,7 +14,3 @@ CREATE TABLE `drivers` (
   `is_deleted` TINYINT NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
-
-
-
