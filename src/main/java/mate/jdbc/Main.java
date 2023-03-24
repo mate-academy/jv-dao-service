@@ -13,9 +13,7 @@ public class Main {
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
 
         List<Driver> drivers = getDrivers();
-        for (Driver driver : drivers) {
-            driverService.create(driver);
-        }
+        getDrivers().forEach(System.out::println);
 
         Driver getDriver = driverService.get(2L);
         System.out.println(getDriver);
@@ -30,7 +28,7 @@ public class Main {
         driverService.update(denis);
         System.out.println(denis);
 
-        boolean isDeletedDriver = driverService.delete((long) drivers.size());
+        boolean isDeletedDriver = driverService.delete(3L);
         System.out.println(isDeletedDriver);
     }
 

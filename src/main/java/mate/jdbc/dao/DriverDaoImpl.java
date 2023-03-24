@@ -17,7 +17,7 @@ import mate.jdbc.util.ConnectionUtil;
 public class DriverDaoImpl implements DriverDao {
     @Override
     public Driver create(Driver driver) {
-        String createQuery = "INSERT INTO drivers(name, license_number) values(?,?);";
+        String createQuery = "INSERT INTO drivers (name, license_number) VALUES (?,?);";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement createDriverStatement = connection.prepareStatement(
                         createQuery, Statement.RETURN_GENERATED_KEYS)) {
@@ -106,7 +106,7 @@ public class DriverDaoImpl implements DriverDao {
             driver.setName(name);
             driver.setLicenseNumber(licenseNumber);
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't create instance of driver", e);
+            throw new DataProcessingException("Can't create instance of driver " + driver, e);
         }
         return driver;
     }
