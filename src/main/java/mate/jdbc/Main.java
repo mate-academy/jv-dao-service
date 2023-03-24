@@ -13,7 +13,7 @@ public class Main {
         ManufactureService manufactureService =
                 (ManufactureService) injector.getInstance(ManufactureService.class);
 
-        Manufacturer bmw = new Manufacturer(1L, "BMW", "Germany");
+        Manufacturer bmw = new Manufacturer(null, "BMW", "Germany");
         System.out.println("create manufacturer");
         System.out.println(manufactureService.create(bmw) + System.lineSeparator());
         System.out.println("get manufacturer");
@@ -26,12 +26,15 @@ public class Main {
         System.out.println("update manufacturer");
         System.out.println(manufactureService.update(bmw) + System.lineSeparator());
         System.out.println("delete manufacturer");
-        System.out.println(manufactureService.delete(bmw.getId()) + System.lineSeparator());
+        manufactureService.delete(bmw.getId());
+        manufactureService.getAll().stream()
+                .forEach(System.out::println);
+        System.out.println("---------------------------------------------------------------");
 
         DriverService driverService =
                 (DriverService) injector.getInstance(DriverService.class);
 
-        Driver bob = new Driver(1L, "Bob", "1010101");
+        Driver bob = new Driver(null, "Bob", "1010101");
         System.out.println("create driver");
         System.out.println(driverService.create(bob) + System.lineSeparator());
         System.out.println("get driver");
@@ -44,6 +47,8 @@ public class Main {
         System.out.println("update driver");
         System.out.println(driverService.update(bob) + System.lineSeparator());
         System.out.println("delete driver");
-        System.out.println(driverService.delete(bob.getId()));
+        driverService.delete(bob.getId());
+        driverService.getAll().stream()
+                .forEach(System.out::println);
     }
 }
