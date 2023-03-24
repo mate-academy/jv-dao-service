@@ -113,5 +113,4 @@ public class DriverDaoImpl implements DriverDao {
         String licenseNumber = resultSet.getString(LICENSE_NUMBER_COLUMN);
         return new Driver(id, name, licenseNumber);
     }
-
 }
