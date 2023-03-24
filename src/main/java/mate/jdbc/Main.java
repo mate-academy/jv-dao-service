@@ -26,8 +26,8 @@ public class Main {
         System.out.println(driverService.get(alice.getId()));
         john.setName("Bill");
         john.setLicenseNumber("18345285");
-        driverService.update(john);
-        driverService.delete(bob.getId());
+        System.out.println(driverService.update(john));
+        System.out.println(driverService.delete(bob.getId()));
 
         Manufacturer reno = new Manufacturer("Reno","France");
         Manufacturer toyota = new Manufacturer("Toyota","Japan");
@@ -38,7 +38,7 @@ public class Main {
         System.out.println(manufacturerService.get(toyota.getId()));
         reno.setName("Mazda");
         reno.setCountry("China");
-        manufacturerService.update(reno);
-        manufacturerService.delete(toyota.getId());
+        System.out.println(manufacturerService.update(reno));
+        System.out.println(manufacturerService.delete(toyota.getId()));
     }
 }
