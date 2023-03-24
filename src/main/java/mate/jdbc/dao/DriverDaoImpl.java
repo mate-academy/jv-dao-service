@@ -15,7 +15,6 @@ import mate.jdbc.util.ConnectionUtil;
 
 @Dao
 public class DriverDaoImpl implements DriverDao {
-
     @Override
     public Driver create(Driver driver) {
         String insertDriverRequest = "INSERT INTO drivers(name, license_number) VALUES(?, ?);";
@@ -32,7 +31,8 @@ public class DriverDaoImpl implements DriverDao {
                 driver.setId(id);
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't insert driver to DataBase", e);
+            throw new DataProcessingException("Can't insert driver to DataBase: "
+                    + driver, e);
         }
         return driver;
     }
@@ -66,8 +66,7 @@ public class DriverDaoImpl implements DriverDao {
                          connection.prepareStatement(getAllDriverRequest)) {
             ResultSet resultSet = getAllDriversStatement.executeQuery();
             while (resultSet.next()) {
-                Driver driver = parseDriver(resultSet);
-                driverList.add(driver);
+                driverList.add(parseDriver(resultSet));
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Can't get all drivers from DataBase", e);
@@ -104,7 +103,8 @@ public class DriverDaoImpl implements DriverDao {
             deleteDriverStatement.setLong(1, id);
             return deleteDriverStatement.executeUpdate() >= 1;
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't delete driver from DataBase", e);
+            throw new DataProcessingException("Can't delete driver from DataBase by ID: "
+                    + id, e);
         }
     }
 
