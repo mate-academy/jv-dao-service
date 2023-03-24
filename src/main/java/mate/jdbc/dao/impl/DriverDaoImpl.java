@@ -95,7 +95,7 @@ public class DriverDaoImpl implements DriverDao {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't get driver from drivers table by id = "
+            throw new DataProcessingException("Can't delete driver from drivers table by id = "
                     + id, e);
         }
     }
