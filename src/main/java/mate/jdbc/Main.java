@@ -27,17 +27,19 @@ public class Main {
 
         toyotaManufacturer.setCountry("Nepal");
         manufacturerService.update(toyotaManufacturer);
-        manufacturerService.delete(toyotaManufacturer.getId());
+        boolean isDeleted = manufacturerService.delete(toyotaManufacturer.getId());
+        System.out.println(isDeleted);
 
         Driver driver = new Driver("Artem", "MN605640");
         driverService.create(driver);
 
-        var drivers = driverService.getAll();
+        List<Driver> drivers = driverService.getAll();
         drivers.forEach(System.out::println);
 
         driver.setName("Artas");
         driverService.update(driver);
-        driverService.get(driver.getId());
-        driverService.delete(driver.getId());
+        System.out.println(driverService.get(driver.getId()));
+        boolean isDeletedDriver = driverService.delete(driver.getId());
+        System.out.println(isDeletedDriver);
     }
 }
