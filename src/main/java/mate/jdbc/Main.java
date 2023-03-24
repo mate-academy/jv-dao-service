@@ -12,8 +12,6 @@ public class Main {
             injector.getInstance(ManufacturerService.class);
     private static final DriverService driverService = (DriverService)
             injector.getInstance(DriverService.class);
-    private static final long INDEX = 1L;
-    private static final long DELETE_INDEX = 2L;
 
     public static void main(String[] args) {
         Manufacturer kraz = new Manufacturer("kraz", "Ukraine");
@@ -23,13 +21,13 @@ public class Main {
 
         manufacturerService.getAll().forEach(System.out::println);
 
-        System.out.println(manufacturerService.get(INDEX));
+        System.out.println(manufacturerService.get(kraz.getId()));
 
         kraz.setName("KRAZ");
         kraz.setCountry("UKRAINE");
         System.out.println(manufacturerService.update(kraz));
 
-        System.out.println(manufacturerService.delete(DELETE_INDEX));
+        System.out.println(manufacturerService.delete(kraz.getId()));
 
         // Driver
 
@@ -40,12 +38,12 @@ public class Main {
 
         driverService.getAll().forEach(System.out::println);
 
-        System.out.println(driverService.get(INDEX));
+        System.out.println(driverService.get(oleg.getId()));
 
         oleg.setName("Alice");
         oleg.setLicenseNumber("000003");
         System.out.println(driverService.update(oleg));
 
-        System.out.println(driverService.delete(DELETE_INDEX));
+        System.out.println(driverService.delete(oleg.getId()));
     }
 }

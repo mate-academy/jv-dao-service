@@ -11,31 +11,31 @@ import mate.jdbc.service.DriverService;
 @Service
 public class DriverServiceImpl implements DriverService {
     @Inject
-    private DriverDao driver;
+    private DriverDao driverDao;
 
     @Override
     public List<Driver> getAll() {
-        return driver.getAll();
+        return driverDao.getAll();
     }
 
     @Override
     public Driver create(Driver manufacturer) {
-        return driver.create(manufacturer);
+        return driverDao.create(manufacturer);
     }
 
     @Override
     public Driver get(Long id) {
-        return driver.get(id).orElseThrow(() ->
+        return driverDao.get(id).orElseThrow(() ->
                 new NoSuchElementException("Can't get driver with that id: " + id));
     }
 
     @Override
     public Driver update(Driver manufacturer) {
-        return driver.update(manufacturer);
+        return driverDao.update(manufacturer);
     }
 
     @Override
     public boolean delete(Long id) {
-        return driver.delete(id);
+        return driverDao.delete(id);
     }
 }

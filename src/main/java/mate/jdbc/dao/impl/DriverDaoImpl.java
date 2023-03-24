@@ -17,7 +17,7 @@ import mate.jdbc.util.ConnectionUtil;
 @Dao
 public class DriverDaoImpl implements DriverDao {
     private static final String NAME = "name";
-    private static final String LICENSE_NUMBER = "licenseNumber";
+    private static final String LICENSE_NUMBER = "license_number";
     private static final String ID = "id";
     private static final int PARAMETER_FIRST_INDEX = 1;
     private static final int PARAMETER_SECOND_INDEX = 2;
@@ -62,7 +62,7 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public Driver create(Driver driver) {
         String insertRequest =
-                "INSERT INTO drivers (name, licenseNumber) VALUES (?, ?);";
+                "INSERT INTO drivers (name, license_number) VALUES (?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement createDriverStatement =
                         connection.prepareStatement(insertRequest,
@@ -86,7 +86,7 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Driver update(Driver driver) {
-        String updateRequest = "UPDATE drivers SET name = ?, licenseNumber = ? "
+        String updateRequest = "UPDATE drivers SET name = ?, license_number = ? "
                 + "WHERE id = ? AND is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement updateDriverStatement =
@@ -107,10 +107,10 @@ public class DriverDaoImpl implements DriverDao {
     public boolean delete(Long id) {
         String deleteRequest = "UPDATE drivers SET is_deleted = TRUE WHERE id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement createDriverStatement =
+                PreparedStatement deleteDriverStatement =
                         connection.prepareStatement(deleteRequest)) {
-            createDriverStatement.setLong(PARAMETER_FIRST_INDEX, id);
-            return createDriverStatement.executeUpdate() != 0;
+            deleteDriverStatement.setLong(PARAMETER_FIRST_INDEX, id);
+            return deleteDriverStatement.executeUpdate() != 0;
         } catch (SQLException e) {
             throw new DataProcessingException("Can't delete driver from DB with that id: "
                     + id, e);
