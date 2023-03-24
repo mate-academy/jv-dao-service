@@ -32,7 +32,7 @@ public class Main {
         drivers.forEach(driverService::create);
         Driver driver = driverService.get(1L);
         driverService.delete(driver.getId());
-        driverService.update(new Driver("Volodymyrovych", "KK325564"));
+        driverService.update(new Driver(1L,"Volodymyrovych", "KK325564"));
         System.out.println(manufacturerService.getAll());
         System.out.println(driverService.getAll());
     }
