@@ -56,7 +56,6 @@ public class DriverDaoImpl implements DriverDao {
         } catch (SQLException e) {
             throw new RuntimeException("Can't get all drivers from taxi_DB", e);
         }
-
         return allDrivers;
     }
 

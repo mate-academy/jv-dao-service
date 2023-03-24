@@ -5,7 +5,6 @@ import java.util.Optional;
 import mate.jdbc.model.Driver;
 
 public interface DriverDao {
-
     Optional<Driver> get(Long id);
 
     List<Driver> getAll();

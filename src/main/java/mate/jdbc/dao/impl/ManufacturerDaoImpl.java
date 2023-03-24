@@ -49,7 +49,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             List<Manufacturer> manufacturers = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                manufacturers.add(getManufacturer(resultSet));
+                manufacturers.add(retrieveManufacturer(resultSet));
             }
             return manufacturers;
         } catch (SQLException e) {
@@ -64,7 +64,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement createManufacturerStatement = connection
                         .prepareStatement(insertFormatsRequest, Statement.RETURN_GENERATED_KEYS)) {
-            parseNameAndCountry(manufacturer, createManufacturerStatement);
+            setNameAndCountry(manufacturer, createManufacturerStatement);
             createManufacturerStatement.executeUpdate();
             ResultSet generatedKeys = createManufacturerStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
@@ -99,7 +99,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement updateManufacturerStatement = connection
                         .prepareStatement(updateRequest)) {
-            parseNameAndCountry(manufacturer, updateManufacturerStatement);
+            setNameAndCountry(manufacturer, updateManufacturerStatement);
             updateManufacturerStatement.setLong(3, manufacturer.getId());
             if (updateManufacturerStatement.executeUpdate() > 0) {
                 return manufacturer;
@@ -111,21 +111,14 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         return null;
     }
 
-    private Manufacturer getManufacturer(ResultSet resultSet) throws SQLException {
+    private Manufacturer retrieveManufacturer(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getObject("id", Long.class);
         String name = resultSet.getString("name");
         String country = resultSet.getString("country");
         return new Manufacturer(id, name, country);
     }
 
-    private Manufacturer retrieveManufacturer(ResultSet set) throws SQLException {
-        String name = set.getString(COLUMN_NAME);
-        String country = set.getString(COLUMN_COUNTRY);
-        Long id = set.getObject(COLUMN_ID, Long.class);
-        return new Manufacturer(id, name, country);
-    }
-
-    private void parseNameAndCountry(Manufacturer manufacturer, PreparedStatement
+    private void setNameAndCountry(Manufacturer manufacturer, PreparedStatement
             createManufacturerStatement) throws SQLException {
         createManufacturerStatement.setString(1, manufacturer.getName());
         createManufacturerStatement.setString(2, manufacturer.getCountry());
