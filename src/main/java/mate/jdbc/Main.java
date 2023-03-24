@@ -6,17 +6,13 @@ import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.DriverService;
 import mate.jdbc.service.ManufacturedService;
-import mate.jdbc.service.impl.DriverServiceImpl;
-import mate.jdbc.service.impl.ManufacturedServiceImpl;
 
 public class Main {
-    private static final Long MANUFACTURER_ID = 15L;
-    private static final Long DRIVER_ID = 1L;
     private static final Injector injector = Injector.getInstance("mate.jdbc");
     private static final ManufacturedService manufacturedService =
-            (ManufacturedServiceImpl) injector.getInstance(ManufacturedService.class);
+            (ManufacturedService) injector.getInstance(ManufacturedService.class);
     private static final DriverService driverService =
-            (DriverServiceImpl) injector.getInstance(DriverService.class);
+            (DriverService) injector.getInstance(DriverService.class);
 
     public static void main(String[] args) {
         Manufacturer firstManufacturer = new Manufacturer();
@@ -43,15 +39,15 @@ public class Main {
         for (Driver driver : allDriversList) {
             System.out.println(driver);
         }
-        System.out.println(manufacturedService.get(MANUFACTURER_ID));
+        System.out.println(manufacturedService.get(firstManufacturer.getId()));
         secondManufacturer.setName("upadtedname");
         System.out.println(manufacturedService.update(secondManufacturer));
-        System.out.println(manufacturedService.delete(MANUFACTURER_ID));;
+        System.out.println(manufacturedService.delete(firstManufacturer.getId()));;
         System.out.println(manufacturedService.getAll());
-        System.out.println(driverService.get(DRIVER_ID));
+        System.out.println(driverService.get(firstDriver.getId()));
         secondDriver.setName("upadtedname");
         System.out.println(driverService.update(secondDriver));
-        System.out.println(driverService.delete(DRIVER_ID));;
+        System.out.println(driverService.delete(firstDriver.getId()));;
         System.out.println(driverService.getAll());
     }
 }

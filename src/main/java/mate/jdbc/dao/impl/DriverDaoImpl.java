@@ -21,13 +21,13 @@ public class DriverDaoImpl implements DriverDao {
         String insertManufacturerRequest =
                 "INSERT INTO drivers (name, license_number) VALUES (?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement createDriversStatement = connection
+                PreparedStatement preparedStatement = connection
                         .prepareStatement(insertManufacturerRequest,
                              Statement.RETURN_GENERATED_KEYS)) {
-            createDriversStatement.setString(1, driver.getName());
-            createDriversStatement.setString(2, driver.getLicenseNumber());
-            createDriversStatement.executeUpdate();
-            ResultSet generatedKeys = createDriversStatement.getGeneratedKeys();
+            preparedStatement.setString(1, driver.getName());
+            preparedStatement.setString(2, driver.getLicenseNumber());
+            preparedStatement.executeUpdate();
+            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 Long id = generatedKeys.getObject(1, Long.class);
                 driver.setId(id);
@@ -80,6 +80,7 @@ public class DriverDaoImpl implements DriverDao {
             statement.setString(1, driver.getName());
             statement.setString(2, driver.getLicenseNumber());
             statement.setLong(3, driver.getId());
+            statement.executeUpdate();
             return driver;
         } catch (SQLException e) {
             throw new DataException("Can`t update data for driver " + driver, e);
@@ -91,7 +92,7 @@ public class DriverDaoImpl implements DriverDao {
         String deleteRequest = "UPDATE drivers SET is_deleted = TRUE where id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement createDriverStatement = connection
-                        .prepareStatement(deleteRequest, Statement.RETURN_GENERATED_KEYS)) {
+                        .prepareStatement(deleteRequest)) {
             createDriverStatement.setLong(1, id);
             return createDriverStatement.executeUpdate() > 0;
         } catch (SQLException e) {
