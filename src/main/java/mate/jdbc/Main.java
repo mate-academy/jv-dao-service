@@ -53,5 +53,4 @@ public class Main {
                 .delete(driver.getId()));
         driverService.getAll().forEach(System.out::println);
     }
-
 }
