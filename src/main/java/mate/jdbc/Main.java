@@ -15,6 +15,8 @@ public class Main {
                 injector.getInstance(DriverService.class);
         Driver createdDriver = driverService.create(new Driver("Oleksandr", "25565"));
         System.out.println("Created driver: " + driverService.get(createdDriver.getId()));
+        Driver updatedDriver = driverService.update(new Driver("Oleksanra", "25565"));
+        System.out.println("Updated driver: " + driverService.get(updatedDriver.getId()));
         System.out.println("All Drivers: " + System.lineSeparator());
         driverService.getAll().forEach(System.out::println);
     }
