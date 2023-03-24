@@ -3,17 +3,17 @@ package mate.jdbc;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
-import mate.jdbc.sevice.impl.DriverServiceImpl;
-import mate.jdbc.sevice.impl.ManufacturerServiceImpl;
+import mate.jdbc.sevice.DriverService;
+import mate.jdbc.sevice.ManufacturerService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
+    private static final ManufacturerService manufacturerService
+            = (ManufacturerService) injector.getInstance(ManufacturerService.class);
+    private static final DriverService driverService
+            = (DriverService) injector.getInstance(DriverService.class);
 
     public static void main(String[] args) {
-        final ManufacturerServiceImpl manufacturerService
-                = (ManufacturerServiceImpl) injector.getInstance(ManufacturerServiceImpl.class);
-        final DriverServiceImpl driverService
-                = (DriverServiceImpl) injector.getInstance(DriverServiceImpl.class);
         Manufacturer manufacturer1 = new Manufacturer("bmv", "germany");
         Manufacturer manufacturer2 = new Manufacturer("honda", "japan");
         manufacturerService.create(manufacturer1);
