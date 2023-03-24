@@ -74,17 +74,18 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public Driver update(Driver driver) {
         String query = "UPDATE drivers SET name = ?, licence_number = ?"
-                + "WHERE id = ? AND is_deleted = FALSE";
+                + " WHERE id = ? AND is_deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement statement =
-                        connection.prepareStatement(query)) {
+                PreparedStatement statement
+                        = connection.prepareStatement(query)) {
             statement.setString(1, driver.getName());
             statement.setString(2, driver.getLicenceNumber());
             statement.setLong(3, driver.getId());
-            statement.executeQuery();
+            statement.executeUpdate();
             return driver;
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't update a driver", e);
+            throw new DataProcessingException("Couldn't update a driver "
+                    + driver, e);
         }
     }
 
@@ -102,8 +103,7 @@ public class DriverDaoImpl implements DriverDao {
     }
 
     private static Driver getDriver(ResultSet resultSet) throws SQLException {
-        return new Driver(resultSet
-                .getObject("id", Long.class),
+        return new Driver(resultSet.getObject("id", Long.class),
                 resultSet.getString("name"),
                 resultSet.getString("licence_number"));
     }

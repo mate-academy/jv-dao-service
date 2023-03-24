@@ -1,5 +1,7 @@
 package mate.jdbc.model;
 
+import java.util.Objects;
+
 public class Driver {
     private long id;
     private String name;
@@ -41,13 +43,26 @@ public class Driver {
     }
 
     @Override
-    public int hashCode() {
-        return super.hashCode();
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Driver driver = (Driver) o;
+        if (id != driver.id) {
+            return false;
+        }
+        if (!Objects.equals(name, driver.name)) {
+            return false;
+        }
+        return Objects.equals(licenceNumber, driver.licenceNumber);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public int hashCode() {
+        return Objects.hash(id, name, licenceNumber);
     }
 
     @Override
