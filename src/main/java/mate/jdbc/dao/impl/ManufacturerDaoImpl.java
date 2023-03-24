@@ -26,10 +26,10 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
     @Override
     public List<Manufacturer> getAll() {
         List<Manufacturer> allManufacturer = new ArrayList<>();
-        String insertRequest = "SELECT * FROM manufacturers WHERE is_deleted = FALSE;";
+        String query = "SELECT * FROM manufacturers WHERE is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement getAllManufacturersStatement =
-                        connection.prepareStatement(insertRequest)) {
+                        connection.prepareStatement(query)) {
             ResultSet resultSet = getAllManufacturersStatement.executeQuery();
             while (resultSet.next()) {
                 Manufacturer manufacturer = getManufacturer(resultSet);
@@ -43,10 +43,10 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override
     public Optional<Manufacturer> get(Long id) {
-        String insertRequest = "SELECT * FROM manufacturers WHERE is_deleted = FALSE AND id = ?;";
+        String query = "SELECT * FROM manufacturers WHERE is_deleted = FALSE AND id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement getManufacturersStatement =
-                        connection.prepareStatement(insertRequest)) {
+                        connection.prepareStatement(query)) {
             getManufacturersStatement.setLong(PARAMETER_FIRST_INDEX, id);
             ResultSet resultSet = getManufacturersStatement.executeQuery();
             if (resultSet.next()) {
@@ -61,11 +61,10 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        String insertManufacturerRequest =
-                "INSERT INTO manufacturers (name, country) VALUES (?, ?);";
+        String query = "INSERT INTO manufacturers (name, country) VALUES (?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement createManufacturersStatement =
-                        connection.prepareStatement(insertManufacturerRequest,
+                        connection.prepareStatement(query,
                               Statement.RETURN_GENERATED_KEYS)) {
             createManufacturersStatement.setString(PARAMETER_FIRST_INDEX,
                     manufacturer.getName());
@@ -86,11 +85,11 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        String updateManufacturerRequest = "UPDATE manufacturers SET name = ?, country = ? "
+        String query = "UPDATE manufacturers SET name = ?, country = ? "
                     + "WHERE id = ? AND is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement updateManufacturerStatement =
-                        connection.prepareStatement(updateManufacturerRequest)) {
+                        connection.prepareStatement(query)) {
             updateManufacturerStatement.setString(PARAMETER_FIRST_INDEX, manufacturer.getName());
             updateManufacturerStatement.setString(PARAMETER_SECOND_INDEX,
                     manufacturer.getCountry());
@@ -105,10 +104,10 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override
     public boolean delete(Long id) {
-        String deleteRequest = "UPDATE manufacturers SET is_deleted = TRUE WHERE id = ?;";
+        String query = "UPDATE manufacturers SET is_deleted = TRUE WHERE id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement deleteManufacturersStatement =
-                        connection.prepareStatement(deleteRequest)) {
+                        connection.prepareStatement(query)) {
             deleteManufacturersStatement.setLong(PARAMETER_FIRST_INDEX, id);
             return deleteManufacturersStatement.executeUpdate() != 0;
         } catch (SQLException e) {
