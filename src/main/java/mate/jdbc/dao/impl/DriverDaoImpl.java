@@ -18,24 +18,25 @@ import mate.jdbc.util.ConnectionUtil;
 public class DriverDaoImpl implements DriverDao {
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_NAME = "name";
-    private static final String LICENCE = "licence_number";
-    private static final String STATEMENT_UPDATE = "UPDATE drivers "
-            + "SET " + COLUMN_NAME + " = ?, " + LICENCE + " = ? "
-            + "WHERE id = ? " + "AND is_deleted IS FALSE;";
-    private static final String STATEMENT_CREATE = "INSERT "
-            + "INTO drivers(" + COLUMN_NAME + "," + LICENCE + ") "
-            + "Values(?,?);";
-    private static final String STATEMENT_GET = "SELECT * "
+    private static final String COLUMN_LICENCE = "licence_number";
+    private static final String COLUMN_IS_DELETED = "is_deleted";
+    private static final String QUERY_UPDATE = "UPDATE drivers "
+            + "SET " + COLUMN_NAME + " = ?, " + COLUMN_LICENCE + " = ? "
+            + "WHERE " + COLUMN_ID + " = ? " + "AND " + COLUMN_IS_DELETED + " IS FALSE;";
+    private static final String QUERY_CREATE = "INSERT "
+            + "INTO drivers(" + COLUMN_NAME + "," + COLUMN_LICENCE + ") "
+            + "Values(?, ?);";
+    private static final String QUERY_GET = "SELECT * "
             + "FROM drivers "
-            + "WHERE id = ? "
-            + "AND is_deleted IS FALSE;";
-    private static final String STATEMENT_GETALL = "SELECT * "
+            + "WHERE " + COLUMN_ID + " = ? "
+            + "AND " + COLUMN_IS_DELETED + " IS FALSE;";
+    private static final String QUERY_GETALL = "SELECT * "
             + "FROM drivers "
-            + "WHERE is_deleted IS FALSE;";
-    private static final String STATEMENT_DELETE = "UPDATE drivers "
-            + "SET is_deleted = true "
-            + "WHERE id = ? "
-            + "AND is_deleted IS FALSE;";
+            + "WHERE " + COLUMN_IS_DELETED + " IS FALSE;";
+    private static final String QUERY_DELETE = "UPDATE drivers "
+            + "SET " + COLUMN_IS_DELETED + " = TRUE "
+            + "WHERE " + COLUMN_ID + " = ? "
+            + "AND " + COLUMN_IS_DELETED + " IS FALSE;";
     private static final String GET_FAILED = "Failed to obtain driver with id: ";
     private static final String CREATE_FAILED = "Failed to create new driver with name= ";
     private static final String UPDATE_FAILED = "Failed to update driver with id: ";
@@ -46,7 +47,7 @@ public class DriverDaoImpl implements DriverDao {
     public Driver create(Driver driver) {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement createStatement = connection.prepareStatement(
-                        STATEMENT_CREATE, Statement.RETURN_GENERATED_KEYS)) {
+                        QUERY_CREATE, Statement.RETURN_GENERATED_KEYS)) {
             createStatement.setString(1, driver.getName());
             createStatement.setString(2, driver.getLicenceNumber());
             createStatement.executeUpdate();
@@ -55,7 +56,7 @@ public class DriverDaoImpl implements DriverDao {
                 driver.setId(resultSet.getObject(1, Long.class));
                 return driver;
             } else {
-                throw new DataProcessingException(GET_FAILED);
+                throw new DataProcessingException(GET_FAILED + driver.getId());
             }
         } catch (SQLException e) {
             throw new DataProcessingException(CREATE_FAILED + driver.getName(), e);
@@ -66,7 +67,7 @@ public class DriverDaoImpl implements DriverDao {
     public Optional<Driver> get(Long id) {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement getStatement = connection.prepareStatement(
-                        STATEMENT_GET)) {
+                        QUERY_GET)) {
             getStatement.setLong(1, id);
             getStatement.executeQuery();
             return parseResult(getStatement.getResultSet()).stream().findFirst();
@@ -80,7 +81,7 @@ public class DriverDaoImpl implements DriverDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 Statement getAllStatement = connection.createStatement()) {
             ResultSet resultSet = getAllStatement.executeQuery(
-                    STATEMENT_GETALL);
+                    QUERY_GETALL);
             return parseResult(resultSet);
         } catch (SQLException e) {
             throw new DataProcessingException(GET_ALL_FAILED, e);
@@ -91,7 +92,7 @@ public class DriverDaoImpl implements DriverDao {
     public Optional<Driver> update(Driver driver) {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement updateStatement = connection.prepareStatement(
-                        STATEMENT_UPDATE)) {
+                        QUERY_UPDATE)) {
             updateStatement.setString(1, driver.getName());
             updateStatement.setString(2, driver.getLicenceNumber());
             updateStatement.setLong(3, driver.getId());
@@ -106,7 +107,7 @@ public class DriverDaoImpl implements DriverDao {
     public boolean delete(Long id) {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement deleteStatement = connection.prepareStatement(
-                        STATEMENT_DELETE)) {
+                        QUERY_DELETE)) {
             deleteStatement.setLong(1, id);
             return deleteStatement.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -120,7 +121,7 @@ public class DriverDaoImpl implements DriverDao {
             result.add(new Driver(
                     resultSet.getObject(COLUMN_ID, Long.class),
                     resultSet.getObject(COLUMN_NAME, String.class),
-                    resultSet.getObject(LICENCE, String.class)));
+                    resultSet.getObject(COLUMN_LICENCE, String.class)));
         }
         return result;
     }
