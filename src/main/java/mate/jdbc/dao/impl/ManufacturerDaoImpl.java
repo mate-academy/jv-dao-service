@@ -56,11 +56,11 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override
     public List<Manufacturer> getAll() {
-        String getAllQuery = "SELECT * FROM manufacturers WHERE NOT is_deleted";
+        String getAllQuery = "SELECT * FROM manufacturers WHERE NOT is_deleted;";
+        List<Manufacturer> manufacturers = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection();
                 Statement getAllManufacturersStatement = connection.createStatement()) {
             ResultSet resultSet = getAllManufacturersStatement.executeQuery(getAllQuery);
-            List<Manufacturer> manufacturers = new ArrayList<>();
             while (resultSet.next()) {
                 manufacturers.add(getManufacturer(resultSet));
             }
@@ -72,17 +72,17 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        String update = "UPDATE manufacturers SET name = ?, country = ?"
+        String updateQuery = "UPDATE manufacturers SET name = ?, country = ?"
                 + "WHERE id = ? AND NOT is_deleted;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement updateManufacturerStatement
-                            = connection.prepareStatement(update)) {
+                            = connection.prepareStatement(updateQuery)) {
             updateManufacturerStatement.setString(1, manufacturer.getName());
             updateManufacturerStatement.setString(2, manufacturer.getCountry());
             updateManufacturerStatement.setLong(3, manufacturer.getId());
             updateManufacturerStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't update " + manufacturer, e);
+            throw new DataProcessingException("Can't updateQuery " + manufacturer, e);
         }
         return manufacturer;
     }
@@ -93,7 +93,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement deleteManufacturerStatement
                             = connection.prepareStatement(deleteQuery)) {
-            deleteManufacturerStatement.setLong(1,id);
+            deleteManufacturerStatement.setLong(1, id);
             return deleteManufacturerStatement.executeUpdate() >= 1;
         } catch (SQLException e) {
             throw new DataProcessingException("Can't delete manufacturer with id " + id, e);
