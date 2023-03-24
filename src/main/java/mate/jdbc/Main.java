@@ -2,7 +2,9 @@ package mate.jdbc;
 
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
+import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.DriverService;
+import mate.jdbc.service.ManufacturerService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
@@ -23,6 +25,25 @@ public class Main {
         System.out.println(driverService.getAll());
         System.out.println("-------------------------------------------------");
         driverBob.setLicenseNumber("0001");
-        System.out.println(driverService.get(driverBob.getId()));
+        System.out.println(driverService.update(driverBob));
+        System.out.println("-------------------------------------------------");
+        System.out.println("-------------------------------------------------");
+        ManufacturerService manufacturerService = (ManufacturerService)
+                injector.getInstance(ManufacturerService.class);
+        Manufacturer manufacturerAudi = new Manufacturer("AUDI", "Germany");
+        Manufacturer manufacturerRenault = new Manufacturer("Renault", "France");
+        Manufacturer manufacturerToyota = new Manufacturer("Toyota", "Japan");
+        manufacturerService.create(manufacturerAudi);
+        manufacturerService.create(manufacturerToyota);
+        manufacturerService.create(manufacturerRenault);
+        System.out.println(manufacturerService.get(manufacturerAudi.getId()));
+        System.out.println("-------------------------------------------------");
+        System.out.println(manufacturerService.getAll());
+        System.out.println("-------------------------------------------------");
+        manufacturerService.delete(manufacturerAudi.getId());
+        System.out.println(manufacturerService.getAll());
+        System.out.println("-------------------------------------------------");
+        manufacturerRenault.setCountry("Ukraine");
+        System.out.println(manufacturerService.update(manufacturerRenault));
     }
 }
