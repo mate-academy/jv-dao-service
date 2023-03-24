@@ -10,12 +10,12 @@ import mate.jdbc.service.impl.ManufacturerServiceImpl;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
+    private static final ManufacturerService manufacturerService
+            = (ManufacturerServiceImpl) injector.getInstance(ManufacturerService.class);
+    private static final DriverService driverService
+            = (DriverServiceImpl) injector.getInstance(DriverService.class);
 
     public static void main(String[] args) {
-        final ManufacturerService manufacturerService
-                = (ManufacturerServiceImpl) injector.getInstance(ManufacturerService.class);
-        final DriverService driverService
-                = (DriverServiceImpl) injector.getInstance(DriverService.class);
 
         Manufacturer manufacturer1 = new Manufacturer();
         manufacturer1.setName("bmw");
