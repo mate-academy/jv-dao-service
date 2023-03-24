@@ -16,9 +16,6 @@ import mate.jdbc.util.ConnectionUtil;
 
 @Dao
 public class DriverDaoImpl implements DriverDao {
-    private static final String ID_COLUMN = "id";
-    private static final String NAME_COLUMN = "name";
-    private static final String LICENSE_NUMBER_COLUMN = "license_number";
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
@@ -41,7 +38,6 @@ public class DriverDaoImpl implements DriverDao {
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't create driver. " + driver, e);
         }
-
     }
 
     @Override
@@ -112,9 +108,9 @@ public class DriverDaoImpl implements DriverDao {
     }
 
     private Driver getDriver(ResultSet resultSet) throws SQLException {
-        Long id = resultSet.getObject(ID_COLUMN, Long.class);
-        String name = resultSet.getString(NAME_COLUMN);
-        String licenseNumber = resultSet.getString(LICENSE_NUMBER_COLUMN);
+        Long id = resultSet.getObject("id", Long.class);
+        String name = resultSet.getString("name");
+        String licenseNumber = resultSet.getString("license_number");
         Driver driver = new Driver();
         driver.setId(id);
         driver.setName(name);

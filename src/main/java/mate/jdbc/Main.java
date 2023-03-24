@@ -29,8 +29,6 @@ public class Main {
         manufacturerService.delete(ferrari.getId());
         System.out.println(manufacturerService.getAll());
 
-        List<Driver> allDrivers = driverService.getAll();
-        allDrivers.forEach(System.out::println);
         Driver audiDriver = new Driver();
         audiDriver.setName("Bastian");
         audiDriver.setLicenseNumber("12121212");
