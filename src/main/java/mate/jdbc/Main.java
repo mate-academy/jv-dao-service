@@ -1,5 +1,6 @@
 package mate.jdbc;
 
+import java.util.List;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
@@ -21,7 +22,7 @@ public class Main {
         System.out.println(manufacturerService
                 .get(toyotaManufacturer.getId()));
 
-        var manufacturers = manufacturerService.getAll();
+        List<Manufacturer> manufacturers = manufacturerService.getAll();
         manufacturers.forEach(System.out::println);
 
         toyotaManufacturer.setCountry("Nepal");
