@@ -19,5 +19,8 @@ public class Main {
         System.out.println("Updated driver: " + driverService.get(updatedDriver.getId()));
         System.out.println("All Drivers: " + System.lineSeparator());
         driverService.getAll().forEach(System.out::println);
+        driverService.delete(updatedDriver.getId());
+        System.out.println("All Drivers after delete: " + System.lineSeparator());
+        driverService.getAll().forEach(System.out::println);
     }
 }
