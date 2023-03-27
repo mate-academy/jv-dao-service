@@ -17,18 +17,22 @@ public class Main {
         //manufacturer test
         Manufacturer createdManufacturer = manufacturerSevice.create(
                 new Manufacturer("Audi", "Germany"));
+        createdManufacturer.setName("Volkswagen");
+        Manufacturer updatedManufacturer = manufacturerSevice.update(
+                createdManufacturer);
         System.out.println("Final manufacturer is: "
-                + manufacturerSevice.get(manufacturerSevice.update(
-                new Manufacturer(createdManufacturer.getId(), "Shmaudi", "Zimbabwe")).getId()));
+                + manufacturerSevice.get(updatedManufacturer.getId()));
         //driver test
         Driver createdDriver = driverService.create(
                 new Driver("Oleksandr", "25565"));
         System.out.println("Created driver: " + driverService.get(createdDriver.getId()));
-        System.out.println("Updated driver: " + driverService.update(
-                new Driver(createdDriver.getId(), "Oleksandra", "25565")));
+        createdDriver.setName("Oleksandra");
+        Driver updatedDriver = driverService.update(
+                createdDriver);
+        System.out.println("Updated driver: " + driverService.get(updatedDriver.getId()));
         System.out.println("All Drivers: ");
         driverService.getAll().forEach(System.out::println);
-        driverService.delete(createdDriver.getId());
+        driverService.delete(updatedDriver.getId());
         System.out.println("All Drivers after delete: " + System.lineSeparator());
         driverService.getAll().forEach(System.out::println);
     }
