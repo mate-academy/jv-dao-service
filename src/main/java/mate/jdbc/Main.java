@@ -17,32 +17,28 @@ public class Main {
         Manufacturer manufacturer = new Manufacturer();
         manufacturer.setName("test");
         manufacturer.setCountry("Ukraine");
-        manufacturerService.create(manufacturer);
+        System.out.println(manufacturerService.create(manufacturer));
+
         manufacturer.setCountry("USA");
-        manufacturerService.create(manufacturer);
+        System.out.println(manufacturerService.update(manufacturer));
 
-        System.out.println(manufacturerService.get(1L));
+        System.out.println(manufacturerService.get(manufacturer.getId()));
 
-        manufacturerService.delete(1L);
-
-        manufacturer.setCountry("Ukraine");
-        manufacturerService.update(manufacturer);
+        System.out.println(manufacturerService.delete(manufacturer.getId()));
 
         manufacturerService.getAll().forEach(System.out::println);
 
         Driver driver = new Driver();
         driver.setName("Bob");
         driver.setLicenseNumber("12345");
-        driverService.create(driver);
-        driver.setLicenseNumber("54321");
-        driverService.create(driver);
-
-        System.out.println(driverService.get(1L));
-
-        driverService.delete(1L);
+        System.out.println(driverService.create(driver));
 
         driver.setLicenseNumber("12312");
-        driverService.update(driver);
+        System.out.println(driverService.update(driver));
+
+        System.out.println(driverService.get(driver.getId()));
+
+        System.out.println(driverService.delete(driver.getId()));
 
         driverService.getAll().forEach(System.out::println);
     }
