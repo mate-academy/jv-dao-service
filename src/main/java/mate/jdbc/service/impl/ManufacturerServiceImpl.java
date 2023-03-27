@@ -20,7 +20,7 @@ public class ManufacturerServiceImpl implements ManufacturerSevice {
 
     @Override
     public Manufacturer get(Long id) {
-        return manufacturerDao.get(id).orElseThrow(NoSuchElementException::new);
+        return manufacturerDao.get(id).orElseThrow();
     }
 
     @Override
