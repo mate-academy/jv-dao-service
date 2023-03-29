@@ -1,5 +1,5 @@
 # HW 03
-- Create class `mate.jdbc.model.Driver`.
+- Create class `Driver`.
 ```java
 public class mate.jdbc.model.Driver {
     private Long id;

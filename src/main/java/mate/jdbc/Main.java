@@ -9,18 +9,18 @@ import mate.jdbc.service.ManufacturerService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
+    private static ManufacturerService manufacturerService
+            = (ManufacturerService) injector.getInstance(ManufacturerService.class);
+    private static DriverService driverService
+            = (DriverService) injector.getInstance(DriverService.class);
 
     public static void main(String[] args) {
-        ManufacturerService manufacturerService
-                = (ManufacturerService) injector.getInstance(ManufacturerService.class);
-        DriverService driverService
-                = (DriverService) injector.getInstance(DriverService.class);
-
+        Manufacturer bmwManufacturer = new Manufacturer("BMW", "Germany");
+        Manufacturer toyotaManufacturer = new Manufacturer("Toyota", "Japan");
+        Manufacturer volvoManufacturer = new Manufacturer("Volvo","Sweden");
+        Manufacturer fordManufacturer = new Manufacturer("Ford","USA");
         List<Manufacturer> manufacturers = List.of(
-                new Manufacturer("BMW", "Germany"),
-                new Manufacturer("Toyota", "Japan"),
-                new Manufacturer("Volvo", "Sweden"),
-                new Manufacturer("Ford", "USA")
+                bmwManufacturer, toyotaManufacturer, volvoManufacturer, fordManufacturer
         );
 
         System.out.println("\nTest manufacturerService create:");
@@ -29,23 +29,25 @@ public class Main {
         }
         System.out.println(manufacturers);
 
-        Long manufacturerID = 3L;
-        System.out.println("\nTest get manufacturerService by id = " + manufacturerID);
-        System.out.println("return = " + manufacturerService.get(manufacturerID));
+        Long id = toyotaManufacturer.getId();
+        System.out.println("\nTest get manufacturerService by id = " + id);
+        System.out.println("return = " + manufacturerService.get(id));
 
         System.out.println("\nTest manufacturerService getAll:");
         manufacturers = manufacturerService.getAll();
         manufacturers.forEach(System.out::println);
 
-        System.out.println("\nTest delete manufacturer by id = " + manufacturerID);
-        System.out.println("return = " + manufacturerService.delete(manufacturerID));
+        volvoManufacturer.setCountry("China");
+        System.out.println("\nTest update manufacturer " + volvoManufacturer);
+        System.out.println("return = " + manufacturerService.update(volvoManufacturer));
 
-        List<Driver> drivers = List.of(
-                new Driver("Taras", "12121212"),
-                new Driver("Petro", "13131313"),
-                new Driver("Stepan", "14141414"),
-                new Driver("Ivan", "98989898")
-        );
+        System.out.println("\nTest delete manufacturer by id = " + id);
+        System.out.println("return = " + manufacturerService.delete(id));
+
+        Driver taras = new Driver("Taras", "12121212");
+        Driver petro = new Driver("petro", "13131313");
+        Driver ivan = new Driver("ivan", "98989898");
+        List<Driver> drivers = List.of(taras, petro, ivan);
 
         System.out.println("\nTest driverService create:");
         for (Driver driver : drivers) {
@@ -53,13 +55,17 @@ public class Main {
         }
         System.out.println(drivers);
 
-        Long driverId = 2L;
+        Long driverId = petro.getId();
         System.out.println("\nTest get driverService by id = " + driverId);
         System.out.println("return = " + driverService.get(driverId));
 
         System.out.println("\nTest driverService getAll:");
         drivers = driverService.getAll();
         drivers.forEach(System.out::println);
+
+        petro.setLicenseNumber("11111111");
+        System.out.println("\nTest update driverService " + petro);
+        System.out.println("return = " + driverService.update(petro));
 
         System.out.println("\nTest delete driver by id = " + driverId);
         System.out.println("return = " + manufacturerService.delete(driverId));
