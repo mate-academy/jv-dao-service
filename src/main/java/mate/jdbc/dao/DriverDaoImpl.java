@@ -23,7 +23,7 @@ public class DriverDaoImpl implements DriverDao {
                 PreparedStatement statement
                          = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, driver.getName());
-            statement.setString(2, driver.getLicenseNumber()); // Q/A about parameter index.
+            statement.setString(2, driver.getLicenseNumber());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -46,7 +46,7 @@ public class DriverDaoImpl implements DriverDao {
             Driver driver;
             if (resultSet.next()) {
                 driver = getDriver(resultSet);
-                return Optional.of(driver); // google about ofNullable method
+                return Optional.of(driver);
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't get driver by id " + id, e);
