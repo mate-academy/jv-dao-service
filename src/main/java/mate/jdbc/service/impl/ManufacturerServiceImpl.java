@@ -22,7 +22,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     public Manufacturer get(Long id) {
         return manufacturerDao.get(id)
                 .orElseThrow(() -> new NoSuchElementException(
-                        "Not manufacturer found with index: " + id));
+                        "No manufacturer found with index: " + id));
     }
 
     @Override

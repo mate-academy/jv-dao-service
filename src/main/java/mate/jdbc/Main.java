@@ -28,9 +28,9 @@ public class Main {
         driverService.delete(id);
     }
 
-    private static Optional<Driver> getDriverById(Long id,
+    private static Driver getDriverById(Long id,
                                                   DriverService driverService) {
-        return Optional.ofNullable(driverService.get(id));
+        return driverService.get(id);
     }
 
     private static void updateDriver(Long id, String licenseNumber,
