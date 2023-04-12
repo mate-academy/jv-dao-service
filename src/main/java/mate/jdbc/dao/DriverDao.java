@@ -11,7 +11,7 @@ public interface DriverDao {
 
     List<Driver> getAll();
 
-    Driver update(Driver manufacturer);
+    Driver update(Driver driver);
 
     boolean delete(Long id);
 }
