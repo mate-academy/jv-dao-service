@@ -107,11 +107,6 @@ public class ManufacturerServiceImpl implements ManufacturerService {
         Long id = resultSet.getObject("id", Long.class);
         String name = resultSet.getString("name");
         String country = resultSet.getString("country");
-        return Manufacturer
-                .builder()
-                .id(id)
-                .name(name)
-                .country(country)
-                .build();
+        return new Manufacturer(id, name, country);
     }
 }

@@ -106,11 +106,6 @@ public class DriverDaoImpl implements DriverDao {
         Long id = resultSet.getObject("id", Long.class);
         String name = resultSet.getString("name");
         String country = resultSet.getString("license_number");
-        return Driver
-            .builder()
-            .id(id)
-            .name(name)
-            .licenseNumber(country)
-            .build();
+        return new Driver(id, name, country);
     }
 }

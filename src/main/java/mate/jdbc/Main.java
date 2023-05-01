@@ -14,11 +14,11 @@ public class Main {
         final ManufacturerService manufacturerService =
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
 
-        Manufacturer manufacturerA = Manufacturer.builder().name("A").country("AA").build();
-        Manufacturer manufacturerB = Manufacturer.builder().name("B").country("BB").build();
-        Manufacturer manufacturerC = Manufacturer.builder().name("C").country("CC").build();
-        Manufacturer manufacturerD = Manufacturer.builder().name("D").country("DD").build();
-        Manufacturer manufacturerE = Manufacturer.builder().name("E").country("EE").build();
+        Manufacturer manufacturerA = new Manufacturer(1L, "A", "AA");
+        Manufacturer manufacturerB = new Manufacturer(2L, "B", "BB");
+        Manufacturer manufacturerC = new Manufacturer(3L, "C", "CC");
+        Manufacturer manufacturerD = new Manufacturer(4L, "D", "DD");
+        Manufacturer manufacturerE = new Manufacturer(5L, "E", "EE");
         System.out.println(manufacturerService.create(manufacturerA));
         System.out.println(manufacturerService.create(manufacturerB));
         System.out.println(manufacturerService.create(manufacturerC));
@@ -33,11 +33,12 @@ public class Main {
         manufacturerService.delete(manufacturerE.getId());
         manufacturerService.getAll().forEach(System.out::println);
 
-        Driver driverA = Driver.builder().name("A").licenseNumber("AA").build();
-        Driver driverB = Driver.builder().name("B").licenseNumber("BB").build();
-        Driver driverC = Driver.builder().name("C").licenseNumber("CC").build();
-        Driver driverD = Driver.builder().name("D").licenseNumber("DD").build();
-        Driver driverE = Driver.builder().name("E").licenseNumber("EE").build();
+        Driver driverA = new Driver(1L, "A", "AA");
+        Driver driverB = new Driver(2L, "B", "BB");
+        Driver driverC = new Driver(3L, "C", "CC");
+        Driver driverD = new Driver(4L, "D", "DD");
+        Driver driverE = new Driver(5L, "E", "EE");
+
         System.out.println(driverService.create(driverA));
         System.out.println(driverService.create(driverB));
         System.out.println(driverService.create(driverC));
