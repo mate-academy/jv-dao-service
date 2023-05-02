@@ -1,6 +1,5 @@
 package mate.jdbc;
 
-import java.util.Optional;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
@@ -21,11 +20,11 @@ public class Main {
         driverService.create(sergeyDriver);
         driverService.create(volodymyrDriver);
 
-        Optional<Driver> driverFromDb = driverService.get(1L);
-        driverFromDb.get().setName("Bogdan");
-        driverFromDb.get().setLicenseNumber("2255");
+        Driver driverFromDb = driverService.get(1L);
+        driverFromDb.setName("Bogdan");
+        driverFromDb.setLicenseNumber("2255");
         driverService.delete(2L);
-        driverService.update(driverFromDb.get());
+        driverService.update(driverFromDb);
         driverService.getAll().forEach(System.out::println);
 
         ManufacturerService manufacturerService = (ManufacturerService)
@@ -40,7 +39,7 @@ public class Main {
         Manufacturer hyundai = new Manufacturer("Hyundai", "Korea");
         manufacturerService.create(hyundai);
 
-        Manufacturer manufacturerFromDb = manufacturerService.get(2L).get();
+        Manufacturer manufacturerFromDb = manufacturerService.get(2L);
 
         manufacturerFromDb.setName("Audi");
         manufacturerFromDb.setCountry("Germany");
