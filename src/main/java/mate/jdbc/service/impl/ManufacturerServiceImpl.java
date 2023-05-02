@@ -1,7 +1,7 @@
 package mate.jdbc.service.impl;
 
 import java.util.List;
-import mate.jdbc.dao.ManufacturerService;
+import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
 import mate.jdbc.model.Manufacturer;
@@ -12,31 +12,31 @@ public class ManufacturerServiceImpl implements mate.jdbc.service.ManufacturerSe
             "Can`t get Manufacturer by id - %s";
 
     @Inject
-    private ManufacturerService manufacturerService;
+    private ManufacturerDao manufacturerDao;
 
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        return manufacturerService.create(manufacturer);
+        return manufacturerDao.create(manufacturer);
     }
 
     @Override
     public Manufacturer get(Long id) {
-        return manufacturerService.get(id).orElseThrow(() -> new RuntimeException(
+        return manufacturerDao.get(id).orElseThrow(() -> new RuntimeException(
                 String.format(GET_MANUFACTURER_BY_ID_EXCEPTION, id)));
     }
 
     @Override
     public List<Manufacturer> getAll() {
-        return manufacturerService.getAll();
+        return manufacturerDao.getAll();
     }
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        return manufacturerService.update(manufacturer);
+        return manufacturerDao.update(manufacturer);
     }
 
     @Override
     public boolean delete(Long id) {
-        return manufacturerService.delete(id);
+        return manufacturerDao.delete(id);
     }
 }
