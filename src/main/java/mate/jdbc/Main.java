@@ -13,9 +13,9 @@ public class Main {
         Driver driver1 = new Driver("Ihor", "20473AB");
         Driver driver2 = new Driver("Ivan", "40573VB");
         Driver driver3 = new Driver("Stepan", "34473VB");
-        Driver dbDriver1 = driverService.create(driver1);
-        Driver dbDriver2 = driverService.create(driver2);
-        Driver dbDriver3 = driverService.create(driver3);
+        final Driver dbDriver1 = driverService.create(driver1);
+        final Driver dbDriver2 = driverService.create(driver2);
+        final Driver dbDriver3 = driverService.create(driver3);
 
         System.out.println("Get all:");
         List<Driver> drivers = driverService.getAll();
