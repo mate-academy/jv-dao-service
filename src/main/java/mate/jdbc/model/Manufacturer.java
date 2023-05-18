@@ -66,7 +66,7 @@ public class Manufacturer {
 
     @Override
     public String toString() {
-        return "ManufacturerService{"
+        return "Manufacturer{"
                 + "id=" + id
                 + ", name='" + name + '\''
                 + ", country='" + country + '\''
