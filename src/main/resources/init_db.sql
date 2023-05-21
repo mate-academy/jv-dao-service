@@ -19,6 +19,5 @@ CREATE TABLE `drivers`
     `name`           VARCHAR(225) NOT NULL,
     `license_number` VARCHAR(225) NOT NULL,
     `is_deleted`     TINYINT      NOT NULL DEFAULT FALSE,
-    CONSTRAINT PK_Drivers PRIMARY KEY (id),
-    UNIQUE INDEX `license_number_UNIQUE` (`license_number`)
+    CONSTRAINT PK_Drivers PRIMARY KEY (id)
 );
