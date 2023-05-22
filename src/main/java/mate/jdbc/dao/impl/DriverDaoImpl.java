@@ -86,10 +86,10 @@ public class DriverDaoImpl implements DriverDao {
             updateDriverStatement.setString(2,driver.getLicenseNumber());
             updateDriverStatement.setObject(3,driver.getId());
             updateDriverStatement.executeUpdate();
+            return driver;
         } catch (SQLException e) {
             throw new DataProcessingException("Could not update driver." + driver, e);
         }
-        return driver;
     }
 
     @Override
