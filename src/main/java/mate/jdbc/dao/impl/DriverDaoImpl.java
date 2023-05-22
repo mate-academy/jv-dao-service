@@ -1,11 +1,5 @@
 package mate.jdbc.dao.impl;
 
-import mate.jdbc.dao.DriverDao;
-import mate.jdbc.exception.DataProcessingException;
-import mate.jdbc.lib.Dao;
-import mate.jdbc.model.Driver;
-import mate.jdbc.util.ConnectionUtil;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import mate.jdbc.dao.DriverDao;
+import mate.jdbc.exception.DataProcessingException;
+import mate.jdbc.lib.Dao;
+import mate.jdbc.model.Driver;
+import mate.jdbc.util.ConnectionUtil;
 
 @Dao
 public class DriverDaoImpl implements DriverDao {
@@ -22,19 +21,20 @@ public class DriverDaoImpl implements DriverDao {
         String insertDriverRequest = "INSERT INTO drivers(name, licenseNumber)"
                 + " VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement createDriverStatements =
-                     connection.prepareStatement(insertDriverRequest, Statement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement createDriverStatements =
+                        connection.prepareStatement(insertDriverRequest,
+                                Statement.RETURN_GENERATED_KEYS)) {
             createDriverStatements.setString(1,driver.getName());
             createDriverStatements.setString(2, driver.getLicenseNumber());
-            createDriverStatements.executeQuery();
+            createDriverStatements.executeUpdate();
             ResultSet generatedKeys = createDriverStatements.getGeneratedKeys();
             if (generatedKeys.next()) {
                 driver.setId(generatedKeys.getObject(1, Long.class));
             }
+            return driver;
         } catch (SQLException e) {
             throw new DataProcessingException("Could not create driver." + driver, e);
         }
-        return driver;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class DriverDaoImpl implements DriverDao {
             updateDriverStatement.setString(1,driver.getName());
             updateDriverStatement.setString(2,driver.getLicenseNumber());
             updateDriverStatement.setObject(3,driver.getId());
-            updateDriverStatement.executeQuery();
+            updateDriverStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DataProcessingException("Could not update driver." + driver, e);
         }
