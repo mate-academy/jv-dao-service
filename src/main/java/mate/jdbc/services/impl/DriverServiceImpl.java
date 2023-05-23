@@ -1,19 +1,16 @@
-package mate.jdbc.services;
+package mate.jdbc.services.impl;
 
 import java.util.List;
 import mate.jdbc.dao.DriverDao;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
 import mate.jdbc.model.Driver;
+import mate.jdbc.services.DriverService;
 
 @Service
 public class DriverServiceImpl implements DriverService {
     @Inject
-    private final DriverDao dao;
-
-    public DriverServiceImpl(DriverDao dao) {
-        this.dao = dao;
-    }
+    private DriverDao dao;
 
     @Override
     public Driver create(Driver driver) {
