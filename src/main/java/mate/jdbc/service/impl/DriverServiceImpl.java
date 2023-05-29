@@ -1,9 +1,7 @@
 package mate.jdbc.service.impl;
 
-import java.sql.SQLException;
 import java.util.List;
 import mate.jdbc.dao.DriverDao;
-import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Service;
 import mate.jdbc.model.Driver;
