@@ -1,30 +1,57 @@
 package mate.jdbc;
 
-import java.util.List;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
-import mate.jdbc.service.DriveService;
+import mate.jdbc.model.Manufacturer;
+import mate.jdbc.service.DriverService;
+import mate.jdbc.service.ManufacturerService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
 
     public static void main(String[] args) {
-        DriveService driveService = (DriveService) injector.getInstance(DriveService.class);
-        printAll(driveService);
-        Driver petro = new Driver("Petro", "68724");
-        driveService.create(petro);
-        printAll(driveService);
-        System.out.println("Driver with id 2 :" + driveService.get(2L));
-        Driver newDriver = new Driver(1L, "Ivan", "87986");
-        driveService.update(newDriver);
-        printAll(driveService);
-        driveService.delete(3L);
-        printAll(driveService);
+        DriverService driveService = (DriverService) injector.getInstance(DriverService.class);
+        testDriverService(driveService);
+        ManufacturerService manufacturerService =
+                (ManufacturerService) injector.getInstance(ManufacturerService.class);
+        testManufacturerService(manufacturerService);
     }
 
-    private static void printAll(DriveService driveService) {
+    private static void printAllDrivers(DriverService driveService) {
         System.out.println("All drivers:");
-        List<Driver> drivers = driveService.getAll();
-        drivers.forEach(System.out::println);
+        driveService.getAll().forEach(System.out::println);
+    }
+
+    private static void testDriverService(DriverService driveService) {
+        printAllDrivers(driveService);
+        Driver petro = new Driver("Migel", "68324");
+        driveService.create(petro);
+        printAllDrivers(driveService);
+        Driver driverById = driveService.get(4L);
+        System.out.println("Driver with id 4 :" + driverById);
+        driverById.setLicenseNumber("123456");
+        driveService.update(driverById);
+        printAllDrivers(driveService);
+        driveService.delete(3L);
+        printAllDrivers(driveService);
+    }
+
+    private static void printAllManufacturers(ManufacturerService manufacturerService) {
+        System.out.println("All manufacturers: ");
+        manufacturerService.getAll().forEach(System.out::println);
+    }
+
+    private static void testManufacturerService(ManufacturerService manufacturerService) {
+        printAllManufacturers(manufacturerService);
+        Manufacturer fiat = new Manufacturer("Fiat", "Italy");
+        manufacturerService.create(fiat);
+        printAllManufacturers(manufacturerService);
+        Manufacturer manufacturerById = manufacturerService.get(1L);
+        System.out.println("Manufacturer by id 1: " + manufacturerById);
+        manufacturerById.setName("Alfa Romeo");
+        manufacturerService.update(manufacturerById);
+        printAllManufacturers(manufacturerService);
+        manufacturerService.delete(2L);
+        printAllManufacturers(manufacturerService);
     }
 }
