@@ -12,6 +12,7 @@ public class Main {
     public static void main(String[] args) {
         ManufacturerService manufacturerService
                 = (ManufacturerService) injector.getInstance(ManufacturerService.class);
+
         Manufacturer manufacturer = new Manufacturer("Audi","Germany");
         manufacturerService.create(manufacturer);
         manufacturer.setName("Skoda");
