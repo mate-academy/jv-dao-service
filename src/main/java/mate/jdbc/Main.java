@@ -38,6 +38,8 @@ public class Main {
         List<Manufacturer> manufacturerList = manufacturerService.getAll();
         System.out.println(manufacturerList);
 
+        System.out.println("***************************************************");
+
         DriverService driverService =
                 (DriverService) injector.getInstance(DriverService.class);
 
@@ -63,7 +65,7 @@ public class Main {
         driverService.delete(driverNancy.getId());
 
         List<Driver> driverList = driverService.getAll();
-        System.out.println(manufacturerList);
+        System.out.println(driverList);
 
     }
 

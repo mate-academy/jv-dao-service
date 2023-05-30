@@ -62,7 +62,7 @@ public class Driver {
 
     @Override
     public String toString() {
-        return "Manufacturer{"
+        return "Driver{"
                 + "id=" + id
                 + ", name='" + name + '\''
                 + ", license number='" + licenseNumber + '\''
