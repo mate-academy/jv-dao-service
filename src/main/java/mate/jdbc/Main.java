@@ -18,10 +18,10 @@ public class Main {
         updated.setLicenseNumber("987654321");
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
 
-        //Driver create = driverService.create(driver);
-        //System.out.println(create);
-        //System.out.println(driverService.get(4L));
-        //System.out.println(driverService.update(updated));
+        Driver create = driverService.create(driver);
+        System.out.println(create);
+        System.out.println(driverService.get(4L));
+        System.out.println(driverService.update(updated));
         System.out.println(driverService.delete(11L));
         driverService.getAll().forEach(System.out::println);
     }
