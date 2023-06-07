@@ -13,15 +13,17 @@ public class Main {
         ManufacturerService manufacturerService =
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
 
-        manufacturerService.create(new Manufacturer("Datsun", "Japan"));
-        manufacturerService.create(new Manufacturer("Toyota", "Japan"));
+        Manufacturer datsun = new Manufacturer("Datsun", "Japan");
+        Manufacturer toyota = new Manufacturer("Toyota", "Japan");
+        manufacturerService.create(datsun);
+        manufacturerService.create(toyota);
 
         System.out.println("All manufacturers");
         manufacturerService.getAll().forEach(System.out::println);
         System.out.println(System.lineSeparator());
 
-        Manufacturer manufacturer = manufacturerService.get(1L);
-        System.out.println("Manufacturer by id of 1");
+        Manufacturer manufacturer = manufacturerService.get(datsun.getId());
+        System.out.println("Manufacturer by id of " + datsun.getId());
         System.out.println(manufacturer);
         System.out.println(System.lineSeparator());
 
@@ -31,7 +33,7 @@ public class Main {
         System.out.println(updatedManufacturer);
         System.out.println(System.lineSeparator());
 
-        manufacturerService.delete(1L);
+        manufacturerService.delete(datsun.getId());
         System.out.println("All manufacturers");
         manufacturerService.getAll().forEach(System.out::println);
         System.out.println(System.lineSeparator());
@@ -39,15 +41,17 @@ public class Main {
         DriverService driverService =
                 (DriverService) injector.getInstance(DriverService.class);
 
-        driverService.create(new Driver("Taras", "AA0000AA"));
-        driverService.create(new Driver("Borys", "AA0001AA"));
+        Driver taras = new Driver("Taras", "AA0000AA");
+        Driver borys = new Driver("Borys", "AA0001AA");
+        driverService.create(taras);
+        driverService.create(borys);
 
         System.out.println("All drivers");
         driverService.getAll().forEach(System.out::println);
         System.out.println(System.lineSeparator());
 
-        Driver driver = driverService.get(1L);
-        System.out.println("Driver by id of 1");
+        Driver driver = driverService.get(taras.getId());
+        System.out.println("Driver by id of" + taras.getId());
         System.out.println(driver);
         System.out.println(System.lineSeparator());
 
@@ -57,7 +61,7 @@ public class Main {
         System.out.println(updatedDriver);
         System.out.println(System.lineSeparator());
 
-        driverService.delete(1L);
+        driverService.delete(taras.getId());
         System.out.println("All drivers");
         driverService.getAll().forEach(System.out::println);
     }
