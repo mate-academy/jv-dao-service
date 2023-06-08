@@ -8,10 +8,10 @@ import mate.jdbc.service.ManufacturerService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("mate.jdbc");
+
     public static void main(String[] args) {
         ManufacturerService manufacturerService =
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
-        DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
 
         Manufacturer manufacturer = new Manufacturer();
         manufacturer.setName("Audi");
@@ -20,8 +20,10 @@ public class Main {
         System.out.println(manufacturerService.create(manufacturer));
         System.out.println(manufacturerService.get(manufacturer.getId()));
         System.out.println(manufacturerService.delete(toyota.getId()));
-        System.out.println(manufacturerService.update(manufacturer));
+        System.out.println(manufacturerService.update(new Manufacturer(3L, "BMW","Germany")));
         manufacturerService.getAll().forEach(System.out::println);
+
+        DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
 
         Driver driver1 = new Driver("Henry", "235674");
         Driver driver2 = new Driver("Franck", "8889989");
@@ -29,7 +31,7 @@ public class Main {
         System.out.println(driverService.create(driver2));
         System.out.println(driverService.get(driver2.getId()));
         System.out.println(driverService.delete(driver1.getId()));
-        System.out.println(driverService.update(driver2));
+        System.out.println(driverService.update(new Driver(2L,"Vlad","99A657")));
         driverService.getAll().forEach(System.out::println);
     }
 }
