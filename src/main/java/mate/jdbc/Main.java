@@ -12,14 +12,13 @@ public class Main {
     public static void main(String[] args) {
         ManufacturerService manufacturerService
                 = (ManufacturerService) injector.getInstance(ManufacturerService.class);
-
         Manufacturer manufacturer = new Manufacturer("BMW","Germany");
         manufacturerService.create(manufacturer);
         manufacturer.setName("Nissan");
         manufacturer.setCountry("Japan");
-        manufacturerService.update(manufacturer);
-        manufacturerService.get(1L);
-        manufacturerService.delete(1L);
+        Manufacturer manufacturerId = manufacturerService.update(manufacturer);
+        manufacturerService.get(manufacturerId.getId());
+        manufacturerService.delete(manufacturerId.getId());
 
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         Driver driver = new Driver();
@@ -28,9 +27,9 @@ public class Main {
         driverService.create(driver);
         driver.setName("Artem");
         driver.setLicenseNumber("0982");
-        driverService.update(driver);
-        driverService.get(2L);
-        driverService.delete(1L);
+        Driver driverId = driverService.update(driver);
+        driverService.get(driverId.getId());
+        driverService.delete(driverId.getId());
 
         System.out.println(driverService.getAll());
         System.out.println(manufacturerService.getAll());
