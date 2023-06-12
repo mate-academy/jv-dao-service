@@ -17,13 +17,14 @@ public class Main {
 
         Manufacturer manufacturer = new Manufacturer("Chevrolet", "USA");
         System.out.println(manufacturerService.create(manufacturer));
+        System.out.println(manufacturerService.get(manufacturer.getId()));
 
         manufacturer.setCountry("DAEWOO-ZAZ");
         manufacturer.setName("Ukraine");
         System.out.println(manufacturerService.update(manufacturer));
 
-        System.out.println(manufacturerService.delete(6L));
-        System.out.println(manufacturerService.get(1L));
+        System.out.println(manufacturerService.get(manufacturer.getId()));
+        System.out.println(manufacturerService.delete(manufacturer.getId()));
 
         System.out.println(manufacturerService.getAll());
 
@@ -33,13 +34,14 @@ public class Main {
 
         Driver driver = new Driver("Sofia", "4");
         driverService.create(driver);
+        driverService.get(driver.getId());
 
         driver.setName("Alice");
         driver.setLicenseNumber("12");
         driverService.update(driver);
 
-        driverService.delete(5L);
-        driverService.get(6L);
+        driverService.get(driver.getId());
+        driverService.delete(driver.getId());
 
         System.out.println(driverService.getAll());
 
