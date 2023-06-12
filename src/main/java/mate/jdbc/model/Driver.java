@@ -2,20 +2,20 @@ package mate.jdbc.model;
 
 import java.util.Objects;
 
-public class Manufacturer {
+public class Driver {
     private Long id;
     private String name;
-    private String country;
+    private String licenseNumber;
 
-    public Manufacturer(String name, String country) {
+    public Driver(String name, String licenseNumber) {
         this.name = name;
-        this.country = country;
+        this.licenseNumber = licenseNumber;
     }
 
-    public Manufacturer(Long id, String name, String country) {
+    public Driver(Long id, String name, String licenseNumber) {
+        this(name, licenseNumber);
         this.id = id;
         this.name = name;
-        this.country = country;
     }
 
     public Long getId() {
@@ -34,39 +34,39 @@ public class Manufacturer {
         this.name = name;
     }
 
-    public String getCountry() {
-        return country;
+    public String getLicenseNumber() {
+        return licenseNumber;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setLicenseNumber(String licenseNumber) {
+        this.licenseNumber = licenseNumber;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object driver) {
+        if (this == driver) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (driver == null || getClass() != driver.getClass()) {
             return false;
         }
-        Manufacturer that = (Manufacturer) o;
+        Driver that = (Driver) driver;
         return Objects.equals(id, that.id)
                 && Objects.equals(name, that.name)
-                && Objects.equals(country, that.country);
+                && Objects.equals(licenseNumber, that.licenseNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, country);
+        return Objects.hash(id, name, licenseNumber);
     }
 
     @Override
     public String toString() {
-        return "Manufacturer{"
+        return "Driver{"
                 + "id=" + id
                 + ", name='" + name + '\''
-                + ", country='" + country + '\''
+                + ", licenseNumber='" + licenseNumber + '\''
                 + '}';
     }
 }
