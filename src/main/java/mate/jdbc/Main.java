@@ -22,9 +22,7 @@ public class Main {
         manufacturerService.delete(2L);
 
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-        Driver driver = new Driver();
-        driver.setName("Petro");
-        driver.setLicenseNumber("123");
+        Driver driver = new Driver("Petro", "123");
         driverService.create(driver);
         driver.setName("Stefania");
         driver.setLicenseNumber("321");
