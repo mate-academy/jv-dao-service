@@ -38,6 +38,7 @@ public class Driver {
         this.licenseNumber = licenseNumber;
     }
 
+    @Override
     public String toString() {
         return "Driver{"
                 + "id=" + id
