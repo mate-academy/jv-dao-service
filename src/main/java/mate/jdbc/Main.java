@@ -1,6 +1,5 @@
 package mate.jdbc;
 
-import java.util.Optional;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 import mate.jdbc.model.Manufacturer;
@@ -14,14 +13,16 @@ public class Main {
         ManufacturerService manufacturerService =
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
 
+        manufacturerService.getAll().forEach(System.out::println);
+
         Manufacturer createdManufacturer =
                 manufacturerService.create(new Manufacturer("Ferrari", "Italy"));
         System.out.println("Created manufacturer: " + createdManufacturer);
 
-        Optional<Manufacturer> receivedManufacturer = manufacturerService.get(6L);
+        Manufacturer receivedManufacturer = manufacturerService.get(6L);
         System.out.println("Received manufacturer: " + receivedManufacturer);
 
-        Manufacturer manufacturerForUpdate = manufacturerService.get(6L).orElse(new Manufacturer());
+        Manufacturer manufacturerForUpdate = manufacturerService.get(6L);
         manufacturerForUpdate.setName("Honda");
         manufacturerForUpdate.setCountry("Japan");
         Manufacturer updatedManufacturer = manufacturerService.update(manufacturerForUpdate);
@@ -35,13 +36,15 @@ public class Main {
         DriverService driverService =
                 (DriverService) injector.getInstance(DriverService.class);
 
+        driverService.getAll().forEach(System.out::println);
+
         Driver createdDriver = driverService.create(new Driver("John", "1212"));
         System.out.println("Created driver: " + createdDriver);
 
-        Optional<Driver> receivedDriver = driverService.get(2L);
+        Driver receivedDriver = driverService.get(2L);
         System.out.println("Received driver: " + receivedDriver);
 
-        Driver driverForUpdate = driverService.get(2L).orElse(new Driver());
+        Driver driverForUpdate = driverService.get(2L);
         driverForUpdate.setName("Lenny");
         driverForUpdate.setLicenseNumber("2490");
         Driver updatedDriver = driverService.update(driverForUpdate);
