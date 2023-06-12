@@ -23,7 +23,6 @@ public class Main {
         manufacturer.setName("Ukraine");
         System.out.println(manufacturerService.update(manufacturer));
 
-        System.out.println(manufacturerService.get(manufacturer.getId()));
         System.out.println(manufacturerService.delete(manufacturer.getId()));
 
         System.out.println(manufacturerService.getAll());
@@ -39,8 +38,6 @@ public class Main {
         driver.setName("Alice");
         driver.setLicenseNumber("12");
         driverService.update(driver);
-
-        driverService.get(driver.getId());
         driverService.delete(driver.getId());
 
         System.out.println(driverService.getAll());
