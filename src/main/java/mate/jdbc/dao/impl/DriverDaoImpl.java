@@ -16,7 +16,6 @@ import mate.jdbc.util.ConnectionUtil;
 
 @Dao
 public class DriverDaoImpl implements DriverDao {
-
     @Override
     public Driver create(Driver driver) {
         String createQuery = "INSERT INTO drivers (name, license_number) "
@@ -58,14 +57,14 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public List<Driver> getAll() {
         String getAllQuery = "SELECT * FROM drivers WHERE is_deleted = FALSE;";
-        List<Driver> allDrivers = new ArrayList<>();
+        List<Driver> drivers = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement getAllStatement = connection.prepareStatement(getAllQuery)) {
             ResultSet resultSet = getAllStatement.executeQuery();
             while (resultSet.next()) {
-                allDrivers.add(getDriver(resultSet));
+                drivers.add(getDriver(resultSet));
             }
-            return allDrivers;
+            return drivers;
         } catch (SQLException e) {
             throw new DataProcessingException("Could not get all drivers from drivers db", e);
         }
