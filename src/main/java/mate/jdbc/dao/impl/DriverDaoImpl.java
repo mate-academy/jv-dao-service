@@ -16,30 +16,29 @@ import mate.jdbc.util.ConnectionUtil;
 
 @Dao
 public class DriverDaoImpl implements DriverDao {
-    private static final String INSERT_FORMAT_REQUEST =
+    private static final String INSERT_FORMAT_QUERY =
             "INSERT INTO drivers(name, license_number) value(?, ?);";
-    private static final String GET_REQUEST =
+    private static final String GET_QUERY =
             "SELECT * FROM drivers WHERE is_deleted = FALSE AND id = ?;";
     private static final String GET_ALL =
             "SELECT * FROM drivers WHERE is_deleted = FALSE;";
-    private static final String UPDATE_REQUEST =
+    private static final String UPDATE_QUERY =
             "UPDATE drivers SET name = ?, license_number = ? WHERE is_deleted = FALSE AND id = ?;";
-    private static final String DELETE_REQUEST =
+    private static final String DELETE_QUERY =
             "UPDATE drivers SET is_deleted = true WHERE id = ?;";
 
     @Override
     public Driver create(Driver driver) {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement createStatement =
-                        connection.prepareStatement(INSERT_FORMAT_REQUEST,
+                        connection.prepareStatement(INSERT_FORMAT_QUERY,
                              Statement.RETURN_GENERATED_KEYS)) {
             createStatement.setString(1, driver.getName());
             createStatement.setString(2, driver.getLicenseNumber());
             createStatement.executeUpdate();
             ResultSet generatedKeys = createStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
-                Long id = generatedKeys.getLong(1);
-                driver.setId(id);
+                driver.setId(generatedKeys.getLong(1));
             }
             return driver;
         } catch (SQLException e) {
@@ -52,7 +51,7 @@ public class DriverDaoImpl implements DriverDao {
     public Optional<Driver> get(Long id) {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement getByIdStatement =
-                        connection.prepareStatement(GET_REQUEST)) {
+                        connection.prepareStatement(GET_QUERY)) {
             getByIdStatement.setLong(1, id);
             ResultSet resultSet = getByIdStatement.executeQuery();
             Driver driver = null;
@@ -85,7 +84,7 @@ public class DriverDaoImpl implements DriverDao {
     public Driver update(Driver driver) {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement updateStatement =
-                        connection.prepareStatement(UPDATE_REQUEST)) {
+                        connection.prepareStatement(UPDATE_QUERY)) {
             updateStatement.setString(1, driver.getName());
             updateStatement.setString(2, driver.getLicenseNumber());
             updateStatement.setLong(3, driver.getId());
@@ -101,7 +100,7 @@ public class DriverDaoImpl implements DriverDao {
     public boolean delete(Long id) {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement deleteStatement =
-                        connection.prepareStatement(DELETE_REQUEST)) {
+                        connection.prepareStatement(DELETE_QUERY)) {
             deleteStatement.setLong(1, id);
             return deleteStatement.executeUpdate() > 0;
         } catch (SQLException e) {
