@@ -10,10 +10,11 @@ public class Main {
     public static void main(String[] args) {
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
         Driver driver = new Driver();
+        driverService.getAll().forEach(System.out::println);
         driver.setName("Petro Poroshenko");
         driver.setLicenseNumber("7777777");
         driverService.create(driver);
-        Driver driver1 = driverService.get(1L).get();
+        Driver driver1 = driverService.get(1L);
         System.out.println(driver1);
         driverService.getAll().forEach(System.out::println);
         driver.setName("Petro Poroshenko Chocolate King");
