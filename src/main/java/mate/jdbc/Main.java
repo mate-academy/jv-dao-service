@@ -2,7 +2,9 @@ package mate.jdbc;
 
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
+import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.DriverService;
+import mate.jdbc.service.ManufacturerService;
 
 public class Main {
     private static Injector injector = Injector.getInstance("mate.jdbc");
@@ -22,5 +24,19 @@ public class Main {
         driverService.getAll().forEach(System.out::println);
         driverService.delete(1L);
         driverService.getAll().forEach(System.out::println);
+
+        ManufacturerService manufacturerService =
+                (ManufacturerService) injector.getInstance(ManufacturerService.class);
+        Manufacturer manufacturer = new Manufacturer();
+        manufacturer.setName("Bohdan");
+        manufacturer.setCountry("Ukraine");
+        manufacturerService.create(manufacturer);
+        Manufacturer manufacturer1 = manufacturerService.get(1L);
+        System.out.println(manufacturer1);
+        manufacturerService.getAll().forEach(System.out::println);
+        manufacturer.setName("Tavria");
+        manufacturerService.update(manufacturer);
+        manufacturerService.getAll().forEach(System.out::println);
+        manufacturerService.delete(1L);
     }
 }
