@@ -11,13 +11,13 @@ public class Main {
 
     public static void main(String[] args) {
         DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-        driverServise(driverService);
+        driverServiseTest(driverService);
         ManufacturerService manufacturerService =
                 (ManufacturerService) injector.getInstance(ManufacturerService.class);
-        manufacturerService(manufacturerService);
+        manufacturerServiceTest(manufacturerService);
     }
 
-    private static void manufacturerService(ManufacturerService manufacturerService) {
+    private static void manufacturerServiceTest(ManufacturerService manufacturerService) {
         Manufacturer manufacturer = new Manufacturer();
         manufacturer.setName("Daewo");
         manufacturer.setCountry("Sweden");
@@ -28,7 +28,7 @@ public class Main {
         manufacturerService.getAll().forEach(System.out::println);
     }
 
-    private static void driverServise(DriverService driverService) {
+    private static void driverServiseTest(DriverService driverService) {
         Driver driver = new Driver();
         driver.setName("Arthur");
         driver.setLicenseNumber("666");
