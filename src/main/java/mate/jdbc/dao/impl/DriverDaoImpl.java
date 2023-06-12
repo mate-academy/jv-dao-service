@@ -54,13 +54,6 @@ public class DriverDaoImpl implements DriverDao {
         }
     }
 
-    private Driver getDriver(ResultSet resultSet) throws SQLException {
-        Long id = resultSet.getObject("id", Long.class);
-        String name = resultSet.getString("name");
-        String licenseNumber = resultSet.getString("license_number");
-        return new Driver(id, name, licenseNumber);
-    }
-
     @Override
     public List<Driver> getAll() {
         String query = "SELECT * FROM drivers WHERE is_deleted = FALSE;";
@@ -108,5 +101,12 @@ public class DriverDaoImpl implements DriverDao {
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't delete a driver by id " + id, e);
         }
+    }
+
+    private Driver getDriver(ResultSet resultSet) throws SQLException {
+        Long id = resultSet.getObject("id", Long.class);
+        String name = resultSet.getString("name");
+        String licenseNumber = resultSet.getString("license_number");
+        return new Driver(id, name, licenseNumber);
     }
 }
