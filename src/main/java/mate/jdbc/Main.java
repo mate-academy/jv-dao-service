@@ -15,34 +15,23 @@ public class Main {
         DriverService driverService =
                 (DriverService) injector.getInstance(DriverService.class);
 
-        Manufacturer manufacturer = new Manufacturer("Zaz", "Ukraine");
-        System.out.println(manufacturerService.create(manufacturer));
+        Manufacturer zaz = manufacturerService.create(new Manufacturer("Zaz", "Ukraine"));
+        Manufacturer dacia = manufacturerService.create(new Manufacturer("Dacia", "Romania"));
+        Manufacturer seat = manufacturerService.create(new Manufacturer("Seat", "Spain"));
 
-        Driver driver = new Driver("Joey", "КАІ 12345");
-        System.out.println(driverService.create(driver));
+        Driver joey = driverService.create(new Driver("Joey", "КАІ 12345"));
+        Driver ross = driverService.create(new Driver("Ross", "ГЕН 23456"));
+        Driver chandler = driverService.create(new Driver("Chandler", "ПАТ 34567"));
+        Driver monica = driverService.create(new Driver("Monica", "ТОВ 45678"));
 
-        manufacturer.setName("Dacia");
-        manufacturer.setCountry("Romania");
-        manufacturer.setName("VAG");
-        manufacturer.setCountry("Germany");
-        manufacturer.setName("Seat");
-        manufacturer.setCountry("Spain");
-
-        driver.setName("Ross");
-        driver.setLicenseNumber("ГЕН 23456");
-        driver.setName("Chandler");
-        driver.setLicenseNumber("ПАТ 34567");
-        driver.setName("Monica");
-        driver.setLicenseNumber("ТОВ 45678");
-
-        System.out.println(manufacturerService.update(manufacturer));
-        System.out.println(manufacturerService.get(1L));
-        System.out.println(manufacturerService.delete(2L));
+        System.out.println(manufacturerService.update(zaz));
+        System.out.println(manufacturerService.get(dacia.getId()));
+        System.out.println(manufacturerService.delete(seat.getId()));
         System.out.println(manufacturerService.getAll());
 
-        System.out.println(driverService.update(driver));
-        System.out.println(driverService.get(1L));
-        System.out.println(driverService.delete(2L));
+        System.out.println(driverService.update(joey));
+        System.out.println(driverService.get(ross.getId()));
+        System.out.println(driverService.delete(chandler.getId()));
         System.out.println(driverService.getAll());
     }
 }
