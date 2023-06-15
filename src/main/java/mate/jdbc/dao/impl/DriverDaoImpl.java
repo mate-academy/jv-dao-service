@@ -48,7 +48,7 @@ public class DriverDaoImpl implements DriverDao {
         } catch (SQLException e) {
             throw new DataProcessingException("can't get a driver by id: " + id, e);
         }
-        throw new RuntimeException("can't get driver by id: " + id);
+        return Optional.empty();
     }
 
     @Override
@@ -70,7 +70,7 @@ public class DriverDaoImpl implements DriverDao {
     @Override
     public Driver update(Driver driver) {
         String query = "UPDATE drivers SET name = ?, licenseNumber = ?"
-                + " WHERE id = ? AND is_deleted = false;";
+                + " WHERE id = ? AND is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement updateStatement = connection.prepareStatement(query)) {
             updateStatement.setString(1, driver.getName());
@@ -99,7 +99,7 @@ public class DriverDaoImpl implements DriverDao {
     private Driver getDriver(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getObject("id", Long.class);
         String name = resultSet.getString("name");
-        String country = resultSet.getString("licenseNumber");
-        return new Driver(id, name, country);
+        String licenseNumber = resultSet.getString("licenseNumber");
+        return new Driver(id, name, licenseNumber);
     }
 }
