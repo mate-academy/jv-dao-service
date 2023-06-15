@@ -18,7 +18,6 @@ import mate.jdbc.util.ConnectionUtil;
 
 @Dao
 public class DriverDaoImpl implements DriverDao {
-    @Inject
     @Override
     public Driver create(Driver driver) {
         String query = "INSERT INTO drivers (name, licenceNumber) values(?,?)";
@@ -43,7 +42,7 @@ public class DriverDaoImpl implements DriverDao {
     public Optional<Driver> get(Long id) {
         String query = "SELECT * FROM drivers WHERE id = ? AND is_deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement getStatement = connection.prepareStatement(query)
+             PreparedStatement getStatement = connection.prepareStatement(query)
         ) {
             getStatement.setLong(1, id);
             getStatement.executeQuery();
@@ -89,7 +88,7 @@ public class DriverDaoImpl implements DriverDao {
         } catch (SQLException e) {
             throw new DataProcessingException("Can`t update driver " + driver, e);
         }
-        throw new NoSuchElementException("driver does`nt exist in db " + driver);
+        return driver;
     }
 
     @Override
