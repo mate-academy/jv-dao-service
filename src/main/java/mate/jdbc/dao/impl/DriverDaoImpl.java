@@ -7,12 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import mate.jdbc.dao.DriverDao;
 import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Dao;
-import mate.jdbc.lib.Inject;
 import mate.jdbc.model.Driver;
 import mate.jdbc.util.ConnectionUtil;
 
@@ -42,7 +40,7 @@ public class DriverDaoImpl implements DriverDao {
     public Optional<Driver> get(Long id) {
         String query = "SELECT * FROM drivers WHERE id = ? AND is_deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement getStatement = connection.prepareStatement(query)
+                PreparedStatement getStatement = connection.prepareStatement(query)
         ) {
             getStatement.setLong(1, id);
             getStatement.executeQuery();
