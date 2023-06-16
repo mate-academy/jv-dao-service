@@ -40,8 +40,7 @@ public class DriverDaoImpl implements DriverDao {
     public Optional<Driver> get(Long id) {
         String query = "SELECT * FROM drivers WHERE id = ? AND is_deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement getStatement = connection.prepareStatement(query)
-        ) {
+                PreparedStatement getStatement = connection.prepareStatement(query)) {
             getStatement.setLong(1, id);
             getStatement.executeQuery();
             ResultSet resultSet = getStatement.getResultSet();
