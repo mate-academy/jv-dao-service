@@ -8,7 +8,7 @@ public interface DriverService {
 
     Driver create(Driver driver);
 
-    Optional<Driver> get(Long id);
+    Driver get(Long id);
 
     List<Driver> getAll();
 
