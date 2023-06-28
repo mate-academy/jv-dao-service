@@ -6,18 +6,14 @@ import mate.jdbc.service.ManufacturerService;
 
 public class Main {
 
-    private final ManufacturerService manufacturerService;
-    private final DriverService driverService;
     private final MainHelper mainHelper;
 
     public Main(ManufacturerService manufacturerService, DriverService driverService) {
-        this.manufacturerService = manufacturerService;
-        this.driverService = driverService;
         this.mainHelper = new MainHelper(manufacturerService, driverService);
     }
 
     public void run() {
-        mainHelper.createManufacturer(64L, "NewValue", "IDK");
+        mainHelper.createManufacturer(39L, "NewValue33", "IDK");
         mainHelper.updateManufacturer(33L, "UpdatedName", "AndCountry");
         mainHelper.deleteManufacturer(14L);
         mainHelper.createDriver(44L, "Data", "Here");
