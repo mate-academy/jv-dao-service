@@ -1,5 +1,6 @@
 package mate.jdbc.service.impl;
 
+import java.util.List;
 import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.dao.impl.ManufacturerDaoImpl;
 import mate.jdbc.lib.Inject;
@@ -7,12 +8,10 @@ import mate.jdbc.lib.Service;
 import mate.jdbc.model.Manufacturer;
 import mate.jdbc.service.ManufacturerService;
 
-import java.util.List;
-
 @Service
 public class ManufacturerServiceImpl implements ManufacturerService {
     @Inject
-    public ManufacturerDao manufacturerDao = new ManufacturerDaoImpl();
+    private ManufacturerDao manufacturerDao = new ManufacturerDaoImpl();
 
     @Override
     public Manufacturer create(Manufacturer manufacturer) {

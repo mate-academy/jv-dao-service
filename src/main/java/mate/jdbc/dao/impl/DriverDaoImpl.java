@@ -3,10 +3,10 @@ package mate.jdbc.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.SQLException;
-import java.util.List;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import mate.jdbc.dao.DriverDao;
 import mate.jdbc.exception.DataProcessingException;
@@ -19,8 +19,8 @@ public class DriverDaoImpl implements DriverDao {
         String query = "INSERT INTO taxi_service.drivers (name, licenseNumber) "
                 + "VALUES (?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement
-                     = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement statement
+                        = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, driver.getName());
             statement.setString(2, driver.getLicenseNumber());
             statement.executeUpdate();
@@ -39,7 +39,7 @@ public class DriverDaoImpl implements DriverDao {
         String query = "SELECT * FROM taxi_service.drivers"
                 + " WHERE id = ? AND is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             Driver driver = null;
@@ -56,8 +56,8 @@ public class DriverDaoImpl implements DriverDao {
     public List<Driver> getAll() {
         String query = "SELECT * FROM taxi_service.drivers WHERE is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement
-                     = connection.prepareStatement(query)) {
+                PreparedStatement statement
+                        = connection.prepareStatement(query)) {
             List<Driver> drivers = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -75,8 +75,8 @@ public class DriverDaoImpl implements DriverDao {
         String query = "UPDATE taxi_service.drivers SET name = ?, licenseNumber = ?"
                 + " WHERE id = ? AND is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement
-                     = connection.prepareStatement(query)) {
+                PreparedStatement statement
+                        = connection.prepareStatement(query)) {
             statement.setString(1, driver.getName());
             statement.setString(2, driver.getLicenseNumber());
             statement.setLong(3, driver.getId());
@@ -93,7 +93,7 @@ public class DriverDaoImpl implements DriverDao {
         String query = "UPDATE taxi_service.drivers SET is_deleted = TRUE WHERE id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement statement
-                     = connection.prepareStatement(query)) {
+                        = connection.prepareStatement(query)) {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {

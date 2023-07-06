@@ -1,9 +1,9 @@
 package mate.jdbc.dao;
 
+import java.util.Optional;
+import java.util.List;
 import mate.jdbc.model.Driver;
 
-import java.util.List;
-import java.util.Optional;
 
 public interface DriverDao {
     Driver create(Driver driver);
