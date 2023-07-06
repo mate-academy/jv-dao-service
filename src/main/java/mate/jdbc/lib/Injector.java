@@ -120,6 +120,7 @@ public class Injector {
      * @throws ClassNotFoundException if the class cannot be located
      * @throws IOException            if I/O errors occur
      */
+
     private static List<Class<?>> getClasses(String packageName)
             throws IOException, ClassNotFoundException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
@@ -148,6 +149,7 @@ public class Injector {
      * @return The classes
      * @throws ClassNotFoundException if the class cannot be located
      */
+
     private static List<Class<?>> findClasses(File directory, String packageName)
             throws ClassNotFoundException {
         List<Class<?>> classes = new ArrayList<>();
