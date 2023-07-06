@@ -1,11 +1,9 @@
 package mate.jdbc.util;
 
-import mate.jdbc.exception.DataProcessingException;
-
 import java.sql.Connection;
+import java.util.Properties;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class ConnectionUtil {
     private static final String URL = "taxi_service";
@@ -26,9 +24,10 @@ public class ConnectionUtil {
             Properties dbProperties = new Properties();
             dbProperties.setProperty("user", USERNAME);
             dbProperties.setProperty("password", PASSWORD);
-           return DriverManager.getConnection("jdbc:mysql://localhost:3306/taxi_service",dbProperties);
+            return DriverManager.getConnection("jdbc:mysql:"
+                    + "//localhost:3306/taxi_service", dbProperties);
         } catch (SQLException e) {
-            throw new RuntimeException("Can't create connection to Db: taxi_service ",e);
+            throw new RuntimeException("Can't create connection to Db: taxi_service ", e);
         }
     }
 }
