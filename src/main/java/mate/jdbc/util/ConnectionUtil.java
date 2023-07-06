@@ -1,10 +1,9 @@
 package mate.jdbc.util;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
-
 
 public class ConnectionUtil {
     private static final String URL = "taxi_service";
