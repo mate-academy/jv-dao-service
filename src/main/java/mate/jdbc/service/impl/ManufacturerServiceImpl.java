@@ -1,7 +1,6 @@
 package mate.jdbc.service.impl;
 
 import java.util.List;
-
 import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.dao.impl.ManufacturerDaoImpl;
 import mate.jdbc.lib.Inject;
