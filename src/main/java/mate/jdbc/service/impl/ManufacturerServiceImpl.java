@@ -1,6 +1,7 @@
 package mate.jdbc.service.impl;
 
 import java.util.List;
+
 import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.dao.impl.ManufacturerDaoImpl;
 import mate.jdbc.lib.Inject;
@@ -20,7 +21,8 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer get(Long id) {
-        return manufacturerDao.get(id).get();
+        return manufacturerDao.get(id).orElseThrow(() ->
+                new RuntimeException("Can't find the manufacturer by id: " + id));
     }
 
     @Override
