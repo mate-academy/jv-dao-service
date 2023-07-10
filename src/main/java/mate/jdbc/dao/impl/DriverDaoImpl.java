@@ -53,7 +53,7 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Driver create(Driver driver) {
-        String query = "INSERT INTO drivers (name, licensenumber) VALUES ((?),(?));";
+        String query = "INSERT INTO drivers (name, license_number) VALUES ((?),(?));";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement =
                         connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
@@ -73,7 +73,7 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Driver update(Driver driver) {
-        String query = "UPDATE drivers SET name = (?), licensenumber = (?) "
+        String query = "UPDATE drivers SET name = (?), license_number = (?) "
                 + "WHERE id = (?) AND is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -106,7 +106,7 @@ public class DriverDaoImpl implements DriverDao {
     private Driver getEntity(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getObject("id", Long.class);
         String name = resultSet.getString("name");
-        String licensenumber = resultSet.getString("licensenumber");
-        return new Driver(id, name, licensenumber);
+        String licenseNumber = resultSet.getString("license_number");
+        return new Driver(id, name, licenseNumber);
     }
 }

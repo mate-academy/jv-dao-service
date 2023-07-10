@@ -14,7 +14,7 @@ COLLATE=utf8_general_ci;
 CREATE TABLE sql7630939.drivers (
 	id BIGINT auto_increment NOT NULL,
 	name varchar(250) NOT NULL,
-	licensenumber varchar(250) NOT NULL,
+	license_number varchar(250) NOT NULL,
 	is_deleted BIT DEFAULT false NOT NULL,
 	CONSTRAINT Drivers_PK PRIMARY KEY (id)
 )
