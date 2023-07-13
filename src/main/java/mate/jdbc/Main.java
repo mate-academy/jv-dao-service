@@ -14,6 +14,8 @@ public class Main {
                 = (ManufacturerService) injector.getInstance(ManufacturerService.class);
         System.out.println("*** Get All Manufacturers ***");
         manufacturerService.getAll().forEach(System.out::println);
+        System.out.println("*** Get Manufacturer #10 ***");
+        System.out.println(manufacturerService.get(10L));
 
         Driver driverPedro = new Driver("Pedro", "100");
         Driver driverBob = new Driver("Bob", "101");
