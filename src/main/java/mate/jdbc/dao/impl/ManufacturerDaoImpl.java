@@ -109,4 +109,5 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         String country = resultSet.getString("country");
         return new Manufacturer(id, name, country);
     }
+
 }
