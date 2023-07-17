@@ -14,5 +14,3 @@ CREATE TABLE `drivers` (
                                         `license_number` varchar(255) DEFAULT NULL,
                                         `is_deleted` tinyint NOT NULL DEFAULT '0',
                                         PRIMARY KEY (`id`))
-
-
