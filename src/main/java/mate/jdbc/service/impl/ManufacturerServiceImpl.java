@@ -22,7 +22,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     public Manufacturer get(Long id) {
         return manufacturerDao.get(id)
                               .orElseThrow(() -> new NoSuchElementException(
-                                      "Could not find Manufacturer by id " + id));
+                                      "Could not find manufacturer by id " + id));
     }
 
     @Override
