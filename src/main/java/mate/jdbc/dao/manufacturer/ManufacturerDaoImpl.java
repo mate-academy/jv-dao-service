@@ -17,7 +17,7 @@ import mate.jdbc.util.ConnectionUtil;
 public class ManufacturerDaoImpl implements ManufacturerDao {
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        String query = "INSERT INTO manufacturer (name, country) "
+        String query = "INSERT INTO manufacturers (name, country) "
                 + "VALUES (?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement
@@ -37,7 +37,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override
     public Optional<Manufacturer> get(Long id) {
-        String query = "SELECT * FROM manufacturer"
+        String query = "SELECT * FROM manufacturers"
                 + " WHERE id = ? AND is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
@@ -55,7 +55,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override
     public List<Manufacturer> getAll() {
-        String query = "SELECT * FROM manufacturer WHERE is_deleted = FALSE;";
+        String query = "SELECT * FROM manufacturers WHERE is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
             List<Manufacturer> manufacturers = new ArrayList<>();
@@ -72,7 +72,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        String query = "UPDATE manufacturer SET name = ?, country = ?"
+        String query = "UPDATE manufacturers SET name = ?, country = ?"
                 + " WHERE id = ? AND is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement
@@ -90,7 +90,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override
     public boolean delete(Long id) {
-        String query = "UPDATE manufacturer SET is_deleted = TRUE WHERE id = ?;";
+        String query = "UPDATE manufacturers SET is_deleted = TRUE WHERE id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement
                         = connection.prepareStatement(query)) {
