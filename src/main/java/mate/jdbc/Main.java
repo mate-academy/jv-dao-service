@@ -33,14 +33,11 @@ public class Main {
         driver.setName("Jack");
         driver.setLicenseNumber("443789");
         driverService.create(driver);
-        Optional<Driver> optionalDriver = driverService.get(2L);
-        if (optionalDriver.isPresent()) {
-            driver = optionalDriver.get();
-            driver.setName("Mark");
-            driver.setLicenseNumber("589456");
-            Driver updatedDriver = driverService.update(driver);
-            System.out.println(updatedDriver);
-        }
+        driver = driverService.get(4L);
+        driver.setName("Mark");
+        driver.setLicenseNumber("589456");
+        Driver updatedDriver = driverService.update(driver);
+        System.out.println(updatedDriver);
         driverService.delete(3L);
         driverService.getAll().forEach(System.out::println);
     }
