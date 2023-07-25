@@ -20,7 +20,8 @@ public class DriverDaoImpl implements DriverDao {
     public Driver create(Driver driver) {
         String createQuery = "INSERT INTO drivers(name, licence_number) VALUES(?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(createQuery, Statement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement statement = connection.prepareStatement(createQuery,
+                        Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, driver.getName());
             statement.setString(2, driver.getLicenceNumber());
             statement.executeUpdate();
@@ -90,7 +91,7 @@ public class DriverDaoImpl implements DriverDao {
         int row = 0;
 
         try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement statement = connection.prepareStatement(deleteQuery)){
+                PreparedStatement statement = connection.prepareStatement(deleteQuery)) {
             statement.setLong(1, id);
             row = statement.executeUpdate();
         } catch (SQLException e) {

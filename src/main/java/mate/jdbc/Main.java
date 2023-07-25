@@ -12,6 +12,7 @@ public class Main {
             injector.getInstance(ManufacturerService.class);
     private static final DriverService driverService = (DriverService)
             injector.getInstance(DriverService.class);
+
     public static void main(String[] args) {
         Manufacturer manufacturer = new Manufacturer();
         manufacturer.setName("Jeep");
@@ -25,7 +26,6 @@ public class Main {
 
         manufacturerService.delete(1L);
         manufacturerService.getAll().forEach(System.out::println);
-
 
         Driver driver = new Driver();
         driver.setName("Viktor");
