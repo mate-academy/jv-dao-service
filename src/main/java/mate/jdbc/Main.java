@@ -14,31 +14,51 @@ public class Main {
             injector.getInstance(DriverService.class);
 
     public static void main(String[] args) {
-        Manufacturer manufacturer = new Manufacturer();
-        manufacturer.setName("Jeep");
-        manufacturer.setCountry("USA");
-        manufacturerService.create(manufacturer);
+        //Test driver
 
-        manufacturer = manufacturerService.get(3L);
-        manufacturer.setName("BMW");
-        manufacturer.setCountry("Germany");
-        Manufacturer updatedManufacturer = manufacturerService.update(manufacturer);
-
-        manufacturerService.delete(1L);
-        manufacturerService.getAll().forEach(System.out::println);
-
+        // Update driver
         Driver driver = new Driver();
-        driver.setName("Viktor");
-        driver.setLicenceNumber("111111");
+        driver.setId(22L);
+        driver.setName("Bill");
+        driver.setLicenceNumber("TG666666");
+        driverService.update(driver);
+        System.out.println(driver);
+
+        //Create driver
+        driver.setName("Bob");
+        driver.setLicenceNumber("TR131313");
         driverService.create(driver);
 
-        driver = driverService.get(4L);
-        driver.setName("Roma");
-        driver.setLicenceNumber("222222");
-        Driver updatedDriver = driverService.update(driver);
+        //Delete driver
+        driverService.delete(23L);
 
-        System.out.println(updatedDriver);
-        driverService.delete(3L);
+        // Get driver
+        driverService.get(21L);
+
+        //Get all drivers
         driverService.getAll().forEach(System.out::println);
+
+        //Test Manufacturer
+
+        //Created Manufacturer
+        Manufacturer manufacturer = new Manufacturer();
+        manufacturer.setName("BMW");
+        manufacturer.setCountry("Germany");
+        manufacturerService.create(manufacturer);
+
+        //Update manufacture
+        manufacturer.setId(1L);
+        manufacturer.setName("Renault");
+        manufacturer.setCountry("France");
+        manufacturerService.update(manufacturer);
+
+        //Get manufacturer
+        System.out.println(manufacturerService.get(2L));
+
+        //Get all manufacturer
+        manufacturerService.getAll().forEach(System.out::println);
+
+        //Deleted manufacturer
+        manufacturerService.delete(3L);
     }
 }
