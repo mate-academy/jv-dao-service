@@ -71,22 +71,18 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Driver update(Driver driver) {
-        Optional<Driver> getDriver = get(driver.getId());
-        if (getDriver.isPresent()) {
-            String updateQuery = "UPDATE drivers SET name = ?, licence_number = ? "
-                    + "WHERE id = ? AND is_deleted = FALSE";
-            try (Connection connection = ConnectionUtil.getConnection();
-                    PreparedStatement statement = connection.prepareStatement(updateQuery)) {
-                statement.setString(1, driver.getName());
-                statement.setString(2, driver.getLicenceNumber());
-                statement.setLong(3, driver.getId());
-                statement.executeUpdate();
-                return driver;
-            } catch (SQLException e) {
-                throw new DataProcessingException("Can't update driver in DB: " + driver, e);
-            }
+        String updateQuery = "UPDATE drivers SET name = ?, licence_number = ? "
+                + "WHERE id = ? AND is_deleted = FALSE";
+        try (Connection connection = ConnectionUtil.getConnection();
+                PreparedStatement statement = connection.prepareStatement(updateQuery)) {
+            statement.setString(1, driver.getName());
+            statement.setString(2, driver.getLicenceNumber());
+            statement.setLong(3, driver.getId());
+            statement.executeUpdate();
+            return driver;
+        } catch (SQLException e) {
+            throw new DataProcessingException("Can't update driver in DB: " + driver, e);
         }
-        return null;
     }
 
     @Override
@@ -101,14 +97,10 @@ public class DriverDaoImpl implements DriverDao {
         }
     }
 
-    private Driver resultSetToDrivers(ResultSet resultSet) {
-        try {
-            Long id = resultSet.getObject("id", Long.class);
-            String name = resultSet.getString("name");
-            String licenceNumber = resultSet.getString("licence_number");
-            return new Driver(id, name, licenceNumber);
-        } catch (SQLException e) {
-            throw new RuntimeException("Can't get a result ", e);
-        }
+    private Driver resultSetToDrivers(ResultSet resultSet) throws SQLException {
+        Long id = resultSet.getObject("id", Long.class);
+        String name = resultSet.getString("name");
+        String licenceNumber = resultSet.getString("licence_number");
+        return new Driver(id, name, licenceNumber);
     }
 }
