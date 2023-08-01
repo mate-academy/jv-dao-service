@@ -2,6 +2,7 @@ package mate.jdbc.service.impl;
 
 import java.util.List;
 import mate.jdbc.dao.ManufacturerDao;
+import mate.jdbc.exception.EntityNotFoundException;
 import mate.jdbc.lib.Dao;
 import mate.jdbc.lib.Inject;
 import mate.jdbc.model.Manufacturer;
@@ -28,7 +29,8 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer getManufacturerById(Long id) {
-        return manufacturerDao.get(id).orElse(null);
+        return manufacturerDao.get(id).orElseThrow(() -> new EntityNotFoundException("Couldn't find"
+                + " a manufacturer with id: " + id));
     }
 
     @Override
