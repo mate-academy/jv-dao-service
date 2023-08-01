@@ -1,7 +1,6 @@
 package mate.jdbc;
 
 import mate.jdbc.dao.DriverDao;
-import mate.jdbc.lib.Inject;
 import mate.jdbc.lib.Injector;
 import mate.jdbc.model.Driver;
 
