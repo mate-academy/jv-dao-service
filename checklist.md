@@ -1,7 +1,7 @@
 ## Common mistakes (jv-dao-service)
 
 * Run __`mvn clean package`__ after finish homework and before sending the solution.
-* Use `PreparedStatement` over `Statement`, even for a static query with no parameters in `getAll()` method. It's the best practice, and it's slightly faster.
+* Use `PreparedStatement` over `Statement`, even for a static query with no parameters in the `getAll()` method. It's the best practice, and it's slightly faster.
 * Use wrapper for id: `Long id` but not `long id`. And remember what is the difference between `==` and `equals`.
 * Remember about SQL style: use uppercase for SQL keywords in your queries.
 
@@ -41,6 +41,6 @@
             throw new DataProcessingException("Can't insert manufacturer " + manufacturer, e);
     ``` 
 * To display data while testing use Stream API `forEach()`, not `for` loop.
-* `get()` methods in Dao layer should return `Optional` (not in services). In the service layer better call method `get()` on Optional and return the object.
-* You should not have any additional logic on Dao layer except managing database operations. All business logic must be on service layer.
-* Do not open connection to DB on the service layer.
+* `get()` methods in the Dao layer should return `Optional` (not in services). In the service layer better call method `orElseThrow()` on Optional and return the object. If you're not interested in throwing a specific exception, both get() and orElseThrow() will throw a NoSuchElementException if the value is absent. 
+* You should not have any additional logic on the Dao layer except managing database operations. All business logic must be on service layer.
+* Do not open a connection to DB on the service layer.
