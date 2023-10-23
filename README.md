@@ -1,7 +1,7 @@
 # HW 03
 - Create class `Driver`.
 ```java
-public class Driver {
+public class mate.jdbc.model.Driver {
     private Long id;
     private String name;
     private String licenseNumber;
@@ -14,12 +14,12 @@ public class Driver {
     - List<Manufacturer> getAll();
     - Manufacturer update(Manufacturer manufacturer);
     - boolean delete(Long id);
-- Create Dao and Service layers for `Driver` and their implementations.
+- Create Dao and Service layers for `mate.jdbc.model.Driver` and their implementations.
 ### DriverService methods:
-    - Driver create(Driver driver);
-    - Driver get(Long id);
-    - List<Driver> getAll();
-    - Driver update(Driver driver);
+    - mate.jdbc.model.Driver create(mate.jdbc.model.Driver driver);
+    - mate.jdbc.model.Driver get(Long id);
+    - List<mate.jdbc.model.Driver> getAll();
+    - mate.jdbc.model.Driver update(mate.jdbc.model.Driver driver);
     - boolean delete(Long id);
 
 - Do not forget about DB naming rules mentioned in previous homework.
