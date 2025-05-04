@@ -48,7 +48,7 @@ public class Injector {
                 setValueToField(field, newInstanceOfClass, classToInject);
             } else {
                 throw new RuntimeException("Class " + field.getName() + " in class "
-                        + clazz.getName() + " hasn't annotation Inject");
+                    + clazz.getName() + " hasn't annotation Inject");
             }
         }
         if (newInstanceOfClass == null) {
@@ -69,8 +69,8 @@ public class Injector {
             }
         }
         throw new RuntimeException("Can't find class which implements "
-                + certainInterface.getName()
-                + " interface and has valid annotation (Dao or Service)");
+            + certainInterface.getName()
+            + " interface and has valid annotation (Dao or Service)");
     }
 
     private Object getNewInstance(Class<?> certainClass) {
