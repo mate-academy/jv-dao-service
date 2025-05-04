@@ -1,4 +1,4 @@
-package mate.jdbc.dao.impl;
+package mate.jdbc.dao.manufacturer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import mate.jdbc.dao.ManufacturerDao;
 import mate.jdbc.exception.DataProcessingException;
 import mate.jdbc.lib.Dao;
 import mate.jdbc.model.Manufacturer;
@@ -58,8 +57,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
     public List<Manufacturer> getAll() {
         String query = "SELECT * FROM manufacturers WHERE is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement statement
-                        = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
             List<Manufacturer> manufacturers = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
