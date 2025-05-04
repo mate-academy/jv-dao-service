@@ -1,7 +1,37 @@
 package mate.jdbc;
 
+import mate.jdbc.lib.Injector;
+import mate.jdbc.model.Driver;
+import mate.jdbc.model.Manufacturer;
+import mate.jdbc.service.impl.DriverService;
+import mate.jdbc.service.impl.ManufacturerService;
+
 public class Main {
+    private static final Injector injector = Injector.getInstance("mate.jdbc");
+
     public static void main(String[] args) {
-        // test your code here
+        DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
+        driverServiceTest(driverService);
+        ManufacturerService manufacturerService =
+                (ManufacturerService) injector.getInstance(ManufacturerService.class);
+        manufacturerServiceTest(manufacturerService);
+    }
+
+    private static void manufacturerServiceTest(ManufacturerService manufacturerService) {
+        Manufacturer manufacturer = new Manufacturer("Daewoo", "Sweden");
+        System.out.println(manufacturerService.create(manufacturer));
+        System.out.println(manufacturerService.get(1L));
+        System.out.println(manufacturerService.delete(2L));
+        System.out.println(manufacturerService.update(manufacturer));
+        manufacturerService.getAll().forEach(System.out::println);
+    }
+
+    private static void driverServiceTest(DriverService driverService) {
+        Driver driver = new Driver("Arthur", "666");
+        System.out.println(driverService.create(driver));
+        System.out.println(driverService.get(1L));
+        System.out.println(driverService.delete(2L));
+        System.out.println(driverService.update(driver));
+        driverService.getAll().forEach(System.out::println);
     }
 }
